@@ -7,6 +7,11 @@ type: index
 
 Catalog of every page in this wiki. Read this first when answering a query — drill into the linked pages rather than searching raw sources. Updated on every ingest. See `CLAUDE.md` for conventions.
 
+## Published
+
+- **Quartz site (VI+EN)**: https://tctruc79.github.io/32ecm_wiki/
+- **Mindmap Artifact (bilingual, 14 topics, self-test)**: https://claude.ai/code/artifact/ef2bb6aa-5e72-4d31-ba0a-eae635f1df2d — private by default; share from the artifact's page if needed. Not synced automatically — regenerate by hand when concepts/*.md changes materially (see `CLAUDE.md` §5.2).
+
 ## Course map (canonical topic numbering, per Course Outline)
 
 | # | Topic | Slide file(s) | Concept page | Status |

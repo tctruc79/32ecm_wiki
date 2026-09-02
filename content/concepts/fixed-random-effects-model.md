@@ -1,0 +1,445 @@
+---
+title: "Panel Data: Fixed Effects and Random Effects Model"
+type: concept
+status: mature
+tags: [panel-data, fixed-effects, random-effects, hausman-test, gls, fgls]
+sources: ["[[sources/slides-6-fixed-random-effects]]", "[[sources/slides-13-panel-data-variance-structures]]"]
+related: ["[[concepts/linear-regression-model]]", "[[concepts/heteroskedasticity]]", "[[people/hausman]]", "[[concepts/iv-regression-panel-data]]", "[[concepts/dynamic-panel-data-models]]"]
+updated: 2026-08-29
+---
+
+> Lịch sử revision: trang này hợp nhất Topic 6 (`slides-6-iu.pdf`, bản nhập môn) và Topic 12 (`slides-13-iu.pdf`, bản mở rộng với variance structures đầy đủ hơn — cùng ví dụ dữ liệu công ty nhưng thêm GLS/FGLS và các loại SE). Cấu trúc dưới đây theo bản mở rộng.
+> <br><span class="en">Revision history: this page merges Topic 6 (`slides-6-iu.pdf`, introductory version) and Topic 12 (`slides-13-iu.pdf`, extended version with fuller variance structures — same company data example but adding GLS/FGLS and the SE types). The structure below follows the extended version.</span>
+
+> **Cách đọc trang này**: đây là phần mở rộng trực tiếp của [[concepts/linear-regression-model]] sang dữ liệu có **chiều thời gian** — mọi khái niệm nền (PRE/SRE, OLS, giả định A1–A5, t-test, F-test) vẫn áp dụng, chỉ được "chi tiết hóa" thêm để phù hợp với cấu trúc panel. Trang này dài vì gộp 2 slide deck (Topic 6 cơ bản + Topic 12 mở rộng) — nên đọc tuần tự: (1) panel data là gì và tại sao nó tồn tại, (2) bộ giả định mở rộng A3a/A3b, A4a/b/c, (3) bốn cách ước lượng (Pooled OLS, GLS/FGLS, FE, RE), (4) cách chọn SE đúng, (5) Hausman test để chọn giữa FE và RE.
+> <br><span class="en">**How to read this page**: this is a direct extension of [[concepts/linear-regression-model]] to data with a **time dimension** — all the underlying concepts (PRE/SRE, OLS, assumptions A1–A5, t-test, F-test) still apply, just "detailed further" to fit the panel structure. This page is long because it merges 2 slide decks (basic Topic 6 + extended Topic 12) — so read it in order: (1) what panel data is and why it exists, (2) the expanded assumption set A3a/A3b, A4a/b/c, (3) four estimation methods (Pooled OLS, GLS/FGLS, FE, RE), (4) how to choose the correct SE, (5) the Hausman test for choosing between FE and RE.</span>
+
+## 1. Panel data là gì — và tại sao nó tồn tại - <span class="en">What panel data is — and why it exists</span>
+
+### 1.1 Ba loại dữ liệu - <span class="en">Three types of data</span>
+
+- **Cross-sectional**: nhiều đơn vị, **một** thời điểm — $y_i$, $i=1,\dots,N$. Ví dụ: khảo sát lương của 1.000 người lao động tại một thời điểm duy nhất.
+<br><span class="en">**Cross-sectional**: many units, **one** point in time — $y_i$, $i=1,\dots,N$. Example: a wage survey of 1,000 workers at a single point in time.</span>
+- **Time-series**: **một** đơn vị, nhiều thời điểm — $y_t$, $t=1,\dots,T$. Ví dụ: GDP Việt Nam qua từng năm.
+<br><span class="en">**Time-series**: **one** unit, many points in time — $y_t$, $t=1,\dots,T$. Example: Vietnam's GDP year by year.</span>
+- **Panel data** (còn gọi là longitudinal data): nhiều đơn vị **và** nhiều thời điểm cùng lúc — $y_{it}$, $i=1,\dots,N$ (chiều cắt ngang/cross-section), $t=1,\dots,T$ (chiều thời gian). Nói cách khác, panel data = cross-sectional data **quan sát lặp lại** theo thời gian cho cùng một tập đơn vị.
+<br><span class="en">**Panel data** (also called longitudinal data): many units **and** many points in time at once — $y_{it}$, $i=1,\dots,N$ (cross-sectional dimension), $t=1,\dots,T$ (time dimension). In other words, panel data = cross-sectional data **observed repeatedly** over time for the same set of units.</span>
+
+**Balanced panel**: mọi đơn vị $i$ đều có đủ $T$ kỳ quan sát — tổng số quan sát $=NT$. **Unbalanced panel**: một số đơn vị thiếu dữ liệu ở một số kỳ — chỉ số thời gian của từng đơn vị là $t=1,\dots,T_i$, tổng số quan sát $=\sum_{i=1}^N T_i$.
+<br><span class="en">**Balanced panel**: every unit $i$ has all $T$ periods observed — total observations $=NT$. **Unbalanced panel**: some units are missing data in some periods — each unit's time index is $t=1,\dots,T_i$, total observations $=\sum_{i=1}^N T_i$.</span>
+
+### 1.2 Ví dụ minh họa: một mini-panel $N\times T$ - <span class="en">Illustrative example: an $N\times T$ mini-panel</span>
+
+Slide Topic 6 dùng dữ liệu 58 tỉnh thành Việt Nam, 5 năm (2007–2011) để minh họa cấu trúc panel — mỗi tỉnh là một đơn vị $i$, mỗi năm là một thời điểm $t$. Trích một phần bảng gốc (đơn vị đúng như slide ghi — xem ghi chú mâu thuẫn ngay dưới bảng):
+<br><span class="en">The Topic 6 slide uses data from 58 Vietnamese provinces, 5 years (2007–2011) to illustrate the panel structure — each province is a unit $i$, each year is a point in time $t$. An excerpt of the original table (units exactly as the slide records them — see the source-contradiction note right below the table):</span>
+
+| province (tỉnh)<br><span class="en">province</span> | year | rgdp (GDP tỉnh)<br><span class="en">rgdp (provincial GDP)</span> | labfo (lao động, nghìn người)<br><span class="en">labfo (labor force, thousand people)</span> | rinvest (đầu tư)<br><span class="en">rinvest (investment)</span> | pci (chỉ số năng lực cạnh tranh cấp tỉnh, 0–100)<br><span class="en">pci (provincial competitiveness index, 0–100)</span> |
+|---|---|---|---|---|---|
+| An Giang | 2007 | 22.000.000 | 1.221,3 | 5.600.000 | 66,47 |
+| An Giang | 2008 | 25.000.000 | 1.244,9 | 4.600.000 | 61,12 |
+| An Giang | 2009 | 25.000.000 | 1.227,3 | 4.800.000 | 58,18 |
+| Bac Can | 2007 | 1.500.000 | 177,2 | 592.714 | 46,47 |
+| Bac Can | 2008 | 2.000.000 | 179,8 | 1.100.000 | 39,78 |
+| Bac Can | 2009 | 2.400.000 | 189,8 | 1.100.000 | 75,96 |
+| … | … | … | … | … | … |
+
+Đây chính là cấu trúc $y_{it}$: mỗi hàng là một cặp $(i,t)$ — "An Giang, 2007" là một quan sát khác với "An Giang, 2008" (cùng $i$, khác $t$) và khác với "Bac Can, 2007" (khác $i$, cùng $t$). $N$ ở đây là số tỉnh (58 tỉnh theo mô tả gốc — nhưng bảng hồi quy `plm` thực tế ở các mục sau lại hiển thị `n = 43, T = 5, N = 215`, tức chỉ 43 tỉnh được dùng trong panel cân bằng cuối cùng; slide gốc không giải thích rõ vì sao 58 giảm còn 43 — có thể do loại bỏ quan sát thiếu dữ liệu để cân bằng panel, nhưng đây là suy luận, không phải điều slide nói rõ).
+<br><span class="en">This is exactly the $y_{it}$ structure: each row is a pair $(i,t)$ — "An Giang, 2007" is a different observation from "An Giang, 2008" (same $i$, different $t$) and from "Bac Can, 2007" (different $i$, same $t$). $N$ here is the number of provinces (58 provinces per the original description — but the actual `plm` regression tables in later sections show `n = 43, T = 5, N = 215`, meaning only 43 provinces are used in the final balanced panel; the original slide does not explain why 58 dropped to 43 — this could be due to dropping observations with missing data to balance the panel, but this is an inference, not something the slide states explicitly).</span>
+
+> **Ghi chú mâu thuẫn nguồn**: slide Topic 6 mô tả đơn vị của `rgdp` và `rinvest` **hai lần khác nhau** — lần đầu ("EXAMPLE DATA") ghi "bil. VND" (tỷ đồng), lần sau ("THE DATA") ghi lại chính hai biến này là "mil. VND" (triệu đồng). Đây là mâu thuẫn thực sự trong slide gốc, không phải lỗi trích xuất — ghi chú lại theo nguyên tắc của wiki, không tự ý chọn một trong hai. Xét về độ lớn hợp lý (GDP một tỉnh cỡ vài chục nghìn tỷ đồng vào giai đoạn 2007–2011), cách đọc "triệu đồng" (mil. VND) cho ra con số hợp lý hơn nhiều so với "tỷ đồng" (bil. VND) — nhưng đây chỉ là suy luận hợp lý, không phải slide xác nhận.
+> <br><span class="en">**Source-contradiction note**: the Topic 6 slide states the units of `rgdp` and `rinvest` **two different times** — the first time ("EXAMPLE DATA") as "bil. VND," the second time ("THE DATA") records the same two variables as "mil. VND." This is a genuine contradiction in the original slide, not an extraction error — it is recorded per the wiki's principle, without arbitrarily picking one. Judging by plausible magnitude (a province's GDP is on the order of a few tens of thousands of billion VND in the 2007–2011 period), reading it as "million VND" (mil. VND) gives a far more plausible figure than "billion VND" (bil. VND) — but this is only a reasonable inference, not something the slide confirms.</span>
+
+### 1.3 Tại sao panel data hữu ích cho identification — kết nối với vấn đề nhận diện nhân quả - <span class="en">Why panel data is useful for identification — connecting to the causal-identification problem</span>
+
+Đây là câu hỏi triết lý quan trọng nhất của toàn bộ trang này, và nó bắt nguồn trực tiếp từ **identification problem** đã bàn ở [[concepts/econometrics-overview]] (mục 8 của trang đó): muốn ước lượng đúng hiệu ứng nhân quả của $X$ lên $y$, cần cô lập được phần biến thiên trong $X$ **không** bị chi phối bởi các yếu tố gây nhiễu (confounders). Vấn đề kinh điển: nếu có một yếu tố $\alpha_i$ **không quan sát được** (unobserved) — ví dụ chất lượng thể chế của tỉnh, năng lực quản trị của công ty, "khả năng thiên bẩm" của một cá nhân — vừa ảnh hưởng đến $y$ vừa tương quan với $X$, thì OLS trên dữ liệu cross-section thông thường sẽ **chệch** (vi phạm A3/exogeneity), vì $\alpha_i$ bị "trộn" vào phần sai số $\varepsilon_{it}$ và tương quan với $X$.
+<br><span class="en">This is the single most important philosophical question of this entire page, and it flows directly from the **identification problem** discussed in [[concepts/econometrics-overview]] (section 8 of that page): to correctly estimate the causal effect of $X$ on $y$, one needs to isolate the part of the variation in $X$ that is **not** driven by confounders. The classic problem: if there is an **unobserved** factor $\alpha_i$ — e.g. a province's institutional quality, a firm's management capability, an individual's "innate ability" — that both affects $y$ and is correlated with $X$, then OLS on ordinary cross-sectional data will be **biased** (violating A3/exogeneity), because $\alpha_i$ gets "mixed" into the error term $\varepsilon_{it}$ and is correlated with $X$.</span>
+
+**Insight cốt lõi của panel data**: nếu yếu tố gây nhiễu không quan sát được $\alpha_i$ **bất biến theo thời gian** (time-invariant — không đổi qua các năm cho cùng một tỉnh/công ty/cá nhân), thì việc có **nhiều quan sát theo thời gian cho cùng một đơn vị** cho phép ta "trừ nó đi" một cách thuần túy đại số, mà **không cần biết** $\alpha_i$ là gì hay đo lường nó thế nào. Đây chính là cơ chế của FE estimator ở mục 9 — một **chiến lược nhận diện** (identification strategy) không cần biến công cụ (instrument) bên ngoài, khác với IV regression ở [[concepts/endogeneity-iv-regression]]. Nói theo ngôn ngữ của [[concepts/econometrics-overview]]: panel data "dùng chiều thời gian để kiểm soát các confounder không quan sát được và bất biến theo thời gian."
+<br><span class="en">**The core insight of panel data**: if the unobserved confounding factor $\alpha_i$ is **time-invariant** (constant across years for the same province/firm/individual), then having **multiple observations over time for the same unit** lets us "subtract it away" purely algebraically, **without needing to know** what $\alpha_i$ is or how to measure it. This is exactly the mechanism of the FE estimator in section 9 — an **identification strategy** that needs no external instrument, unlike IV regression in [[concepts/endogeneity-iv-regression]]. In the language of [[concepts/econometrics-overview]]: panel data "uses the time dimension to control for unobserved, time-invariant confounders."</span>
+
+**Giới hạn quan trọng cần nhớ ngay từ đầu**: cơ chế này **chỉ** xử lý được phần confounding **bất biến theo thời gian**. Nếu yếu tố gây nhiễu **thay đổi** theo thời gian (ví dụ một cú sốc bất ngờ chỉ ảnh hưởng công ty $i$ ở năm $t$ cụ thể), panel FE **không** giải quyết được — vẫn cần IV hoặc thiết kế khác (xem mục 9.4 và [[concepts/iv-regression-panel-data]]).
+<br><span class="en">**An important limitation to remember from the start**: this mechanism handles **only** the time-invariant part of confounding. If the confounding factor **changes** over time (e.g. a sudden shock that affects only firm $i$ in a specific year $t$), panel FE does **not** solve it — IV or another design is still needed (see section 9.4 and [[concepts/iv-regression-panel-data]]).</span>
+
+## 2. Ưu và nhược điểm của panel data - <span class="en">Advantages and disadvantages of panel data</span>
+
+| Ưu điểm<br><span class="en">Advantages</span> | Nhược điểm<br><span class="en">Disadvantages</span> |
+|---|---|
+| Nhiều quan sát hơn ($NT$ thay vì chỉ $N$ hoặc chỉ $T$)<br><span class="en">More observations ($NT$ instead of just $N$ or just $T$)</span> | Tốn công thu thập dữ liệu hơn (phải theo dõi cùng đơn vị qua nhiều kỳ)<br><span class="en">More costly to collect data (must track the same units across many periods)</span> |
+| Nhiều biến thiên hơn (more variability — ví dụ bắt được cả seasonal effects)<br><span class="en">More variability — e.g. can also capture seasonal effects</span> | Rủi ro selectivity bias (đơn vị nào ở lại trong mẫu suốt $T$ kỳ có thể không ngẫu nhiên)<br><span class="en">Risk of selectivity bias (which units remain in the sample for all $T$ periods may not be random)</span> |
+| Ít multicollinearity hơn giữa các regressor<br><span class="en">Less multicollinearity among regressors</span> | |
+| Phân tích được cả time effects<br><span class="en">Can also analyze time effects</span> | |
+| Giảm được heterogeneity bias và endogeneity do omitted variable bất biến thời gian (xem mục 1.3)<br><span class="en">Reduces heterogeneity bias and endogeneity from time-invariant omitted variables (see section 1.3)</span> | |
+
+## 3. Điều kiện tiên quyết: within-group variation - <span class="en">Prerequisite: within-group variation</span>
+
+**Mô hình FE đòi hỏi biến thiên trong nhóm (within-group variation)** — nếu một biến độc lập không đổi theo thời gian cho từng đơn vị, nó sẽ bị "hấp thụ" hoàn toàn bởi fixed effect $\alpha_i$ và **không ước lượng được**.
+<br><span class="en">**The FE model requires within-group variation** — if an independent variable does not change over time for a given unit, it will be completely "absorbed" by the fixed effect $\alpha_i$ and **cannot be estimated**.</span>
+
+Ví dụ phản chứng của slide: hồi quy khối lượng xuất khẩu từ Việt Nam sang nước $i$ ở năm $t$ theo khoảng cách địa lý từ Việt Nam đến nước $i$:
+<br><span class="en">The slide's counterexample: regressing export volume from Vietnam to country $i$ in year $t$ on the geographic distance from Vietnam to country $i$:</span>
+$$y_{it}=\alpha+\beta x_{it}+u_{it}$$
+Vì khoảng cách địa lý **không đổi** theo năm (nước $i$ luôn cách Việt Nam một khoảng cố định), biến này không có within-group variation → không thể đưa vào một mô hình fixed-effects. Đây chính là lý do FE **không cho phép** regressor bất biến thời gian, trong khi RE (mục 10) thì cho phép — một trong những khác biệt quan trọng nhất giữa hai mô hình.
+<br><span class="en">Because geographic distance is **constant** over years (country $i$ is always a fixed distance from Vietnam), this variable has no within-group variation → it cannot be included in a fixed-effects model. This is exactly why FE **does not allow** a time-invariant regressor, while RE (section 10) does — one of the most important differences between the two models.</span>
+
+## 4. Hai bộ dữ liệu minh họa xuyên suốt trang này - <span class="en">The two illustrative datasets used throughout this page</span>
+
+Vì trang này hợp nhất hai slide deck, có **hai** bộ dữ liệu minh họa khác nhau xuất hiện xen kẽ ở các mục dưới đây — **không phải cùng một bộ dữ liệu** (lưu ý này bổ sung cho dòng "Lịch sử revision" ở đầu trang, vốn có thể gợi ý nhầm là "cùng ví dụ dữ liệu công ty"):
+<br><span class="en">Because this page merges two slide decks, **two** different illustrative datasets appear interleaved in the sections below — **not the same dataset** (this note supplements the "Revision history" line at the top of the page, which might mistakenly suggest "the same company data example"):</span>
+
+| | Dữ liệu Topic 6 (`slides-6-iu.pdf`)<br><span class="en">Topic 6 data (`slides-6-iu.pdf`)</span> | Dữ liệu Topic 12 (`slides-13-iu.pdf`)<br><span class="en">Topic 12 data (`slides-13-iu.pdf`)</span> |
+|---|---|---|
+| Đơn vị quan sát<br><span class="en">Observation unit</span> | 58 tỉnh thành Việt Nam (panel cân bằng cuối cùng dùng $n=43$)<br><span class="en">58 Vietnamese provinces (final balanced panel uses $n=43$)</span> | 300 công ty<br><span class="en">300 firms</span> |
+| Số kỳ<br><span class="en">Number of periods</span> | 5 năm (2007–2011)<br><span class="en">5 years (2007–2011)</span> | 5 năm<br><span class="en">5 years</span> |
+| Biến phụ thuộc<br><span class="en">Dependent variable</span> | `log(rgdp)` — log GDP tỉnh<br><span class="en">`log(rgdp)` — log provincial GDP</span> | `log(output)` — log giá trị sản lượng công ty (triệu VND)<br><span class="en">`log(output)` — log firm output value (million VND)</span> |
+| Biến độc lập<br><span class="en">Independent variables</span> | `log(labfo)` (log lao động), `log(rinvest)` (log đầu tư), `pci` (chỉ số năng lực cạnh tranh)<br><span class="en">`log(labfo)` (log labor), `log(rinvest)` (log investment), `pci` (competitiveness index)</span> | `log(capital)` (log vốn vật chất), `log(labor)` (log số lao động), `training` (giờ đào tạo/lao động), `export` (dummy có xuất khẩu), `credit` (dummy có tiếp cận tín dụng), `mediumtech`/`hightech` (dummy công nghệ, nền `lowtech`)<br><span class="en">`log(capital)` (log physical capital), `log(labor)` (log number of workers), `training` (training hours/worker), `export` (export dummy), `credit` (credit-access dummy), `mediumtech`/`hightech` (technology dummies, base `lowtech`)</span> |
+| Tổng số quan sát trong hồi quy<br><span class="en">Total observations in the regression</span> | $N=215$ ($n=43\times T=5$) | $N=1.500$ ($n=300\times T=5$) |
+
+Dữ liệu Topic 6 dùng minh họa Pooled OLS, FE (within/LSDV), RE cơ bản, và Hausman test bằng số cụ thể. Dữ liệu Topic 12 dùng minh họa đầy đủ **5 loại SE** trên cùng một mô hình — vì đây chính xác là phần "variance structure" mà Topic 12 bổ sung (xem mục 12).
+<br><span class="en">The Topic 6 data illustrates Pooled OLS, FE (within/LSDV), basic RE, and the Hausman test with concrete numbers. The Topic 12 data illustrates all **5 SE types** on the same model — since this is exactly the "variance structure" part that Topic 12 adds (see section 12).</span>
+
+## 5. Mô hình cơ bản và mở rộng theo thời gian - <span class="en">The basic model and its extension over time</span>
+
+$$y_{it}=\alpha_i+\beta x_{it}+\varepsilon_{it} \qquad \text{(one-way fixed effects model)}$$
+
+Mỗi đơn vị $i$ có một hệ số chặn riêng $\alpha_i$ ("fixed effect"), nhưng hệ số góc $\beta$ giống nhau cho mọi đơn vị.
+<br><span class="en">Each unit $i$ has its own intercept $\alpha_i$ (a "fixed effect"), but the slope coefficient $\beta$ is the same for every unit.</span>
+
+Có thể mở rộng để cho phép thêm **time effects**:
+<br><span class="en">This can be extended to also allow **time effects**:</span>
+$$y_{it}=\alpha_i+\delta_t+\beta x_{it}+\varepsilon_{it}$$
+với $\delta_t$ đại diện một xu hướng thời gian tuyến tính (constant rate of change theo thời gian — VD thay đổi công nghệ đồng loạt). Nếu tốc độ thay đổi không tuyến tính, dùng tập hợp time dummies tổng quát hơn:
+<br><span class="en">where $\delta_t$ represents a linear time trend (a constant rate of change over time — e.g. economy-wide technological change). If the rate of change is not linear, use a more general set of time dummies:</span>
+$$y_{it}=\alpha_i+\sum_{t=2}^T\delta_tD_t+\beta x_{it}+\varepsilon_{it}$$
+với $t=1$ là kỳ nền (reference/base period). Đây gọi là **two-way fixed effects model** — kiểm soát đồng thời cả đặc điểm riêng từng đơn vị ($\alpha_i$) lẫn cú sốc chung tại từng thời điểm ($\delta_t$, ảnh hưởng đồng đều lên mọi đơn vị ở kỳ đó).
+<br><span class="en">where $t=1$ is the reference/base period. This is called the **two-way fixed effects model** — it simultaneously controls for both unit-specific characteristics ($\alpha_i$) and common shocks at each point in time ($\delta_t$, affecting all units equally in that period).</span>
+
+## 6. Bộ giả định đầy đủ: A1–A5 mở rộng cho panel data - <span class="en">The full assumption set: A1–A5 extended for panel data</span>
+
+| | Linear Regression Model (Topic 1) | Panel Data Model |
+|---|---|---|
+| A1 | Linear relationship | Linear relationship (không đổi)<br><span class="en">Linear relationship (unchanged)</span> |
+| A2 | Full rank | Full rank (không đổi)<br><span class="en">Full rank (unchanged)</span> |
+| A3 | Exogeneity $E(\varepsilon\vert X)=0$ | **A3a**: $E(X_{it}\varepsilon_{it})=0$ · **A3b**: $E(X_{it}\alpha_i)=0$ |
+| A4 | Homoskedasticity $E(\varepsilon\varepsilon'\vert X)=\sigma^2I$ | **A4a**: individual homoskedasticity · **A4b**: no autocorrelation · **A4c**: no cross-sectional correlation |
+| A5 | Normality | Normality (không đổi)<br><span class="en">Normality (unchanged)</span> |
+
+**Vì sao phải "chi tiết hóa" A3 và A4?** Trong dữ liệu cross-section thường (Topic 1), sai số $\varepsilon_i$ chỉ có **một chiều biến thiên** (giữa các đơn vị). Trong panel data, sai số $\varepsilon_{it}$ có **hai chiều** biến thiên (giữa các đơn vị $i$, và theo thời gian $t$ trong cùng một đơn vị) — nên một giả định "gộp" như A3 hay A4 của Topic 1 không đủ chi tiết để mô tả hết các kiểu vi phạm có thể xảy ra. Việc tách A3 → A3a/A3b và A4 → A4a/b/c là **chìa khóa để hiểu toàn bộ phần còn lại của trang này**: mỗi mô hình/ước lượng khác nhau (Pooled OLS, FE, RE, GLS/FGLS) và mỗi loại SE (mục 12) chỉ khác nhau ở **những giả định con nào được giữ, những giả định con nào được nới lỏng**.
+<br><span class="en">**Why "detail out" A3 and A4?** In ordinary cross-sectional data (Topic 1), the error $\varepsilon_i$ has only **one dimension of variation** (across units). In panel data, the error $\varepsilon_{it}$ has **two dimensions** of variation (across units $i$, and over time $t$ within the same unit) — so a single "lumped" assumption like Topic 1's A3 or A4 is not detailed enough to describe all the possible kinds of violation. Splitting A3 → A3a/A3b and A4 → A4a/b/c is **the key to understanding the rest of this page**: each different model/estimator (Pooled OLS, FE, RE, GLS/FGLS) and each SE type (section 12) differs only in **which sub-assumptions are kept and which are relaxed**.</span>
+
+### 6.1 A3 → A3a / A3b: hai nguồn exogeneity khác nhau - <span class="en">A3 → A3a / A3b: two different sources of exogeneity</span>
+
+- **A3a**: $E(X_{it}\varepsilon_{it})=0$ — biến độc lập không tương quan với phần sai số **idiosyncratic** (đặc thù từng quan sát, thay đổi theo cả $i$ lẫn $t$). Đây là giả định exogeneity "thông thường", giống hệt A3 gốc nhưng áp cho panel.
+<br><span class="en">**A3a**: $E(X_{it}\varepsilon_{it})=0$ — the independent variable is uncorrelated with the **idiosyncratic** error component (specific to each observation, varying with both $i$ and $t$). This is the "ordinary" exogeneity assumption, identical to the original A3 but applied to panel data.</span>
+- **A3b**: $E(X_{it}\alpha_i)=0$ — biến độc lập không tương quan với **hiệu ứng cá nhân bất biến thời gian** $\alpha_i$ (VD: năng lực quản trị công ty, chất lượng thể chế tỉnh). Đây là giả định **đặc thù riêng của panel data**, không tồn tại trong mô hình cross-section thường.
+<br><span class="en">**A3b**: $E(X_{it}\alpha_i)=0$ — the independent variable is uncorrelated with the **time-invariant individual effect** $\alpha_i$ (e.g. a firm's management capability, a province's institutional quality). This assumption is **specific to panel data**, and has no counterpart in an ordinary cross-sectional model.</span>
+
+Ý nghĩa thực tế của việc tách đôi: **A3a luôn bắt buộc** cho mọi ước lượng panel (Pooled OLS, FE, RE) — nếu vi phạm A3a thì có endogeneity thật sự, không mô hình panel nào cứu được (cần IV, xem [[concepts/iv-regression-panel-data]]). Nhưng **A3b có thể vi phạm mà vẫn ước lượng nhất quán được** — miễn là dùng đúng ước lượng (FE, xem mục 9.4) thay vì ước lượng đòi hỏi A3b (RE, xem mục 10).
+<br><span class="en">The practical meaning of this split: **A3a is always required** for every panel estimator (Pooled OLS, FE, RE) — if A3a is violated there is genuine endogeneity that no panel model can fix (IV is needed, see [[concepts/iv-regression-panel-data]]). But **A3b can be violated and estimation can still be consistent** — as long as the right estimator is used (FE, see section 9.4) instead of one that requires A3b (RE, see section 10).</span>
+
+### 6.2 A4 → A4a / A4b / A4c: ba chiều của "phương sai không đổi, không tương quan" - <span class="en">A4 → A4a / A4b / A4c: three dimensions of "constant variance, no correlation"</span>
+
+- **A4a** (individual homoskedasticity): $E(\varepsilon_{it}^2\vert X)=\sigma^2$ cho mọi $i,t$ — phương sai sai số giống nhau qua **mọi** quan sát. Vi phạm thường gặp: công ty lớn có sai số "ồn" hơn công ty nhỏ.
+<br><span class="en">**A4a** (individual homoskedasticity): $E(\varepsilon_{it}^2\vert X)=\sigma^2$ for all $i,t$ — the error variance is the same across **all** observations. Common violation: large firms have "noisier" errors than small firms.</span>
+- **A4b** (no autocorrelation within panel): $E(\varepsilon_{it}\varepsilon_{is}\vert X)=0$ với $t\neq s$ — sai số của cùng một đơn vị ở hai thời điểm khác nhau không tương quan. Vi phạm thường gặp: một cú sốc tốt/xấu của công ty $i$ ở năm $t$ có xu hướng "kéo dài" sang năm $t+1$ (điều kiện nội tại của công ty mang tính bền vững). Dạng vi phạm phổ biến nhất là quá trình tự hồi quy bậc 1, **AR(1)**: $\varepsilon_{it}=\rho\varepsilon_{i,t-1}+u_{it}$, với $\rho$ là hệ số tương quan, $u_{it}$ là nhiễu trắng (white noise, iid, trung bình 0, phương sai không đổi). Hầu hết các gói phần mềm panel chỉ hỗ trợ AR(1) vì đây là dạng đơn giản và phổ biến nhất.
+<br><span class="en">**A4b** (no autocorrelation within panel): $E(\varepsilon_{it}\varepsilon_{is}\vert X)=0$ for $t\neq s$ — the errors of the same unit at two different points in time are uncorrelated. Common violation: a good/bad shock to firm $i$ in year $t$ tends to "persist" into year $t+1$ (a firm's internal conditions are persistent). The most common form of violation is a first-order autoregressive process, **AR(1)**: $\varepsilon_{it}=\rho\varepsilon_{i,t-1}+u_{it}$, where $\rho$ is the correlation coefficient and $u_{it}$ is white noise (iid, mean zero, constant variance). Most panel software packages support only AR(1) since it is the simplest and most common form.</span>
+- **A4c** (no cross-sectional/contemporaneous correlation): $E(\varepsilon_{it}\varepsilon_{jt}\vert X)=0$ với $i\neq j$ — sai số của hai đơn vị **khác nhau** tại **cùng** một thời điểm không tương quan. Vi phạm thường gặp: một cú sốc vĩ mô (khủng hoảng tài chính, thay đổi chính sách quốc gia) ảnh hưởng đồng thời lên nhiều công ty/tỉnh cùng lúc.
+<br><span class="en">**A4c** (no cross-sectional/contemporaneous correlation): $E(\varepsilon_{it}\varepsilon_{jt}\vert X)=0$ for $i\neq j$ — the errors of two **different** units at the **same** point in time are uncorrelated. Common violation: a macro shock (a financial crisis, a national policy change) affects many firms/provinces simultaneously.</span>
+
+## 7. Pooled OLS Estimator - <span class="en">Pooled OLS Estimator</span>
+
+**Trực giác**: cách đơn giản nhất để dùng panel data — gộp toàn bộ $NT$ quan sát lại thành một mẫu cross-section lớn, rồi chạy OLS bình thường, **coi như không có gì đặc biệt** về cấu trúc panel (bỏ qua việc nhiều quan sát thuộc về cùng một đơn vị).
+<br><span class="en">**Intuition**: the simplest way to use panel data — pool all $NT$ observations into one large cross-sectional sample, then run ordinary OLS, **treating the panel structure as if there were nothing special about it** (ignoring that multiple observations belong to the same unit).</span>
+
+$$y_{it}=\alpha+\beta X_{it}+u_{it}$$
+
+Pooled OLS giả định **mọi** $\alpha_i$ bằng nhau ($=\alpha$ chung cho tất cả) — hệ số hồi quy giống hệt nhau cho mọi đơn vị. Nếu giả định này sai (các đơn vị thực sự khác nhau về đặc điểm không quan sát được), Pooled OLS gây ra **heterogeneity bias**.
+<br><span class="en">Pooled OLS assumes **every** $\alpha_i$ is equal ($=$ a common $\alpha$ for all) — the regression coefficients are identical for every unit. If this assumption is wrong (units genuinely differ in unobserved characteristics), Pooled OLS produces **heterogeneity bias**.</span>
+
+**Ví dụ số** (dữ liệu tỉnh, `pols = lm(log(rgdp) ~ log(labfo) + log(rinvest) + pci)`, $N=215$):
+<br><span class="en">**Numerical example** (province data, `pols = lm(log(rgdp) ~ log(labfo) + log(rinvest) + pci)`, $N=215$):</span>
+
+| Biến<br><span class="en">Variable</span> | Estimate | SE (conventional) | t-value | p-value |
+|---|---|---|---|---|
+| (Intercept) | 2.770256 | 0.528587 | 5.241 | <0.001 |
+| log(labfo) | 0.490986 | 0.072717 | 6.752 | <0.001 |
+| log(rinvest) | 0.623586 | 0.045691 | 13.648 | <0.001 |
+| pci | 0.012884 | 0.004481 | 2.875 | 0.004 |
+
+$R^2=0.783$, $R^2_{adj}=0.780$. Pooled OLS áp dụng được đầy đủ cả 5 loại SE ở mục 12 — bảng trên chỉ dùng SE conventional; mục 12.1 sẽ chạy lại đúng ý tưởng này (nhưng trên bộ dữ liệu công ty) với cả 5 loại SE để so sánh trực tiếp.
+<br><span class="en">$R^2=0.783$, $R^2_{adj}=0.780$. Pooled OLS supports all 5 SE types in section 12 — the table above only uses the conventional SE; section 12.1 will re-run this same idea (but on the company data) with all 5 SE types for direct comparison.</span>
+
+## 8. GLS / FGLS Estimator - <span class="en">GLS / FGLS Estimator</span>
+
+**Trực giác trước công thức**: OLS coi mọi quan sát "đáng tin như nhau" — mỗi phần dư đóng góp như nhau vào hàm mục tiêu $\sum e_i^2$, bất kể quan sát đó "ồn" (noisy) hay "sạch" (precise), độc lập hay tương quan với các quan sát khác. Khi các sai số thực sự có phương sai khác nhau (heteroskedastic) hoặc tương quan với nhau (autocorrelated/clustered), coi chúng "ngang hàng" như OLS làm là **lãng phí thông tin** — OLS vẫn cho ước lượng không chệch (nếu exogeneity giữ), nhưng không còn là ước lượng **hiệu quả nhất** (efficient) có thể có. **GLS (Generalized Least Squares)** khắc phục bằng cách "cân lại" các quan sát: hạ trọng số các quan sát ồn/dư thừa thông tin (vì tương quan với quan sát khác), nâng trọng số các quan sát sạch/độc lập — dùng đúng ma trận hiệp phương sai thật của sai số để làm việc này một cách tối ưu.
+<br><span class="en">**Intuition before the formula**: OLS treats every observation as "equally trustworthy" — each residual contributes equally to the objective function $\sum e_i^2$, regardless of whether that observation is "noisy" or "precise," independent or correlated with other observations. When the errors truly have different variances (heteroskedastic) or are correlated with each other (autocorrelated/clustered), treating them "as equals" the way OLS does **wastes information** — OLS still gives an unbiased estimate (if exogeneity holds), but is no longer the most **efficient** estimator possible. **GLS (Generalized Least Squares)** fixes this by "reweighting" observations: down-weighting noisy/redundant observations (because they're correlated with others), up-weighting clean/independent observations — using the true error covariance matrix to do this optimally.</span>
+
+Về công thức: OLS thường $b=(X'X)^{-1}X'y$ ngầm giả định ma trận hiệp phương sai sai số là $\sigma^2I$ (phương sai không đổi, không tương quan giữa các quan sát — chính là A4 gốc). **GLS** tổng quát hóa, cho phép một cấu trúc hiệp phương sai $\Omega$ bất kỳ:
+<br><span class="en">On the formula: ordinary OLS $b=(X'X)^{-1}X'y$ implicitly assumes the error covariance matrix is $\sigma^2I$ (constant variance, no correlation across observations — exactly the original A4). **GLS** generalizes this, allowing any covariance structure $\Omega$:</span>
+$$\beta_{GLS}=(X'\Omega^{-1}X)^{-1}X'\Omega^{-1}y$$
+
+**Vấn đề**: $\Omega$ **không xác định được nếu chưa biết $\beta$** (đây là bài toán "con gà quả trứng" — cần $\beta$ để tính phần dư, cần phần dư để ước lượng $\Omega$, nhưng cần $\Omega$ để tính $\beta_{GLS}$). Giải pháp: **Feasible GLS (FGLS)**, hai cách tiếp cận:
+<br><span class="en">**Problem**: $\Omega$ **cannot be determined without knowing $\beta$ first** (this is a "chicken and egg" problem — $\beta$ is needed to compute residuals, residuals are needed to estimate $\Omega$, but $\Omega$ is needed to compute $\beta_{GLS}$). Solution: **Feasible GLS (FGLS)**, with two approaches:</span>
+- Dùng $\hat\beta_{OLS}$ (từ OLS thường, vẫn không chệch dù không hiệu quả) để ước lượng $\Omega$ trước, rồi tính GLS với $\hat\Omega$ đó — gọi là **classical FGLS**.
+<br><span class="en">Use $\hat\beta_{OLS}$ (from ordinary OLS, still unbiased even if inefficient) to estimate $\Omega$ first, then compute GLS with that $\hat\Omega$ — called **classical FGLS**.</span>
+- Ước lượng đồng thời $\Omega$ và $\beta$ bằng **Maximum Likelihood (ML)** — một biến thể khác của FGLS.
+<br><span class="en">Estimate $\Omega$ and $\beta$ simultaneously using **Maximum Likelihood (ML)** — another variant of FGLS.</span>
+
+**Các biến thể FGLS ứng với từng cấu trúc $\Omega$ khác nhau** — mỗi biến thể tương ứng với việc nới lỏng A4a/A4b/A4c theo một cách khác nhau, và **không có biến thể nào giải quyết trọn vẹn cả ba cùng lúc**:
+<br><span class="en">**The FGLS variants correspond to different $\Omega$ structures** — each variant relaxes A4a/A4b/A4c in a different way, and **no variant solves all three at once**:</span>
+
+| Đặc tả $\Omega$<br><span class="en">$\Omega$ specification</span> | Giải quyết được<br><span class="en">Handles</span> | Không giải quyết được<br><span class="en">Does not handle</span> |
+|---|---|---|
+| Không đặc tả gì (baseline)<br><span class="en">No specification (baseline)</span> | —<br><span class="en">—</span> | **Trùng hệt Pooled OLS** vì cấu trúc hiệp phương sai không được chỉ định<br><span class="en">**Identical to Pooled OLS** since the covariance structure is unspecified</span> |
+| Individual heteroskedasticity (phương sai riêng từng đơn vị)<br><span class="en">Individual heteroskedasticity (unit-specific variance)</span> | A4a theo từng đơn vị<br><span class="en">A4a, unit by unit</span> | Đòi hỏi tài nguyên tính toán rất lớn với dữ liệu panel<br><span class="en">Requires very heavy computational resources with panel data</span> |
+| Period/year heteroskedasticity (phương sai riêng từng năm)<br><span class="en">Period/year heteroskedasticity (year-specific variance)</span> | Heteroskedasticity theo năm<br><span class="en">Heteroskedasticity by year</span> | Serial correlation, cross-sectional dependence<br><span class="en">Serial correlation, cross-sectional dependence</span> |
+| AR(1) | Autocorrelation (A4b) | Heteroskedasticity, cross-sectional dependence<br><span class="en">Heteroskedasticity, cross-sectional dependence</span> |
+| Time heteroskedasticity + AR(1) kết hợp<br><span class="en">Time heteroskedasticity + AR(1) combined</span> | Cả hai trên cùng lúc<br><span class="en">Both of the above at once</span> | Cross-sectional dependence (A4c) vẫn chưa xử lý được<br><span class="en">Cross-sectional dependence (A4c) still not handled</span> |
+
+Không biến thể FGLS nào ở trên xử lý được trọn vẹn cả ba (A4a+A4b+A4c) cùng lúc ở mức **ước lượng** — điều mà Driscoll-Kraay SE (mục 12) làm được, nhưng chỉ ở mức **suy luận (inference)**, tức là sửa SE chứ không đổi cách ước lượng $\beta$.
+<br><span class="en">None of the FGLS variants above fully handles all three (A4a+A4b+A4c) at once at the **estimation** level — something Driscoll-Kraay SE (section 12) does, but only at the **inference** level, i.e. it corrects the SE rather than changing how $\beta$ is estimated.</span>
+
+## 9. Fixed Effects (FE) Model - <span class="en">Fixed Effects (FE) Model</span>
+
+$$y_{it}=\alpha_i+\beta X_{it}+u_{it}$$
+
+Mô hình này cho phép **mỗi đơn vị có một hệ số chặn riêng** $\alpha_i$ ("fixed effect", đại diện cho toàn bộ đặc điểm riêng của đơn vị đó mà không thay đổi theo thời gian), trong khi hệ số góc $\beta$ vẫn giống nhau cho mọi đơn vị. Có **hai** cách ước lượng tương đương (không phải hai mô hình khác nhau — chỉ khác cách tính toán, cho ra cùng một $\beta$).
+<br><span class="en">This model allows **each unit to have its own intercept** $\alpha_i$ ("fixed effect," representing that unit's entire set of characteristics that do not change over time), while the slope coefficient $\beta$ remains the same for every unit. There are **two** equivalent ways to estimate it (not two different models — just different computations, yielding the same $\beta$).</span>
+
+### 9.1 Within-group (demeaning) estimator - <span class="en">Within-group (demeaning) estimator</span>
+
+**Trực giác trước công thức**: nếu $\alpha_i$ là một hằng số **không đổi theo thời gian** cho đơn vị $i$, thì trung bình theo thời gian của $y_{it}$ cho đơn vị đó cũng chứa nguyên vẹn $\alpha_i$. Khi lấy $y_{it}$ trừ đi trung bình theo thời gian $\bar y_i$ của chính đơn vị đó, $\alpha_i$ xuất hiện ở cả hai số hạng và **triệt tiêu hoàn toàn** — đây chính là cơ chế toán học thể hiện đúng ý tưởng "trừ đi trung bình theo từng cá nhân sẽ loại bỏ hiệu ứng cố định" đã nói ở mục 1.3. Cái còn lại chỉ là phần **biến thiên xung quanh trung bình riêng của từng đơn vị** — điều này giải thích vì sao mục 3 nói FE cần "within-group variation": nếu $X_{it}$ không biến thiên quanh trung bình của chính nó, phép trừ sẽ triệt tiêu luôn cả $X$, không còn gì để ước lượng $\beta$.
+<br><span class="en">**Intuition before the formula**: if $\alpha_i$ is a constant **that does not change over time** for unit $i$, then the time average of $y_{it}$ for that unit also contains $\alpha_i$ intact. When $y_{it}$ is subtracted by that unit's own time average $\bar y_i$, $\alpha_i$ appears in both terms and **cancels completely** — this is exactly the mathematical mechanism embodying the idea "subtracting each individual's own mean removes the fixed effect" mentioned in section 1.3. What remains is only the **variation around each unit's own mean** — this explains why section 3 says FE requires "within-group variation": if $X_{it}$ does not vary around its own mean, the subtraction cancels $X$ too, leaving nothing to estimate $\beta$ from.</span>
+
+Về công thức: xuất phát từ mô hình gốc
+<br><span class="en">On the formula: starting from the original model</span>
+$$y_{it}=\alpha_i+\beta X_{it}+u_{it} \qquad (1)$$
+lấy trung bình theo thời gian cho từng đơn vị (lưu ý $\alpha_i,\beta$ không đổi theo $t$ nên không bị ảnh hưởng bởi phép lấy trung bình):
+<br><span class="en">take the time average for each unit (note $\alpha_i,\beta$ do not change with $t$, so they are unaffected by averaging):</span>
+$$\bar y_i=\alpha_i+\beta\bar X_i+\bar u_i \qquad (2), \qquad \bar y_i=\frac1T\sum_{t=1}^Ty_{it},\;\; \bar X_i=\frac1T\sum_{t=1}^TX_{it}$$
+Lấy (1) trừ (2):
+<br><span class="en">Subtracting (2) from (1):</span>
+$$y_{it}-\bar y_i=(\alpha_i-\alpha_i)+\beta(X_{it}-\bar X_i)+(u_{it}-\bar u_i) \;\;\Rightarrow\;\; \tilde y_{it}=\beta\tilde X_{it}+\tilde u_{it}$$
+$\alpha_i$ đã bị khử hoàn toàn — chạy OLS trên phương trình "đã demean" này ước lượng được $\beta$, nhưng **không** ước lượng được $\alpha_i$ (đã mất đi qua phép trừ, đúng như trực giác ở trên).
+<br><span class="en">$\alpha_i$ has been completely eliminated — running OLS on this "demeaned" equation estimates $\beta$, but does **not** estimate $\alpha_i$ (lost through the subtraction, exactly as the intuition above suggested).</span>
+
+**Ví dụ số** (dữ liệu tỉnh, `plm(model = "within")`, $n=43$, $T=5$, $N=215$):
+<br><span class="en">**Numerical example** (province data, `plm(model = "within")`, $n=43$, $T=5$, $N=215$):</span>
+
+| Biến<br><span class="en">Variable</span> | Estimate | SE (conventional) | t-value | p-value |
+|---|---|---|---|---|
+| log(labfo) | 1.0781368 | 0.1820954 | 5.9207 | <0.001 |
+| log(rinvest) | 0.2658911 | 0.0475283 | 5.5944 | <0.001 |
+| pci | 0.0056793 | 0.0019995 | 2.8404 | 0.005 |
+
+$R^2=0.4433$ — thấp hơn hẳn Pooled OLS ($R^2=0.783$) vì FE chỉ dùng phần biến thiên **trong nhóm** (within-group), bỏ qua toàn bộ phần biến thiên **giữa các nhóm** (between-group) mà Pooled OLS tận dụng được — đây là lý do trực tiếp giải thích tại sao FE kém hiệu quả hơn (mục 11).
+<br><span class="en">$R^2=0.4433$ — much lower than Pooled OLS ($R^2=0.783$) because FE uses only the **within-group** variation, discarding all the **between-group** variation that Pooled OLS exploits — this directly explains why FE is less efficient (section 11).</span>
+
+### 9.2 Least Squares Dummy Variable (LSDV) estimator - <span class="en">Least Squares Dummy Variable (LSDV) estimator</span>
+
+Cách thứ hai để ước lượng cùng một mô hình FE: đưa vào $N$ biến dummy, một cho mỗi đơn vị:
+<br><span class="en">A second way to estimate the same FE model: include $N$ dummy variables, one per unit:</span>
+$$y_{it}=\sum_{j=1}^N\alpha_jD_{ji}+\beta X_{it}+u_{it}, \qquad D_{ji}=\begin{cases}1 & j=i\\0 & \text{khác}\end{cases}$$
+Chạy OLS thông thường trên phương trình này. **Hệ số $\beta$ giống hệt within-group estimator** (không phải xấp xỉ — giống hệt đến nhiều chữ số thập phân, xem ví dụ số dưới), nhưng LSDV **ước lượng được cả $\alpha_j$** (hệ số của từng dummy chính là fixed effect của đơn vị đó). Đánh đổi: LSDV **không khả thi khi $N$ lớn** (phải ước lượng thêm $N$ tham số).
+<br><span class="en">Run ordinary OLS on this equation. **The $\beta$ coefficient is identical to the within-group estimator** (not an approximation — identical to many decimal places, see the numerical example below), but LSDV **also estimates $\alpha_j$** (each dummy's coefficient is exactly that unit's fixed effect). Trade-off: LSDV is **infeasible when $N$ is large** (an extra $N$ parameters must be estimated).</span>
+
+**Ví dụ số xác nhận "giống hệt"** (`fe1 = lm(log(rgdp) ~ log(labfo) + log(rinvest) + pci + factor(province))`):
+<br><span class="en">**Numerical example confirming "identical"** (`fe1 = lm(log(rgdp) ~ log(labfo) + log(rinvest) + pci + factor(province))`):</span>
+
+| Biến<br><span class="en">Variable</span> | LSDV Estimate | Within-group Estimate (mục 9.1)<br><span class="en">Within-group Estimate (section 9.1)</span> |
+|---|---|---|
+| log(labfo) | 1.078137 | 1.0781368 |
+| log(rinvest) | 0.265891 | 0.2658911 |
+| pci | 0.005679 | 0.0056793 |
+
+Khớp hoàn toàn. LSDV thêm được `(Intercept) = 4.932273` và 42 hệ số dummy tỉnh (VD `factor(province)3 = -0.613103`) mà within-group không cho ra được.
+<br><span class="en">A perfect match. LSDV additionally gives `(Intercept) = 4.932273` and 42 province dummy coefficients (e.g. `factor(province)3 = -0.613103`) that within-group cannot produce.</span>
+
+### 9.3 Two-way FE - <span class="en">Two-way FE</span>
+
+Thêm dummy thời gian vào LSDV:
+<br><span class="en">Adding time dummies to LSDV:</span>
+$$y_{it}=\sum_{j=1}^N\alpha_jD_{ji}+\sum_{g=1}^T\gamma_gD_{gt}+\beta X_{it}+u_{it}$$
+kiểm soát đồng thời cả đặc điểm riêng từng đơn vị lẫn cú sốc chung theo thời điểm. Ví dụ số (`fe2` thêm `factor(year)`, $N=215$): `factor(year)2008 = 0.098326` (p<0.001), `factor(year)2011 = 0.431488` (p<0.001) — cho thấy GDP các tỉnh có xu hướng tăng đều theo năm ngoài phần đã giải thích bởi $X$, $R^2=0.9918$.
+<br><span class="en">controls simultaneously for unit-specific characteristics and common shocks at each point in time. Numerical example (`fe2` adds `factor(year)`, $N=215$): `factor(year)2008 = 0.098326` (p<0.001), `factor(year)2011 = 0.431488` (p<0.001) — showing that provincial GDP tends to rise steadily by year beyond what is already explained by $X$, $R^2=0.9918$.</span>
+
+### 9.4 Tính chất consistency và giới hạn của FE - <span class="en">FE's consistency property and its limitations</span>
+
+**Tính chất quan trọng nhất của FE**: ước lượng FE **consistent ngay cả khi A3b bị vi phạm** ($E(X_{it}\alpha_i)\neq0$, tức $\alpha_i$ tương quan với $X$) — đây chính là lý do FE được ưa chuộng khi nghi ngờ có confounder bất biến theo thời gian tương quan với biến giải thích (đúng cơ chế đã giải thích ở mục 1.3: $\alpha_i$ bị khử đi bằng đại số, nên dù nó tương quan với $X$ đến đâu cũng không còn ảnh hưởng gì tới $\beta$ ước lượng được). Nhưng **A3a vẫn bắt buộc** — nếu vi phạm A3a (phần sai số idiosyncratic $u_{it}$ tương quan với $X_{it}$) thì FE vẫn có endogeneity, không có "phép màu" nào cứu được. **SE của FE chỉ unbiased nếu A4a, A4b, A4c đều đúng** — nếu không, cần robust/clustered/DK SE (mục 12).
+<br><span class="en">**FE's most important property**: the FE estimator is **consistent even when A3b is violated** ($E(X_{it}\alpha_i)\neq0$, i.e. $\alpha_i$ is correlated with $X$) — this is exactly why FE is preferred when a time-invariant confounder correlated with the explanatory variable is suspected (exactly the mechanism explained in section 1.3: $\alpha_i$ is eliminated algebraically, so no matter how strongly it is correlated with $X$, it no longer affects the estimated $\beta$). But **A3a is still required** — if A3a is violated (the idiosyncratic error $u_{it}$ is correlated with $X_{it}$), FE still has endogeneity; no "magic" can fix this. **FE's SE is unbiased only if A4a, A4b, A4c all hold** — otherwise robust/clustered/DK SE is needed (section 12).</span>
+
+**Giới hạn của FE**: FE model giải quyết được endogeneity do **omitted variable bất biến theo thời gian**, nhưng vẫn "mong manh" (fragile) trước endogeneity từ các nguồn khác: measurement error (sai số đo lường biến $X$), reverse causality ($y$ cũng ảnh hưởng ngược lại $X$), simultaneity ($X$ và $y$ được quyết định đồng thời). Các trường hợp này cần công cụ khác — xem [[concepts/endogeneity-iv-regression]] và [[concepts/iv-regression-panel-data]].
+<br><span class="en">**FE's limitation**: the FE model solves endogeneity from a **time-invariant omitted variable**, but remains "fragile" against endogeneity from other sources: measurement error (in $X$), reverse causality ($y$ also affects $X$ back), simultaneity ($X$ and $y$ are determined jointly). These cases need other tools — see [[concepts/endogeneity-iv-regression]] and [[concepts/iv-regression-panel-data]].</span>
+
+## 10. Random Effects (RE) Model - <span class="en">Random Effects (RE) Model</span>
+
+**Khác biệt triết lý cốt lõi với FE**: thay vì coi $\alpha_i$ là một hằng số cố định riêng của từng đơn vị (như FE), RE coi $\alpha_i$ là một **biến ngẫu nhiên** — một thành phần "may rủi" được rút ra từ một phân phối chung, độc lập (giả định) với $X$. Vì $\alpha_i$ không còn là thứ cần "khử đi" bằng đại số, mà là một phần của cấu trúc sai số cần **mô hình hóa**, RE ước lượng bằng GLS thay vì demeaning.
+<br><span class="en">**The core philosophical difference from FE**: instead of treating $\alpha_i$ as a fixed constant unique to each unit (as FE does), RE treats $\alpha_i$ as a **random variable** — a "chance" component drawn from a common distribution, (assumed) independent of $X$. Since $\alpha_i$ is no longer something to be algebraically "eliminated," but part of the error structure that must be **modeled**, RE is estimated by GLS rather than demeaning.</span>
+
+$$y_{it}=\alpha_0+\alpha_i+\beta X_{it}+\varepsilon_{it}, \qquad \alpha_i\sim N(0,\sigma_\alpha^2),\;\; \varepsilon_{it}\sim N(0,\sigma_\varepsilon^2)$$
+
+Sai số tổng hợp $u_{it}=\alpha_i+\varepsilon_{it}$ gồm hai thành phần: $\alpha_i$ — thành phần ngẫu nhiên đặc thù cá nhân (individual specific random component), và $\varepsilon_{it}$ — nhiễu đặc thù quan sát (idiosyncratic disturbance). Trong RE, $\alpha_i$ **không được ước lượng riêng cho từng đơn vị** như LSDV — thay vào đó, chỉ $\sigma_\alpha^2$ (phương sai của $\alpha_i$) được ước lượng. Vì $\alpha_i$ không bị "trừ đi" như trong FE, **RE cho phép regressor bất biến theo thời gian** — khác biệt thực tế quan trọng nhất so với FE (mục 3).
+<br><span class="en">The composite error $u_{it}=\alpha_i+\varepsilon_{it}$ has two components: $\alpha_i$ — the individual specific random component, and $\varepsilon_{it}$ — the idiosyncratic disturbance. In RE, $\alpha_i$ is **not estimated separately for each unit** as in LSDV — instead, only $\sigma_\alpha^2$ (the variance of $\alpha_i$) is estimated. Since $\alpha_i$ is not "subtracted away" as in FE, **RE allows a time-invariant regressor** — the most important practical difference from FE (section 3).</span>
+
+**Tại sao RE hiệu quả hơn FE nếu đúng, nhưng chệch nếu sai**: RE **chỉ consistent nếu A3b đúng** ($E(X_{it}\alpha_i)=0$ — thành phần ngẫu nhiên $\alpha_i$ không tương quan với $X$; A3a vẫn cần như mọi mô hình khác). Nếu A3b thực sự đúng, RE **hiệu quả hơn FE** vì không phải "tốn" bậc tự do để ước lượng riêng $N$ hệ số chặn như LSDV — nó chỉ cần ước lượng một tham số $\sigma_\alpha^2$ duy nhất, giữ lại được nhiều bậc tự do hơn (degrees of freedom), do đó SE nhỏ hơn, ước lượng chụm hơn. Nhưng nếu A3b **sai** (đúng là trường hợp thường gặp trong thực tế — VD năng lực quản trị công ty vừa ảnh hưởng đến $y$ vừa tương quan với quyết định đầu tư $X$), giả định "ngẫu nhiên, độc lập với $X$" của RE bị vi phạm → ước lượng RE **chệch và không consistent**, dù cỡ mẫu có lớn đến đâu. **SE của RE chỉ unbiased nếu A4a, A4b, A4c đúng.**
+<br><span class="en">**Why RE is more efficient than FE when correct, but biased when wrong**: RE is **consistent only if A3b holds** ($E(X_{it}\alpha_i)=0$ — the random component $\alpha_i$ is uncorrelated with $X$; A3a is still needed as with every other model). If A3b truly holds, RE is **more efficient than FE** because it does not "spend" degrees of freedom estimating $N$ separate intercepts as LSDV does — it only needs to estimate a single parameter $\sigma_\alpha^2$, retaining more degrees of freedom, hence smaller SE, more precise estimates. But if A3b is **wrong** (indeed a common case in practice — e.g. a firm's management capability affects $y$ and is also correlated with the investment decision $X$), RE's "random, independent of $X$" assumption is violated → the RE estimate is **biased and inconsistent**, no matter how large the sample. **RE's SE is unbiased only if A4a, A4b, A4c hold.**</span>
+
+**Ví dụ số** (dữ liệu tỉnh, `plm(model = "random")`, Swamy-Arora's transformation, $n=43$, $T=5$, $N=215$):
+<br><span class="en">**Numerical example** (province data, `plm(model = "random")`, Swamy-Arora's transformation, $n=43$, $T=5$, $N=215$):</span>
+
+| Biến<br><span class="en">Variable</span> | Estimate | SE (conventional) | z-value | p-value |
+|---|---|---|---|---|
+| (Intercept) | 5.1685242 | 0.7005398 | 7.3779 | <0.001 |
+| log(labfo) | 0.8689746 | 0.1078362 | 8.0583 | <0.001 |
+| log(rinvest) | 0.3390771 | 0.0444305 | 7.6316 | <0.001 |
+| pci | 0.0054236 | 0.0020291 | 2.6729 | 0.008 |
+
+Thành phần phương sai: idiosyncratic $\sigma_\varepsilon^2=0.02524$ (chiếm 12,4% tổng phương sai), individual $\sigma_\alpha^2=0.17900$ (chiếm 87,6%) — cho thấy phần lớn biến thiên trong sai số đến từ khác biệt **giữa các tỉnh** (không quan sát được), không phải từ biến động theo năm trong cùng một tỉnh. $R^2=0.564$.
+<br><span class="en">Variance components: idiosyncratic $\sigma_\varepsilon^2=0.02524$ (12.4% of total variance), individual $\sigma_\alpha^2=0.17900$ (87.6%) — showing that most of the error variation comes from **between-province** differences (unobserved), not from year-to-year movement within the same province. $R^2=0.564$.</span>
+
+So với FE (mục 9.1): hệ số `log(labfo)` của RE (0.869) khác khá xa so với FE (1.078); `log(rinvest)` cũng khác (0.339 so với 0.266). Đây chính xác là loại chênh lệch mà Hausman test (mục 13) được thiết kế để kiểm tra xem có "hệ thống" hay chỉ là nhiễu ngẫu nhiên.
+<br><span class="en">Compared with FE (section 9.1): RE's `log(labfo)` coefficient (0.869) differs quite a bit from FE's (1.078); `log(rinvest)` also differs (0.339 vs. 0.266). This is exactly the kind of discrepancy the Hausman test (section 13) is designed to check — whether it is "systematic" or just sampling noise.</span>
+
+## 11. FE vs. RE — bảng tóm tắt quyết định - <span class="en">FE vs. RE — decision summary table</span>
+
+| | FE | RE |
+|---|---|---|
+| Giả định về $\alpha_i$<br><span class="en">Assumption about $\alpha_i$</span> | Cố định (fixed), được phép tương quan tùy ý với $X$<br><span class="en">Fixed, allowed to correlate with $X$ in any way</span> | Ngẫu nhiên (random), giả định không tương quan với $X$<br><span class="en">Random, assumed uncorrelated with $X$</span> |
+| Consistency cần<br><span class="en">Consistency requires</span> | A3a (không cần A3b)<br><span class="en">A3a (A3b not needed)</span> | A3a **và** A3b<br><span class="en">A3a **and** A3b</span> |
+| Cho phép regressor bất biến thời gian?<br><span class="en">Allows a time-invariant regressor?</span> | Không<br><span class="en">No</span> | Có<br><span class="en">Yes</span> |
+| Hiệu quả (efficiency)<br><span class="en">Efficiency</span> | Thấp hơn (tốn bậc tự do ước lượng $N$ hệ số chặn nếu dùng LSDV)<br><span class="en">Lower (spends degrees of freedom estimating $N$ intercepts if using LSDV)</span> | Cao hơn (nhiều bậc tự do hơn) nếu A3b đúng<br><span class="en">Higher (more degrees of freedom) if A3b holds</span> |
+| Rủi ro nếu giả định sai<br><span class="en">Risk if the assumption is wrong</span> | Không có rủi ro thêm (FE vẫn consistent dù A3b sai)<br><span class="en">No added risk (FE stays consistent even if A3b is wrong)</span> | Chệch, inconsistent nếu A3b sai<br><span class="en">Biased, inconsistent if A3b is wrong</span> |
+
+**Tóm gọn**: RE hiệu quả hơn nhưng có thể inconsistent nếu A3b sai; FE ít hiệu quả hơn nhưng vững hơn (không cần A3b). Nguyên tắc thực hành: **chỉ dùng RE nếu hệ số ước lượng không khác biệt hệ thống so với FE** — câu hỏi này được trả lời chính thức bằng Hausman test (mục 13).
+<br><span class="en">**In short**: RE is more efficient but can be inconsistent if A3b is wrong; FE is less efficient but more robust (does not need A3b). Rule of thumb: **only use RE if the estimated coefficients do not differ systematically from FE** — this question is formally answered by the Hausman test (section 13).</span>
+
+## 12. Năm loại chuẩn sai số (Standard Errors) — áp dụng chung cho Pooled OLS, FE, RE - <span class="en">Five types of standard errors — common to Pooled OLS, FE, RE</span>
+
+Bảng giả định A4a/A4b/A4c (mục 6.2) quyết định **công thức nào đúng để tính SE** — chọn sai loại SE không làm hệ số ước lượng $\beta$ thay đổi (điểm quan trọng cần nhớ, xem ví dụ số ở mục 12.1), nhưng có thể làm sai hoàn toàn kết luận về ý nghĩa thống kê.
+<br><span class="en">The A4a/A4b/A4c assumption set (section 6.2) determines **which formula is correct for computing the SE** — choosing the wrong SE type does not change the estimated coefficient $\beta$ (an important point to remember, see the numerical example in section 12.1), but it can completely mislead the conclusion about statistical significance.</span>
+
+| Loại SE<br><span class="en">SE type</span> | Giả định được "vá" (nới lỏng)<br><span class="en">Assumption being "patched" (relaxed)</span> | Robust với<br><span class="en">Robust to</span> | Khi nào nên dùng<br><span class="en">When to use</span> |
+|---|---|---|---|
+| Conventional (mặc định)<br><span class="en">Conventional (default)</span> | Không nới lỏng gì — giữ nguyên A4a+A4b+A4c<br><span class="en">Nothing relaxed — keeps A4a+A4b+A4c intact</span> | Không gì cả<br><span class="en">Nothing</span> | Chỉ khi có cơ sở tin cả ba đều đúng — hiếm gặp trong panel data thực tế<br><span class="en">Only when there is reason to believe all three hold — rare in real panel data</span> |
+| Robust (heteroskedasticity-robust) | A4a | Heteroskedasticity | Nghi ngờ phương sai sai số không đổi qua các quan sát (VD công ty lớn "ồn" hơn công ty nhỏ), nhưng không có lý do nghi ngờ tương quan theo thời gian hay giữa các đơn vị<br><span class="en">Error variance is suspected to be non-constant across observations (e.g. large firms "noisier" than small firms), but there is no reason to suspect correlation over time or across units</span> |
+| (One-way) Clustered | A4a + A4b | Heteroskedasticity + autocorrelation trong cùng một đơn vị<br><span class="en">Heteroskedasticity + autocorrelation within the same unit</span> | Lựa chọn mặc định phổ biến nhất trong thực hành hiện đại với panel data — hợp lý khi sai số của cùng một đơn vị có thể tương quan theo thời gian<br><span class="en">The most common default choice in modern panel-data practice — reasonable when errors of the same unit may be correlated over time</span> |
+| Two-way clustered | A4a + A4b + A4c | Cả ba, kể cả cross-sectional dependence<br><span class="en">All three, including cross-sectional dependence</span> | Nghi ngờ có cú sốc chung theo thời gian ảnh hưởng đồng thời nhiều đơn vị (khủng hoảng, thay đổi chính sách vĩ mô) — nhưng **cần $T$ đủ lớn**; $T$ nhỏ cho ước lượng không đáng tin cậy, thậm chí có thể gặp cảnh báo ma trận VCV không positive definite (xem ví dụ số mục 12.1)<br><span class="en">A common time shock affecting many units simultaneously is suspected (crisis, macro policy change) — but **$T$ must be large enough**; a small $T$ gives unreliable estimates and may even trigger a non-positive-definite VCV matrix warning (see the numerical example in section 12.1)</span> |
+| Driscoll-Kraay (DKSE) | A4a + A4b + A4c | Cả ba, kiểu HAC (Heteroskedasticity and Autocorrelation Consistent)<br><span class="en">All three, HAC-style (Heteroskedasticity and Autocorrelation Consistent)</span> | Panel với $T$ tương đối lớn, nghi ngờ cross-sectional dependence nhưng không đủ điều kiện áp dụng two-way clustering đáng tin cậy; giả định hiệp phương sai giảm dần theo độ trễ (autocovariance decays over lags)<br><span class="en">A panel with relatively large $T$, cross-sectional dependence is suspected but conditions are insufficient for reliable two-way clustering; assumes autocovariance decays over lags</span> |
+
+### 12.1 Ví dụ số: cùng một mô hình, 5 loại SE khác nhau (Pooled OLS, dữ liệu công ty) - <span class="en">Numerical example: the same model, 5 different SE types (Pooled OLS, company data)</span>
+
+Mô hình `log(output) ~ log(capital) + log(labor) + training + export + credit + mediumtech + hightech`, $N=1.500$ (300 công ty × 5 năm). **Điểm mấu chốt cần thấy**: hệ số ước lượng (cột Estimate) **giống hệt nhau ở cả 5 bảng** — chỉ SE (và do đó t-value, p-value) thay đổi:
+<br><span class="en">Model `log(output) ~ log(capital) + log(labor) + training + export + credit + mediumtech + hightech`, $N=1,500$ (300 firms × 5 years). **The key point to notice**: the estimated coefficients (Estimate column) are **identical across all 5 columns** — only the SE (and hence t-value, p-value) changes:</span>
+
+| Biến<br><span class="en">Variable</span> | Estimate | SE Conventional | SE Robust | SE Clustered (id) | SE Two-way clustered (id & year) | SE Driscoll-Kraay (L=1) |
+|---|---|---|---|---|---|---|
+| log(capital) | 0,257119 | 0,015124 | 0,014443 | 0,013814 | 0,023524 | 0,015417 |
+| log(labor) | 0,041700 | 0,023417 | 0,023621 | 0,023191 | 0,024146 | 0,025055 |
+| training | 0,053184 | 0,003101 | 0,003119 | 0,003350 | 0,002318 | 0,001230 |
+| export | 0,030659 | 0,029467 | 0,028805 | 0,031019 | 0,029538 | 0,031529 |
+| credit | 0,019788 | 0,027438 | 0,027688 | 0,027974 | 0,029791 | 0,025060 |
+| mediumtech | −0,055506 | 0,030407 | 0,030790 | 0,030565 | 0,034516 | 0,026808 |
+| hightech | 0,142140 | 0,037643 | 0,036466 | 0,036085 | 0,048573 | 0,036757 |
+
+**Quan sát đáng chú ý**: `hightech` luôn có ý nghĩa thống kê xuyên suốt 5 loại SE, nhưng p-value nới rộng đáng kể — từ $<2\times10^{-16}$ (conventional) lên $0{,}043$ (two-way clustered), rồi $0{,}018$ (DK) — vẫn bác bỏ được $H_0$ ở $\alpha=5\%$, nhưng biên độ an toàn hẹp đi rất nhiều. `training` có SE **giảm mạnh** dưới Driscoll-Kraay (0,00330 → 0,00123, t-value tăng vọt từ 17 lên 43) — minh họa rằng SE "robust hơn" **không đồng nghĩa với SE lớn hơn**; hướng thay đổi phụ thuộc hoàn toàn vào cấu trúc tương quan thật của dữ liệu, không có quy luật "càng robust càng bảo thủ". Đúng với ví dụ số của FE (bên dưới), pattern này cũng lặp lại — càng khẳng định: **chọn loại SE phải dựa trên hiểu biết về cấu trúc dữ liệu (có autocorrelation không? có cú sốc chung theo năm không?), không phải chọn loại nào cho ra p-value "đẹp" nhất.**
+<br><span class="en">**A notable observation**: `hightech` is always statistically significant across all 5 SE types, but the p-value widens considerably — from $<2\times10^{-16}$ (conventional) to $0.043$ (two-way clustered), then $0.018$ (DK) — still rejecting $H_0$ at $\alpha=5\%$, but with a much narrower safety margin. `training`'s SE **drops sharply** under Driscoll-Kraay (0.00330 → 0.00123, t-value jumping from 17 to 43) — illustrating that a "more robust" SE **does not mean a larger SE**; the direction of change depends entirely on the data's true correlation structure, with no rule that "more robust always means more conservative." This same pattern repeats in the FE numerical example below — reinforcing: **the SE type must be chosen based on understanding the data structure (is there autocorrelation? a common yearly shock?), not by picking whichever type gives the "nicest" p-value.**</span>
+
+Ở bảng two-way clustered SE, R xuất ra cảnh báo thực tế: `Warning message: The VCOV matrix is not positive definite and was 'fixed'` — một biểu hiện khác của cùng vấn đề số học sẽ gặp lại ở Hausman test (mục 13.3): ước lượng ma trận hiệp phương sai từ quá ít thông tin độc lập ($T=5$ ở đây là khá nhỏ cho two-way clustering) có thể cho ra ma trận không khả nghịch đúng nghĩa.
+<br><span class="en">For the two-way clustered SE table, R actually outputs the warning: `Warning message: The VCOV matrix is not positive definite and was 'fixed'` — another manifestation of the same numerical issue that will reappear in the Hausman test (section 13.3): estimating a covariance matrix from too little independent information ($T=5$ here is fairly small for two-way clustering) can produce a matrix that is not truly invertible.</span>
+
+### 12.2 Ví dụ số: Within-group FE với 5 loại SE (dữ liệu công ty) - <span class="en">Numerical example: within-group FE with 5 SE types (company data)</span>
+
+Cùng mô hình trên nhưng ước lượng bằng within-group FE thay vì Pooled OLS — một lần nữa, hệ số **không đổi** qua 5 loại SE (đây chính là bản chất "identical to LSDV estimator" đã nói ở mục 9.2):
+<br><span class="en">The same model but estimated with within-group FE instead of Pooled OLS — once again, the coefficients **do not change** across the 5 SE types (this is exactly the "identical to LSDV estimator" property mentioned in section 9.2):</span>
+
+| Biến<br><span class="en">Variable</span> | Estimate | SE Conventional | SE Robust | SE Clustered | SE Driscoll-Kraay |
+|---|---|---|---|---|---|
+| log(capital) | 0,25858 | 0,01104 | 0,00988 | 0,01107 | 0,00532 |
+| log(labor) | 0,02277 | 0,01677 | 0,01460 | 0,01587 | 0,01307 |
+| training | 0,04368 | 0,00228 | 0,00207 | 0,00229 | 0,00185 |
+| export | 0,02262 | 0,02160 | 0,01969 | 0,02306 | 0,01803 |
+| credit | 0,06515 | 0,01980 | 0,01819 | 0,02124 | 0,00919 |
+| mediumtech | −0,01277 | 0,02203 | 0,02005 | 0,02362 | 0,02524 |
+| hightech | 0,18311 | 0,02740 | 0,02413 | 0,02665 | 0,03728 |
+
+`log(labor)` không có ý nghĩa thống kê ở bất kỳ loại SE nào (p dao động 0,082–0,175); `credit` chuyển từ có ý nghĩa mạnh (SE conventional/robust/clustered, p<0,004) sang **vẫn có ý nghĩa nhưng SE nhỏ hẳn** dưới Driscoll-Kraay (0,00919 so với ~0,02) — một lần nữa xác nhận: không có hướng thay đổi "chắc chắn" khi đổi loại SE, phải hiểu rõ cấu trúc dữ liệu trước khi chọn.
+<br><span class="en">`log(labor)` is not statistically significant under any SE type (p ranges 0.082–0.175); `credit` goes from strongly significant (conventional/robust/clustered SE, p<0.004) to **still significant but with a much smaller SE** under Driscoll-Kraay (0.00919 vs. ~0.02) — once again confirming: there is no "certain" direction of change when switching SE types; the data structure must be understood first before choosing.</span>
+
+## 13. Hausman Test (FE vs. RE) - <span class="en">Hausman Test (FE vs. RE)</span>
+
+**Trực giác**: Hausman test giải quyết câu hỏi "nên dùng FE hay RE?" bằng cách **so sánh hai ước lượng** của cùng một $\beta$. Logic cốt lõi: FE luôn **consistent** bất kể A3b đúng hay sai (mục 9.4); RE chỉ **efficient hơn** (chụm hơn) **nếu** A3b đúng, nhưng sẽ **inconsistent** nếu A3b sai (mục 10). Vậy nếu A3b thực sự đúng, hai ước lượng FE và RE — dù khác nhau về hiệu quả — về mặt kỳ vọng phải **cho ra cùng một giá trị** (cả hai đều consistent, chênh lệch quan sát được chỉ là nhiễu ngẫu nhiên của mẫu). Ngược lại, nếu A3b sai, RE bị chệch còn FE thì không — hai ước lượng sẽ **khác nhau một cách hệ thống**, không thể giải thích chỉ bằng nhiễu mẫu. Hausman test chính là phép kiểm định thống kê cho "khác nhau một cách hệ thống" này.
+<br><span class="en">**Intuition**: the Hausman test resolves the question "should FE or RE be used?" by **comparing two estimates** of the same $\beta$. The core logic: FE is always **consistent** regardless of whether A3b holds (section 9.4); RE is only **more efficient** (more precise) **if** A3b holds, but is **inconsistent** if A3b is wrong (section 10). So if A3b truly holds, the FE and RE estimates — though differing in efficiency — must, in expectation, **give the same value** (both are consistent, and the observed difference is just sampling noise). Conversely, if A3b is wrong, RE is biased while FE is not — the two estimates will differ **systematically**, something sampling noise alone cannot explain. The Hausman test is exactly the statistical test for this "systematic difference."</span>
+
+$$H_0: \beta_{RE} \text{ không khác biệt hệ thống với } \beta_{FE} \text{ (tương đương: cả hai đều consistent)}, \qquad H_a: \text{RE inconsistent}$$
+<br><span class="en">$H_0: \beta_{RE}$ does not differ systematically from $\beta_{FE}$ (equivalently: both are consistent), $H_a$: RE is inconsistent</span>
+$$H = (\hat\beta_{FE}-\hat\beta_{RE})'\big[V(\hat\beta_{FE})-V(\hat\beta_{RE})\big]^{-1}(\hat\beta_{FE}-\hat\beta_{RE}) \sim \chi^2_{k}$$
+
+với $k$ = số regressor đang kiểm định, $V(\beta)$ là ma trận hiệp phương sai. **Quy tắc quyết định**: bác bỏ $H_0$ nếu p-value nhỏ.
+<br><span class="en">where $k$ = the number of regressors being tested, $V(\beta)$ is the covariance matrix. **Decision rule**: reject $H_0$ if the p-value is small.</span>
+- **Bác bỏ $H_0$**: ước lượng RE và FE khác nhau hệ thống → **FE consistent, RE không** → dùng FE.
+<br><span class="en">**Reject $H_0$**: the RE and FE estimates differ systematically → **FE is consistent, RE is not** → use FE.</span>
+- **Không bác bỏ $H_0$**: RE và FE không khác nhau đáng kể → cả hai đều "tốt" (theo nghĩa consistent), nhưng **RE hiệu quả hơn** — nên ưu tiên RE (nhắc lại đúng nguyên tắc "không bác bỏ ≠ chứng minh đúng" từ [[concepts/linear-regression-model]] mục 7.5 — chỉ là "không đủ bằng chứng chống lại RE", không phải "đã xác nhận RE đúng tuyệt đối").
+<br><span class="en">**Fail to reject $H_0$**: RE and FE do not differ meaningfully → both are "good" (in the sense of being consistent), but **RE is more efficient** — RE should be preferred (recalling the principle "failing to reject ≠ proving true" from [[concepts/linear-regression-model]] section 7.5 — it only means "insufficient evidence against RE," not "RE has been confirmed absolutely correct").</span>
+
+**Ví dụ số** (Topic 6, dữ liệu tỉnh, `phtest(fe, re)`):
+<br><span class="en">**Numerical example** (Topic 6, province data, `phtest(fe, re)`):</span>
+```
+Hausman Test
+data: log(rgdp) ~ log(labfo) + log(rinvest) + pci
+chisq = 17.621, df = 3, p-value = 0.0005265
+alternative hypothesis: one model is inconsistent
+```
+$p=0{,}0005 \ll 0{,}05$ → **bác bỏ mạnh** $H_0$ → dùng FE cho dữ liệu này. Kết quả này nhất quán với quan sát ở mục 10: hệ số `log(labfo)` và `log(rinvest)` của FE và RE thực sự khác nhau khá xa (1,078 so với 0,869; 0,266 so với 0,339) — Hausman test xác nhận chênh lệch này là **hệ thống**, không phải nhiễu ngẫu nhiên.
+<br><span class="en">$p=0.0005 \ll 0.05$ → **strongly reject** $H_0$ → use FE for this data. This result is consistent with the observation in section 10: FE's and RE's `log(labfo)` and `log(rinvest)` coefficients really do differ substantially (1.078 vs. 0.869; 0.266 vs. 0.339) — the Hausman test confirms this gap is **systematic**, not random noise.</span>
+
+### 13.1 Ba lưu ý quan trọng khi dùng Hausman test - <span class="en">Three important notes when using the Hausman test</span>
+
+1. **Chỉ kiểm định được với cùng một bộ regressor.** Nếu RE có biến bất biến thời gian (không thể có trong FE vì FE demean/absorb hết, xem mục 3), Hausman test **không thực hiện được** — hai mô hình không còn "cùng $k$ hệ số" để so sánh.
+<br><span class="en">**Can only be tested with the same set of regressors.** If RE has a time-invariant variable (impossible in FE, since FE demeans/absorbs it entirely, see section 3), the Hausman test **cannot be performed** — the two models no longer have "the same $k$ coefficients" to compare.</span>
+2. **Hausman test chỉ kiểm tra 2 ước lượng có bằng nhau không** — không phán xét đúng/sai tuyệt đối của bất kỳ mô hình nào một cách độc lập.
+<br><span class="en">**The Hausman test only checks whether the two estimates are equal** — it does not independently judge the absolute correctness of either model.</span>
+3. **Bẫy thi quan trọng nhất**: nếu bất kỳ regressor nào tương quan với sai số theo nghĩa vi phạm **A3a** (endogeneity thật sự, không chỉ vi phạm A3b), **cả FE lẫn RE đều bị chệch** — Hausman test không cứu được trường hợp này, vì nó chỉ so sánh FE với RE dựa trên tiền đề A3a đã đúng cho cả hai. Cần chuyển sang IV cho panel data — xem [[concepts/iv-regression-panel-data]].
+<br><span class="en">**The most important exam trap**: if any regressor is correlated with the error in a way that violates **A3a** (genuine endogeneity, not just an A3b violation), **both FE and RE are biased** — the Hausman test cannot save this case, since it only compares FE with RE on the premise that A3a already holds for both. IV for panel data is needed instead — see [[concepts/iv-regression-panel-data]].</span>
+
+### 13.2 "Vb-VB is not positive definite" — ghi chú thực hành - <span class="en">"Vb-VB is not positive definite" — a practical note</span>
+
+Khi chạy `phtest()` (hoặc lệnh tương đương) trong R, đôi khi gặp cảnh báo:
+<br><span class="en">When running `phtest()` (or an equivalent command) in R, one sometimes encounters the warning:</span>
+> **"Vb-VB is not positive definite"**
+
+Cảnh báo này nghĩa là hiệu ma trận hiệp phương sai $V(\hat\beta_{FE})-V(\hat\beta_{RE})$ **không khả nghịch** đúng nghĩa toán học — do đó thống kê kiểm định $H$ **không tính đúng được** (công thức đòi hỏi nghịch đảo ma trận này). Cách khắc phục theo slide gốc:
+<br><span class="en">This warning means the covariance-matrix difference $V(\hat\beta_{FE})-V(\hat\beta_{RE})$ is **not truly invertible** in the mathematical sense — so the test statistic $H$ **cannot be computed correctly** (the formula requires inverting this matrix). Fixes according to the original slide:</span>
+- Kiểm tra **outlier** trong dữ liệu.
+<br><span class="en">Check for **outliers** in the data.</span>
+- Kiểm tra **multicollinearity** (xem [[concepts/multicollinearity]]).
+<br><span class="en">Check for **multicollinearity** (see [[concepts/multicollinearity]]).</span>
+- **Rescale** (chuẩn hóa lại) các biến.
+<br><span class="en">**Rescale** the variables.</span>
+- Thử **functional form** khác cho mô hình.
+<br><span class="en">Try a different **functional form** for the model.</span>
+
+Lưu ý liên hệ: đây **không phải** hiện tượng cô lập — ở mục 12.1, ví dụ two-way clustered SE cho Pooled OLS cũng gặp cảnh báo tương tự ("The VCOV matrix is not positive definite and was 'fixed'"). Cả hai đều là biểu hiện của cùng một vấn đề số học nền tảng: **ước lượng một ma trận hiệp phương sai từ quá ít thông tin độc lập** (VD $T$ nhỏ, ít cluster, hoặc collinearity giữa các biến) dễ cho ra ma trận suy biến hoặc gần suy biến về mặt số học, dù về lý thuyết ma trận "thật" luôn khả nghịch.
+<br><span class="en">A connecting note: this is **not** an isolated phenomenon — in section 12.1, the two-way clustered SE example for Pooled OLS hit a similar warning ("The VCOV matrix is not positive definite and was 'fixed'"). Both are manifestations of the same underlying numerical issue: **estimating a covariance matrix from too little independent information** (e.g. small $T$, few clusters, or collinearity among variables) easily produces a matrix that is numerically singular or near-singular, even though the "true" matrix is always invertible in theory.</span>
+
+## 14. Bẫy thi tổng hợp - <span class="en">Summary of exam traps</span>
+
+1. Coi "không bác bỏ Hausman" là bằng chứng RE "đúng" tuyệt đối — chỉ là "không đủ bằng chứng chống lại RE", đúng nguyên tắc chung về diễn giải "không bác bỏ $H_0$" đã nói ở [[concepts/linear-regression-model]].
+<br><span class="en">Treating "failing to reject the Hausman test" as absolute proof RE is "correct" — it only means "insufficient evidence against RE," consistent with the general principle for interpreting "failing to reject $H_0$" discussed in [[concepts/linear-regression-model]].</span>
+2. Chạy Hausman test khi hai mô hình có bộ regressor khác nhau (VD RE có biến bất biến thời gian mà FE không thể có) — kiểm định không hợp lệ.
+<br><span class="en">Running the Hausman test when the two models have different regressor sets (e.g. RE has a time-invariant variable that FE cannot have) — the test is invalid.</span>
+3. Quên rằng nếu A3a bị vi phạm (không chỉ A3b), **cả FE và RE đều chệch** — cần chuyển sang IV, không chỉ chọn giữa FE/RE bằng Hausman test.
+<br><span class="en">Forgetting that if A3a is violated (not just A3b), **both FE and RE are biased** — a switch to IV is needed, not just choosing between FE/RE via the Hausman test.</span>
+4. Nhầm lẫn 5 loại SE (conventional/robust/clustered/two-way clustered/DK) — mỗi loại nới lỏng một tập con khác nhau của A4a/b/c, **không phải** "càng robust càng tốt, luôn dùng loại mạnh nhất" — two-way clustered và DK cần $T$ đủ lớn để đáng tin cậy, và như ví dụ số ở mục 12 cho thấy, SE "robust hơn" có thể lớn hơn **hoặc nhỏ hơn** SE gốc tùy cấu trúc dữ liệu thật.
+<br><span class="en">Confusing the 5 SE types (conventional/robust/clustered/two-way clustered/DK) — each relaxes a different subset of A4a/b/c, **not** "the more robust the better, always use the strongest type" — two-way clustered and DK need a sufficiently large $T$ to be reliable, and as the numerical examples in section 12 show, a "more robust" SE can be **larger or smaller** than the original SE depending on the data's true structure.</span>
+5. Nghĩ rằng đổi loại SE sẽ làm hệ số ước lượng $\beta$ thay đổi — SE chỉ ảnh hưởng đến **suy luận thống kê** (t-test, p-value, khoảng tin cậy), không ảnh hưởng đến điểm ước lượng (xem ví dụ số mục 12.1–12.2, nơi Estimate giữ nguyên qua cả 5 bảng).
+<br><span class="en">Thinking that changing the SE type changes the estimated coefficient $\beta$ — SE only affects **statistical inference** (t-test, p-value, confidence interval), not the point estimate (see the numerical examples in sections 12.1–12.2, where Estimate stays fixed across all 5 columns).</span>
+6. Đưa biến bất biến thời gian (VD khoảng cách địa lý cố định) vào mô hình FE — biến này sẽ bị fixed effect "hấp thụ" hoàn toàn, không ước lượng được (mục 3).
+<br><span class="en">Including a time-invariant variable (e.g. fixed geographic distance) in an FE model — this variable will be completely "absorbed" by the fixed effect and cannot be estimated (section 3).</span>
+7. Coi FE luôn "an toàn hơn" RE trong mọi trường hợp — FE vẫn cần A3a như mọi mô hình khác, và luôn kém hiệu quả hơn RE nếu A3b thực sự đúng; chọn FE một cách mặc định mà không kiểm định là bỏ phí hiệu quả không cần thiết.
+<br><span class="en">Treating FE as always "safer" than RE in every case — FE still needs A3a like every other model, and is always less efficient than RE when A3b truly holds; defaulting to FE without testing wastes efficiency unnecessarily.</span>
+8. Nhầm lẫn giữa việc Pooled OLS "vẫn consistent" khi A4 (theo bất kỳ dạng nào) bị vi phạm, với việc "SE của nó vẫn đúng" — hai điều hoàn toàn khác nhau: vi phạm A4a/b/c không làm chệch hệ số, nhưng làm SE mặc định sai, dẫn đến kết luận suy luận thống kê sai (đúng tinh thần đã nói ở [[concepts/heteroskedasticity]]).
+<br><span class="en">Confusing Pooled OLS being "still consistent" when A4 (in any form) is violated, with its "SE still being correct" — these are entirely different things: violating A4a/b/c does not bias the coefficient, but does make the default SE wrong, leading to incorrect statistical-inference conclusions (in the same spirit as [[concepts/heteroskedasticity]]).</span>
+
+## 15. Kết nối với phần còn lại của khóa học - <span class="en">Connections to the rest of the course</span>
+
+Trang này mở rộng [[concepts/linear-regression-model]] sang dữ liệu bảng — bộ ba A3a/A3b và A4a/b/c ở đây là phiên bản "chi tiết hóa" của A3, A4 gốc, xuất phát từ chính câu hỏi identification đã đặt ra ở [[concepts/econometrics-overview]] (mục 1.3 của trang này). [[people/hausman]] xuất hiện ở cả đây và [[concepts/endogeneity-iv-regression]] (Wu-Hausman test) — cùng một logic so sánh hai ước lượng, một luôn consistent và một chỉ efficient dưới $H_0$. Đây là nền tảng trực tiếp cho [[concepts/iv-regression-panel-data]] (khi A3a bị vi phạm — cả FE lẫn RE đều bất lực, cần biến công cụ) và [[concepts/dynamic-panel-data-models]] (khi thêm biến trễ của $y$ vào vế phải, làm nảy sinh một dạng endogeneity mới mà within-group estimator không xử lý được). Vấn đề chọn đúng loại SE (mục 12) là một biến thể trực tiếp của [[concepts/heteroskedasticity]], mở rộng cho cấu trúc hai chiều (đơn vị × thời gian) đặc thù của panel data.
+<br><span class="en">This page extends [[concepts/linear-regression-model]] to panel data — the A3a/A3b and A4a/b/c triads here are the "detailed" version of the original A3, A4, stemming directly from the identification question raised in [[concepts/econometrics-overview]] (section 1.3 of this page). [[people/hausman]] appears both here and in [[concepts/endogeneity-iv-regression]] (Wu-Hausman test) — the same logic of comparing two estimators, one always consistent and one only efficient under $H_0$. This is the direct foundation for [[concepts/iv-regression-panel-data]] (when A3a is violated — both FE and RE are powerless, and an instrumental variable is needed) and [[concepts/dynamic-panel-data-models]] (when a lagged $y$ is added to the right-hand side, creating a new form of endogeneity that the within-group estimator cannot handle). The problem of choosing the correct SE type (section 12) is a direct variant of [[concepts/heteroskedasticity]], extended for the two-dimensional (unit × time) structure specific to panel data.</span>

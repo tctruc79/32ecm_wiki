@@ -1,9 +1,10 @@
 ---
-title: "Panel Data Models — Fixed and Random Effects (basic)"
+title: "Lecture 6: Panel Data Models — Fixed and Random Effects (basic)"
 type: source
 raw_file: "raw/SLIDES/slides-6-iu.pdf"
 pages: 38
 topic: 6
+lecture: 6
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/fixed-random-effects-model]]"]

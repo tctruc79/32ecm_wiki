@@ -1,9 +1,10 @@
 ---
-title: "Multicollinearity"
+title: "Lecture 3: Multicollinearity"
 type: source
 raw_file: "raw/SLIDES/slides-3-iu.pdf"
 pages: 22
 topic: 3
+lecture: 3
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/multicollinearity]]"]

@@ -1,9 +1,10 @@
 ---
-title: "The Linear Regression Model"
+title: "Lecture 1: The Linear Regression Model"
 type: source
 raw_file: "raw/SLIDES/slides-1-iu.pdf"
 pages: 51
 topic: 1
+lecture: 1
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/linear-regression-model]]"]

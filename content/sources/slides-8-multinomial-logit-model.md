@@ -1,9 +1,10 @@
 ---
-title: "Multinomial Logit Model"
+title: "Lecture 10: Multinomial Logit Model"
 type: source
 raw_file: "raw/SLIDES/slides-8-iu.pdf"
 pages: 42
 topic: 8
+lecture: 10
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/multinomial-logit-model]]"]

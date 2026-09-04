@@ -238,27 +238,29 @@ Full mapping notes (why file numbers ≠ topic numbers) are in `CLAUDE.md` §3. 
 
 ## Sources
 
-| Page | Raw file | Topic | Status |
-|---|---|---|---|
-| [[sources/2026-course-outline]] | VNP2026-CO.pdf | (meta) | current |
-| [[sources/intro-to-econometrics]] | VNP2026-intro.pdf | 0 | current |
-| [[sources/slides-1-linear-regression-model]] | slides-1-iu.pdf | 1 | current |
-| [[sources/slides-2-functional-forms]] | slides-2-iu.pdf | 2 | current |
-| [[sources/slides-3-multicollinearity]] | slides-3-iu.pdf | 3 | current |
-| [[sources/slides-4-heteroskedasticity]] | slides-4-iu.pdf | 4 | current |
-| [[sources/slides-5-endogeneity-iv-regression]] | slides-5-iu.pdf | 5 | superseded |
-| [[sources/slides-16-endogeneity-iv-regression-extended]] | slides-16-iu.pdf | 5 | current |
-| [[sources/slides-6-fixed-random-effects]] | slides-6-iu.pdf | 6 | current |
-| [[sources/slides-7-binary-response-models]] | slides-7-iu.pdf | 7 | current |
-| [[sources/slides-310-binary-response-models-logit-probit]] | slides-310-iu.pdf | 7 | current |
-| [[sources/slides-8-multinomial-logit-model]] | slides-8-iu.pdf | 8 | current |
-| [[sources/slides-9-ordinal-response-models]] | slides-9-iu.pdf | 9 | current |
-| [[sources/slides-10-count-data-models]] | slides-10-iu.pdf | 10 | current |
-| [[sources/slides-11-censored-regression-tobit]] | slides-11-iu.pdf | 11 | current |
-| [[sources/slides-13-panel-data-variance-structures]] | slides-13-iu.pdf | 12 | current |
-| [[sources/slides-14-iv-regression-panel-data]] | slides-14-iu.pdf | 13 | current |
-| [[sources/slides-15-dynamic-panel-data-models]] | slides-15-iu.pdf | 14 | current |
-| [[sources/slides-0-r-basics]] | slides-0-iu.pdf | (tooling) | current |
+Ordered by Lecture (see `CLAUDE.md` §3.1); Introduction/R basics/Course Outline are unnumbered.
+
+| Lecture | Page | Raw file | CO Topic | Status |
+|---|---|---|---|---|
+| — | [[sources/2026-course-outline]] | VNP2026-CO.pdf | (meta) | current |
+| — | [[sources/intro-to-econometrics]] | VNP2026-intro.pdf | 0 | current |
+| 1 | [[sources/slides-1-linear-regression-model]] | slides-1-iu.pdf | 1 | current |
+| 2 | [[sources/slides-2-functional-forms]] | slides-2-iu.pdf | 2 | current |
+| 3 | [[sources/slides-3-multicollinearity]] | slides-3-iu.pdf | 3 | current |
+| 4 | [[sources/slides-4-heteroskedasticity]] | slides-4-iu.pdf | 4 | current |
+| 5 | [[sources/slides-5-endogeneity-iv-regression]] | slides-5-iu.pdf | 5 | superseded |
+| 5 | [[sources/slides-16-endogeneity-iv-regression-extended]] | slides-16-iu.pdf | 5 | current |
+| 6 | [[sources/slides-6-fixed-random-effects]] | slides-6-iu.pdf | 6 | current |
+| 6 | [[sources/slides-13-panel-data-variance-structures]] | slides-13-iu.pdf | 12 | current |
+| 7 | [[sources/slides-14-iv-regression-panel-data]] | slides-14-iu.pdf | 13 | current |
+| 8 | [[sources/slides-15-dynamic-panel-data-models]] | slides-15-iu.pdf | 14 | current |
+| 9 | [[sources/slides-7-binary-response-models]] | slides-7-iu.pdf | 7 | current |
+| 9 | [[sources/slides-310-binary-response-models-logit-probit]] | slides-310-iu.pdf | 7 | current |
+| 10 | [[sources/slides-8-multinomial-logit-model]] | slides-8-iu.pdf | 8 | current |
+| 11 | [[sources/slides-9-ordinal-response-models]] | slides-9-iu.pdf | 9 | current |
+| 12 | [[sources/slides-10-count-data-models]] | slides-10-iu.pdf | 10 | current |
+| 13 | [[sources/slides-11-censored-regression-tobit]] | slides-11-iu.pdf | 11 | current |
+| — | [[sources/slides-0-r-basics]] | slides-0-iu.pdf | (tooling) | current |
 
 ## Concepts
 

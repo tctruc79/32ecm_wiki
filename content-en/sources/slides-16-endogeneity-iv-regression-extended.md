@@ -1,9 +1,10 @@
 ---
-title: "Endogeneity and Instrumental Variable Regression (extended)"
+title: "Lecture 5: Endogeneity and Instrumental Variable Regression (extended)"
 type: source
 raw_file: "raw/SLIDES/slides-16-iu.pdf"
 pages: 70
 topic: 5
+lecture: 5
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/endogeneity-iv-regression]]"]

@@ -1,9 +1,10 @@
 ---
-title: "Binary Response Models (vaccine example)"
+title: "Lecture 9: Binary Response Models (vaccine example)"
 type: source
 raw_file: "raw/SLIDES/slides-7-iu.pdf"
 pages: 48
 topic: 7
+lecture: 9
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/binary-response-models]]"]

@@ -1,9 +1,10 @@
 ---
-title: "Censored Regression: The Tobit Model"
+title: "Lecture 13: Censored Regression: The Tobit Model"
 type: source
 raw_file: "raw/SLIDES/slides-11-iu.pdf"
 pages: 35
 topic: 11
+lecture: 13
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/censored-regression-tobit]]"]

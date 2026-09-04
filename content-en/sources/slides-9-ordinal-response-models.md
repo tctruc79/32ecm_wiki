@@ -1,9 +1,10 @@
 ---
-title: "Ordinal Response Models"
+title: "Lecture 11: Ordinal Response Models"
 type: source
 raw_file: "raw/SLIDES/slides-9-iu.pdf"
 pages: 32
 topic: 9
+lecture: 11
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/ordinal-response-models]]"]

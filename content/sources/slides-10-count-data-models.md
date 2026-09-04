@@ -1,9 +1,10 @@
 ---
-title: "Count Data Models"
+title: "Lecture 12: Count Data Models"
 type: source
 raw_file: "raw/SLIDES/slides-10-iu.pdf"
 pages: 44
 topic: 10
+lecture: 12
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/count-data-models]]"]

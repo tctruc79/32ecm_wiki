@@ -1,9 +1,10 @@
 ---
-title: "Panel Data Models with Covariance Structure"
+title: "Lecture 6: Panel Data Models with Covariance Structure"
 type: source
 raw_file: "raw/SLIDES/slides-13-iu.pdf"
 pages: 61
 topic: 12
+lecture: 6
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/fixed-random-effects-model]]"]

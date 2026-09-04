@@ -1,9 +1,10 @@
 ---
-title: "Dynamic Models for Panel Data"
+title: "Lecture 8: Dynamic Models for Panel Data"
 type: source
 raw_file: "raw/SLIDES/slides-15-iu.pdf"
 pages: 64
 topic: 14
+lecture: 8
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/dynamic-panel-data-models]]"]

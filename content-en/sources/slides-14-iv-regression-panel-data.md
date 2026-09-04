@@ -1,9 +1,10 @@
 ---
-title: "Instrumental Variable Regression for Panel Data"
+title: "Lecture 7: Instrumental Variable Regression for Panel Data"
 type: source
 raw_file: "raw/SLIDES/slides-14-iu.pdf"
 pages: 56
 topic: 13
+lecture: 7
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/iv-regression-panel-data]]"]

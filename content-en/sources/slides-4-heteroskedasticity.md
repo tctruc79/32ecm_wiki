@@ -1,9 +1,10 @@
 ---
-title: "Heteroskedasticity"
+title: "Lecture 4: Heteroskedasticity"
 type: source
 raw_file: "raw/SLIDES/slides-4-iu.pdf"
 pages: 25
 topic: 4
+lecture: 4
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/heteroskedasticity]]"]

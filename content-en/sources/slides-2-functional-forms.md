@@ -1,9 +1,10 @@
 ---
-title: "Functional Forms"
+title: "Lecture 2: Functional Forms"
 type: source
 raw_file: "raw/SLIDES/slides-2-iu.pdf"
 pages: 32
 topic: 2
+lecture: 2
 status: current
 ingested: 2026-07-29
 concepts: ["[[concepts/functional-forms]]"]

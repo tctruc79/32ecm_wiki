@@ -10,7 +10,7 @@ Instructor of **Applied Econometrics for Master Programme in Economics**. Two em
 
 Runs a dedicated online learning platform for the course at **econometrics.site** (practice, assignments, project submission).
 
-## Xuất hiện trong
+## Appears in
 
 - [[sources/2026-course-outline]]
 - [[sources/intro-to-econometrics]]

@@ -74,17 +74,17 @@ Viết gọn: $y_{it}=\delta W_{it}+\alpha_i+\varepsilon_{it}$. Instrument $IV_{
 Bộ dữ liệu: 300 doanh nghiệp × 5 năm (balanced panel, $N=1500$).
 <br><span class="en">Dataset: 300 firms × 5 years (balanced panel, $N=1500$).</span>
 
-| Biến / Variable | Ý nghĩa / Meaning | Vai trò / Role |
+| Biến<br><span class="en">Variable</span> | Ý nghĩa<br><span class="en">Meaning</span> | Vai trò<br><span class="en">Role</span> |
 |---|---|---|
-| `output` | Giá trị sản lượng (mil. VND) / Output value (mil. VND) | Biến phụ thuộc, dùng $\ln$ / Dependent variable, uses $\ln$ |
-| `capital` | Giá trị vốn vật chất (mil. VND) / Physical capital value (mil. VND) | Ngoại sinh, dùng $\ln$ / Exogenous, uses $\ln$ |
-| `training` | Giờ đào tạo/lao động (giờ/người) / Training hours per worker (hours/person) | **Nội sinh nghi ngờ** / **Suspected endogenous** |
-| `labor` | Số lao động (người) / Number of workers (persons) | Ngoại sinh, dùng $\ln$ / Exogenous, uses $\ln$ |
-| `export` | Dummy, 1 = có xuất khẩu / Dummy, 1 = exports | Ngoại sinh / Exogenous |
-| `credit` | Dummy, 1 = có tiếp cận tín dụng / Dummy, 1 = has credit access | Ngoại sinh / Exogenous |
-| `tech` | Trình độ công nghệ tương đối: `lowtech` (nền), `mediumtech`, `hightech` / Relative technology level: `lowtech` (base), `mediumtech`, `hightech` | Ngoại sinh (categorical → 2 dummy) / Exogenous (categorical → 2 dummies) |
-| `subeligible` | Dummy, 1 = doanh nghiệp đủ điều kiện nhận trợ cấp đào tạo / Dummy, 1 = firm eligible for training subsidy | **Instrument (excluded)** |
-| `localbudget` | Ngân sách chính quyền địa phương cho đào tạo (mil. VND) / Local government training budget (mil. VND) | **Instrument (excluded)** |
+| `output` | Giá trị sản lượng (mil. VND)<br><span class="en">Output value (mil. VND)</span> | Biến phụ thuộc, dùng $\ln$<br><span class="en">Dependent variable, uses $\ln$</span> |
+| `capital` | Giá trị vốn vật chất (mil. VND)<br><span class="en">Physical capital value (mil. VND)</span> | Ngoại sinh, dùng $\ln$<br><span class="en">Exogenous, uses $\ln$</span> |
+| `training` | Giờ đào tạo/lao động (giờ/người)<br><span class="en">Training hours per worker (hours/person)</span> | **Nội sinh nghi ngờ**<br><span class="en">**Suspected endogenous**</span> |
+| `labor` | Số lao động (người)<br><span class="en">Number of workers (persons)</span> | Ngoại sinh, dùng $\ln$<br><span class="en">Exogenous, uses $\ln$</span> |
+| `export` | Dummy, 1 = có xuất khẩu<br><span class="en">Dummy, 1 = exports</span> | Ngoại sinh<br><span class="en">Exogenous</span> |
+| `credit` | Dummy, 1 = có tiếp cận tín dụng<br><span class="en">Dummy, 1 = has credit access</span> | Ngoại sinh<br><span class="en">Exogenous</span> |
+| `tech` | Trình độ công nghệ tương đối: `lowtech` (nền), `mediumtech`, `hightech`<br><span class="en">Relative technology level: `lowtech` (base), `mediumtech`, `hightech`</span> | Ngoại sinh (categorical → 2 dummy)<br><span class="en">Exogenous (categorical → 2 dummies)</span> |
+| `subeligible` | Dummy, 1 = doanh nghiệp đủ điều kiện nhận trợ cấp đào tạo<br><span class="en">Dummy, 1 = firm eligible for training subsidy</span> | **Instrument (excluded)** |
+| `localbudget` | Ngân sách chính quyền địa phương cho đào tạo (mil. VND)<br><span class="en">Local government training budget (mil. VND)</span> | **Instrument (excluded)** |
 
 Mô hình cụ thể: $\ln(output)_{it} = \alpha_i + \gamma\,training_{it} + \beta_1\ln(capital)_{it} + \beta_2\ln(labor)_{it} + \cdots + \varepsilon_{it}$.
 <br><span class="en">Specific model: $\ln(output)_{it} = \alpha_i + \gamma\,training_{it} + \beta_1\ln(capital)_{it} + \beta_2\ln(labor)_{it} + \cdots + \varepsilon_{it}$.</span>
@@ -92,7 +92,7 @@ Mô hình cụ thể: $\ln(output)_{it} = \alpha_i + \gamma\,training_{it} + \be
 **Mốc so sánh (benchmark) — FE cơ bản, coi `training` là ngoại sinh** (chưa xử lý nghi ngờ nội sinh, dùng để đối chiếu với kết quả IV ở các mục sau):
 <br><span class="en">**Benchmark — basic FE, treating `training` as exogenous** (not yet addressing suspected endogeneity, used for comparison against the IV results in later sections):</span>
 
-| Biến / Variable | Estimate | SE | t | p |
+| Biến<br><span class="en">Variable</span> | Estimate | SE | t | p |
 |---|---|---|---|---|
 | `log(capital)` | 0.25465 | 0.01063 | 23.96 | <0.001 *** |
 | `log(labor)` | 0.02106 | 0.01522 | 1.38 | 0.167 |
@@ -129,7 +129,7 @@ FDIV: d(log(output)) ~ d(log(capital)) + d(log(labor)) + d(export) + d(credit)
       + d(mediumtech) + d(hightech) | 0 | d(training) ~ d(subeligible) + d(localbudget)
 ```
 
-| Biến / Variable | Estimate | SE | t | p |
+| Biến<br><span class="en">Variable</span> | Estimate | SE | t | p |
 |---|---|---|---|---|
 | Intercept | 0.033730 | 0.013872 | 2.43 | 0.015 * |
 | **`fit_d(training)`** | **0.016833** | 0.005997 | 2.81 | 0.005 ** |
@@ -170,7 +170,7 @@ FEIV1: log(output) ~ log(capital) + log(labor) + export + credit + mediumtech + 
 $N=1500$, fixed-effects: `id` (300 nhóm).
 <br><span class="en">$N=1500$, fixed-effects: `id` (300 groups).</span>
 
-| Biến / Variable | Estimate | SE | t | p |
+| Biến<br><span class="en">Variable</span> | Estimate | SE | t | p |
 |---|---|---|---|---|
 | **`fit_training`** | **0.021190** | 0.005724 | 3.70 | <0.001 *** |
 | `log(capital)` | 0.264823 | 0.011351 | 23.33 | <0.001 *** |
@@ -304,10 +304,10 @@ $$H_0: X_2 \text{ exogenous}, \qquad \text{Statistic: } (\hat\beta_{2SLS}-\hat\b
 **Đối chiếu trực quan với mục 2 và mục 4.2** — đây là minh họa số cụ thể, rất đáng nhớ cho việc "cảm nhận" endogeneity bias thay vì chỉ đọc con số kiểm định trừu tượng:
 <br><span class="en">**Visual comparison with section 2 and section 4.2** — a concrete numeric illustration well worth remembering for "feeling" endogeneity bias rather than just reading an abstract test statistic:</span>
 
-| Ước lượng / Estimate | Hệ số `training` / `training` coefficient |
+| Ước lượng<br><span class="en">Estimate</span> | Hệ số `training`<br><span class="en">`training` coefficient</span> |
 |---|---|
-| FE cơ bản (coi `training` ngoại sinh — mục 2) / Basic FE (treating `training` as exogenous — section 2) | **0.04185** |
-| FE-IV (coi `training` nội sinh, IV = `subeligible`, `localbudget` — mục 4.2) / FE-IV (treating `training` as endogenous, IV = `subeligible`, `localbudget` — section 4.2) | **0.02119** |
+| FE cơ bản (coi `training` ngoại sinh — mục 2)<br><span class="en">Basic FE (treating `training` as exogenous — section 2)</span> | **0.04185** |
+| FE-IV (coi `training` nội sinh, IV = `subeligible`, `localbudget` — mục 4.2)<br><span class="en">FE-IV (treating `training` as endogenous, IV = `subeligible`, `localbudget` — section 4.2)</span> | **0.02119** |
 
 Hệ số FE "ngây thơ" **gần gấp đôi** hệ số FE-IV đã hiệu chỉnh — nhất quán với câu chuyện kinh tế "doanh nghiệp tăng đào tạo *vì* kỳ vọng sản lượng tăng" (reverse causality): phần "tăng đào tạo đi kèm tăng sản lượng" trong hệ số FE ngây thơ không hoàn toàn là hiệu ứng nhân quả của đào tạo lên sản lượng, mà một phần là do lựa chọn tự thân của doanh nghiệp (self-selection) tương quan với kỳ vọng tăng trưởng. FE-IV bóc tách và loại bỏ phần chệch đó, cho hệ số nhỏ hơn — khớp với kết luận Wu-Hausman rằng `training` nội sinh và OLS/FE bị chệch.
 <br><span class="en">The "naïve" FE coefficient is **nearly double** the corrected FE-IV coefficient — consistent with the economic story "firms increase training *because* they expect output to rise" (reverse causality): the "training increase alongside output increase" portion of the naïve FE coefficient is not entirely a causal effect of training on output, but partly reflects firms' self-selection correlated with growth expectations. FE-IV strips out and removes that bias, yielding a smaller coefficient — consistent with the Wu-Hausman conclusion that `training` is endogenous and OLS/FE is biased.</span>

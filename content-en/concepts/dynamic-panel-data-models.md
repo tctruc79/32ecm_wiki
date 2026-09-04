@@ -320,7 +320,7 @@ $$\theta_{GMM}=\arg\min_\theta \begin{bmatrix}g^D(\theta)'&g^L(\theta)'\end{bmat
 
 **Validity**: requires **both** conditions simultaneously:
 
-$$E[\Delta y_{i,t-1}\cdot\varepsilon_{it}]=0 \qquad\text{và}\qquad E[\Delta y_{i,t-1}\cdot\alpha_i]=0$$
+$$E[\Delta y_{i,t-1}\cdot\varepsilon_{it}]=0 \qquad\text{and}\qquad E[\Delta y_{i,t-1}\cdot\alpha_i]=0$$
 
 The first condition is identical to the "no serial correlation at level" condition already encountered in AB. The second condition is **new**, and requires **stationarity** of $y_{it}$: $E[y_{it}\mid\alpha_i]$ is constant over $t$.
 
@@ -351,7 +351,7 @@ System GMM specification in R (`plm::pgmm`, `transformation = "ld"` — level+di
 | $\log(capital)$ | 0.236 | 0.013 | 18.05 |
 | $\log(labor)$ | −0.016 | 0.021 | −0.76 (n.s.) |
 | `training` | 0.049 | 0.003 | 16.94 |
-| `credit` | 0.045 | 0.024 | 1.88 (biên, $p=0.061$) |
+| `credit` | 0.045 | 0.024 |1.88 (borderline, $p=0.061$) |
 | `hightech` | 0.236 | 0.031 | 7.64 |
 
 Sargan: $\chi^2(133)=146.83$, $p=0.195$ (not rejected). AR(1): $z=-12.888$, $p\approx0$ (strongly rejected — expected, good). AR(2): $z=-0.629$, $p=0.529$ (not rejected — expected, good).
@@ -398,8 +398,8 @@ This is the crux: even when the original error is entirely "clean" (the most ide
 
 |Test |Expectation when the model is correct |If the opposite happens |
 |---|---|---|
-| AR(1) trên $\Delta\hat\varepsilon$ |**Should be rejected** — an inevitable mechanical consequence of first-difference, not a bad sign |Fails to be rejected → abnormal, suggests misspecification or a data error |
-| AR(2) trên $\Delta\hat\varepsilon$ |**Should not be rejected** — no mechanical overlap between $\Delta\varepsilon_{it}$ and $\Delta\varepsilon_{i,t-2}$ |Rejected → the instrument (for the lagged dependent variable) is invalid |
+|AR(1) on $\Delta\hat\varepsilon$ |**Should be rejected** — an inevitable mechanical consequence of first-difference, not a bad sign |Fails to be rejected → abnormal, suggests misspecification or a data error |
+|AR(2) on $\Delta\hat\varepsilon$ |**Should not be rejected** — no mechanical overlap between $\Delta\varepsilon_{it}$ and $\Delta\varepsilon_{i,t-2}$ |Rejected → the instrument (for the lagged dependent variable) is invalid |
 
 ### [[people/sargan|Sargan]] test
 

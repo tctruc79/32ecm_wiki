@@ -48,30 +48,30 @@ $F(\cdot)$ here is called the **link function** — its job is simply to "squeez
 
 A survey of 377 people in Ho Chi Minh City in 2020 (data made public by EEPSEA), asking whether they would decide to get a hypothetical COVID-19 vaccine.
 
-| Biến / Variable | Ý nghĩa / Meaning |
+|Variable |Meaning |
 |---|---|
-| `dself` (dep var) | 1 = quyết định tiêm cho bản thân / 1 = decides to get vaccinated for themselves |
-| `efficacy80` | 1 = hiệu quả vaccine 80%, 0 = 50% / 1 = vaccine efficacy 80%, 0 = 50% |
-| `duration3` | 1 = thời gian miễn dịch 3 năm, 0 = 1 năm / 1 = immunity duration 3 years, 0 = 1 year |
-| `priceUS` (USD) | giá vaccine (2 liều) / vaccine price (2 doses) |
-| `pbenefit` | 1 = được cung cấp thông tin về ngoại tác (externality) của việc tiêm vaccine / 1 = was given information about the externality of vaccination |
-| `hhincomeUS` (USD/tháng) | tổng thu nhập hộ gia đình / total household income |
-| `hhsize` | quy mô hộ gia đình / household size |
-| `age` (năm) | tuổi người trả lời / respondent's age |
-| `edu` (categorical 1–6) | trình độ học vấn / education level |
+| `dself` (dep var) |1 = decides to get vaccinated for themselves |
+| `efficacy80` |1 = vaccine efficacy 80%, 0 = 50% |
+| `duration3` |1 = immunity duration 3 years, 0 = 1 year |
+| `priceUS` (USD) |vaccine price (2 doses) |
+| `pbenefit` |1 = was given information about the externality of vaccination |
+|`hhincomeUS` (USD/month) |total household income |
+| `hhsize` |household size |
+|`age` (years) |respondent's age |
+| `edu` (categorical 1–6) |education level |
 | `male` | 1 = nam / 1 = male |
-| `risk` (ordinal 1–5) | mức độ cảm nhận rủi ro nhiễm COVID-19: "Very unlikely" → "Very likely" / perceived risk of COVID-19 infection: "Very unlikely" → "Very likely" |
+| `risk` (ordinal 1–5) |perceived risk of COVID-19 infection: "Very unlikely" → "Very likely" |
 
 ### E-wallet (slides-310, used only to illustrate the concept, no extractable R output)
 
-| Biến / Variable | Ý nghĩa / Meaning |
+|Variable |Meaning |
 |---|---|
-| `ewallet` (dep var) | 1 = có dùng ví điện tử / 1 = uses an e-wallet |
-| `income` (triệu VNĐ/tháng) | thu nhập khả dụng hàng tháng / monthly disposable income |
-| `age`, `schooling` (năm) | tuổi, số năm đi học / age, years of schooling |
+| `ewallet` (dep var) |1 = uses an e-wallet |
+|`income` (million VND/month) |monthly disposable income |
+|`age`, `schooling` (years) |age, years of schooling |
 | `male` | 1 = nam / 1 = male |
-| `risklover` | 1 = tự nhận là người ưa thích rủi ro / 1 = self-identifies as a risk lover |
-| `freq` → `weekly`, `daily` (dummy) | tần suất mua sắm trực tuyến (nền: "monthly" — dưới hàng tuần) / frequency of online shopping (base: "monthly" — less than weekly) |
+| `risklover` |1 = self-identifies as a risk lover |
+| `freq` → `weekly`, `daily` (dummy) |frequency of online shopping (base: "monthly" — less than weekly) |
 
 The two datasets differ completely in context, but share **the same problem structure**: a 0/1 outcome to be explained by a mixed set of independent variables (continuous, dummy, categorical) — exactly the type of problem LPM/Logit/Probit are designed to handle.
 
@@ -79,7 +79,7 @@ The two datasets differ completely in context, but share **the same problem stru
 
 The slide lists 5 choices of link function (the first 3 are the focus of the course):
 
-| Mô hình / Model | $F(X_i,\beta)$ |
+|Model | $F(X_i,\beta)$ |
 |---|---|
 | **Linear Probability Model (LPM)** | $X_i\beta$ |
 | **Logit** | $\Lambda(X_i\beta) = \dfrac{1}{1+e^{-X_i\beta}}$ |
@@ -185,7 +185,7 @@ In other words: Logit assumes the error $u$ follows a **logistic distribution**;
 
 Here is the full estimation results table (`stargazer(logit, probit)`), $N=377$:
 
-| Biến / Variable | Logit $\hat\beta$ (SE) | Probit $\hat\beta$ (SE) |
+|Variable | Logit $\hat\beta$ (SE) | Probit $\hat\beta$ (SE) |
 |---|---|---|
 | `efficacy80` | 0.1584 (0.2704) | 0.0821 (0.1542) |
 | `duration3` | −0.2807 (0.2712) | −0.1603 (0.1544) |
@@ -245,8 +245,8 @@ $H_0: \beta_{riskNeither}=\beta_{riskUnlikely}=\beta_{riskVery\,likely}=\beta_{r
 
 | | LR test | Wald test |
 |---|---|---|
-| **Logit**: $LL_F=-175.11$ (13 tham số / parameters) vs $LL_R=-180.92$ (9 tham số / parameters) | $\chi^2=11.618$, df=4, p=0.02043 | $\chi^2=11.067$, df=4, p=0.02582 |
-| **Probit**: $LL_F=-175.70$ (13 tham số / parameters) vs $LL_R=-181.01$ (9 tham số / parameters) | $\chi^2=10.626$, df=4, p=0.03111 | $\chi^2=10.452$, df=4, p=0.03346 |
+|**Logit**: $LL_F=-175.11$ (13 parameters) vs $LL_R=-180.92$ (9 parameters) | $\chi^2=11.618$, df=4, p=0.02043 | $\chi^2=11.067$, df=4, p=0.02582 |
+|**Probit**: $LL_F=-175.70$ (13 parameters) vs $LL_R=-181.01$ (9 parameters) | $\chi^2=10.626$, df=4, p=0.03111 | $\chi^2=10.452$, df=4, p=0.03346 |
 
 All 4 tests reject $H_0$ at the 5% level — there is evidence that the perceived risk of COVID-19 infection jointly affects the vaccination decision. **Point to remember**: LR and Wald give the **same conclusion** (reject at 5%) but the **test statistics do not match exactly** (11.618 ≠ 11.067; 10.626 ≠ 10.452) — this is a normal consequence of the two tests being only *asymptotically* equivalent (as $n\to\infty$), not identical in finite samples ($n=377$ here).
 
@@ -271,11 +271,11 @@ The term $P_i(1-P_i)$ is a bell-shaped "weight," reaching a maximum $=0.25$ at $
 
 Using the Logit coefficient from section 7 ($\beta_{priceUS}=-0.0318$; other variables fixed at: `efficacy80=1, duration3=1, pbenefit=0, hhincomeUS=700, hhsize=4, age=30, male=1, risk="Very likely"` — exactly the reference values the slide uses to plot the predicted-probability graph in section 10), computing by hand with the formula above to clearly see the S shape and how the marginal effect changes with vaccine price:
 
-| `priceUS` (USD) | $P_i$ dự đoán / predicted | Marginal effect ($\partial P/\partial X$, %-điểm mỗi $1 tăng thêm / pp per $1 increase) |
+| `priceUS` (USD) |predicted |Marginal effect ($\partial P/\partial X$, pp per $1 increase) |
 |---|---|---|
 | 0 | ≈ 0.950 | ≈ −0.152 |
 | 50 | ≈ 0.794 | ≈ −0.521 |
-| 92 (≈ điểm $P=0.5$ / point where $P=0.5$) | = 0.500 | ≈ **−0.795 (dốc nhất / steepest)** |
+|(point where $P=0.5$) | = 0.500 |**(steepest)** |
 | 100 | ≈ 0.440 | ≈ −0.783 |
 | 150 | ≈ 0.138 | ≈ −0.378 |
 
@@ -296,14 +296,14 @@ Since the marginal effect changes with $X$, a practical question arises: when re
 
 **Logit — MEM (`atmean=TRUE`)**, listing only the statistically significant variables:
 
-| Biến / Variable | dF/dx | SE | p-value |
+|Variable | dF/dx | SE | p-value |
 |---|---|---|---|
 | `priceUS` | −4.7433e-03 | 1.3804e-03 | 0.0006 *** |
 | `age` | −4.2117e-03 | 1.3341e-03 | 0.0016 ** |
 
 **Logit — AME (`atmean=FALSE`)**:
 
-| Biến / Variable | dF/dx | SE | p-value |
+|Variable | dF/dx | SE | p-value |
 |---|---|---|---|
 | `priceUS` | −4.7423e-03 | 1.5302e-03 | 0.00194 ** |
 | `age` | −4.2108e-03 | 1.4774e-03 | 0.00437 ** |
@@ -337,10 +337,10 @@ Holding the other variables at their reference levels (as in section 9.2), letti
 
 Using the threshold $\hat P_i>0.5$ to classify the prediction as "vaccinate"/"not vaccinate," compared against the actual outcome:
 
-| | Thực tế: `dself=0` / Actual: `dself=0` | Thực tế: `dself=1` / Actual: `dself=1` |
+| |Actual: `dself=0` |Actual: `dself=1` |
 |---|---|---|
-| Dự đoán: không tiêm (FALSE) / Predicted: not vaccinate (FALSE) | 9 | 7 |
-| Dự đoán: có tiêm (TRUE) / Predicted: vaccinate (TRUE) | 72 | 289 |
+|Predicted: not vaccinate (FALSE) | 9 | 7 |
+|Predicted: vaccinate (TRUE) | 72 | 289 |
 
 Overall correct prediction rate: $\dfrac{9+289}{377} = 0.7904509$ (≈79.05%).
 
@@ -354,28 +354,28 @@ Overlaying the two predicted-probability curves (Logit and Probit) on the same `
 
 Another common way of presenting Logit results — especially in health/epidemiology — is to report the **odds ratio** directly instead of the raw coefficient. Since $\dfrac{P_i}{1-P_i}=e^{\beta X_i}$ (section 5.2) already holds, the odds ratio of each variable is exactly $e^{\hat\beta_j}$ — the slide confirms this with real data: `exp(coef(logit))` produces exactly the "OddsRatio" column in the `logitor()` table.
 
-| Biến / Variable | Odds Ratio | p-value | Diễn giải / Interpretation |
+|Variable | Odds Ratio | p-value |Interpretation |
 |---|---|---|---|
-| `priceUS` | 0.9687 | 0.0005 *** | mỗi $1 tăng giá làm odds (tỷ lệ cược) quyết định tiêm **giảm khoảng 3.13%** ($(0.9687-1)\times100\%$), giữ các biến khác không đổi / each $1 increase in price **decreases** the odds of deciding to vaccinate by **about 3.13%** ($(0.9687-1)\times100\%$), holding other variables constant |
-| `age` | 0.9722 | 0.0053 ** | mỗi năm tuổi tăng thêm làm odds quyết định tiêm giảm khoảng 2.78% / each additional year of age decreases the odds of deciding to vaccinate by about 2.78% |
-| `hhincomeUS` | 1.00046 | 0.0428 * | mỗi $1 thu nhập hộ tăng thêm làm odds tăng khoảng 0.046% (rất nhỏ, dù có ý nghĩa thống kê yếu) / each additional $1 of household income increases the odds by about 0.046% (very small, though weakly statistically significant) |
-| `riskVery unlikely` | 0.3847 | 0.0536 . | so với nhóm "Likely" (nền), nhóm cảm thấy rủi ro "rất khó xảy ra" có odds quyết định tiêm chỉ bằng khoảng 38.5% (ở mức ý nghĩa biên, p≈0.054) / relative to the "Likely" (base) group, the group who feel infection is "very unlikely" have odds of deciding to vaccinate only about 38.5% as large (at a marginal significance level, p≈0.054) |
+| `priceUS` | 0.9687 | 0.0005 *** |each $1 increase in price **decreases** the odds of deciding to vaccinate by **about 3.13%** ($(0.9687-1)\times100\%$), holding other variables constant |
+| `age` | 0.9722 | 0.0053 ** |each additional year of age decreases the odds of deciding to vaccinate by about 2.78% |
+| `hhincomeUS` | 1.00046 | 0.0428 * |each additional $1 of household income increases the odds by about 0.046% (very small, though weakly statistically significant) |
+| `riskVery unlikely` | 0.3847 | 0.0536 . |relative to the "Likely" (base) group, the group who feel infection is "very unlikely" have odds of deciding to vaccinate only about 38.5% as large (at a marginal significance level, p≈0.054) |
 
 **Rule for reading an odds ratio**: $OR>1$ → the variable **increases** the odds (and hence increases $P$); $OR<1$ → **decreases** the odds; $OR=1$ → no effect. The percentage change in odds $=(OR-1)\times100\%$. Note: this is still a statement about **odds**, not a direct statement about the probability $P$ or the marginal effect — converting back from odds ratio to probability still requires applying the formula $P=OR/(1+OR)$ in the right context; the odds ratio cannot be read directly as a percentage-change number for $P$.
 
 ## Summary comparison: LPM vs Logit vs Probit
 
-| Tiêu chí / Criterion | LPM | Logit | Probit |
+|Criterion | LPM | Logit | Probit |
 |---|---|---|---|
-| Hàm liên kết $F(X\beta)$ / Link function $F(X\beta)$ | $X\beta$ | $\dfrac{1}{1+e^{-X\beta}}$ | $\Phi(X\beta)$ (CDF chuẩn / normal CDF) |
-| Dự đoán $Pr(y=1)$ có bị chặn [0,1] không / Is predicted $Pr(y=1)$ bounded in [0,1] | ❌ Không / No | ✅ Có / Yes | ✅ Có / Yes |
-| Marginal effect | Hằng số ($=\beta_j$) / Constant ($=\beta_j$) | Thay đổi theo $X$ (qua $P(1-P)$) / Changes with $X$ (via $P(1-P)$) | Thay đổi theo $X$ (qua $\phi(X\beta)$) / Changes with $X$ (via $\phi(X\beta)$) |
-| Ước lượng / Estimation | OLS | Maximum Likelihood | Maximum Likelihood |
-| Heteroskedasticity | Có sẵn, luôn vi phạm A4 / Inherent, always violates A4 | Không phải vấn đề theo cùng cách (không dùng khung OLS) / Not an issue in the same way (does not use the OLS framework) | Tương tự Logit / Similar to Logit |
-| Diễn giải hệ số thô / Interpreting the raw coefficient | Trực tiếp = thay đổi xác suất / Direct = change in probability | Chỉ cho **dấu** (chiều), không cho độ lớn — cần marginal effect hoặc odds ratio / Gives only the **sign** (direction), not the magnitude — need the marginal effect or odds ratio | Chỉ cho **dấu**, không cho độ lớn — cần marginal effect / Gives only the **sign**, not the magnitude — need the marginal effect |
-| Ưu điểm / Advantage | Đơn giản, dễ diễn giải, dùng được công cụ OLS quen thuộc / Simple, easy to interpret, can use familiar OLS tools | Marginal effect có công thức đóng; có thêm cách diễn giải odds ratio / Marginal effect has a closed form; also has the odds-ratio interpretation | Nền tảng lý thuyết gắn với phân phối chuẩn — hay dùng khi mô hình hóa latent variable có $u\sim N(0,1)$ (ví dụ mở rộng sang Tobit, Heckman) / Theoretical foundation tied to the normal distribution — often used when modeling a latent variable with $u\sim N(0,1)$ (e.g. extensions to Tobit, Heckman) |
-| Nhược điểm / Disadvantage | 4 nhược điểm ở mục 4.4 / The 4 drawbacks in section 4.4 | Đuôi dày hơn chuẩn — hội tụ về 0/1 chậm hơn / Fatter tails than normal — converges to 0/1 more slowly | Marginal effect phải tính số (không có công thức đóng đơn giản) / Marginal effect must be computed numerically (no simple closed form) |
-| Khi nào dùng / When to use | Khi cần diễn giải cực nhanh, cực đơn giản, hoặc làm mô hình cơ sở (baseline) để so sánh; ít khi dùng làm mô hình chính thức trong nghiên cứu hiện đại / When an extremely fast, extremely simple interpretation is needed, or as a baseline model for comparison; rarely used as the formal model in modern research | Lựa chọn phổ biến nhất trong thực hành — đặc biệt khi cần odds ratio (y tế, tín dụng) / The most common choice in practice — especially when the odds ratio is needed (health, credit) | Khi lý thuyết/mô hình mở rộng yêu cầu giả định phân phối chuẩn (ví dụ liên kết với các mô hình censored/truncated ở Topic 11) / When the theory/extended model requires the normal-distribution assumption (e.g. linking to censored/truncated models in Topic 11) |
+|Link function $F(X\beta)$ | $X\beta$ | $\dfrac{1}{1+e^{-X\beta}}$ |$\Phi(X\beta)$ (normal CDF) |
+|Is predicted $Pr(y=1)$ bounded in [0,1] |No |Yes |Yes |
+| Marginal effect |Constant ($=\beta_j$) |Changes with $X$ (via $P(1-P)$) |Changes with $X$ (via $\phi(X\beta)$) |
+|Estimation | OLS | Maximum Likelihood | Maximum Likelihood |
+| Heteroskedasticity |Inherent, always violates A4 |Not an issue in the same way (does not use the OLS framework) |Similar to Logit |
+|Interpreting the raw coefficient |Direct = change in probability |Gives only the **sign** (direction), not the magnitude — need the marginal effect or odds ratio |Gives only the **sign**, not the magnitude — need the marginal effect |
+|Advantage |Simple, easy to interpret, can use familiar OLS tools |Marginal effect has a closed form; also has the odds-ratio interpretation |Theoretical foundation tied to the normal distribution — often used when modeling a latent variable with $u\sim N(0,1)$ (e.g. extensions to Tobit, Heckman) |
+|Disadvantage |The 4 drawbacks in section 4.4 |Fatter tails than normal — converges to 0/1 more slowly |Marginal effect must be computed numerically (no simple closed form) |
+|When to use |When an extremely fast, extremely simple interpretation is needed, or as a baseline model for comparison; rarely used as the formal model in modern research |The most common choice in practice — especially when the odds ratio is needed (health, credit) |When the theory/extended model requires the normal-distribution assumption (e.g. linking to censored/truncated models in Topic 11) |
 
 ## Exam traps
 

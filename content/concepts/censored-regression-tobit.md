@@ -95,7 +95,7 @@ Quan sát trực quan quan trọng nhất từ 4 đồ thị này: với censore
 | Giá trị $y$ ngoài khoảng / <span class="en">Value of $y$ outside the range</span> | Gán thành một hằng số cố định (thường 0) / <span class="en">Assigned to a fixed constant (usually 0)</span> | Không tồn tại trong dữ liệu — biến mất hoàn toàn, không phải "0" / <span class="en">Does not exist in the data — vanishes entirely, not a "0"</span> |
 | Ta có biết ai bị loại không? / <span class="en">Do we know who was excluded?</span> | Có — biết chính xác đơn vị nào bị censor và đặc điểm $X$ của họ / <span class="en">Yes — we know exactly which units are censored and their $X$ characteristics</span> | Không — không biết họ tồn tại, không đếm được số lượng / <span class="en">No — we don't know they exist, cannot count how many</span> |
 | Mô hình phù hợp / <span class="en">Appropriate model</span> | **Tobit** | Truncated regression model (một mô hình khác, không phải Tobit) / <span class="en">Truncated regression model (a different model, not Tobit)</span> |
-| Chạy OLS trực tiếp trên $y$ quan sát được / <span class="en">Running OLS directly on observed $y$</span> | Chệch (biased) | Chệch (biased) |
+| Chạy OLS trực tiếp trên $y$ quan sát được / <span class="en">Running OLS directly on observed $y$</span> | Chệch / <span class="en">Biased</span> | Chệch / <span class="en">Biased</span> |
 
 ### 2.4 Vì sao Tobit KHÔNG áp dụng được cho dữ liệu truncated - <span class="en">Why Tobit CANNOT be applied to truncated data</span>
 
@@ -123,7 +123,7 @@ Cả hai cách đều chệch, bất kể mức độ censor nhiều hay ít. Ch
 
 ## 4. Mô hình Tobit — cấu trúc latent variable - <span class="en">The Tobit model — latent variable structure</span>
 
-$$y^*=X\beta+\varepsilon, \qquad y=\begin{cases}0 & \text{nếu } y^*\le0\\ y^* & \text{nếu } y^*>0\end{cases}$$
+$$y^*=X\beta+\varepsilon, \qquad y=\begin{cases}0 & \text{if } y^*\le0\\ y^* & \text{if } y^*>0\end{cases}$$
 
 - $y^*$ gọi là **biến chỉ số / biến tiềm ẩn (index/latent variable)** — cùng cấu trúc toán học với $y^*$ trong [[concepts/ordinal-response-models]] (đều là "một biến liên tục ẩn, quan sát được thông qua các ngưỡng"). Khác biệt quan trọng: ở ordinal model, có **nhiều ngưỡng cắt** và các ngưỡng đó thường **được ước lượng** từ dữ liệu; ở Tobit "censoring tại 0", chỉ có **một ngưỡng duy nhất, cố định tại 0** (đã biết trước, không cần ước lượng).
 <br><span class="en">$y^*$ is called the **index / latent variable** — the same mathematical structure as $y^*$ in [[concepts/ordinal-response-models]] (both are "a hidden continuous variable, observed through thresholds"). Important difference: in the ordinal model, there are **multiple cut thresholds** and those thresholds are usually **estimated** from the data; in Tobit "censoring at 0," there is only **a single threshold, fixed at 0**" (known in advance, not estimated).</span>
@@ -143,7 +143,7 @@ trong đó $\Phi$ là hàm phân phối tích lũy (CDF) của phân phối chu�
 **Trường hợp tổng quát** (censoring cả hai phía, tại $a$ và $b$, ví dụ giá bị kiểm soát cả trần lẫn sàn):
 <br><span class="en">**General case** (censoring on both sides, at $a$ and $b$, e.g. a price controlled by both a ceiling and a floor):</span>
 
-$$y=\begin{cases}a & \text{nếu } y^*\le a\\ y^*=X\beta+\varepsilon & \text{nếu } a<y^*<b\\ b & \text{nếu } y^*\ge b\end{cases}$$
+$$y=\begin{cases}a & \text{if } y^*\le a\\ y^*=X\beta+\varepsilon & \text{if } a<y^*<b\\ b & \text{if } y^*\ge b\end{cases}$$
 
 Xác suất không bị censor (nằm trong khoảng mở) trở thành:
 <br><span class="en">The probability of not being censored (falling within the open interval) becomes:</span>
@@ -238,7 +238,7 @@ Số hạng đầu (nhân với $\mathbb{1}(Y_i>0)$) chính là log của mật 
 Đây là hiệu ứng lên **biến tiềm ẩn không quan sát được** $y^*$ — tức "khuynh hướng vay nợ" ẩn, có thể âm, không bị chặn bởi ngưỡng 0.
 <br><span class="en">This is the effect on the **unobserved latent variable** $y^*$ — i.e. the hidden "borrowing tendency," which can be negative and is not bounded by the 0 threshold.</span>
 
-$$E(y^*\mid X)=X\beta \qquad\Rightarrow\qquad \text{Marginal effect} = \beta \text{ (không đổi, giống hệt OLS thường)}$$
+$$E(y^*\mid X)=X\beta \qquad\Rightarrow\qquad \text{Marginal effect} = \beta \text{ (constant, exactly like ordinary OLS)}$$
 
 **Dùng khi nào**: khi câu hỏi nghiên cứu về bản thân "khuynh hướng"/"chỉ số" tiềm ẩn — ví dụ mô hình hóa một khái niệm lý thuyết (creditworthiness, willingness to borrow) mà `balance` quan sát được chỉ là một biểu hiện bị cắt của nó. **Đây KHÔNG phải là hiệu ứng lên số dư nợ thẻ tín dụng thực tế mà một nhà phân tích/ngân hàng quan tâm** — chỉ là hiệu ứng lên một cấu trúc toán học trung gian. Đây chính là lý do $\beta$ thô từ output Tobit **không nên được diễn giải trực tiếp như một marginal effect thực tế** — bẫy thi phổ biến nhất của mục này (xem mục 9).
 <br><span class="en">**When to use**: when the research question is about the latent "tendency"/"index" itself — e.g. modeling a theoretical concept (creditworthiness, willingness to borrow) for which observed `balance` is just a cut-off manifestation. **This is NOT the effect on the actual credit card balance that an analyst/bank cares about** — it is only the effect on an intermediate mathematical structure. This is exactly why the raw $\beta$ from Tobit output **should not be interpreted directly as a real marginal effect** — the most common exam trap of this section (see section 9).</span>

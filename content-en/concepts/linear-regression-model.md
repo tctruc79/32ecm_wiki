@@ -254,7 +254,7 @@ $$t_{obs} = \frac{b_{aforest}-c}{SE} = \frac{-5.363-(-5)}{0.32} \approx -1.12$$
 
 The t-test only handles **one coefficient at a time**. But many research questions require testing **several coefficients simultaneously** — for example: "does terrain affect storm damage at all?" — this question involves **both** dummies `chighland` and `ccoastal` at once, not each one separately.
 
-$$H_0: \beta_{chighland} = \beta_{ccoastal} = 0 \qquad H_a: \text{ít nhất một hệ số} \neq 0$$
+$$H_0: \beta_{chighland} = \beta_{ccoastal} = 0 \qquad H_a: \text{at least one coefficient} \neq 0$$
 
 ### Formula
 

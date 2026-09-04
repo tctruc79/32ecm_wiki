@@ -1,7 +1,7 @@
 ---
 title: "Anderson-Hsiao / Arellano-Bond / Arellano-Bover-Blundell-Bond"
 type: person
-role: "Dòng ước lượng GMM cho dynamic panel data"
+role: "GMM estimator lineage for dynamic panel data"
 tags: [dynamic-panel, gmm, arellano-bond, blundell-bond]
 ---
 
@@ -20,6 +20,6 @@ Chuỗi đóng góp liên tiếp giải quyết **Nickell bias** trong mô hình
 Đều được trích dẫn trong Course Outline như tài liệu đọc chính cho Topic 14, cùng với Roodman (2009, hướng dẫn `xtabond2`) và Windmeijer (2005, hiệu chỉnh phương sai two-step GMM).
 <br><span class="en">All are cited in the Course Outline as the main readings for Topic 14, along with Roodman (2009, an `xtabond2` guide) and Windmeijer (2005, a two-step GMM variance correction).</span>
 
-## Xuất hiện trong
+## Xuất hiện trong - <span class="en">Appears in</span>
 
 - [[concepts/dynamic-panel-data-models]]

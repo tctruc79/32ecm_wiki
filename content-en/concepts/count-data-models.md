@@ -276,7 +276,7 @@ $$IRR_j = e^{\hat\beta_j}$$
 | `hhincomeUS` | 0.0001039 | 1.00010 |Household income increases by 1 USD → expected number of vaccines purchased **rises by 0.010%** (≈1.04% if income rises by 100 USD) |
 | `hhsize` | 0.07759 | 1.0807 |Household gains 1 additional member → expected number of vaccines purchased **rises by 8.07%** |
 | `age` | −0.009695 | 0.9904 |Age increases by 1 year → expected number of vaccines purchased **falls by 0.96%** |
-| `verylikely` (so với base "very unlikely") | 0.4376 | 1.5490 |A person who perceives the risk of infection as "very likely" has an expected vaccine purchase **54.9% higher** than someone who perceives it as "very unlikely" (base), holding other variables fixed |
+|`verylikely` (relative to base "very unlikely") | 0.4376 | 1.5490 |A person who perceives the risk of infection as "very likely" has an expected vaccine purchase **54.9% higher** than someone who perceives it as "very unlikely" (base), holding other variables fixed |
 
 Because `risk` is not explicitly labeled causal/non-causal by the slide the way the Forest/Storm dataset is in [[concepts/linear-regression-model]], the interpretation above uses only associational language ("associated with", "higher than") — **no causal claim is made** when the source does not clearly confirm a causal mechanism.
 

@@ -414,7 +414,7 @@ $$\theta_{GMM}=\arg\min_\theta \begin{bmatrix}g^D(\theta)'&g^L(\theta)'\end{bmat
 **Tính hợp lệ (validity)**: cần **đồng thời** hai điều kiện:
 <br><span class="en">**Validity**: requires **both** conditions simultaneously:</span>
 
-$$E[\Delta y_{i,t-1}\cdot\varepsilon_{it}]=0 \qquad\text{và}\qquad E[\Delta y_{i,t-1}\cdot\alpha_i]=0$$
+$$E[\Delta y_{i,t-1}\cdot\varepsilon_{it}]=0 \qquad\text{and}\qquad E[\Delta y_{i,t-1}\cdot\alpha_i]=0$$
 
 Điều kiện thứ nhất giống hệt điều kiện "không tự tương quan ở mức" đã gặp ở AB. Điều kiện thứ hai **mới**, và đòi hỏi **tính dừng (stationarity)** của $y_{it}$: $E[y_{it}\mid\alpha_i]$ không đổi theo $t$.
 <br><span class="en">The first condition is identical to the "no serial correlation at level" condition already encountered in AB. The second condition is **new**, and requires **stationarity** of $y_{it}$: $E[y_{it}\mid\alpha_i]$ is constant over $t$.</span>
@@ -455,7 +455,7 @@ Logic song song hoàn toàn với biến trễ của $y$: nếu `training` cũng
 | $\log(capital)$ | 0.236 | 0.013 | 18.05 |
 | $\log(labor)$ | −0.016 | 0.021 | −0.76 (n.s.) |
 | `training` | 0.049 | 0.003 | 16.94 |
-| `credit` | 0.045 | 0.024 | 1.88 (biên, $p=0.061$) |
+| `credit` | 0.045 | 0.024 | 1.88 (biên, $p=0.061$)<br><span class="en">1.88 (borderline, $p=0.061$)</span> |
 | `hightech` | 0.236 | 0.031 | 7.64 |
 
 Sargan: $\chi^2(133)=146.83$, $p=0.195$ (không bác bỏ). AR(1): $z=-12.888$, $p\approx0$ (bác bỏ mạnh — kỳ vọng, tốt). AR(2): $z=-0.629$, $p=0.529$ (không bác bỏ — kỳ vọng, tốt).
@@ -520,8 +520,8 @@ $$Cov(\Delta\varepsilon_{it},\Delta\varepsilon_{i,t-1}) = -Var(\varepsilon_{i,t-
 
 | Kiểm định - <span class="en">Test</span> | Kỳ vọng khi mô hình đúng - <span class="en">Expectation when the model is correct</span> | Nếu ngược lại xảy ra - <span class="en">If the opposite happens</span> |
 |---|---|---|
-| AR(1) trên $\Delta\hat\varepsilon$ | **Nên bác bỏ** — hệ quả cơ học tất yếu của first-difference, không phải dấu hiệu xấu<br><span class="en">**Should be rejected** — an inevitable mechanical consequence of first-difference, not a bad sign</span> | Không bác bỏ được → bất thường, gợi ý sai đặc tả hoặc lỗi dữ liệu<br><span class="en">Fails to be rejected → abnormal, suggests misspecification or a data error</span> |
-| AR(2) trên $\Delta\hat\varepsilon$ | **Không nên bác bỏ** — không có trùng lặp cơ học giữa $\Delta\varepsilon_{it}$ và $\Delta\varepsilon_{i,t-2}$<br><span class="en">**Should not be rejected** — no mechanical overlap between $\Delta\varepsilon_{it}$ and $\Delta\varepsilon_{i,t-2}$</span> | Bác bỏ được → instrument (cho biến trễ phụ thuộc) không hợp lệ<br><span class="en">Rejected → the instrument (for the lagged dependent variable) is invalid</span> |
+| AR(1) trên $\Delta\hat\varepsilon$<br><span class="en">AR(1) on $\Delta\hat\varepsilon$</span> | **Nên bác bỏ** — hệ quả cơ học tất yếu của first-difference, không phải dấu hiệu xấu<br><span class="en">**Should be rejected** — an inevitable mechanical consequence of first-difference, not a bad sign</span> | Không bác bỏ được → bất thường, gợi ý sai đặc tả hoặc lỗi dữ liệu<br><span class="en">Fails to be rejected → abnormal, suggests misspecification or a data error</span> |
+| AR(2) trên $\Delta\hat\varepsilon$<br><span class="en">AR(2) on $\Delta\hat\varepsilon$</span> | **Không nên bác bỏ** — không có trùng lặp cơ học giữa $\Delta\varepsilon_{it}$ và $\Delta\varepsilon_{i,t-2}$<br><span class="en">**Should not be rejected** — no mechanical overlap between $\Delta\varepsilon_{it}$ and $\Delta\varepsilon_{i,t-2}$</span> | Bác bỏ được → instrument (cho biến trễ phụ thuộc) không hợp lệ<br><span class="en">Rejected → the instrument (for the lagged dependent variable) is invalid</span> |
 
 ### 7.3 [[people/sargan|Sargan]] test - <span class="en">[[people/sargan|Sargan]] test</span>
 

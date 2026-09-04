@@ -1,7 +1,7 @@
 ---
 title: "Cragg & Donald"
 type: person
-role: "Econometricians — thống kê Cragg-Donald F kiểm định weak instruments dưới homoskedasticity"
+role: "Econometricians — the Cragg-Donald F statistic for testing weak instruments under homoskedasticity"
 tags: [cragg-donald, weak-instruments, iv-regression]
 ---
 
@@ -14,7 +14,7 @@ Với đúng 1 biến nội sinh, CD-F trùng với first-stage F thông thườ
 Khi giả định homoskedasticity không giữ, bản thay thế robust là **Kleibergen-Paap rk Wald F (KP-F)** — nhưng KP-F **không** so sánh trực tiếp được với ngưỡng Stock-Yogo (vốn được thiết kế riêng cho CD-F, giả định homoskedastic).
 <br><span class="en">When the homoskedasticity assumption fails, the robust alternative is the **Kleibergen-Paap rk Wald F (KP-F)** — but KP-F **cannot** be directly compared to the Stock-Yogo critical values (which were designed specifically for CD-F, under homoskedasticity).</span>
 
-## Xuất hiện trong
+## Xuất hiện trong - <span class="en">Appears in</span>
 
 - [[concepts/endogeneity-iv-regression]]
 - [[concepts/iv-regression-panel-data]]

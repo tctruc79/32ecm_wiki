@@ -204,7 +204,7 @@ Residual Deviance: 2834.382; AIC: 2842.382. Đây chính là minh họa "cutpoin
 **Hệ số $\beta$** (tác động lên $y^*$, chưa phải lên $Pr(y=k)$ — xem mục 8):
 <br><span class="en">**Coefficients $\beta$** (the effect on $y^*$, not yet on $Pr(y=k)$ — see section 8):</span>
 
-| Biến | Value | Std. Error | t value | p-value |
+| Biến<br><span class="en">Variable</span> | Value | Std. Error | t value | p-value |
 |---|---|---|---|---|
 | `age` | −0.2900 | 0.0123 | −23.53 | 0.000 |
 | `whours` | 0.0045 | 0.0025 | 1.81 | 0.071 |
@@ -300,8 +300,8 @@ Câu hỏi: `inrelationship` và `married` có ý nghĩa **đồng thời** hay 
 
 | Model | #Df | LogLik |
 |---|---|---|
-| Full (có `inrelationship`, `married`) | 11 | −723.34 |
-| Restricted (bỏ hai biến) | 9 | −1095.00 |
+| Full (có `inrelationship`, `married`)<br><span class="en">Full (includes `inrelationship`, `married`)</span> | 11 | −723.34 |
+| Restricted (bỏ hai biến)<br><span class="en">Restricted (drops both variables)</span> | 9 | −1095.00 |
 
 Chisq = 743.32, df=2, $p<2.2\times10^{-16}$ → bác bỏ mạnh $H_0$: cả hai hệ số cùng bằng 0. Đây là phiên bản ML của **F-test cho một nhóm hệ số** ở [[concepts/linear-regression-model]] mục 8 (VD kiểm định `chighland`/`ccoastal` đồng thời) — cùng logic "ép hệ số về 0 (restricted) rồi so với mô hình đầy đủ (unrestricted)", chỉ thay thống kê $F$ dựa trên $RSS$ bằng thống kê $\chi^2$ dựa trên log-likelihood.
 <br><span class="en">Chisq = 743.32, df=2, $p<2.2\times10^{-16}$ → strongly reject $H_0$: both coefficients are jointly zero. This is the ML version of the **F-test for a group of coefficients** in [[concepts/linear-regression-model]] section 8 (e.g. jointly testing `chighland`/`ccoastal`) — the same "force the coefficients to 0 (restricted) then compare against the full model (unrestricted)" logic, only the $F$ statistic based on $RSS$ is replaced by a $\chi^2$ statistic based on log-likelihood.</span>

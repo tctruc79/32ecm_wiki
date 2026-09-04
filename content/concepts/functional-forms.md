@@ -404,7 +404,7 @@ $$H_0: \beta_1=\beta_2=0$$
 <br><span class="en">**Actual F-test result from the slide** (`car::linearHypothesis`, comparing the model with and without `age`, `I(age^2)`):</span>
 
 ```
-Model 1: restricted model (không có age, age^2)
+Model 1: restricted model (không có / without age, age^2)
 Model 2: log(wage) ~ age + I(age^2) + schooling + tenure + gender + origin + science + social
 
   Res.Df   RSS Df Sum of Sq      F Pr(>F)

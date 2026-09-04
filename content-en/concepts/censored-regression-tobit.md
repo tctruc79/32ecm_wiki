@@ -70,7 +70,7 @@ The most important visual takeaway from these 4 plots: with censored, **point de
 |Value of $y$ outside the range |Assigned to a fixed constant (usually 0) |Does not exist in the data — vanishes entirely, not a "0" |
 |Do we know who was excluded? |Yes — we know exactly which units are censored and their $X$ characteristics |No — we don't know they exist, cannot count how many |
 |Appropriate model | **Tobit** |Truncated regression model (a different model, not Tobit) |
-|Running OLS directly on observed $y$ | Chệch (biased) | Chệch (biased) |
+|Running OLS directly on observed $y$ |Biased |Biased |
 
 ### Why Tobit CANNOT be applied to truncated data
 
@@ -91,7 +91,7 @@ Both approaches are biased, regardless of how much or how little censoring there
 
 ## The Tobit model — latent variable structure
 
-$$y^*=X\beta+\varepsilon, \qquad y=\begin{cases}0 & \text{nếu } y^*\le0\\ y^* & \text{nếu } y^*>0\end{cases}$$
+$$y^*=X\beta+\varepsilon, \qquad y=\begin{cases}0 & \text{if } y^*\le0\\ y^* & \text{if } y^*>0\end{cases}$$
 
 - $y^*$ is called the **index / latent variable** — the same mathematical structure as $y^*$ in [[concepts/ordinal-response-models]] (both are "a hidden continuous variable, observed through thresholds"). Important difference: in the ordinal model, there are **multiple cut thresholds** and those thresholds are usually **estimated** from the data; in Tobit "censoring at 0," there is only **a single threshold, fixed at 0**" (known in advance, not estimated).
 - $y$ is the **observed variable** — the actual credit card balance recorded in the data.
@@ -105,7 +105,7 @@ where $\Phi$ is the cumulative distribution function (CDF) of the standard norma
 
 **General case** (censoring on both sides, at $a$ and $b$, e.g. a price controlled by both a ceiling and a floor):
 
-$$y=\begin{cases}a & \text{nếu } y^*\le a\\ y^*=X\beta+\varepsilon & \text{nếu } a<y^*<b\\ b & \text{nếu } y^*\ge b\end{cases}$$
+$$y=\begin{cases}a & \text{if } y^*\le a\\ y^*=X\beta+\varepsilon & \text{if } a<y^*<b\\ b & \text{if } y^*\ge b\end{cases}$$
 
 The probability of not being censored (falling within the open interval) becomes:
 
@@ -179,7 +179,7 @@ This is the **most important and most confusable** part of the topic. The root r
 
 This is the effect on the **unobserved latent variable** $y^*$ — i.e. the hidden "borrowing tendency," which can be negative and is not bounded by the 0 threshold.
 
-$$E(y^*\mid X)=X\beta \qquad\Rightarrow\qquad \text{Marginal effect} = \beta \text{ (không đổi, giống hệt OLS thường)}$$
+$$E(y^*\mid X)=X\beta \qquad\Rightarrow\qquad \text{Marginal effect} = \beta \text{ (constant, exactly like ordinary OLS)}$$
 
 **When to use**: when the research question is about the latent "tendency"/"index" itself — e.g. modeling a theoretical concept (creditworthiness, willingness to borrow) for which observed `balance` is just a cut-off manifestation. **This is NOT the effect on the actual credit card balance that an analyst/bank cares about** — it is only the effect on an intermediate mathematical structure. This is exactly why the raw $\beta$ from Tobit output **should not be interpreted directly as a real marginal effect** — the most common exam trap of this section (see section 9).
 

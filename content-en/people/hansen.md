@@ -1,7 +1,7 @@
 ---
 title: "Hansen (L. P.)"
 type: person
-role: "Econometrician — GMM framework và kiểm định overidentifying restrictions tổng quát (Hansen's J test)"
+role: "Econometrician — GMM framework and the generalized overidentifying-restrictions test (Hansen's J test)"
 tags: [hansen-j-test, gmm, overidentification, iv-regression]
 ---
 
@@ -11,7 +11,7 @@ Lars Peter Hansen (1982, *"Large Sample Properties of Generalized Method of Mome
 
 **Interpretation note common to both tests**: failing to reject $H_0$ only means "no evidence found against instrument validity", **not** "instrument validity has been proven" — validity must always be argued through the research design (the exclusion restriction); the test only supports, never replaces, that argument.
 
-## Xuất hiện trong
+## Appears in
 
 - [[concepts/endogeneity-iv-regression]]
 - [[concepts/iv-regression-panel-data]]

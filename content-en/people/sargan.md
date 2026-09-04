@@ -1,7 +1,7 @@
 ---
 title: "Sargan (J. D.)"
 type: person
-role: "Econometrician — kiểm định overidentifying restrictions gốc cho IV/GMM dưới homoskedasticity"
+role: "Econometrician — the original overidentifying-restrictions test for IV/GMM under homoskedasticity"
 tags: [sargan-test, overidentification, iv-regression]
 ---
 
@@ -11,7 +11,7 @@ Underlying assumption: **homoskedasticity**. When this assumption fails, [[peopl
 
 **Interpretation note common to both tests**: failing to reject $H_0$ only means "no evidence found against instrument validity", **not** "instrument validity has been proven" — validity must always be argued through the research design (the exclusion restriction); the test only supports, never replaces, that argument.
 
-## Xuất hiện trong
+## Appears in
 
 - [[concepts/endogeneity-iv-regression]]
 - [[concepts/iv-regression-panel-data]]

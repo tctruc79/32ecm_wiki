@@ -1,5 +1,5 @@
 ---
-title: "Econometrics: Tổng quan, Causality và Identification"
+title: "Econometrics: Overview, Causality and Identification"
 type: concept
 status: mature
 tags: [foundations, causality, identification, research-design]

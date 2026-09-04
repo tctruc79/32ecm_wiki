@@ -3,7 +3,7 @@ title: "Econometrics Wiki — Index"
 type: index
 ---
 
-# Index — Econometrics Wiki (GS Trương Đăng Thụy)
+# Index — Econometrics Wiki (Prof. Trương Đăng Thụy)
 
 Catalog of every page in this wiki. Read this first when answering a query — drill into the linked pages rather than searching raw sources. Updated on every ingest. See `CLAUDE.md` for conventions.
 
@@ -267,20 +267,20 @@ Ordered by Lecture (see `CLAUDE.md` §3.1); Introduction/R basics/Course Outline
 | Lecture | Page | Summary | Status |
 |---|---|---|---|
 | — | [[concepts/econometrics-overview]] | Correlation vs. ceteris paribus vs. causality; identification problem; PRE vs SRE | mature |
-| 1 | [[concepts/linear-regression-model]] | OLS, 5 giả định (A1-A5), diễn giải hệ số, t-test, F-test, R² | mature |
+| 1 | [[concepts/linear-regression-model]] | OLS, 5 assumptions (A1-A5), coefficient interpretation, t-test, F-test, R² | mature |
 | 2 | [[concepts/functional-forms]] | Linear/log-log/log-lin/lin-log/quadratic/interaction, elasticity | mature |
-| 3 | [[concepts/multicollinearity]] | VIF, phát hiện, giải pháp | mature |
+| 3 | [[concepts/multicollinearity]] | VIF, detection, solutions | mature |
 | 4 | [[concepts/heteroskedasticity]] | BP/White test, robust SE, Wald F-test | mature |
 | 5 | [[concepts/endogeneity-iv-regression]] | 2SLS, LIML/Fuller, GMM, weak-IV tests, Sargan/Hansen, Wu-Hausman | mature |
-| 6 | [[concepts/fixed-random-effects-model]] | Pooled OLS, GLS/FGLS, FE/RE, A3a/A3b+A4a/b/c, Hausman test, 5 loại SE | mature |
-| 7 | [[concepts/iv-regression-panel-data]] | FD-IV, FE-IV, LIML/Fuller/GMM cho panel, CD-F/KP-F | mature |
+| 6 | [[concepts/fixed-random-effects-model]] | Pooled OLS, GLS/FGLS, FE/RE, A3a/A3b+A4a/b/c, Hausman test, 5 types of SE | mature |
+| 7 | [[concepts/iv-regression-panel-data]] | FD-IV, FE-IV, LIML/Fuller/GMM for panel, CD-F/KP-F | mature |
 | 8 | [[concepts/dynamic-panel-data-models]] | Nickell bias, Anderson-Hsiao, Difference/System GMM, AR(1)/AR(2) test | mature |
-| — | [[concepts/r-basics]] | Tham khảo lệnh R cơ bản (không phải nội dung econometrics) | mature |
+| — | [[concepts/r-basics]] | Reference for basic R commands (not econometrics content) | mature |
 | 9 | [[concepts/binary-response-models]] | LPM, Logit, Probit, LR/Wald test, marginal effects | mature |
 | 10 | [[concepts/multinomial-logit-model]] | MNL, log-odds vs base category, McFadden R² | mature |
 | 11 | [[concepts/ordinal-response-models]] | Latent variable, cutpoints, ordered logit/probit, Brant test | mature |
 | 12 | [[concepts/count-data-models]] | Poisson, over/underdispersion, Negative Binomial, ZINB | mature |
-| 13 | [[concepts/censored-regression-tobit]] | Censored vs truncated, Tobit, 3 loại prediction/ME | mature |
+| 13 | [[concepts/censored-regression-tobit]] | Censored vs truncated, Tobit, 3 types of prediction/ME | mature |
 
 ## People
 
@@ -292,7 +292,7 @@ Ordered by Lecture (see `CLAUDE.md` §3.1); Introduction/R basics/Course Outline
 | [[people/sargan]] | Sargan test — overidentifying restrictions (IV/GMM), homoskedastic |
 | [[people/hansen]] | Hansen's J test — overidentifying restrictions, GMM framework, robust hetero |
 | [[people/cragg-donald]] | Cragg-Donald F-statistic — weak-instrument test, homoskedastic |
-| [[people/stock-yogo]] | Stock-Yogo critical values — ngưỡng đánh giá Cragg-Donald F |
+| [[people/stock-yogo]] | Stock-Yogo critical values — threshold for evaluating the Cragg-Donald F |
 
 ## Synthesis
 

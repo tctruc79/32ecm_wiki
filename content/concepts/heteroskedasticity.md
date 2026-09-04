@@ -44,7 +44,7 @@ Ví dụ số cụ thể minh họa đúng hiện tượng này nằm ở mục 
 Giả định **A4 (Homoskedasticity)** của CLRM (Classical Linear Regression Model) phát biểu rằng phương sai sai số là **hằng số**, không đổi qua các quan sát:
 <br><span class="en">The **A4 (Homoskedasticity)** assumption of the CLRM (Classical Linear Regression Model) states that the error variance is **constant**, unchanging across observations:</span>
 
-$$Var(\varepsilon_i) = \sigma^2 \quad \text{với mọi } i, \qquad \text{tương đương } Var(\varepsilon|X) = \sigma^2 I$$
+$$Var(\varepsilon_i) = \sigma^2 \quad \text{for all } i, \qquad \text{equivalently } Var(\varepsilon|X) = \sigma^2 I$$
 
 trong đó $I$ là ma trận đơn vị $n\times n$ — nghĩa là không chỉ phương sai bằng nhau ở mọi quan sát, mà sai số ở quan sát này còn không tương quan với sai số ở quan sát khác (các phần tử ngoài đường chéo của ma trận VCV sai số bằng 0).
 <br><span class="en">where $I$ is the $n\times n$ identity matrix — meaning not only that the variance is equal across all observations, but also that the error at one observation is uncorrelated with the error at another observation (the off-diagonal elements of the error VCV matrix are zero).</span>
@@ -52,7 +52,7 @@ trong đó $I$ là ma trận đơn vị $n\times n$ — nghĩa là không chỉ 
 **Heteroskedasticity** là khi giả định này **bị vi phạm**:
 <br><span class="en">**Heteroskedasticity** is when this assumption is **violated**:</span>
 
-$$Var(\varepsilon_i) \neq \sigma^2 \quad \text{(phương sai sai số thay đổi theo } i\text{)}, \qquad \text{tức } Var(\varepsilon|X) \neq \sigma^2 I$$
+$$Var(\varepsilon_i) \neq \sigma^2 \quad \text{(the error variance changes with } i\text{)}, \qquad \text{i.e. } Var(\varepsilon|X) \neq \sigma^2 I$$
 
 VCV và SE "chuẩn" mà OLS báo cáo mặc định (kể cả trong `summary(lm(...))` của R) được tính **dựa trên giả định A4 đúng** — đây là lý do vi phạm A4 làm những con số đó trở nên đáng ngờ (xem mục 6).
 <br><span class="en">The "standard" VCV and SE that OLS reports by default (including in R's `summary(lm(...))`) are computed **assuming A4 holds** — this is why violating A4 makes those numbers suspect (see section 6).</span>
@@ -210,7 +210,7 @@ $$e^2 = \alpha_0+\alpha_1X_1+\cdots+\alpha_kX_k+u$$
 Nếu homoskedastic, $e^2$ phải độc lập với các regressor — tức $\alpha_1=\cdots=\alpha_k=0$. Ta kiểm định:
 <br><span class="en">If homoskedastic, $e^2$ must be independent of the regressors — that is, $\alpha_1=\cdots=\alpha_k=0$. We test:</span>
 
-$$H_0: \alpha_1=\alpha_2=\cdots=\alpha_k=0 \qquad (\text{đây là một F-test trên hồi quy phụ})$$
+$$H_0: \alpha_1=\alpha_2=\cdots=\alpha_k=0 \qquad (\text{this is an F-test on the auxiliary regression})$$
 
 - **Không bác bỏ $H_0$** → không có bằng chứng heteroskedasticity.
 <br><span class="en">**Fail to reject $H_0$** → no evidence of heteroskedasticity.</span>

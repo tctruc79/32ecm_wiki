@@ -2,11 +2,11 @@
 // Quartz nhung san `data-basepath="<pathname cua cfg.baseUrl>"` (vd "/32dbc_wiki") vao
 // <body> moi trang, va cac plugin client-side (Explorer, Graph, Search, stacked-pages...)
 // dung gia tri nay de dung link/fetch tuyet doi: `basepath + "/" + path`. Vi build-site.sh
-// dung chung 1 quartz.config.yaml (1 baseUrl) cho ca 2 cay VI (/vi/) va EN (/en/), gia tri
-// nhung san bi thieu doan "/vi" hoac "/en" -- khien Explorer/Graph/Search fetch/link sai
+// dung chung 1 quartz.config.yaml (1 baseUrl) cho ca 2 cay song ngu (/bi/) va EN (/en/), gia tri
+// nhung san bi thieu doan "/bi" hoac "/en" -- khien Explorer/Graph/Search fetch/link sai
 // duong dan (404) sau khi tach 2 cay ra khoi baseUrl goc. Quartz build CLI khong co flag
 // override baseUrl, nen phai patch lai sau build. Script nay chay sau moi `npx quartz
-// build`, cong them `suffix` ("/vi" hoac "/en") vao gia tri data-basepath da nhung san
+// build`, cong them `suffix` ("/bi" hoac "/en") vao gia tri data-basepath da nhung san
 // trong tung file HTML cua CHINH cay do.
 import { readdir, readFile, writeFile } from "fs/promises"
 import { join } from "path"
@@ -28,7 +28,7 @@ async function walk(dir) {
 async function main() {
   const [targetDir, suffix] = process.argv.slice(2)
   if (!targetDir || !suffix) {
-    console.error("Usage: node fix-basepath.mjs <build-output-dir> <suffix e.g. /vi>")
+    console.error("Usage: node fix-basepath.mjs <build-output-dir> <suffix e.g. /bi>")
     process.exit(1)
   }
   const files = await walk(targetDir)

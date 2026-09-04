@@ -1,7 +1,7 @@
 ---
 title: "Stock & Yogo"
 type: person
-role: "Econometricians — bảng ngưỡng tới hạn (critical values) cho kiểm định weak instruments"
+role: "Econometricians — critical-value tables for testing weak instruments"
 tags: [stock-yogo, weak-instruments, iv-regression]
 ---
 
@@ -19,7 +19,7 @@ Ngưỡng Stock-Yogo được xây dựng theo **hai tiêu chí khác nhau**, ha
 Một instrument có thể đạt tiêu chí này nhưng không đạt tiêu chí kia — cần nói rõ đang dùng tiêu chí nào khi báo cáo kết quả, không chỉ nói chung chung "vượt ngưỡng Stock-Yogo". Bảng chỉ được thiết kế cho CD-F (giả định homoskedastic); không dùng chính thức được cho Kleibergen-Paap F (robust heteroskedasticity), dù trong thực hành người ta vẫn so sánh không chính thức.
 <br><span class="en">An instrument can meet one criterion but not the other — state clearly which criterion is being used when reporting results, not just a generic "exceeds the Stock-Yogo threshold." The table was designed only for CD-F (homoskedastic assumption); it is not formally valid for the Kleibergen-Paap F (robust to heteroskedasticity), though in practice people still compare them informally.</span>
 
-## Xuất hiện trong
+## Xuất hiện trong - <span class="en">Appears in</span>
 
 - [[concepts/endogeneity-iv-regression]]
 - [[concepts/iv-regression-panel-data]]

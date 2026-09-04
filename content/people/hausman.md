@@ -1,7 +1,7 @@
 ---
 title: "Hausman (J. A.)"
 type: person
-role: "Econometrician — tên gắn với các kiểm định so sánh ước lượng consistent vs. efficient"
+role: "Econometrician — name attached to tests comparing a consistent vs. efficient estimator"
 tags: [hausman-test, specification-test]
 ---
 
@@ -13,7 +13,7 @@ Tên gắn với họ kiểm định dựa trên logic chung: so sánh hai ướ
 - **Hausman test** (chọn Fixed Effects vs Random Effects trong panel data) — xem [[concepts/fixed-random-effects-model]].
   <br><span class="en">**Hausman test** (choosing between Fixed Effects vs. Random Effects in panel data) — see [[concepts/fixed-random-effects-model]].</span>
 
-## Xuất hiện trong
+## Xuất hiện trong - <span class="en">Appears in</span>
 
 - [[concepts/endogeneity-iv-regression]]
 - [[concepts/fixed-random-effects-model]]

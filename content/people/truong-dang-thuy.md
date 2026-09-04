@@ -12,7 +12,7 @@ Giảng viên môn **Applied Econometrics for Master Programme in Economics**. H
 Vận hành nền tảng học trực tuyến riêng cho môn học tại **econometrics.site** (luyện tập, làm assignment, nộp project).
 <br><span class="en">Runs a dedicated online learning platform for the course at **econometrics.site** (practice, assignments, project submission).</span>
 
-## Xuất hiện trong
+## Xuất hiện trong - <span class="en">Appears in</span>
 
 - [[sources/2026-course-outline]]
 - [[sources/intro-to-econometrics]]

@@ -32,13 +32,13 @@ A concrete numerical example illustrating exactly this phenomenon appears in sec
 
 The **A4 (Homoskedasticity)** assumption of the CLRM (Classical Linear Regression Model) states that the error variance is **constant**, unchanging across observations:
 
-$$Var(\varepsilon_i) = \sigma^2 \quad \text{với mọi } i, \qquad \text{tương đương } Var(\varepsilon|X) = \sigma^2 I$$
+$$Var(\varepsilon_i) = \sigma^2 \quad \text{for all } i, \qquad \text{equivalently } Var(\varepsilon|X) = \sigma^2 I$$
 
 where $I$ is the $n\times n$ identity matrix — meaning not only that the variance is equal across all observations, but also that the error at one observation is uncorrelated with the error at another observation (the off-diagonal elements of the error VCV matrix are zero).
 
 **Heteroskedasticity** is when this assumption is **violated**:
 
-$$Var(\varepsilon_i) \neq \sigma^2 \quad \text{(phương sai sai số thay đổi theo } i\text{)}, \qquad \text{tức } Var(\varepsilon|X) \neq \sigma^2 I$$
+$$Var(\varepsilon_i) \neq \sigma^2 \quad \text{(the error variance changes with } i\text{)}, \qquad \text{i.e. } Var(\varepsilon|X) \neq \sigma^2 I$$
 
 The "standard" VCV and SE that OLS reports by default (including in R's `summary(lm(...))`) are computed **assuming A4 holds** — this is why violating A4 makes those numbers suspect (see section 6).
 
@@ -150,7 +150,7 @@ $$e^2 = \alpha_0+\alpha_1X_1+\cdots+\alpha_kX_k+u$$
 
 If homoskedastic, $e^2$ must be independent of the regressors — that is, $\alpha_1=\cdots=\alpha_k=0$. We test:
 
-$$H_0: \alpha_1=\alpha_2=\cdots=\alpha_k=0 \qquad (\text{đây là một F-test trên hồi quy phụ})$$
+$$H_0: \alpha_1=\alpha_2=\cdots=\alpha_k=0 \qquad (\text{this is an F-test on the auxiliary regression})$$
 
 - **Fail to reject $H_0$** → no evidence of heteroskedasticity.
 - **Reject $H_0$** → evidence of heteroskedasticity.

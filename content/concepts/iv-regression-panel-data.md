@@ -1,11 +1,13 @@
 ---
-title: "Instrumental Variable (IV) Regression for Panel Data"
+title: "Lecture 7: Instrumental Variable (IV) Regression for Panel Data"
 type: concept
 status: mature
 tags: [panel-data, instrumental-variables, 2sls, gmm, endogeneity]
 sources: ["[[sources/slides-14-iv-regression-panel-data]]"]
 related: ["[[concepts/endogeneity-iv-regression]]", "[[concepts/fixed-random-effects-model]]", "[[concepts/dynamic-panel-data-models]]"]
-updated: 2026-08-29
+lecture: 7
+assignment: ["Assignment 6: Instrumental Variable Regression for Panel data"]
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: đây là trang **cầu nối** — không phải điểm khởi đầu.
@@ -14,6 +16,9 @@ updated: 2026-08-29
 > <br><span class="en">If you haven't mastered 2SLS, LIML/Fuller, GMM, and the four groups of diagnostic tests (underidentification, weak instrument, overidentification, Wu-Hausman) at the cross-section level, read [[concepts/endogeneity-iv-regression]] first — that page is the foundation, and this page **does not re-teach** what 2SLS is.</span>
 > Nếu chưa nắm FE/RE và bộ giả định A3a/A3b (tách từ A3 gốc), hãy đọc [[concepts/fixed-random-effects-model]] trước — trang này dùng lại đúng khung đó.
 > <br><span class="en">If you haven't mastered FE/RE and the A3a/A3b assumption set (split from the original A3), read [[concepts/fixed-random-effects-model]] first — this page reuses that exact framework.</span>
+
+**Lecture 7** trong đề cương (CO Topic 13) — Assignment 6: Instrumental Variable Regression for Panel data.
+<br><span class="en">**Lecture 7** in the syllabus (CO Topic 13) — Assignment 6: Instrumental Variable Regression for Panel data.</span>
 > Trang hiện tại chỉ tập trung vào **phần mở rộng riêng cho panel data**: làm sao loại bỏ $\alpha_i$ (individual effects) *trước khi* áp dụng bộ công cụ IV đã học, và những điều chỉnh cần thiết cho các kiểm định chẩn đoán khi chuyển từ cross-section sang panel.
 > <br><span class="en">This page focuses only on the **extension specific to panel data**: how to remove $\alpha_i$ (individual effects) *before* applying the already-learned IV toolkit, and the adjustments needed for the diagnostic tests when moving from cross-section to panel.</span>
 
@@ -336,3 +341,12 @@ Hệ số FE "ngây thơ" **gần gấp đôi** hệ số FE-IV đã hiệu ch�
 
 Cầu nối trực tiếp giữa [[concepts/endogeneity-iv-regression]] (Topic 5, dữ liệu cross-section — cung cấp toàn bộ máy móc 2SLS/LIML/Fuller/GMM và 4 nhóm kiểm định chẩn đoán) và [[concepts/fixed-random-effects-model]] (Topic 6/12, panel không nội sinh — cung cấp khung A3a/A3b và cơ chế within/demean loại $\alpha_i$). Trang này áp đúng bộ công cụ IV vào bối cảnh có $\alpha_i$, chỉ thêm bước "loại $\alpha_i$ trước" (sai phân hoặc demean) so với cross-section thuần túy. Là bước đệm trực tiếp cho [[concepts/dynamic-panel-data-models]] (Topic 14), nơi chính **biến trễ của $y$** trở thành biến nội sinh cần xử lý bằng logic IV tương tự nhưng với instrument nội tại (internal instruments) thay vì instrument bên ngoài như `subeligible`/`localbudget` ở đây.
 <br><span class="en">A direct bridge between [[concepts/endogeneity-iv-regression]] (Topic 5, cross-section data — supplies the entire 2SLS/LIML/Fuller/GMM machinery and the 4 groups of diagnostic tests) and [[concepts/fixed-random-effects-model]] (Topic 6/12, panel without endogeneity — supplies the A3a/A3b framework and the within/demean mechanism for removing $\alpha_i$). This page applies the IV toolkit exactly to a setting with $\alpha_i$, adding only the "remove $\alpha_i$ first" step (differencing or demeaning) compared to pure cross-section. It is a direct stepping stone to [[concepts/dynamic-panel-data-models]] (Topic 14), where the **lagged $y$** itself becomes the endogenous variable to be handled with similar IV logic, but with internal instruments instead of external instruments like `subeligible`/`localbudget` here.</span>
+
+## 10. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa IV regression cho panel data trong nghiên cứu kinh tế thực tế (đề cương Lecture 7):
+<br><span class="en">Three recent papers illustrating IV regression for panel data in real-world economic research (Lecture 7 syllabus):</span>
+
+- Gonzales, J. T. (2023). Implications of AI innovation on economic growth: A panel data study. *Journal of Economic Structures*, 12(1), 13. https://doi.org/10.1186/s40008-023-00307-w
+- Zheng, M., & Wong, C. Y. (2024). The impact of digital economy on renewable energy development in China. *Innovation and Green Development*, 3(1), 100094. https://doi.org/10.1016/j.igd.2024.100094
+- Siddiki, J., & Bala-Keffi, L. R. (2024). Revisiting the relation between financial inclusion and economic growth: A global analysis using panel threshold regression. *Economic Modelling*, 135, 106707. https://doi.org/10.1016/j.econmod.2024.106707

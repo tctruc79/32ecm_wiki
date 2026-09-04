@@ -1,17 +1,22 @@
 ---
-title: "Count Data Models (Poisson, Negative Binomial, ZINB)"
+title: "Lecture 12: Count Data Models (Poisson, Negative Binomial, ZINB)"
 type: concept
 status: mature
 tags: [count-data, poisson, negative-binomial, zero-inflated, limited-dependent-variable]
 sources: ["[[sources/slides-10-count-data-models]]"]
 related: ["[[concepts/binary-response-models]]", "[[concepts/linear-regression-model]]"]
-updated: 2026-08-29
+lecture: 12
+assignment: []
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: Topic 10 tiếp tục mạch **Models for Limited Dependent Variables** mở đầu từ [[concepts/binary-response-models]] (Topic 7) — cùng khung Maximum Likelihood, cùng logic "dùng hàm liên kết (link function) phi tuyến vì bản chất biến phụ thuộc không cho phép mô hình tuyến tính trực tiếp".
 > <br><span class="en">**How to read this page**: Topic 10 continues the **Models for Limited Dependent Variables** thread opened in [[concepts/binary-response-models]] (Topic 7) — same Maximum Likelihood framework, same logic of "using a nonlinear link function because the nature of the dependent variable rules out a direct linear model".</span>
 > Khác biệt duy nhất: ở Topic 7, biến phụ thuộc là nhị phân (0/1) — "có xảy ra hay không"; ở Topic 10, biến phụ thuộc là **số đếm** (0, 1, 2, 3, …) — "xảy ra bao nhiêu lần".
 > <br><span class="en">The one difference: in Topic 7 the dependent variable is binary (0/1) — "did it happen or not"; in Topic 10 the dependent variable is a **count** (0, 1, 2, 3, …) — "how many times did it happen".</span>
+
+**Lecture 12** trong đề cương (CO Topic 10) — chưa có assignment riêng.
+<br><span class="en">**Lecture 12** in the syllabus (CO Topic 10) — no dedicated assignment yet.</span>
 > Ví dụ dữ liệu xuyên suốt trang này chính là **cùng bộ khảo sát vaccine COVID-19** dùng ở Topic 7 (377 người trả lời tại TP.HCM), chỉ đổi biến phụ thuộc từ `dself` (nhị phân — cá nhân có quyết định tiêm hay không) sang `dhh` (đếm — số liều vaccine mua cho các thành viên trong hộ gia đình).
 > <br><span class="en">The example data running through this page is the **same COVID-19 vaccine survey** used in Topic 7 (377 respondents in Ho Chi Minh City), only swapping the dependent variable from `dself` (binary — whether the individual decided to get vaccinated) to `dhh` (count — the number of vaccine doses purchased for the members of the household).</span>
 > Đây là minh họa trực tiếp cho nguyên tắc chọn mô hình: **chọn theo bản chất của biến phụ thuộc, không phải theo thói quen hay theo dữ liệu có sẵn**.
@@ -521,3 +526,12 @@ Count data models dùng chung khung Maximum Likelihood với toàn bộ **Part 2
 
 Khái niệm **nesting** (NB lồng Poisson tại $\alpha=0$, mục 7.3) và kiểm định LR dựa trên so sánh log-likelihood giữa mô hình đầy đủ/rút gọn (mục 8.3, 8.1) tái sử dụng đúng logic Likelihood Ratio test đã xây dựng ở [[concepts/binary-response-models]] — chỉ khác đối tượng kiểm định (một tham số phân tán $\alpha$ thay vì một tập hệ số $\beta$).
 <br><span class="en">The concept of **nesting** (NB nests Poisson at $\alpha=0$, section 7.3) and the LR test based on comparing log-likelihood between the full/restricted model (sections 8.3, 8.1) reuse exactly the Likelihood Ratio test logic already built in [[concepts/binary-response-models]] — only the object being tested differs (a dispersion parameter $\alpha$ instead of a set of coefficients $\beta$).</span>
+
+## 11. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa count data models (Poisson, Negative Binomial) trong nghiên cứu kinh tế thực tế (đề cương Lecture 12):
+<br><span class="en">Three recent papers illustrating count data models (Poisson, Negative Binomial) in real-world economic research (Lecture 12 syllabus):</span>
+
+- Meredith, N. R., Macy, A., & Meredith, A. (2022). Income elasticity of demand for tanning bed usage: evidence from survey data. *Journal of Applied Economics*, 25(1), 1156-1181. https://doi.org/10.1080/15140326.2022.2110640
+- Hynes, S., O'Reilly, P., & Corless, R. (2015). An on-site versus a household survey approach to modelling the demand for recreational angling: Do welfare estimates differ? *Ecosystem Services*, 16, 136-145. https://doi.org/10.1016/j.ecoser.2015.10.013
+- Xu, M., Ye, Q., Wang, X., & Wang, M. (2017). Assessing influence of online reputation on sales using a zero-inflated negative binomial model. *Procedia Computer Science*, 122, 1108-1113. https://doi.org/10.1016/j.procs.2017.11.480

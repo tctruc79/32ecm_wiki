@@ -1,15 +1,20 @@
 ---
-title: "Multicollinearity"
+title: "Lecture 3: Multicollinearity"
 type: concept
 status: mature
 tags: [multicollinearity, vif, linear-regression, model-diagnostics]
 sources: ["[[sources/slides-3-multicollinearity]]"]
 related: ["[[concepts/linear-regression-model]]"]
-updated: 2026-08-29
+lecture: 3
+assignment: ["Assignment 2: Multicollinearity"]
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: multicollinearity là vấn đề "vá lỗi" đầu tiên trong chuỗi topic của khóa học — nó liên quan đến giả định **A2 (Full rank)** của [[concepts/linear-regression-model]], nhưng chỉ ở dạng "gần vi phạm", không phải vi phạm hoàn toàn. Nên đọc lại mục 4 (năm giả định OLS) và mục 6–7 (VCV matrix, Standard Error, t-test) của trang đó trước, vì toàn bộ hệ quả của multicollinearity ở trang này chỉ có ý nghĩa khi đã hiểu SE và t-statistic thực sự đo cái gì.
 > <br><span class="en">**How to read this page**: multicollinearity is the first "bug-fix" issue in the course's topic sequence — it relates to assumption **A2 (Full rank)** of [[concepts/linear-regression-model]], but only in a "near-violation" form, not a full violation. You should reread section 4 (the five OLS assumptions) and sections 6–7 (VCV matrix, Standard Error, t-test) of that page first, because every consequence of multicollinearity on this page only makes sense once you understand what SE and the t-statistic actually measure.</span>
+
+**Lecture 3** trong đề cương (CO Topic 3) — Assignment 2: Multicollinearity.
+<br><span class="en">**Lecture 3** in the syllabus (CO Topic 3) — Assignment 2: Multicollinearity.</span>
 
 ## 1. Trực giác: Multicollinearity là gì — và KHÔNG phải là gì - <span class="en">Intuition: what multicollinearity is — and is NOT</span>
 
@@ -331,3 +336,12 @@ Bỏ bớt (các) regressor tương quan cao khỏi mô hình.
   <br><span class="en">The fourth source of multicollinearity ("mathematical derivation" — one variable is a function of another, e.g., a variable and its square) connects directly to the quadratic/polynomial form in [[concepts/functional-forms]].</span>
 - Cơ chế "SE lớn → t-statistic nhỏ → khó bác bỏ $H_0$" ở mục 6 là ứng dụng trực tiếp khung t-test đã học ở [[concepts/linear-regression-model]] mục 7 — case study ở trang này (`age_wife`, `age_husband` đều $|t|<2$) là một minh họa số cụ thể cho việc SE bị phóng đại làm giảm power của kiểm định, dẫn đến nguy cơ Type II error.
   <br><span class="en">The "large SE → small t-statistic → hard to reject $H_0$" mechanism in section 6 is a direct application of the t-test framework learned in [[concepts/linear-regression-model]] section 7 — the case study on this page (`age_wife`, `age_husband` both with $|t|<2$) is a concrete numerical illustration of how an inflated SE reduces the power of a test, leading to the risk of a Type II error.</span>
+
+## 12. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa vấn đề multicollinearity trong nghiên cứu kinh tế thực tế (đề cương Lecture 3):
+<br><span class="en">Three recent papers illustrating multicollinearity in real-world economic research (Lecture 3 syllabus):</span>
+
+- Babina, T., Fedyk, A., He, A., & Hodson, J. (2024). Artificial intelligence, firm growth, and product innovation. *Journal of Financial Economics*, 151, 103745. https://doi.org/10.1016/j.jfineco.2023.103745
+- Hoang, T. X., Pham, C. S., & Ulubaşoğlu, M. A. (2014). Non-farm activity, household expenditure, and poverty reduction in rural Vietnam: 2002-2008. *World Development*, 64, 554-568. https://doi.org/10.1016/j.worlddev.2014.06.027
+- Xiaoxu, X., Qiangmin, X., & Weihao, S. (2024). Impact of urban compactness on carbon emission in Chinese cities: From moderating effects of industrial diversity and job-housing imbalances. *Land Use Policy*, 143, 107213. https://doi.org/10.1016/j.landusepol.2024.107213

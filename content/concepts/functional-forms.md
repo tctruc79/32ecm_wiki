@@ -1,14 +1,19 @@
 ---
-title: "Functional Forms"
+title: "Lecture 2: Functional Forms"
 type: concept
 status: mature
 tags: [functional-forms, elasticity, interaction, linear-regression]
 sources: ["[[sources/slides-2-functional-forms]]"]
 related: ["[[concepts/linear-regression-model]]"]
-updated: 2026-08-29
+lecture: 2
+assignment: ["Assignment 1: Linear Regression Model with functional forms"]
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: trang này mở rộng trực tiếp giả định **A1 (Linearity)** của [[concepts/linear-regression-model]] — "linear regression model" nghĩa là mô hình tuyến tính theo **tham số** $\beta$, **không nhất thiết** tuyến tính theo **biến** $X$ hay $Y$. Nếu chưa đọc mục 4 (Năm giả định OLS) của trang linear regression, nên đọc trước — mọi kỹ thuật dưới đây (log-log, log-lin, lin-log, quadratic, interaction term) chỉ là những cách biến đổi (transform) $X$ và/hoặc $Y$ trước khi đưa vào hồi quy, để mô hình *vẫn* tuyến tính theo $\beta$ (nên OLS vẫn dùng được y nguyên công thức $b=(X'X)^{-1}X'y$) trong khi biểu diễn được các quan hệ kinh tế phi tuyến trong thực tế.<br><span class="en">**How to read this page**: this page directly extends assumption **A1 (Linearity)** from [[concepts/linear-regression-model]] — "linear regression model" means a model that is linear in the **parameters** $\beta$, **not necessarily** linear in the **variables** $X$ or $Y$. If you haven't read section 4 (the five OLS assumptions) of the linear regression page yet, read it first — every technique below (log-log, log-lin, lin-log, quadratic, interaction term) is simply a way of transforming $X$ and/or $Y$ before running the regression, so that the model *remains* linear in $\beta$ (so OLS still applies exactly as-is via the formula $b=(X'X)^{-1}X'y$) while still being able to represent nonlinear economic relationships found in reality.</span>
+
+**Lecture 2** trong đề cương (CO Topic 2) — Assignment 1: Linear Regression Model with functional forms.
+<br><span class="en">**Lecture 2** in the syllabus (CO Topic 2) — Assignment 1: Linear Regression Model with functional forms.</span>
 
 ## 1. Vì sao cần vượt ra khỏi dạng linear? - <span class="en">Why go beyond the linear form?</span>
 
@@ -528,3 +533,12 @@ Hai điểm nối tiếp đáng chú ý cho các topic sau của khóa học:
 <br><span class="en">- **Interaction terms increase the risk of multicollinearity** between the interaction term and the original variables that compose it (e.g. `schooling` and `schooling:gender` are often fairly highly correlated) — this is why interaction terms tend to have larger-than-expected standard errors, directly related to the topic covered in [[concepts/linear-regression-model]] section A2, and discussed further in the multicollinearity part of the course.</span>
 - **Việc chọn sai functional form** (VD dùng linear khi quan hệ thật là log-log) là một dạng **model misspecification** — không vi phạm trực tiếp A1 (mô hình vẫn tuyến tính theo $\beta$ dù chọn form nào), nhưng có thể khiến hệ số ước lượng mất đi ý nghĩa kinh tế đúng đắn dù về mặt thống kê vẫn "chạy được" bình thường. Đây là lý do khóa học luôn nhấn mạnh: chọn dạng hàm phải xuất phát từ **lý thuyết kinh tế** về bản chất quan hệ giữa các biến, không phải chọn dạng nào cho $R^2$ cao nhất (xem mục 8) hay dạng nào "chạy ra p-value đẹp".
 <br><span class="en">- **Choosing the wrong functional form** (e.g. using linear when the true relationship is log-log) is a form of **model misspecification** — it does not directly violate A1 (the model remains linear in $\beta$ regardless of which form is chosen), but it can cause the estimated coefficients to lose their correct economic meaning even though the model still "runs" fine statistically. This is why the course always emphasizes: the choice of functional form must come from **economic theory** about the underlying nature of the relationship between variables, not from picking whichever form gives the highest $R^2$ (see section 8) or whichever form "produces a nice-looking p-value."</span>
+
+## 11. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa cách các functional form (log-log, log-lin, quadratic, interaction) được dùng trong nghiên cứu kinh tế thực tế (đề cương Lecture 2):
+<br><span class="en">Three recent papers illustrating how functional forms (log-log, log-lin, quadratic, interaction) are used in real-world economic research (Lecture 2 syllabus):</span>
+
+- Yang, F., & Zhan, J. (2025). Economic impact of cooperative management behavior on citrus production performance. *Finance Research Letters*, 107042. https://doi.org/10.1016/j.frl.2025.107042
+- Xia, H., Li, C., Zhou, D., Zhang, Y., & Xu, J. (2020). Peasant households' land use decision-making analysis using social network analysis: A case of Tantou Village, China. *Journal of Rural Studies*, 80, 452-468. https://doi.org/10.1016/j.jrurstud.2020.07.004
+- Gonzales, J. T. (2023). Implications of AI innovation on economic growth: A panel data study. *Journal of Economic Structures*, 12(1), 13. https://doi.org/10.1186/s40008-023-00307-w

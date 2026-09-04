@@ -1,14 +1,18 @@
 ---
-title: "Endogeneity and Instrumental Variable (IV) Regression"
+title: "Lecture 5: Endogeneity and Instrumental Variable (IV) Regression"
 type: concept
 status: mature
 tags: [endogeneity, instrumental-variables, 2sls, gmm, liml, hausman-test]
 sources: ["[[sources/slides-5-endogeneity-iv-regression]]", "[[sources/slides-16-endogeneity-iv-regression-extended]]"]
 related: ["[[concepts/linear-regression-model]]", "[[concepts/econometrics-overview]]", "[[people/hausman]]"]
-updated: 2026-08-29
+lecture: 5
+assignment: ["Assignment 4: Endogeneity and Instrumental Variable Regression"]
+updated: 2026-09-04
 ---
 
 > **How to read this page**: this page resolves the violation of assumption **A3 (exogeneity)** of [[concepts/linear-regression-model]] — arguably the single most important topic in the course, because it goes straight at the question "when does a regression coefficient actually measure a causal relationship?" The page merges `slides-5-iu.pdf` (original version, 63 slides) and `slides-16-iu.pdf` (extended version, 70 slides, used as the canonical structure). Main difference between the two versions: slides-16 corrects the terminology "biased" → "inconsistent" for greater precision, and adds an entirely new section — **robust inference under weak instruments** (Anderson-Rubin, Stock-Wright) — absent from slides-5. Specific numerical discrepancies between the two versions are noted exactly where they occur in the text, never silently reconciled.
+
+**Lecture 5** in the syllabus (CO Topic 5) — Assignment 4: Endogeneity and Instrumental Variable Regression.
 
 ## What is endogeneity? — intuition before formulas
 
@@ -432,3 +436,11 @@ This is the toolkit for resolving the violation of **A3 (exogeneity)** of [[conc
 - The entire diagnostic toolkit here (weak-instrument test, Sargan/Hansen, Wu-Hausman) is **reused almost intact**, with only an added transformation step to remove the fixed effect ($\alpha_i$) before applying 2SLS/LIML/Fuller/GMM, in [[concepts/iv-regression-panel-data]] (Topic 13 — IV regression for panel data, using an FD or FE transformation before feeding into 2SLS).
 - The **omitted variable** issue (section 2.1) is the direct thread connecting to [[concepts/econometrics-overview]] (the identification problem, introduced back in Topic 0) — endogeneity is exactly the technical formalization of the question "is correlation causation?" that the entire course revolves around.
 - The **Wu-Hausman** test here shares the same comparison logic — "two estimators, one consistent-under-all-conditions and one consistent-only-under-$H_0$" — with the **Hausman test** in [[concepts/fixed-random-effects-model]] (Topic 6/12, comparing Fixed Effects vs Random Effects) — same namesake (Hausman), same underlying idea, different application context. See [[people/hausman]].
+
+## Real-world application references
+
+Three recent papers illustrating endogeneity and IV regression in real-world economic research (Lecture 5 syllabus):
+
+- Gonzales, J. T. (2023). Implications of AI innovation on economic growth: A panel data study. *Journal of Economic Structures*, 12(1), 13. https://doi.org/10.1186/s40008-023-00307-w
+- Acerenza, S., Gandelman, N., & Misail, D. (2025). Neighborhood impacts on human capital accumulation of adolescents and young adults in Montevideo. *Regional Science and Urban Economics*, 111, 104085. https://doi.org/10.1016/j.regsciurbeco.2025.104085
+- Chen, Y., & Lyu, Y. (2025). Grandchild care and grandparents' labor supply. *Economic Modelling*, 143, 106936. https://doi.org/10.1016/j.econmod.2024.106936

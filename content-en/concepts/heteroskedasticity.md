@@ -1,16 +1,20 @@
 ---
-title: "Heteroskedasticity"
+title: "Lecture 4: Heteroskedasticity"
 type: concept
 status: mature
 tags: [heteroskedasticity, robust-standard-errors, linear-regression, model-diagnostics]
 sources: ["[[sources/slides-4-heteroskedasticity]]"]
 related: ["[[concepts/linear-regression-model]]", "[[concepts/multicollinearity]]"]
-updated: 2026-08-29
+lecture: 4
+assignment: ["Assignment 3: Heteroskedasticity"]
+updated: 2026-09-04
 ---
 
 > **How to read this page**: this is the patch page for OLS's **A4 assumption (Homoskedasticity)** — if you're not yet clear on what A4 is and why it matters, read sections 4 and 6 of [[concepts/linear-regression-model]] first.
 > The key point to keep in mind throughout this page: heteroskedasticity does **not** make the regression coefficient wrong — it makes **the measure of uncertainty around that coefficient** (SE, and hence the t-test, F-test, p-value, confidence interval) unreliable.
 > This is a problem of **statistical inference**, not a problem of **estimation accuracy**.
+
+**Lecture 4** in the syllabus (CO Topic 4) — Assignment 3: Heteroskedasticity.
 
 ## Intuition first — what is heteroskedasticity
 
@@ -295,3 +299,11 @@ With `children` in section 9.3, we already saw a clear case where switching the 
 - **The same illustrative dataset** (2020 Ho Chi Minh City household expenditure survey) as [[concepts/multicollinearity]], but **two entirely independent issues**: multicollinearity affects A2 (full rank)/efficiency through correlation among the explanatory variables; heteroskedasticity affects A4/the reliability of SE — a model can suffer from both, either one, or neither, independently of each other.
 - [[concepts/fixed-random-effects-model]] (Topic 12, panel data) extends the concept of heteroskedasticity to the panel data setting (heteroskedasticity **across panels/groups**, typically denoted A4a/A4b/A4c in the panel data slides) — the same root logic (non-uniform error variance) but applied along the "across cross-sectional units" dimension instead of "across observations" as on this page.
 - The **robust standard errors** technique here is the foundation for "cluster-robust SE" techniques that will reappear in panel data — the same philosophy: no need to know the exact form of the error variance, just estimate it directly from the data.
+
+## Real-world application references
+
+Three recent papers illustrating heteroskedasticity in real-world economic research (Lecture 4 syllabus):
+
+- Li, W., & He, W. (2024). Revenue-increasing effect of rural e-commerce: A perspective of farmers' market integration and employment growth. *Economic Analysis and Policy*, 81, 482-493. https://doi.org/10.1016/j.eap.2023.12.015
+- Zhou, Y., & Shi, X. (2025). How Does Digital Technology Adoption Affect Corporate Employment? Evidence from China. *Economic Modelling*, 107045. https://doi.org/10.1016/j.econmod.2025.107045
+- Tang, Y., Sun, Y., & He, Z. (2025). Air pollution and firms' robot adoption: Evidence from China. *Economic Modelling*, 143, 106957. https://doi.org/10.1016/j.econmod.2024.106957

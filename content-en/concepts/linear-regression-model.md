@@ -1,14 +1,18 @@
 ---
-title: "Linear Regression Model"
+title: "Lecture 1: Linear Regression Model"
 type: concept
 status: mature
 tags: [linear-regression, ols, hypothesis-testing, foundations]
 sources: ["[[sources/slides-1-linear-regression-model]]"]
 related: ["[[concepts/econometrics-overview]]", "[[concepts/functional-forms]]", "[[concepts/multicollinearity]]", "[[concepts/heteroskedasticity]]", "[[concepts/endogeneity-iv-regression]]"]
-updated: 2026-08-29
+lecture: 1
+assignment: []
+updated: 2026-09-04
 ---
 
 > **How to read this page**: this is the foundational page for the entire course — every later topic (Topic 2–14) is a variant of, or a patch for, the model presented here. If you only have time to carefully read one page while reviewing for the exam or thesis, read this one first. The reasoning behind "why we need ceteris paribus, correlation ≠ causation" is discussed in more depth in [[concepts/econometrics-overview]] — this page focuses on the **technical mechanics**: what OLS is, how it is estimated, and how to know whether that estimate is trustworthy.
+
+**Lecture 1** in the syllabus (CO Topic 1) — no dedicated assignment yet.
 
 ## Why do we need a "model"? — PRE and SRE
 
@@ -350,3 +354,11 @@ This is the foundational model — every violation of assumptions A1–A4 opens 
 - The entire PRE/SRE, OLS, t-test, F-test framework on this page is also **extended to data with a time dimension** in [[concepts/fixed-random-effects-model]] (panel data) and **to non-continuous dependent variables** in [[concepts/binary-response-models]] and related pages.
 
 The foundational philosophical question "why do we need to identify the causal effect, not just compute a coefficient" is discussed in depth in [[concepts/econometrics-overview]] — worth reading alongside this page if you need to review the big picture before diving into individual techniques.
+
+## Real-world application references
+
+Three recent papers illustrating how the linear regression model is used in real-world economic research (Lecture 1 syllabus):
+
+- Peng, Y., Yang, J., Shen, J., & Gou, Q. (2025). Financial outreach, bank deposits, and economic growth. *Journal of Economic Behavior & Organization*, 171, 105036. https://doi.org/10.1016/j.jedc.2025.105036
+- Su, Y., Huang, Q., Shu, Q., Wang, Y., & Qi, X. (2025). Mechanism of land trusteeship promoting farmers' collective action: A study based on social-ecological systems framework. *Journal of Rural Studies*, 116, 103622. https://doi.org/10.1016/j.jrurstud.2025.103622
+- Yokying, P. (2025). Domestic and international migration, landownership, and rice farming in Cambodia. *Journal of Rural Studies*, 114, 103532. https://doi.org/10.1016/j.jrurstud.2024.103532

@@ -1,15 +1,20 @@
 ---
-title: "Ordinal Response Models (Ordered Logit/Probit)"
+title: "Lecture 11: Ordinal Response Models (Ordered Logit/Probit)"
 type: concept
 status: mature
 tags: [ordinal-response, ordered-probit, ordered-logit, brant-test, limited-dependent-variable]
 sources: ["[[sources/slides-9-ordinal-response-models]]"]
 related: ["[[concepts/binary-response-models]]", "[[concepts/multinomial-logit-model]]"]
-updated: 2026-08-29
+lecture: 11
+assignment: []
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: đây là Topic 9, tiếp nối trực tiếp [[concepts/binary-response-models]] (biến phụ thuộc nhị phân, Topic 7) và song song với [[concepts/multinomial-logit-model]] (biến phụ thuộc phân loại không thứ tự, Topic 8). Nếu chưa quen với ý tưởng "biến phụ thuộc rời rạc, ước lượng bằng Maximum Likelihood thay vì OLS", nên đọc [[concepts/binary-response-models]] trước — trang đó xây khung log-likelihood, LR test, marginal effects mà trang này tái sử dụng gần như nguyên vẹn, chỉ thêm một lớp phức tạp: **thứ tự** giữa các phạm trù.
 > <br><span class="en">**How to read this page**: this is Topic 9, a direct continuation of [[concepts/binary-response-models]] (binary dependent variable, Topic 7) and a parallel to [[concepts/multinomial-logit-model]] (unordered categorical dependent variable, Topic 8). If you're not yet familiar with the idea "discrete dependent variable, estimated by Maximum Likelihood instead of OLS," read [[concepts/binary-response-models]] first — that page builds the log-likelihood framework, LR test, and marginal effects that this page reuses almost unchanged, adding only one extra layer of complexity: **order** among the categories.</span>
+
+**Lecture 11** trong đề cương (CO Topic 9) — chưa có assignment riêng.
+<br><span class="en">**Lecture 11** in the syllabus (CO Topic 9) — no dedicated assignment yet.</span>
 
 ## 1. Bài toán ordinal response là gì? - <span class="en">What is the ordinal response problem?</span>
 
@@ -448,3 +453,12 @@ Ordinal response models đứng giữa hai mô hình discrete-choice khác trong
 
 Câu hỏi triết lý "tại sao cần Maximum Likelihood thay vì OLS khi biến phụ thuộc rời rạc" được đặt nền tảng ở [[concepts/binary-response-models]] — nên đọc trang đó trước nếu cần ôn lại từ đầu trước khi đi vào các biến thể phức tạp hơn (ordinal, MNL, và các mô hình đếm ở Topic 10).
 <br><span class="en">The foundational question "why is Maximum Likelihood needed instead of OLS when the dependent variable is discrete" is laid out in [[concepts/binary-response-models]] — worth reading that page first if you need to review from scratch before moving on to the more complex variants (ordinal, MNL, and the count models in Topic 10).</span>
+
+## 11. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa ordered logit/probit models trong nghiên cứu kinh tế thực tế (đề cương Lecture 11):
+<br><span class="en">Three recent papers illustrating ordered logit/probit models in real-world economic research (Lecture 11 syllabus):</span>
+
+- Kolog, J. D., Asem, F. E., & Mensah-Bonsu, A. (2023). The state of food security and its determinants in Ghana: an ordered probit analysis of the household hunger scale and household food insecurity access scale. *Scientific African*, 19, e01579. https://doi.org/10.1016/j.sciaf.2023.e01579
+- Chen, F., Yu, D., & Sun, Z. (2023). Investigating the associations of consumer financial knowledge and financial behaviors of credit card use. *Heliyon*, 9(1), E12713. https://doi.org/10.1016/j.heliyon.2022.e12713
+- Ramachandran, R., Sudhir, S., & Unnithan, A. B. (2021). Exploring the relationship between emotionality and product star ratings in online reviews. *IIMB Management Review*, 33(4), 299-308. https://doi.org/10.1016/j.iimb.2021.12.002

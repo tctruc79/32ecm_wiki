@@ -1,14 +1,18 @@
 ---
-title: "Multicollinearity"
+title: "Lecture 3: Multicollinearity"
 type: concept
 status: mature
 tags: [multicollinearity, vif, linear-regression, model-diagnostics]
 sources: ["[[sources/slides-3-multicollinearity]]"]
 related: ["[[concepts/linear-regression-model]]"]
-updated: 2026-08-29
+lecture: 3
+assignment: ["Assignment 2: Multicollinearity"]
+updated: 2026-09-04
 ---
 
 > **How to read this page**: multicollinearity is the first "bug-fix" issue in the course's topic sequence — it relates to assumption **A2 (Full rank)** of [[concepts/linear-regression-model]], but only in a "near-violation" form, not a full violation. You should reread section 4 (the five OLS assumptions) and sections 6–7 (VCV matrix, Standard Error, t-test) of that page first, because every consequence of multicollinearity on this page only makes sense once you understand what SE and the t-statistic actually measure.
+
+**Lecture 3** in the syllabus (CO Topic 3) — Assignment 2: Multicollinearity.
 
 ## Intuition: what multicollinearity is — and is NOT
 
@@ -254,3 +258,11 @@ Remove the highly correlated regressor(s) from the model.
 - Unlike a violation of **A3 (Exogeneity)** ([[concepts/endogeneity-iv-regression]]): multicollinearity does not cause bias/inconsistency; endogeneity does cause bias. A coefficient with the "wrong expected sign" could be due to multicollinearity **or** to an omitted variable/endogeneity — the correct corresponding diagnostic toolkit must be used (VIF/correlation matrix for multicollinearity; separate tests for endogeneity) before concluding the cause.
 - The fourth source of multicollinearity ("mathematical derivation" — one variable is a function of another, e.g., a variable and its square) connects directly to the quadratic/polynomial form in [[concepts/functional-forms]].
 - The "large SE → small t-statistic → hard to reject $H_0$" mechanism in section 6 is a direct application of the t-test framework learned in [[concepts/linear-regression-model]] section 7 — the case study on this page (`age_wife`, `age_husband` both with $|t|<2$) is a concrete numerical illustration of how an inflated SE reduces the power of a test, leading to the risk of a Type II error.
+
+## Real-world application references
+
+Three recent papers illustrating multicollinearity in real-world economic research (Lecture 3 syllabus):
+
+- Babina, T., Fedyk, A., He, A., & Hodson, J. (2024). Artificial intelligence, firm growth, and product innovation. *Journal of Financial Economics*, 151, 103745. https://doi.org/10.1016/j.jfineco.2023.103745
+- Hoang, T. X., Pham, C. S., & Ulubaşoğlu, M. A. (2014). Non-farm activity, household expenditure, and poverty reduction in rural Vietnam: 2002-2008. *World Development*, 64, 554-568. https://doi.org/10.1016/j.worlddev.2014.06.027
+- Xiaoxu, X., Qiangmin, X., & Weihao, S. (2024). Impact of urban compactness on carbon emission in Chinese cities: From moderating effects of industrial diversity and job-housing imbalances. *Land Use Policy*, 143, 107213. https://doi.org/10.1016/j.landusepol.2024.107213

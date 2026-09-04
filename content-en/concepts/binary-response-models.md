@@ -1,16 +1,20 @@
 ---
-title: "Binary Response Models (LPM, Logit, Probit)"
+title: "Lecture 9: Binary Response Models (LPM, Logit, Probit)"
 type: concept
 status: mature
 tags: [binary-response, logit, probit, limited-dependent-variable, marginal-effects]
 sources: ["[[sources/slides-7-binary-response-models]]", "[[sources/slides-310-binary-response-models-logit-probit]]"]
 related: ["[[concepts/linear-regression-model]]", "[[concepts/multinomial-logit-model]]", "[[concepts/ordinal-response-models]]"]
-updated: 2026-08-29
+lecture: 9
+assignment: ["Assignment 10: Binary Response Model: Logit/Probit"]
+updated: 2026-09-04
 ---
 
 > **How to read this page**: this is the opening page of **Part 2: Models for Limited Dependent Variables** — the rest of the course (Topic 8–11) are all variants of the ML/latent-variable framework built here.
 > If [[concepts/linear-regression-model]] is the "rulebook" for continuous $y$, this page is the "rulebook" for when $y$ can only be 0 or 1.
 > Two slide decks teach the same theory with two different datasets: `slides-7-iu.pdf` (48 pages, COVID-19 vaccine decision example, with real R output on pages 7–45) and `slides-310-iu.pdf` (39 pages, e-wallet example, mostly text/formulas, with the R-output section as images from which concrete numbers could not be extracted).
+
+**Lecture 9** in the syllabus (CO Topic 7) — Assignment 10: Binary Response Model: Logit/Probit.
 > Every numerical example on this page is drawn from the `slides-7` vaccine dataset; the e-wallet dataset is used only to illustrate that the theory applies to any binary outcome.
 
 ## The original problem: when the dependent variable can only be 0 or 1
@@ -392,3 +396,11 @@ This page is the foundation for all of **Part 2: Models for Limited Dependent Va
 - [[concepts/count-data-models]] and [[concepts/censored-regression-tobit]] also share the same "use ML instead of OLS" philosophy once the dependent variable is no longer "cleanly" continuous in the classical LRM sense.
 - The LPM in section 4 is a direct point of comparison back to [[concepts/linear-regression-model]] — the same OLS tool, but applied to a binary variable clearly exposes the limits of the linear framework, exactly as the "5 assumptions A1–A5" section of that page warned in advance.
 - The LPM's "built-in" heteroskedasticity problem (section 4.4, drawback #3) is a concrete, empirical illustration of the entire theoretical content in [[concepts/heteroskedasticity]] — worth reading alongside it for a deeper understanding of why robust SE is necessary.
+
+## Real-world application references
+
+Three recent papers illustrating binary response models (Logit/Probit) in real-world economic research (Lecture 9 syllabus):
+
+- Wagner, J., Bühner, C., Gölz, S., Trommsdorff, M., & Jürkenbeck, K. (2024). Factors influencing the willingness to use agrivoltaics: A quantitative study among German farmers. *Applied Energy*, 361, 122934. https://doi.org/10.1016/j.apenergy.2024.122934
+- Alfano, V., De Simone, E., D'Uva, M., & Gaeta, G. L. (2022). Exploring motivations behind the introduction of tourist accommodation taxes: The case of the Marche region in Italy. *Land Use Policy*, 113, 105903. https://doi.org/10.1016/j.landusepol.2021.105903
+- Mahn, D., Best, R., Wang, C., & Abiona, O. (2024). What drives solar energy adoption in developing countries? Evidence from household surveys across countries. *Energy Economics*, 138, 107815. https://doi.org/10.1016/j.eneco.2024.107815

@@ -1,11 +1,13 @@
 ---
-title: "Binary Response Models (LPM, Logit, Probit)"
+title: "Lecture 9: Binary Response Models (LPM, Logit, Probit)"
 type: concept
 status: mature
 tags: [binary-response, logit, probit, limited-dependent-variable, marginal-effects]
 sources: ["[[sources/slides-7-binary-response-models]]", "[[sources/slides-310-binary-response-models-logit-probit]]"]
 related: ["[[concepts/linear-regression-model]]", "[[concepts/multinomial-logit-model]]", "[[concepts/ordinal-response-models]]"]
-updated: 2026-08-29
+lecture: 9
+assignment: ["Assignment 10: Binary Response Model: Logit/Probit"]
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: đây là trang mở đầu **Part 2: Models for Limited Dependent Variables** — phần còn lại của khóa học (Topic 8–11) đều là biến thể của khung ML/latent-variable dựng ở đây.
@@ -14,6 +16,9 @@ updated: 2026-08-29
 > <br><span class="en">If [[concepts/linear-regression-model]] is the "rulebook" for continuous $y$, this page is the "rulebook" for when $y$ can only be 0 or 1.</span>
 > Hai bộ slide dạy cùng một lý thuyết bằng hai bộ dữ liệu khác nhau: `slides-7-iu.pdf` (48 trang, ví dụ quyết định tiêm vaccine COVID-19, có số liệu R thật ở trang 7–45) và `slides-310-iu.pdf` (39 trang, ví dụ dùng ví điện tử — e-wallet, chủ yếu văn bản/công thức, phần R-output là ảnh chưa trích xuất được số cụ thể).
 > <br><span class="en">Two slide decks teach the same theory with two different datasets: `slides-7-iu.pdf` (48 pages, COVID-19 vaccine decision example, with real R output on pages 7–45) and `slides-310-iu.pdf` (39 pages, e-wallet example, mostly text/formulas, with the R-output section as images from which concrete numbers could not be extracted).</span>
+
+**Lecture 9** trong đề cương (CO Topic 7) — Assignment 10: Binary Response Model: Logit/Probit.
+<br><span class="en">**Lecture 9** in the syllabus (CO Topic 7) — Assignment 10: Binary Response Model: Logit/Probit.</span>
 > Toàn bộ ví dụ số trong trang này lấy từ bộ dữ liệu vaccine của `slides-7`; bộ e-wallet chỉ dùng để minh họa rằng lý thuyết áp dụng được cho bất kỳ outcome nhị phân nào.
 > <br><span class="en">Every numerical example on this page is drawn from the `slides-7` vaccine dataset; the e-wallet dataset is used only to illustrate that the theory applies to any binary outcome.</span>
 
@@ -499,3 +504,12 @@ Trang này là nền tảng cho toàn bộ **Part 2: Models for Limited Dependen
   <br><span class="en">The LPM in section 4 is a direct point of comparison back to [[concepts/linear-regression-model]] — the same OLS tool, but applied to a binary variable clearly exposes the limits of the linear framework, exactly as the "5 assumptions A1–A5" section of that page warned in advance.</span>
 - Vấn đề heteroskedasticity "bẩm sinh" của LPM (mục 4.4, nhược điểm #3) là một minh họa cụ thể, thực chứng cho toàn bộ nội dung lý thuyết ở [[concepts/heteroskedasticity]] — đáng đọc song song nếu cần hiểu sâu hơn tại sao robust SE lại cần thiết.
   <br><span class="en">The LPM's "built-in" heteroskedasticity problem (section 4.4, drawback #3) is a concrete, empirical illustration of the entire theoretical content in [[concepts/heteroskedasticity]] — worth reading alongside it for a deeper understanding of why robust SE is necessary.</span>
+
+## 11. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa binary response models (Logit/Probit) trong nghiên cứu kinh tế thực tế (đề cương Lecture 9):
+<br><span class="en">Three recent papers illustrating binary response models (Logit/Probit) in real-world economic research (Lecture 9 syllabus):</span>
+
+- Wagner, J., Bühner, C., Gölz, S., Trommsdorff, M., & Jürkenbeck, K. (2024). Factors influencing the willingness to use agrivoltaics: A quantitative study among German farmers. *Applied Energy*, 361, 122934. https://doi.org/10.1016/j.apenergy.2024.122934
+- Alfano, V., De Simone, E., D'Uva, M., & Gaeta, G. L. (2022). Exploring motivations behind the introduction of tourist accommodation taxes: The case of the Marche region in Italy. *Land Use Policy*, 113, 105903. https://doi.org/10.1016/j.landusepol.2021.105903
+- Mahn, D., Best, R., Wang, C., & Abiona, O. (2024). What drives solar energy adoption in developing countries? Evidence from household surveys across countries. *Energy Economics*, 138, 107815. https://doi.org/10.1016/j.eneco.2024.107815

@@ -1,14 +1,18 @@
 ---
-title: "Ordinal Response Models (Ordered Logit/Probit)"
+title: "Lecture 11: Ordinal Response Models (Ordered Logit/Probit)"
 type: concept
 status: mature
 tags: [ordinal-response, ordered-probit, ordered-logit, brant-test, limited-dependent-variable]
 sources: ["[[sources/slides-9-ordinal-response-models]]"]
 related: ["[[concepts/binary-response-models]]", "[[concepts/multinomial-logit-model]]"]
-updated: 2026-08-29
+lecture: 11
+assignment: []
+updated: 2026-09-04
 ---
 
 > **How to read this page**: this is Topic 9, a direct continuation of [[concepts/binary-response-models]] (binary dependent variable, Topic 7) and a parallel to [[concepts/multinomial-logit-model]] (unordered categorical dependent variable, Topic 8). If you're not yet familiar with the idea "discrete dependent variable, estimated by Maximum Likelihood instead of OLS," read [[concepts/binary-response-models]] first — that page builds the log-likelihood framework, LR test, and marginal effects that this page reuses almost unchanged, adding only one extra layer of complexity: **order** among the categories.
+
+**Lecture 11** in the syllabus (CO Topic 9) — no dedicated assignment yet.
 
 ## What is the ordinal response problem?
 
@@ -353,3 +357,11 @@ Ordinal response models sit between two other discrete-choice models in Part 2 o
 - The log-likelihood framework $LL=\sum_i\sum_k Y_{ik}\ln Pr(y_i=k)$ (section 5) is the **common denominator** of all three models (binary, ordinal, MNL) — the only difference between them is the formula used to compute $Pr(y_i=k)$.
 
 The foundational question "why is Maximum Likelihood needed instead of OLS when the dependent variable is discrete" is laid out in [[concepts/binary-response-models]] — worth reading that page first if you need to review from scratch before moving on to the more complex variants (ordinal, MNL, and the count models in Topic 10).
+
+## Real-world application references
+
+Three recent papers illustrating ordered logit/probit models in real-world economic research (Lecture 11 syllabus):
+
+- Kolog, J. D., Asem, F. E., & Mensah-Bonsu, A. (2023). The state of food security and its determinants in Ghana: an ordered probit analysis of the household hunger scale and household food insecurity access scale. *Scientific African*, 19, e01579. https://doi.org/10.1016/j.sciaf.2023.e01579
+- Chen, F., Yu, D., & Sun, Z. (2023). Investigating the associations of consumer financial knowledge and financial behaviors of credit card use. *Heliyon*, 9(1), E12713. https://doi.org/10.1016/j.heliyon.2022.e12713
+- Ramachandran, R., Sudhir, S., & Unnithan, A. B. (2021). Exploring the relationship between emotionality and product star ratings in online reviews. *IIMB Management Review*, 33(4), 299-308. https://doi.org/10.1016/j.iimb.2021.12.002

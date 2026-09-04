@@ -1,15 +1,20 @@
 ---
-title: "Multinomial Logit Model (MNL)"
+title: "Lecture 10: Multinomial Logit Model (MNL)"
 type: concept
 status: mature
 tags: [multinomial-logit, discrete-choice, limited-dependent-variable]
 sources: ["[[sources/slides-8-multinomial-logit-model]]"]
 related: ["[[concepts/binary-response-models]]", "[[concepts/ordinal-response-models]]"]
-updated: 2026-08-29
+lecture: 10
+assignment: []
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: MNL là mắt xích thứ hai trong chuỗi "limited dependent variable models" của khóa học — sau [[concepts/binary-response-models]] (Topic 7, biến phụ thuộc 0/1) và trước [[concepts/ordinal-response-models]] (Topic 9, biến phụ thuộc có thứ tự). Điều quan trọng nhất cần nắm **trước khi** đọc công thức là: MNL giải quyết trường hợp biến phụ thuộc là **một lựa chọn trong nhiều lựa chọn KHÔNG có thứ tự tự nhiên** — khác hẳn cả biến nhị phân lẫn biến có thứ tự. Toàn bộ trang này dùng lại đúng một case study xuyên suốt (chọn nơi khám chữa bệnh, dữ liệu VHLSS 2012) — cần nắm case study này để hiểu các ví dụ số ở các mục sau.
 > <br><span class="en">**How to read this page**: MNL is the second link in the course's "limited dependent variable models" chain — after [[concepts/binary-response-models]] (Topic 7, 0/1 dependent variable) and before [[concepts/ordinal-response-models]] (Topic 9, ordered dependent variable). The most important thing to grasp **before** reading the formulas: MNL handles the case where the dependent variable is **one choice among several choices with NO natural order** — fundamentally different from both a binary variable and an ordinal one. This entire page reuses exactly one running case study (choice of healthcare provider, VHLSS 2012 data) — understanding this case study is necessary for following the numeric examples in the sections below.</span>
+
+**Lecture 10** trong đề cương (CO Topic 8) — chưa có assignment riêng.
+<br><span class="en">**Lecture 10** in the syllabus (CO Topic 8) — no dedicated assignment yet.</span>
 
 ## 1. Định vị bài toán: ba họ mô hình cho biến phụ thuộc rời rạc - <span class="en">Positioning the problem: three model families for discrete dependent variables</span>
 
@@ -499,3 +504,12 @@ Theo hướng dẫn kinh điển của McFadden (được trích dẫn rộng r�
 <br><span class="en">**McFadden $R^2$** is a form of "pseudo-$R^2$" shared by every model estimated via Maximum Likelihood — this exact same logic (and the exact same "significance ≠ fit magnitude" lesson) will reappear in [[concepts/ordinal-response-models]] and the count data models covered later in the course.</span>
 - Việc **base category** buộc mọi hệ số phải diễn giải tương đối là cùng một nguyên lý với biến phân loại (categorical) trong OLS ([[concepts/linear-regression-model]] mục 5) — chỉ khác ở chỗ MNL áp dụng nguyên lý đó cho *toàn bộ hệ* $(J-1)$ phương trình đồng thời, thay vì một phương trình duy nhất.
 <br><span class="en">The way a **base category** forces every coefficient to be interpreted relatively is the same principle as categorical variables in OLS ([[concepts/linear-regression-model]] section 5) — the only difference is that MNL applies that principle to an *entire system* of $(J-1)$ equations simultaneously, instead of a single equation.</span>
+
+## 11. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa multinomial logit model trong nghiên cứu kinh tế thực tế (đề cương Lecture 10):
+<br><span class="en">Three recent papers illustrating the multinomial logit model in real-world economic research (Lecture 10 syllabus):</span>
+
+- Alem, Y., Beyene, A. D., Köhlin, G., & Mekonnen, A. (2016). Modeling household cooking fuel choice: A panel multinomial logit approach. *Energy Economics*, 59, 129-137. https://doi.org/10.1016/j.eneco.2016.06.025
+- Mostofi, H. (2022). The frequency use and the modal shift to ICT-based mobility services. *Resources, Environment and Sustainability*, 9. https://doi.org/10.1016/j.resenv.2022.100076
+- Fikire, A. H. (2021). Determinants of urban housing choice in Debre Berhan Town, North Shewa zone, Amhara Region, Ethiopia. *Cogent Economics & Finance*, 9(1). https://doi.org/10.1080/23322039.2021.1885196

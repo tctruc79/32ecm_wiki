@@ -1,15 +1,19 @@
 ---
-title: "Count Data Models (Poisson, Negative Binomial, ZINB)"
+title: "Lecture 12: Count Data Models (Poisson, Negative Binomial, ZINB)"
 type: concept
 status: mature
 tags: [count-data, poisson, negative-binomial, zero-inflated, limited-dependent-variable]
 sources: ["[[sources/slides-10-count-data-models]]"]
 related: ["[[concepts/binary-response-models]]", "[[concepts/linear-regression-model]]"]
-updated: 2026-08-29
+lecture: 12
+assignment: []
+updated: 2026-09-04
 ---
 
 > **How to read this page**: Topic 10 continues the **Models for Limited Dependent Variables** thread opened in [[concepts/binary-response-models]] (Topic 7) — same Maximum Likelihood framework, same logic of "using a nonlinear link function because the nature of the dependent variable rules out a direct linear model".
 > The one difference: in Topic 7 the dependent variable is binary (0/1) — "did it happen or not"; in Topic 10 the dependent variable is a **count** (0, 1, 2, 3, …) — "how many times did it happen".
+
+**Lecture 12** in the syllabus (CO Topic 10) — no dedicated assignment yet.
 > The example data running through this page is the **same COVID-19 vaccine survey** used in Topic 7 (377 respondents in Ho Chi Minh City), only swapping the dependent variable from `dself` (binary — whether the individual decided to get vaccinated) to `dhh` (count — the number of vaccine doses purchased for the members of the household).
 > This is a direct illustration of the model-choice principle: **choose according to the nature of the dependent variable, not out of habit or whatever data happens to be available**.
 
@@ -419,3 +423,11 @@ Count data models share the same Maximum Likelihood framework with the whole of 
 - **The same COVID-19 vaccine survey dataset**, only the dependent variable changes (`dself` binary in Topic 7 → `dhh` count in Topic 10) — illustrating the principle of choosing a model according to the nature of the dependent variable.
 
 The concept of **nesting** (NB nests Poisson at $\alpha=0$, section 7.3) and the LR test based on comparing log-likelihood between the full/restricted model (sections 8.3, 8.1) reuse exactly the Likelihood Ratio test logic already built in [[concepts/binary-response-models]] — only the object being tested differs (a dispersion parameter $\alpha$ instead of a set of coefficients $\beta$).
+
+## Real-world application references
+
+Three recent papers illustrating count data models (Poisson, Negative Binomial) in real-world economic research (Lecture 12 syllabus):
+
+- Meredith, N. R., Macy, A., & Meredith, A. (2022). Income elasticity of demand for tanning bed usage: evidence from survey data. *Journal of Applied Economics*, 25(1), 1156-1181. https://doi.org/10.1080/15140326.2022.2110640
+- Hynes, S., O'Reilly, P., & Corless, R. (2015). An on-site versus a household survey approach to modelling the demand for recreational angling: Do welfare estimates differ? *Ecosystem Services*, 16, 136-145. https://doi.org/10.1016/j.ecoser.2015.10.013
+- Xu, M., Ye, Q., Wang, X., & Wang, M. (2017). Assessing influence of online reputation on sales using a zero-inflated negative binomial model. *Procedia Computer Science*, 122, 1108-1113. https://doi.org/10.1016/j.procs.2017.11.480

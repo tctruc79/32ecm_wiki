@@ -1,15 +1,20 @@
 ---
-title: "Dynamic Panel Data Models"
+title: "Lecture 8: Dynamic Panel Data Models"
 type: concept
 status: mature
 tags: [panel-data, dynamic-model, nickell-bias, gmm, arellano-bond, blundell-bond]
 sources: ["[[sources/slides-15-dynamic-panel-data-models]]"]
 related: ["[[concepts/fixed-random-effects-model]]", "[[concepts/iv-regression-panel-data]]", "[[concepts/endogeneity-iv-regression]]", "[[people/arellano-bond]]"]
-updated: 2026-08-29
+lecture: 8
+assignment: ["Assignment 7: Dynamic panel data models: Anderson-Hsiao estimator", "Assignment 8: Dynamic panel data models: Difference GMM", "Assignment 9: Dynamic panel data models: System GMM"]
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: đây là bài cuối của khóa học, và là điểm hội tụ của toàn bộ mạch panel data — nên đọc sau khi đã nắm [[concepts/fixed-random-effects-model]] (phép biến đổi within/FD) và [[concepts/iv-regression-panel-data]] (khung GMM/IV áp cho panel). Nếu chỉ có thời gian ôn hai điểm quan trọng nhất, hãy tập trung vào: (1) Nickell bias là hàm của $1/T$, **không phải** $1/N$ — điểm hay bị hiểu ngược nhất của cả topic; và (2) bộ kiểm định AR(1)/AR(2) có quy tắc **phản trực giác** — AR(1) *nên* bị bác bỏ, không bác bỏ mới là dấu hiệu có vấn đề; AR(2) *không nên* bị bác bỏ, bác bỏ mới là dấu hiệu instrument hỏng.
 > <br><span class="en">**How to read this page**: this is the final lesson of the course, and the convergence point of the entire panel-data thread — so read it after mastering [[concepts/fixed-random-effects-model]] (the within/FD transformation) and [[concepts/iv-regression-panel-data]] (the GMM/IV framework applied to panel data). If you only have time to review the two most important points, focus on: (1) Nickell bias is a function of $1/T$, **not** $1/N$ — the single most commonly reversed point in the whole topic; and (2) the AR(1)/AR(2) test battery follows a **counter-intuitive** rule — AR(1) *should* be rejected, failing to reject it is the sign of a problem; AR(2) *should not* be rejected, rejecting it is the sign of a broken instrument.</span>
+
+**Lecture 8** trong đề cương (CO Topic 14) — Assignment 7 (Anderson-Hsiao), Assignment 8 (Difference GMM), Assignment 9 (System GMM).
+<br><span class="en">**Lecture 8** in the syllabus (CO Topic 14) — Assignment 7 (Anderson-Hsiao), Assignment 8 (Difference GMM), Assignment 9 (System GMM).</span>
 
 Mô hình động đưa **biến trễ của chính $y$** vào vế phải — và biến trễ này luôn nội sinh, đòi hỏi một họ ước lượng riêng (Anderson-Hsiao → Difference GMM → System GMM).
 <br><span class="en">A dynamic model brings **the lagged value of $y$ itself** into the right-hand side — and this lagged variable is always endogenous, requiring its own family of estimators (Anderson-Hsiao → Difference GMM → System GMM).</span>

@@ -1,11 +1,13 @@
 ---
-title: "Heteroskedasticity"
+title: "Lecture 4: Heteroskedasticity"
 type: concept
 status: mature
 tags: [heteroskedasticity, robust-standard-errors, linear-regression, model-diagnostics]
 sources: ["[[sources/slides-4-heteroskedasticity]]"]
 related: ["[[concepts/linear-regression-model]]", "[[concepts/multicollinearity]]"]
-updated: 2026-08-29
+lecture: 4
+assignment: ["Assignment 3: Heteroskedasticity"]
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: đây là trang vá lỗi cho **giả định A4 (Homoskedasticity)** của OLS — nếu chưa nắm rõ A4 là gì và vì sao nó quan trọng, đọc mục 4 và mục 6 của [[concepts/linear-regression-model]] trước.
@@ -14,6 +16,9 @@ updated: 2026-08-29
 > <br><span class="en">The key point to keep in mind throughout this page: heteroskedasticity does **not** make the regression coefficient wrong — it makes **the measure of uncertainty around that coefficient** (SE, and hence the t-test, F-test, p-value, confidence interval) unreliable.</span>
 > Đây là bài toán về **suy luận thống kê (inference)**, không phải bài toán về **độ chính xác của ước lượng (estimation)**.
 > <br><span class="en">This is a problem of **statistical inference**, not a problem of **estimation accuracy**.</span>
+
+**Lecture 4** trong đề cương (CO Topic 4) — Assignment 3: Heteroskedasticity.
+<br><span class="en">**Lecture 4** in the syllabus (CO Topic 4) — Assignment 3: Heteroskedasticity.</span>
 
 ## 1. Trực giác trước — heteroskedasticity là gì - <span class="en">Intuition first — what is heteroskedasticity</span>
 
@@ -414,3 +419,12 @@ Với `children` ở mục 9.3, ta đã thấy rõ ràng một trường hợp m
 <br><span class="en">[[concepts/fixed-random-effects-model]] (Topic 12, panel data) extends the concept of heteroskedasticity to the panel data setting (heteroskedasticity **across panels/groups**, typically denoted A4a/A4b/A4c in the panel data slides) — the same root logic (non-uniform error variance) but applied along the "across cross-sectional units" dimension instead of "across observations" as on this page.</span>
 - Kỹ thuật **robust standard errors** ở đây là nền tảng cho các kỹ thuật "cluster-robust SE" sẽ gặp lại ở panel data — cùng một triết lý: không cần biết đúng dạng của phương sai sai số, chỉ cần ước lượng trực tiếp nó từ dữ liệu.
 <br><span class="en">The **robust standard errors** technique here is the foundation for "cluster-robust SE" techniques that will reappear in panel data — the same philosophy: no need to know the exact form of the error variance, just estimate it directly from the data.</span>
+
+## 13. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa vấn đề heteroskedasticity trong nghiên cứu kinh tế thực tế (đề cương Lecture 4):
+<br><span class="en">Three recent papers illustrating heteroskedasticity in real-world economic research (Lecture 4 syllabus):</span>
+
+- Li, W., & He, W. (2024). Revenue-increasing effect of rural e-commerce: A perspective of farmers' market integration and employment growth. *Economic Analysis and Policy*, 81, 482-493. https://doi.org/10.1016/j.eap.2023.12.015
+- Zhou, Y., & Shi, X. (2025). How Does Digital Technology Adoption Affect Corporate Employment? Evidence from China. *Economic Modelling*, 107045. https://doi.org/10.1016/j.econmod.2025.107045
+- Tang, Y., Sun, Y., & He, Z. (2025). Air pollution and firms' robot adoption: Evidence from China. *Economic Modelling*, 143, 106957. https://doi.org/10.1016/j.econmod.2024.106957

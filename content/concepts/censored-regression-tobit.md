@@ -1,15 +1,20 @@
 ---
-title: "Censored Regression: The Tobit Model"
+title: "Lecture 13: Censored Regression: The Tobit Model"
 type: concept
 status: mature
 tags: [tobit, censored-data, truncated-data, limited-dependent-variable]
 sources: ["[[sources/slides-11-censored-regression-tobit]]"]
 related: ["[[concepts/linear-regression-model]]", "[[concepts/binary-response-models]]"]
-updated: 2026-08-29
+lecture: 13
+assignment: []
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: đây là bài cuối của Part 2 — Models for Limited Dependent Variables, sau y nhị phân ([[concepts/binary-response-models]]), y đa lựa chọn không thứ tự ([[concepts/multinomial-logit-model]]), y có thứ tự ([[concepts/ordinal-response-models]]) và y đếm ([[concepts/count-data-models]]). Ở đây $y$ quay lại là **liên tục** như [[concepts/linear-regression-model]] — nhưng bị "cắt" ở một ngưỡng. **Phần khó nhất, và theo log ôn tập là "bẫy thi giá trị cao nhất" của topic này, là phân biệt BA loại giá trị dự đoán/marginal effect sau Tobit** (mục 7) — nếu chỉ có thời gian đọc một mục trước khi thi, hãy đọc mục 7. Mục 2 (censored vs. truncated) là nền tảng bắt buộc phải nắm trước, vì nó quyết định mô hình nào được phép dùng.
 > <br><span class="en">**How to read this page**: this is the final lesson of Part 2 — Models for Limited Dependent Variables, after binary $y$ ([[concepts/binary-response-models]]), unordered multi-choice $y$ ([[concepts/multinomial-logit-model]]), ordered $y$ ([[concepts/ordinal-response-models]]) and count $y$ ([[concepts/count-data-models]]). Here $y$ goes back to being **continuous** as in [[concepts/linear-regression-model]] — but is "cut" at a threshold. **The hardest part, and per the review log the "highest-value exam trap" of this topic, is distinguishing the THREE types of predicted value/marginal effect after Tobit** (section 7) — if there is only time to read one section before the exam, read section 7. Section 2 (censored vs. truncated) is the mandatory foundation to master first, since it determines which model is allowed to be used.</span>
+
+**Lecture 13** trong đề cương (CO Topic 11) — chưa có assignment riêng. Đây cũng là lecture cuối cùng của khóa.
+<br><span class="en">**Lecture 13** in the syllabus (CO Topic 11) — no dedicated assignment yet. This is also the final lecture of the course.</span>
 
 ## 1. Vì sao cần một mô hình riêng? — khi $y$ bị "cắt" ở một ngưỡng - <span class="en">Why a dedicated model is needed — when $y$ is "cut" at a threshold</span>
 
@@ -382,3 +387,12 @@ $H_0: \beta_{age}=\beta_{male}=\beta_{edu}=0$. Với $\chi^2=530.58$, $p<2.2\tim
 <br><span class="en">The quantity $\lambda$ (inverse Mills ratio) appearing in the Unconditional/Conditional expected value (sections 7.2–7.3) is the same mathematical structure that will reappear in the **Heckman selection model** — the standard model for handling sample selection/truncation with a systematic element, but **not taught in this slide deck** (see the scope note in section 9).</span>
 - Đây là bài cuối của **Part 2 (Models for Limited Dependent Variables)** — sau bài này, khóa học quay lại **Panel Data** ở Part 3, mở rộng khung OLS/panel đã học ở [[concepts/fixed-random-effects-model]] sang các cấu trúc phương sai phức tạp hơn.
 <br><span class="en">This is the final lesson of **Part 2 (Models for Limited Dependent Variables)** — after this lesson, the course returns to **Panel Data** in Part 3, extending the OLS/panel framework learned in [[concepts/fixed-random-effects-model]] to more complex variance structures.</span>
+
+## 10. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa Tobit model trong nghiên cứu kinh tế thực tế (đề cương Lecture 13):
+<br><span class="en">Three recent papers illustrating the Tobit model in real-world economic research (Lecture 13 syllabus):</span>
+
+- Liu, H., Wahl, T. I., Seale, J. L., & Bai, J. (2015). Household composition, income, and food-away-from-home expenditure in urban China. *Food Policy*, 51, 97-103. https://doi.org/10.1016/j.foodpol.2014.12.011
+- Basnet, H. C., & Donou-Adonsou, F. (2016). Internet, consumer spending, and credit card balance: Evidence from US consumers. *Review of Financial Economics*, 30, 11-22. https://doi.org/10.1016/j.rfe.2016.01.002
+- Jiang, H., Livingston, M., Room, R., & Callinan, S. (2016). Price elasticity of on- and off-premises demand for alcoholic drinks: A Tobit analysis. *Drug and Alcohol Dependence*, 163, 222-228. https://doi.org/10.1016/j.drugalcdep.2016.04.026

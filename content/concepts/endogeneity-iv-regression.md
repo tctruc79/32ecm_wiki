@@ -1,15 +1,20 @@
 ---
-title: "Endogeneity and Instrumental Variable (IV) Regression"
+title: "Lecture 5: Endogeneity and Instrumental Variable (IV) Regression"
 type: concept
 status: mature
 tags: [endogeneity, instrumental-variables, 2sls, gmm, liml, hausman-test]
 sources: ["[[sources/slides-5-endogeneity-iv-regression]]", "[[sources/slides-16-endogeneity-iv-regression-extended]]"]
 related: ["[[concepts/linear-regression-model]]", "[[concepts/econometrics-overview]]", "[[people/hausman]]"]
-updated: 2026-08-29
+lecture: 5
+assignment: ["Assignment 4: Endogeneity and Instrumental Variable Regression"]
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: đây là trang giải quyết vi phạm giả định **A3 (exogeneity)** của [[concepts/linear-regression-model]] — có lẽ là chủ đề quan trọng nhất môn học vì nó chạm trực tiếp vào câu hỏi "khi nào một hệ số hồi quy thực sự đo được quan hệ nhân quả". Trang hợp nhất `slides-5-iu.pdf` (bản gốc, 63 trang) và `slides-16-iu.pdf` (bản mở rộng, 70 trang, dùng làm cấu trúc chính/canonical). Khác biệt chính giữa hai bản: slides-16 sửa thuật ngữ "biased" → "inconsistent" cho chính xác hơn, và thêm hẳn một mục mới — **robust inference dưới weak instruments** (Anderson-Rubin, Stock-Wright) — không có trong slides-5. Các khác biệt số liệu cụ thể giữa hai bản được ghi chú tại đúng chỗ xuất hiện trong bài, không âm thầm sửa.
 > <br><span class="en">**How to read this page**: this page resolves the violation of assumption **A3 (exogeneity)** of [[concepts/linear-regression-model]] — arguably the single most important topic in the course, because it goes straight at the question "when does a regression coefficient actually measure a causal relationship?" The page merges `slides-5-iu.pdf` (original version, 63 slides) and `slides-16-iu.pdf` (extended version, 70 slides, used as the canonical structure). Main difference between the two versions: slides-16 corrects the terminology "biased" → "inconsistent" for greater precision, and adds an entirely new section — **robust inference under weak instruments** (Anderson-Rubin, Stock-Wright) — absent from slides-5. Specific numerical discrepancies between the two versions are noted exactly where they occur in the text, never silently reconciled.</span>
+
+**Lecture 5** trong đề cương (CO Topic 5) — Assignment 4: Endogeneity and Instrumental Variable Regression.
+<br><span class="en">**Lecture 5** in the syllabus (CO Topic 5) — Assignment 4: Endogeneity and Instrumental Variable Regression.</span>
 
 ## 1. Endogeneity là gì? — trực quan trước khi vào công thức - <span class="en">What is endogeneity? — intuition before formulas</span>
 
@@ -653,3 +658,12 @@ $W$ là ma trận trọng số (weighting matrix): $W=I$ → GMM đơn giản; $
 <br><span class="en">The **omitted variable** issue (section 2.1) is the direct thread connecting to [[concepts/econometrics-overview]] (the identification problem, introduced back in Topic 0) — endogeneity is exactly the technical formalization of the question "is correlation causation?" that the entire course revolves around.</span>
 - Kiểm định **Wu-Hausman** ở đây dùng chung logic so sánh "hai ước lượng, một consistent-dưới-mọi-điều-kiện và một chỉ-consistent-dưới-$H_0$" với kiểm định **Hausman test** ở [[concepts/fixed-random-effects-model]] (Topic 6/12, so sánh Fixed Effects vs Random Effects) — cùng tên người (Hausman), cùng ý tưởng nền tảng, khác bối cảnh áp dụng. Xem [[people/hausman]].
 <br><span class="en">The **Wu-Hausman** test here shares the same comparison logic — "two estimators, one consistent-under-all-conditions and one consistent-only-under-$H_0$" — with the **Hausman test** in [[concepts/fixed-random-effects-model]] (Topic 6/12, comparing Fixed Effects vs Random Effects) — same namesake (Hausman), same underlying idea, different application context. See [[people/hausman]].</span>
+
+## 15. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa endogeneity và IV regression trong nghiên cứu kinh tế thực tế (đề cương Lecture 5):
+<br><span class="en">Three recent papers illustrating endogeneity and IV regression in real-world economic research (Lecture 5 syllabus):</span>
+
+- Gonzales, J. T. (2023). Implications of AI innovation on economic growth: A panel data study. *Journal of Economic Structures*, 12(1), 13. https://doi.org/10.1186/s40008-023-00307-w
+- Acerenza, S., Gandelman, N., & Misail, D. (2025). Neighborhood impacts on human capital accumulation of adolescents and young adults in Montevideo. *Regional Science and Urban Economics*, 111, 104085. https://doi.org/10.1016/j.regsciurbeco.2025.104085
+- Chen, Y., & Lyu, Y. (2025). Grandchild care and grandparents' labor supply. *Economic Modelling*, 143, 106936. https://doi.org/10.1016/j.econmod.2024.106936

@@ -1,16 +1,20 @@
 ---
-title: "Panel Data: Fixed Effects and Random Effects Model"
+title: "Lecture 6: Panel Data: Fixed Effects and Random Effects Model"
 type: concept
 status: mature
 tags: [panel-data, fixed-effects, random-effects, hausman-test, gls, fgls]
 sources: ["[[sources/slides-6-fixed-random-effects]]", "[[sources/slides-13-panel-data-variance-structures]]"]
 related: ["[[concepts/linear-regression-model]]", "[[concepts/heteroskedasticity]]", "[[people/hausman]]", "[[concepts/iv-regression-panel-data]]", "[[concepts/dynamic-panel-data-models]]"]
-updated: 2026-08-29
+lecture: 6
+assignment: ["Assignment 5: Panel data models with variance structures"]
+updated: 2026-09-04
 ---
 
 > Revision history: this page merges Topic 6 (`slides-6-iu.pdf`, introductory version) and Topic 12 (`slides-13-iu.pdf`, extended version with fuller variance structures — same company data example but adding GLS/FGLS and the SE types). The structure below follows the extended version.
 
 > **How to read this page**: this is a direct extension of [[concepts/linear-regression-model]] to data with a **time dimension** — all the underlying concepts (PRE/SRE, OLS, assumptions A1–A5, t-test, F-test) still apply, just "detailed further" to fit the panel structure. This page is long because it merges 2 slide decks (basic Topic 6 + extended Topic 12) — so read it in order: (1) what panel data is and why it exists, (2) the expanded assumption set A3a/A3b, A4a/b/c, (3) four estimation methods (Pooled OLS, GLS/FGLS, FE, RE), (4) how to choose the correct SE, (5) the Hausman test for choosing between FE and RE.
+
+**Lecture 6** in the syllabus (CO Topic 6 & 12) — Assignment 5: Panel data models with variance structures.
 
 ## What panel data is — and why it exists
 
@@ -335,3 +339,11 @@ A connecting note: this is **not** an isolated phenomenon — in section 12.1, t
 ## Connections to the rest of the course
 
 This page extends [[concepts/linear-regression-model]] to panel data — the A3a/A3b and A4a/b/c triads here are the "detailed" version of the original A3, A4, stemming directly from the identification question raised in [[concepts/econometrics-overview]] (section 1.3 of this page). [[people/hausman]] appears both here and in [[concepts/endogeneity-iv-regression]] (Wu-Hausman test) — the same logic of comparing two estimators, one always consistent and one only efficient under $H_0$. This is the direct foundation for [[concepts/iv-regression-panel-data]] (when A3a is violated — both FE and RE are powerless, and an instrumental variable is needed) and [[concepts/dynamic-panel-data-models]] (when a lagged $y$ is added to the right-hand side, creating a new form of endogeneity that the within-group estimator cannot handle). The problem of choosing the correct SE type (section 12) is a direct variant of [[concepts/heteroskedasticity]], extended for the two-dimensional (unit × time) structure specific to panel data.
+
+## Real-world application references
+
+Three recent papers illustrating panel data models with variance structures in real-world economic research (Lecture 6 syllabus):
+
+- Yang, Z., Jia, P., Liu, W., & Yin, H. (2017). Car ownership and urban development in Chinese cities: A panel data analysis. *Journal of Transport Geography*, 58, 127-134. https://doi.org/10.1016/j.jtrangeo.2016.11.013
+- González, E. S. M., & Soler-Vaya, F. (2024). Depopulation determinants of small rural municipalities in the Valencia Region (Spain). *Journal of Rural Studies*, 110, 103369. https://doi.org/10.1016/j.jrurstud.2024.103369
+- de Haan, J., Pleninger, R., & Sturm, J. E. (2022). Does financial development reduce the poverty gap? *Social Indicators Research*, 161(1), 1-27. https://doi.org/10.1007/s11205-021-02705-8

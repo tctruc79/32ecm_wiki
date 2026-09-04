@@ -1,14 +1,18 @@
 ---
-title: "Functional Forms"
+title: "Lecture 2: Functional Forms"
 type: concept
 status: mature
 tags: [functional-forms, elasticity, interaction, linear-regression]
 sources: ["[[sources/slides-2-functional-forms]]"]
 related: ["[[concepts/linear-regression-model]]"]
-updated: 2026-08-29
+lecture: 2
+assignment: ["Assignment 1: Linear Regression Model with functional forms"]
+updated: 2026-09-04
 ---
 
 > **How to read this page**: this page directly extends assumption **A1 (Linearity)** from [[concepts/linear-regression-model]] — "linear regression model" means a model that is linear in the **parameters** $\beta$, **not necessarily** linear in the **variables** $X$ or $Y$. If you haven't read section 4 (the five OLS assumptions) of the linear regression page yet, read it first — every technique below (log-log, log-lin, lin-log, quadratic, interaction term) is simply a way of transforming $X$ and/or $Y$ before running the regression, so that the model *remains* linear in $\beta$ (so OLS still applies exactly as-is via the formula $b=(X'X)^{-1}X'y$) while still being able to represent nonlinear economic relationships found in reality.
+
+**Lecture 2** in the syllabus (CO Topic 2) — Assignment 1: Linear Regression Model with functional forms.
 
 ## Why go beyond the linear form?
 
@@ -417,3 +421,11 @@ Two noteworthy connections to later topics in the course:
 
 - - **Interaction terms increase the risk of multicollinearity** between the interaction term and the original variables that compose it (e.g. `schooling` and `schooling:gender` are often fairly highly correlated) — this is why interaction terms tend to have larger-than-expected standard errors, directly related to the topic covered in [[concepts/linear-regression-model]] section A2, and discussed further in the multicollinearity part of the course.
 - - **Choosing the wrong functional form** (e.g. using linear when the true relationship is log-log) is a form of **model misspecification** — it does not directly violate A1 (the model remains linear in $\beta$ regardless of which form is chosen), but it can cause the estimated coefficients to lose their correct economic meaning even though the model still "runs" fine statistically. This is why the course always emphasizes: the choice of functional form must come from **economic theory** about the underlying nature of the relationship between variables, not from picking whichever form gives the highest $R^2$ (see section 8) or whichever form "produces a nice-looking p-value."
+
+## Real-world application references
+
+Three recent papers illustrating how functional forms (log-log, log-lin, quadratic, interaction) are used in real-world economic research (Lecture 2 syllabus):
+
+- Yang, F., & Zhan, J. (2025). Economic impact of cooperative management behavior on citrus production performance. *Finance Research Letters*, 107042. https://doi.org/10.1016/j.frl.2025.107042
+- Xia, H., Li, C., Zhou, D., Zhang, Y., & Xu, J. (2020). Peasant households' land use decision-making analysis using social network analysis: A case of Tantou Village, China. *Journal of Rural Studies*, 80, 452-468. https://doi.org/10.1016/j.jrurstud.2020.07.004
+- Gonzales, J. T. (2023). Implications of AI innovation on economic growth: A panel data study. *Journal of Economic Structures*, 12(1), 13. https://doi.org/10.1186/s40008-023-00307-w

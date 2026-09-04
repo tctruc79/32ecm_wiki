@@ -1,15 +1,20 @@
 ---
-title: "Linear Regression Model"
+title: "Lecture 1: Linear Regression Model"
 type: concept
 status: mature
 tags: [linear-regression, ols, hypothesis-testing, foundations]
 sources: ["[[sources/slides-1-linear-regression-model]]"]
 related: ["[[concepts/econometrics-overview]]", "[[concepts/functional-forms]]", "[[concepts/multicollinearity]]", "[[concepts/heteroskedasticity]]", "[[concepts/endogeneity-iv-regression]]"]
-updated: 2026-08-29
+lecture: 1
+assignment: []
+updated: 2026-09-04
 ---
 
 > **Cách đọc trang này**: đây là trang nền của toàn bộ môn — mọi topic sau (Topic 2–14) đều là một biến thể hoặc một cách vá lỗi của mô hình ở đây. Nếu ôn thi/ôn luận văn mà chỉ có thời gian đọc kỹ một trang, hãy đọc trang này trước. Phần lý luận "tại sao cần ceteris paribus, correlation ≠ causation" được nói kỹ hơn ở [[concepts/econometrics-overview]] — trang này tập trung vào **cơ chế kỹ thuật**: OLS là gì, ước lượng ra sao, và làm sao biết được ước lượng đó có đáng tin không.
 > <br><span class="en">**How to read this page**: this is the foundational page for the entire course — every later topic (Topic 2–14) is a variant of, or a patch for, the model presented here. If you only have time to carefully read one page while reviewing for the exam or thesis, read this one first. The reasoning behind "why we need ceteris paribus, correlation ≠ causation" is discussed in more depth in [[concepts/econometrics-overview]] — this page focuses on the **technical mechanics**: what OLS is, how it is estimated, and how to know whether that estimate is trustworthy.</span>
+
+**Lecture 1** trong đề cương (CO Topic 1) — chưa có assignment riêng.
+<br><span class="en">**Lecture 1** in the syllabus (CO Topic 1) — no dedicated assignment yet.</span>
 
 ## 1. Vì sao cần một "mô hình"? — PRE và SRE - <span class="en">Why do we need a "model"? — PRE and SRE</span>
 
@@ -483,3 +488,12 @@ Khác với $R^2$ thường, $R^2_{adj}$ **có thể giảm** nếu biến mới
 
 Câu hỏi triết lý nền tảng "vì sao cần identify được hiệu ứng nhân quả, không chỉ tính hệ số" được bàn kỹ ở [[concepts/econometrics-overview]] — nên đọc trang đó song song nếu cần ôn lại bức tranh tổng thể trước khi đi sâu vào từng kỹ thuật.
 <br><span class="en">The foundational philosophical question "why do we need to identify the causal effect, not just compute a coefficient" is discussed in depth in [[concepts/econometrics-overview]] — worth reading alongside this page if you need to review the big picture before diving into individual techniques.</span>
+
+## 12. Tài liệu tham khảo ứng dụng thực tế - <span class="en">Real-world application references</span>
+
+Ba bài báo gần đây minh họa cách linear regression model được dùng trong nghiên cứu kinh tế thực tế (đề cương Lecture 1):
+<br><span class="en">Three recent papers illustrating how the linear regression model is used in real-world economic research (Lecture 1 syllabus):</span>
+
+- Peng, Y., Yang, J., Shen, J., & Gou, Q. (2025). Financial outreach, bank deposits, and economic growth. *Journal of Economic Behavior & Organization*, 171, 105036. https://doi.org/10.1016/j.jedc.2025.105036
+- Su, Y., Huang, Q., Shu, Q., Wang, Y., & Qi, X. (2025). Mechanism of land trusteeship promoting farmers' collective action: A study based on social-ecological systems framework. *Journal of Rural Studies*, 116, 103622. https://doi.org/10.1016/j.jrurstud.2025.103622
+- Yokying, P. (2025). Domestic and international migration, landownership, and rice farming in Cambodia. *Journal of Rural Studies*, 114, 103532. https://doi.org/10.1016/j.jrurstud.2024.103532

@@ -1,14 +1,18 @@
 ---
-title: "Multinomial Logit Model (MNL)"
+title: "Lecture 10: Multinomial Logit Model (MNL)"
 type: concept
 status: mature
 tags: [multinomial-logit, discrete-choice, limited-dependent-variable]
 sources: ["[[sources/slides-8-multinomial-logit-model]]"]
 related: ["[[concepts/binary-response-models]]", "[[concepts/ordinal-response-models]]"]
-updated: 2026-08-29
+lecture: 10
+assignment: []
+updated: 2026-09-04
 ---
 
 > **How to read this page**: MNL is the second link in the course's "limited dependent variable models" chain — after [[concepts/binary-response-models]] (Topic 7, 0/1 dependent variable) and before [[concepts/ordinal-response-models]] (Topic 9, ordered dependent variable). The most important thing to grasp **before** reading the formulas: MNL handles the case where the dependent variable is **one choice among several choices with NO natural order** — fundamentally different from both a binary variable and an ordinal one. This entire page reuses exactly one running case study (choice of healthcare provider, VHLSS 2012 data) — understanding this case study is necessary for following the numeric examples in the sections below.
+
+**Lecture 10** in the syllabus (CO Topic 8) — no dedicated assignment yet.
 
 ## Positioning the problem: three model families for discrete dependent variables
 
@@ -328,3 +332,11 @@ According to McFadden's classic guideline (widely cited in discrete-choice textb
 - The **LR test (unrestricted vs. restricted)** logic in section 8 parallels OLS's **F-test** entirely ([[concepts/linear-regression-model]] section 8) — the same model-comparison mindset, differing only in the test statistic because of the different estimation foundation (ML vs. OLS).
 - **McFadden $R^2$** is a form of "pseudo-$R^2$" shared by every model estimated via Maximum Likelihood — this exact same logic (and the exact same "significance ≠ fit magnitude" lesson) will reappear in [[concepts/ordinal-response-models]] and the count data models covered later in the course.
 - The way a **base category** forces every coefficient to be interpreted relatively is the same principle as categorical variables in OLS ([[concepts/linear-regression-model]] section 5) — the only difference is that MNL applies that principle to an *entire system* of $(J-1)$ equations simultaneously, instead of a single equation.
+
+## Real-world application references
+
+Three recent papers illustrating the multinomial logit model in real-world economic research (Lecture 10 syllabus):
+
+- Alem, Y., Beyene, A. D., Köhlin, G., & Mekonnen, A. (2016). Modeling household cooking fuel choice: A panel multinomial logit approach. *Energy Economics*, 59, 129-137. https://doi.org/10.1016/j.eneco.2016.06.025
+- Mostofi, H. (2022). The frequency use and the modal shift to ICT-based mobility services. *Resources, Environment and Sustainability*, 9. https://doi.org/10.1016/j.resenv.2022.100076
+- Fikire, A. H. (2021). Determinants of urban housing choice in Debre Berhan Town, North Shewa zone, Amhara Region, Ethiopia. *Cogent Economics & Finance*, 9(1). https://doi.org/10.1080/23322039.2021.1885196

@@ -424,10 +424,7 @@ $$E[\Delta y_{i,t-1}\cdot\varepsilon_{it}]=0 \qquad\text{và}\qquad E[\Delta y_{
 Xét quá trình $y_{it}=\alpha_i+\rho y_{i,t-1}+v_{it}$, với $E[v_{it}]=0$. Thế lặp lại đến tận $y_{i0}$:
 <br><span class="en">Consider the process $y_{it}=\alpha_i+\rho y_{i,t-1}+v_{it}$, with $E[v_{it}]=0$. Substituting repeatedly back to $y_{i0}$:</span>
 
-$$y_{it}=\alpha_i\left(1+\rho+\rho^2+\cdots+\rho^t\right)+y_{i0}\rho^t+\sum_{k=0}^{t-1}\rho^k v_{i,t-k}$$
-
-> **Lưu ý về nguồn**: số mũ trên cùng của chuỗi hình học $(1+\rho+\cdots+\rho^t)$ bị mờ khi trích xuất từ slide gốc (chồng chữ do OCR) — có thể là $\rho^t$ hoặc $\rho^{t-1}$ tùy góc đọc. Giữ nguyên cách viết đã dùng trong bản wiki trước (khớp với bản trích xuất gốc có sẵn) thay vì tự ý sửa lại theo đại số "chuẩn" (thường $t$ số hạng từ $\rho^0$ đến $\rho^{t-1}$ đi kèm điều kiện đầu $\rho^t y_{i0}$ tách riêng) — bản chất kết luận về ba trường hợp $\rho$ dưới đây không đổi dù chọn cách viết nào.
-> <br><span class="en">**Note on the source**: the top exponent of the geometric series $(1+\rho+\cdots+\rho^t)$ is blurred in the extraction from the original slide (text overlap from OCR) — it could be $\rho^t$ or $\rho^{t-1}$ depending on the reading angle. The notation used in the previous wiki version is kept as-is (matching the available original extraction) rather than being unilaterally "corrected" to "standard" algebra (usually $t$ terms from $\rho^0$ to $\rho^{t-1}$ with the initial condition $\rho^t y_{i0}$ kept separate) — the substance of the conclusions about the three cases of $\rho$ below is unchanged regardless of which notation is chosen.</span>
+$$y_{it}=\alpha_i\left(1+\rho+\rho^2+\cdots+\rho^{t-1}\right)+y_{i0}\rho^t+\sum_{k=0}^{t-1}\rho^k v_{i,t-k}$$
 
 Ba thành phần của biểu thức: $\alpha_i(1+\rho+\rho^2+\cdots)$ là **cân bằng dài hạn** (long-run equilibrium); $y_{i0}\rho^t$ là **điều kiện ban đầu** (initial condition); $\sum_{k=0}^{t-1}\rho^k v_{i,t-k}$ là **cú sốc tích lũy** (accumulated shock).
 <br><span class="en">Three components of the expression: $\alpha_i(1+\rho+\rho^2+\cdots)$ is the **long-run equilibrium**; $y_{i0}\rho^t$ is the **initial condition**; $\sum_{k=0}^{t-1}\rho^k v_{i,t-k}$ is the **accumulated shock**.</span>

@@ -46,8 +46,3 @@ Slide bài giảng đầu tiên (Topic 0 trong Course Outline) của **[[people/
     <br><span class="en">**Course preview** — 3 main parts: (a) the Linear Regression Model and its problems (OLS, multicollinearity, heteroskedasticity, endogeneity); (b) Models for Limited Dependent Variables (logit/probit, multinomial logit, Poisson/NB, ordinal, censored/truncated); (c) Panel data models (FE/RE, panel IV: 2SLS/LIML/GMM, dynamic panel).</span>
 15. **Nền tảng học tập**: econometrics.site — luyện tập, làm assignment, nộp project.
     <br><span class="en">**Course platform**: econometrics.site — practice, assignments, project submission.</span>
-
-## Ghi chú - <span class="en">Note</span>
-
-Toàn bộ nội dung khái niệm của bài này đã được tổng hợp vào `[[concepts/econometrics-overview]]` — trang đó là nơi chứa synthesis đầy đủ (định nghĩa, ví dụ, bảng so sánh). Trang này chỉ giữ vai trò ghi nhận nguồn và mạch trình bày gốc của slide.
-<br><span class="en">All the conceptual content of this deck has been synthesized into `[[concepts/econometrics-overview]]` — that page holds the full synthesis (definitions, examples, comparison tables). This page only records provenance and the original slide's narrative flow.</span>

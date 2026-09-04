@@ -72,8 +72,6 @@ With $J$ categories (e.g. $J=3$: $y\in\{0,1,2\}$ as the slide first illustrates)
 
 (read: $y=0$ if $y^*\le u_1$; $y=1$ if $u_1<y^*\le u_2$; $y=2$ if $y^*> u_2$)
 
-> **A small note on the source**: the slide, on the page that first states the rule (the "MODELLING ORDINAL RESPONSE" page), writes **strict** inequalities ("$y=0$ if $y^*<u_1$"; "$y=2$ if $y^*>u_2$"), but the page immediately after, which derives the probability formulas, uses **"≤"/"≥"** ("$Pr(y=0)=Pr(y^*\le u_1)$"). This is a small notational inconsistency between two adjacent pages of the same slide deck — mathematically it doesn't affect the result (since $y^*$ is continuous, $Pr(y^*=u_1)=0$), but it is noted here rather than silently picking one convention, following this wiki's own principle. This page uses the "≤/>" convention matching the probability-derivation page, since that is the page used for computation in the rest of the slides.
-
 **What cutpoints mean**: they are **threshold parameters** — not an "intercept" in the usual OLS sense, even though R's software output lists them under the name **"Intercepts."** The model estimates $\beta$ **and** the cutpoints $u_j$ **simultaneously** by Maximum Likelihood (section 5) — both are unknown parameters, neither is given in advance.
 
 **An important structural detail, easy to overlook**: the equation $y^*=\beta X+\varepsilon$ **has no separate intercept $\beta_0$** the way the LRM's PRE does. Reason: with only one cutpoint (the binary case, $J=2$), having both a free cutpoint *and* a free intercept would make the model **unidentified** (identification) — the two parameters "compete" for the role of shifting the number line in the same direction. The ordinal model resolves this by dropping $\beta_0$ entirely from $X\beta$, letting the cutpoints $u_j$ take over that "positioning" role.
@@ -145,8 +143,6 @@ The same logic that distinguishes binary Logit/Probit ([[concepts/binary-respons
 | `homeown` |1 if homeowner, 0 otherwise |
 | `gender` |1 if male, 0 otherwise |
 | `marriage` |original text-valued variable: "single" / "inrelationship" / "married" → generates 2 dummies `inrelationship`, `married` (base group is "single") |
-
-> **Note on the source**: the slide titles the dependent-variable distribution barplot page **"DEPENDENT VARIABLE: BLOOD PRESSURE,"** even though that page's content (and the rest of the deck) only uses the `eatout` variable — there is no "blood pressure" variable in the data. This is most likely a copy-paste error from a different slide/deck (this note was already left in the wiki's original ingest log) — the note is kept as-is, the title is not silently corrected.
 
 **Distribution of `eatout`** (`barplot(table(data$eatout))`): No ≈ 280 observations (largest), 1–2/month ≈ 160, 3–5/month ≈ 235, 5–10/month ≈ 220, 11+/month ≈ 50 (smallest) — a skewed distribution, concentrated heavily on "No" and the middle levels, thinning out at the highest level.
 

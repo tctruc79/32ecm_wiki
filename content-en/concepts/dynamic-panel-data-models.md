@@ -328,9 +328,7 @@ The first condition is identical to the "no serial correlation at level" conditi
 
 Consider the process $y_{it}=\alpha_i+\rho y_{i,t-1}+v_{it}$, with $E[v_{it}]=0$. Substituting repeatedly back to $y_{i0}$:
 
-$$y_{it}=\alpha_i\left(1+\rho+\rho^2+\cdots+\rho^t\right)+y_{i0}\rho^t+\sum_{k=0}^{t-1}\rho^k v_{i,t-k}$$
-
-> **Note on the source**: the top exponent of the geometric series $(1+\rho+\cdots+\rho^t)$ is blurred in the extraction from the original slide (text overlap from OCR) — it could be $\rho^t$ or $\rho^{t-1}$ depending on the reading angle. The notation used in the previous wiki version is kept as-is (matching the available original extraction) rather than being unilaterally "corrected" to "standard" algebra (usually $t$ terms from $\rho^0$ to $\rho^{t-1}$ with the initial condition $\rho^t y_{i0}$ kept separate) — the substance of the conclusions about the three cases of $\rho$ below is unchanged regardless of which notation is chosen.
+$$y_{it}=\alpha_i\left(1+\rho+\rho^2+\cdots+\rho^{t-1}\right)+y_{i0}\rho^t+\sum_{k=0}^{t-1}\rho^k v_{i,t-k}$$
 
 Three components of the expression: $\alpha_i(1+\rho+\rho^2+\cdots)$ is the **long-run equilibrium**; $y_{i0}\rho^t$ is the **initial condition**; $\sum_{k=0}^{t-1}\rho^k v_{i,t-k}$ is the **accumulated shock**.
 

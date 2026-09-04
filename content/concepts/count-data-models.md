@@ -130,8 +130,8 @@ Giống hệt logic của Logit/Probit: marginal effect **không phải là hằ
 | `male` | Giới tính, 1 = nam, 0 = nữ<br><span class="en">Gender, 1 = male, 0 = female</span> |
 | `risk` (ordinal) | Nhận thức về rủi ro nhiễm COVID-19: "Very unlikely", "Unlikely", "Neither", "Likely", "Very likely" — chuyển thành 4 dummy (`unlikely`, `neither`, `likely`, `verylikely`), nhóm nền (base) là "Very unlikely"<br><span class="en">Perceived risk of COVID-19 infection: "Very unlikely", "Unlikely", "Neither", "Likely", "Very likely" — converted into 4 dummies (`unlikely`, `neither`, `likely`, `verylikely`), with base group "Very unlikely"</span> |
 
-> **Ghi chú liên kết nguồn**: theo `log.md` của wiki, ví dụ ở Topic 10 dùng lại **chính xác** bộ khảo sát vaccine của Topic 7 — chỉ đổi biến phụ thuộc từ `dself` (nhị phân, quyết định cá nhân có tiêm hay không) sang `dhh` (đếm, số liều mua cho cả hộ). Đây là điểm liên kết rõ ràng với [[concepts/binary-response-models]] — cùng một khảo sát, hai câu hỏi nghiên cứu khác nhau đòi hỏi hai họ mô hình khác nhau.
-> <br><span class="en">**Source-linkage note**: according to the wiki's `log.md`, the Topic 10 example reuses **exactly** the Topic 7 vaccine survey — only swapping the dependent variable from `dself` (binary, individual decision to get vaccinated or not) to `dhh` (count, number of doses purchased for the whole household). This is a clear link to [[concepts/binary-response-models]] — the same survey, two different research questions requiring two different model families.</span>
+Ví dụ ở đây dùng lại **chính xác** bộ khảo sát vaccine của [[concepts/binary-response-models]] — chỉ đổi biến phụ thuộc từ `dself` (nhị phân, quyết định cá nhân có tiêm hay không) sang `dhh` (đếm, số liều mua cho cả hộ): cùng một khảo sát, hai câu hỏi nghiên cứu khác nhau đòi hỏi hai họ mô hình khác nhau.
+<br><span class="en">The example here reuses **exactly** the same vaccine survey as [[concepts/binary-response-models]] — only swapping the dependent variable from `dself` (binary, individual decision to get vaccinated or not) to `dhh` (count, number of doses purchased for the whole household): the same survey, two different research questions requiring two different model families.</span>
 
 ### 4.1 Thống kê mô tả — và một tín hiệu "cảnh báo sớm" - <span class="en">Descriptive statistics — and an "early warning" signal</span>
 
@@ -371,9 +371,6 @@ nbpred2 - nbpred1
 Con số $0.0001038968$ này **đúng bằng** $\hat\beta_{hhincomeUS}=0.0001039$ (làm tròn) — điều này là hiển nhiên về mặt đại số: `type="link"` trả về $X\beta$ (thang log của $\lambda$), và vì mô hình tuyến tính theo $X$ trên thang log, chênh lệch $X\beta$ khi $X_j$ tăng đúng 1 đơn vị luôn **chính xác bằng** $\hat\beta_j$ — không cần chạy `predict()` để biết trước con số này. Tương tự, ví dụ đổi `risk` từ "likely" sang "very likely" cho hiệu số $\approx0.3374$, xấp xỉ đúng $\hat\beta_{verylikely}-\hat\beta_{likely}=0.4376-0.1003=0.3373$.
 <br><span class="en">This figure $0.0001038968$ is **exactly equal to** $\hat\beta_{hhincomeUS}=0.0001039$ (rounded) — this is algebraically obvious: `type="link"` returns $X\beta$ (the log scale of $\lambda$), and because the model is linear in $X$ on the log scale, the difference in $X\beta$ when $X_j$ increases by exactly 1 unit is always **exactly equal to** $\hat\beta_j$ — there is no need to run `predict()` to know this number in advance. Similarly, the example of changing `risk` from "likely" to "very likely" gives a difference $\approx0.3374$, closely matching $\hat\beta_{verylikely}-\hat\beta_{likely}=0.4376-0.1003=0.3373$.</span>
 
-> **Lưu ý về nguồn**: slide gắn nhãn biểu đồ dự đoán ở phần "Prediction after negative binomial" (trục $y$: "Predicted number of vaccines purchased") nhưng code dùng `predict(negbin, type="link", ...)` — hàm này trả về **log của số đếm kỳ vọng** ($X\beta$), **không phải** bản thân số đếm kỳ vọng $\lambda=e^{X\beta}$. Để có dự đoán đúng đơn vị "số vaccine", cần `type="response"`. Đây là một điểm dễ gây hiểu lầm trong slide gốc — ghi chú lại ở đây theo nguyên tắc của wiki, không âm thầm sửa nhãn trục.
-> <br><span class="en">**Note on the source**: the slide labels the prediction chart under "Prediction after negative binomial" (y-axis: "Predicted number of vaccines purchased") but the code uses `predict(negbin, type="link", ...)` — this function returns **the log of the expected count** ($X\beta$), **not** the expected count itself $\lambda=e^{X\beta}$. To get a prediction in the correct "number of vaccines" unit, `type="response"` is needed. This is a potentially misleading point in the original slide — noted here per the wiki's principle of not silently correcting the axis label.</span>
-
 ## 10. Zero-Inflated Negative Binomial (ZINB) — bài toán "excess zeros" - <span class="en">Zero-Inflated Negative Binomial (ZINB) — the "excess zeros" problem</span>
 
 ### 10.1 Trực giác: khi nào có "quá nhiều số 0"? - <span class="en">Intuition: when are there "too many zeros"?</span>
@@ -409,9 +406,6 @@ trong đó:
 - $\lambda_i=e^{\beta X}$: kỳ vọng đến từ **quá trình đếm** (count process — mô hình NB).
 <br><span class="en">$\lambda_i=e^{\beta X}$: the expectation coming from the **count process** (count process — the NB model).</span>
 
-> **Ghi chú về nguồn**: công thức trên được chép nguyên văn từ slide. Ký hiệu $\{y_i=0\}$ nhiều khả năng là hàm chỉ báo (indicator function, bằng 1 nếu $y_i=0$, ngược lại bằng 0) theo quy ước chuẩn của ZINB trong tài liệu kinh tế lượng (Pr(y=0) = $\pi_i + (1-\pi_i)\times Pr_{NB}(y=0)$; $E(y_i)=(1-\pi_i)\lambda_i$) — nhưng slide không định nghĩa tường minh $\{y_i=0\}$ là gì, nên trình bày lại đúng nguyên văn thay vì diễn giải lại công thức theo cách khác.
-> <br><span class="en">**Note on the source**: the formula above is copied verbatim from the slide. The notation $\{y_i=0\}$ is most likely an indicator function (equal to 1 if $y_i=0$, 0 otherwise) per the standard ZINB convention in econometrics literature (Pr(y=0) = $\pi_i + (1-\pi_i)\times Pr_{NB}(y=0)$; $E(y_i)=(1-\pi_i)\lambda_i$) — but the slide does not explicitly define what $\{y_i=0\}$ is, so it is presented here verbatim rather than reinterpreted into a different form.</span>
-
 **Điểm mấu chốt**: trong ZINB, xác suất quan sát $y=0$ đến từ **hai nguồn** cộng lại:
 <br><span class="en">**Key point**: in ZINB, the probability of observing $y=0$ comes from **two sources** added together:</span>
 
@@ -435,9 +429,6 @@ library(pscl)
 zinb = zeroinfl(dhh ~ efficacy80+duration3+priceUS+pbenefit+hhincomeUS+hhsize+age+male
                  | hhsize+age+male, data=data, dist="negbin")
 ```
-
-> **Ghi chú về nguồn**: phần đếm (count part) của ZINB ở slide **bỏ bộ 4 dummy `risk`** — vốn có mặt trong cả Poisson và NB ở các mục 5, 8 — và phần zero-inflation chỉ dùng 3 biến (`hhsize`, `age`, `male`). Đây có vẻ là lựa chọn đơn giản hóa có chủ đích của giảng viên khi minh họa cú pháp `zeroinfl()`, không phải lỗi, nhưng cần lưu ý: vì tập biến độc lập của ZINB **khác** tập biến của NB ở mục 8, hai mô hình **không so sánh log-likelihood/AIC trực tiếp "apples-to-apples"** được — muốn so sánh NB và ZINB đúng nghĩa cần giữ nguyên cùng một tập biến ở cả hai phần.
-> <br><span class="en">**Note on the source**: the count part of ZINB in the slide **drops the 4 `risk` dummies** — which are present in both Poisson and NB in sections 5 and 8 — and the zero-inflation part uses only 3 variables (`hhsize`, `age`, `male`). This appears to be a deliberate simplification by the instructor for illustrating `zeroinfl()` syntax, not an error, but note: because ZINB's independent variable set **differs** from NB's in section 8, the two models **cannot be compared directly "apples-to-apples"** on log-likelihood/AIC — a meaningful comparison between NB and ZINB requires keeping the same variable set in both parts.</span>
 
 **Count model coefficients (NB với log link)**:
 <br><span class="en">**Count model coefficients (NB with log link)**:</span>

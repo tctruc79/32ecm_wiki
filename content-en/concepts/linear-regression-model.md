@@ -156,8 +156,6 @@ And a second, **independent** set of rules from the variable type above — the 
 - ❌ (proof claim): "The data **prove** that being coastal increases damage by exactly 2.24 thousand USD." — wrong because no test can "prove" anything absolutely, only provide "evidence."
 - ❌ (causal claim for a non-causal variable): "Being coastal **increases** damage." — wrong because `ccoastal` is a non-causal variable; even though the coefficient is positive and statistically significant, one may only say it "is associated with" damage.
 
-> **Note on the source**: the original slide, in this exact "wrong causal claim" example, states the figure as "increases by 2.15 thousand USD" — inconsistent with the 2.24 figure used everywhere else in the same slide. This is most likely a typo/discrepancy between slide versions (not a meaningfully different number) — noted here rather than silently corrected, following this wiki's own principle.
-
 ## Uncertainty of the estimate: the VCV matrix and Standard Error
 
 Before hypothesis testing, we need an intermediate question: OLS gives us a number $b$ (a point estimate), but if we drew a **different** sample of data (same population, different observations), $b$ would come out **different**. So how do we measure this degree of "fluctuation"?
@@ -269,8 +267,6 @@ $$F = \frac{(RSS_r - RSS_u)/q}{RSS_u/(N-k)} \sim F_{q,\,N-k}$$
 - $q$: the number of coefficients being tested jointly (in the example above, $q=2$).
 
 **Intuition**: if forcing the coefficients to 0 makes RSS increase **a lot** ($RSS_r$ much larger than $RSS_u$), it means those variables really do contribute to explaining $y$ → evidence against $H_0$ → a large F. If forcing them to 0 leaves RSS nearly unchanged, those variables "aren't doing much" → a small F, $H_0$ cannot be rejected.
-
-> Note on the source: the original slide labels both $RSS_r$ **and** $RSS_u$ as "RSS of the unrestricted model" — this is clearly a typo in the original material, inferred from standard notation ($r$=restricted, $u$=unrestricted) and from the F formula itself. Noted here rather than silently corrected, following this wiki's principle.
 
 ### General form — not just testing "= 0"
 

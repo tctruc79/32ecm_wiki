@@ -178,8 +178,6 @@ $R^2=0.8548$ (>0.8, the threshold stated by the slide) and an extremely signific
 
 The slide only gives the VIF formula for the 2-regressor case ($VIF=1/(1-r_{12}^2)$), but the `car::vif()` results table in section 9.2 (5 regressors) shows the slide applies the more general formula: $VIF_j=1/(1-R_j^2)$, where $R_j^2$ is precisely the $R^2$ of the auxiliary regression for variable $X_j$ — this is how the `car::vif()` function in R actually computes it, and matches the "auxiliary regression" logic the slide presented in section 8.2.
 
-> **Note on the source**: the specific VIF number below is **not printed directly by the slide** for the original (5-variable) model — it is derived here by applying the slide's own formula $VIF_j=1/(1-R_j^2)$ to the $R^2=0.8548$ that the slide computed in the auxiliary regression in section 8.2. Noted explicitly to distinguish it from the VIF numbers the slide prints directly (section 9.2).
-
 $$VIF_{\text{age\_wife}}=\frac{1}{1-0.8548}=\frac{1}{0.1452}\approx 6.89$$
 
 With the $VIF>5$ threshold, the figure $\approx6.89$ confirms serious multicollinearity involving `age_wife` (and correspondingly, `age_husband`) — but it does not exceed the $10$ threshold if that alternative threshold is used (see exam trap #7).

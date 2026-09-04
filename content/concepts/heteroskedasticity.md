@@ -227,13 +227,6 @@ $$BP = 167.46, \quad df=5, \quad \text{p-value} < 2.2\text{e-}16$$
 p-value cực nhỏ → **bác bỏ mạnh** $H_0$ (homoskedastic) → có bằng chứng rất rõ ràng rằng mô hình chi tiêu hộ gia đình bị heteroskedasticity — đúng như gợi ý từ đồ thị "loa kèn" ở mục 5.
 <br><span class="en">An extremely small p-value → **strongly reject** $H_0$ (homoskedastic) → very clear evidence that the household expenditure model has heteroskedasticity — exactly as suggested by the "megaphone" plot in section 5.</span>
 
-> **Ghi chú về nguồn — điểm cần lưu ý khi đọc slide gốc**: slide trình bày BP test ở mục 7.2 là "**an F-test**" (kiểm định $H_0:\alpha_1=\cdots=\alpha_k=0$ trên hồi quy phụ), nhưng ví dụ minh họa trong R lại dùng `lmtest::bptest(model)`, và chính output của R tự ghi rõ đây là "**studentized Breusch-Pagan test**" với thống kê $BP=167.46$ theo phân phối **Chi-square** ($df=5$), **không phải** phân phối F.
-> <br><span class="en">**Source note — a point to watch when reading the original slide**: the slide presents the BP test in section 7.2 as "**an F-test**" (testing $H_0:\alpha_1=\cdots=\alpha_k=0$ on the auxiliary regression), but the R example instead uses `lmtest::bptest(model)`, and R's own output explicitly labels it the "**studentized Breusch-Pagan test**" with statistic $BP=167.46$ following a **Chi-square** distribution ($df=5$), **not** an F distribution.</span>
-> Slide sau đó có một khối code riêng, ghi chú "`# F-test version of the BP test`" — hồi quy thủ công $e^2$ lên các biến rồi dùng `car::linearHypothesis()` để lấy đúng phiên bản F — nhưng **không có kết quả số nào được hiển thị** cho khối code này trong slide (chỉ có code, không có output).
-> <br><span class="en">The slide then has a separate code block, commented "`# F-test version of the BP test`" — manually regressing $e^2$ on the variables and then using `car::linearHypothesis()` to obtain the actual F version — but **no numerical result is shown** for this code block in the slide (only code, no output).</span>
-> Vậy có hai phiên bản BP test cùng tồn tại trong slide (một chi-square qua `bptest()`, một F qua hồi quy phụ thủ công + `linearHypothesis()`) nhưng chỉ phiên bản chi-square có kết quả số minh họa — ghi chú lại đây thay vì tự suy diễn con số cho phiên bản F, theo đúng nguyên tắc của wiki này.
-> <br><span class="en">So two versions of the BP test coexist in the slide (a chi-square version via `bptest()`, and an F version via the manual auxiliary regression + `linearHypothesis()`), but only the chi-square version has an illustrative numerical result — this is noted here rather than inventing a number for the F version, in keeping with this wiki's principles.</span>
-
 ## 8. White's test - <span class="en">White's test</span>
 
 ### 8.1 Trực giác và điểm khác biệt với BP test - <span class="en">Intuition and the difference from the BP test</span>
@@ -259,11 +252,6 @@ Nhưng nếu mối quan hệ giữa phương sai sai số và $X$ phức tạp h
 
 **Bác bỏ $H_0$** → có bằng chứng heteroskedasticity; **không bác bỏ** → không có bằng chứng.
 <br><span class="en">**Reject $H_0$** → evidence of heteroskedasticity; **fail to reject** → no evidence.</span>
-
-> **Ghi chú về nguồn**: slide chỉ trình bày White's test ở dạng lý thuyết/công thức (không có ví dụ số minh họa bằng dữ liệu chi tiêu hộ gia đình như đã làm với BP test) — không có bảng kết quả `nR²`, `df`, hay p-value cụ thể nào được đưa ra trong deck này cho White's test.
-> <br><span class="en">**Source note**: the slide presents White's test only in theoretical/formula form (no numerical example using the household expenditure data as was done for the BP test) — no results table with `nR²`, `df`, or a specific p-value is given in this deck for White's test.</span>
-> Vì vậy phần này chỉ trình bày được công thức và trực giác, không có case study số đi kèm — không tự bịa thêm con số.
-> <br><span class="en">Therefore this section can only present the formula and intuition, with no accompanying numerical case study — no numbers are invented here.</span>
 
 **Tóm tắt khác biệt BP vs. White**:
 <br><span class="en">**Summary of the BP vs. White difference**:</span>

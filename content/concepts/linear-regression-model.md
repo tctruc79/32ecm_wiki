@@ -207,9 +207,6 @@ Và một lớp quy tắc thứ hai, **độc lập** với loại biến ở tr
 - ❌ (causal claim cho biến non-causal): "Ven biển **làm tăng** (increases) thiệt hại." — sai vì `ccoastal` là biến non-causal, dù hệ số dương và có ý nghĩa thống kê, chỉ được nói "có liên quan đến" (associated with).
 <br><span class="en">❌ (causal claim for a non-causal variable): "Being coastal **increases** damage." — wrong because `ccoastal` is a non-causal variable; even though the coefficient is positive and statistically significant, one may only say it "is associated with" damage.</span>
 
-> **Ghi chú về nguồn**: slide gốc, ở đúng ví dụ "wrong causal claim" này, lại ghi số liệu là "tăng 2.15 nghìn USD" — lệch với con số 2.24 dùng ở mọi chỗ khác trong cùng slide. Đây nhiều khả năng là lỗi đánh máy/sai lệch giữa các phiên bản slide (không phải một con số mới có ý nghĩa) — ghi chú lại đây thay vì âm thầm sửa, theo đúng nguyên tắc của wiki này.
-> <br><span class="en">**Note on the source**: the original slide, in this exact "wrong causal claim" example, states the figure as "increases by 2.15 thousand USD" — inconsistent with the 2.24 figure used everywhere else in the same slide. This is most likely a typo/discrepancy between slide versions (not a meaningfully different number) — noted here rather than silently corrected, following this wiki's own principle.</span>
-
 ## 6. Độ bất định của ước lượng: VCV matrix và Standard Error - <span class="en">Uncertainty of the estimate: the VCV matrix and Standard Error</span>
 
 Trước khi kiểm định giả thuyết, cần một câu hỏi trung gian: OLS cho ta một con số $b$ (point estimate — ước lượng điểm), nhưng nếu ta rút một mẫu dữ liệu **khác** (cùng dân số, khác quan sát), $b$ sẽ ra một con số **khác**. Vậy làm sao đo được mức độ "dao động" này?
@@ -368,9 +365,6 @@ $$F = \frac{(RSS_r - RSS_u)/q}{RSS_u/(N-k)} \sim F_{q,\,N-k}$$
 
 **Trực giác**: nếu ép các hệ số về 0 mà RSS tăng lên **nhiều** ($RSS_r$ lớn hơn hẳn $RSS_u$), nghĩa là các biến đó thực sự đóng góp vào việc giải thích $y$ → bằng chứng chống lại $H_0$ → F lớn. Nếu ép về 0 mà RSS gần như không đổi, các biến đó "không làm gì nhiều" → F nhỏ, không bác bỏ được $H_0$.
 <br><span class="en">**Intuition**: if forcing the coefficients to 0 makes RSS increase **a lot** ($RSS_r$ much larger than $RSS_u$), it means those variables really do contribute to explaining $y$ → evidence against $H_0$ → a large F. If forcing them to 0 leaves RSS nearly unchanged, those variables "aren't doing much" → a small F, $H_0$ cannot be rejected.</span>
-
-> Lưu ý về nguồn: slide gốc ghi cả $RSS_r$ **và** $RSS_u$ đều là "RSS of the unrestricted model" — đây rõ ràng là lỗi đánh máy trong tài liệu gốc, suy ra từ ký hiệu chuẩn ($r$=restricted, $u$=unrestricted) và từ chính công thức F. Ghi chú lại thay vì lặng lẽ sửa, theo nguyên tắc của wiki này.
-> <br><span class="en">Note on the source: the original slide labels both $RSS_r$ **and** $RSS_u$ as "RSS of the unrestricted model" — this is clearly a typo in the original material, inferred from standard notation ($r$=restricted, $u$=unrestricted) and from the F formula itself. Noted here rather than silently corrected, following this wiki's principle.</span>
 
 ### 8.3 Dạng tổng quát — không chỉ kiểm định "= 0" - <span class="en">General form — not just testing "= 0"</span>
 

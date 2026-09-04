@@ -162,8 +162,6 @@ The slide only presents the code for all 5 types of SE (homoskedastic, individua
 
 Both validly remove $\alpha_i$ and both use the same 5 types of SE (conventional/robust/clustered/two-way clustered/Driscoll-Kraay) with application conditions identical to [[concepts/fixed-random-effects-model]] (two-way clustered and DK need $T$ large enough to be reliable). But **the two estimators do not coincide numerically** unless $T=2$ — evidence right in the example above: the `training` coefficient is **0.0168** (FD-IV) versus **0.0212** (FE-IV), not the same despite the same data, same instruments.
 
-> **Note on the source**: the slide **does not give an explicit decision rule** between FD-IV and FE-IV beyond presenting both as parallel options (differing only in SE robustness notes, which are identical across the two models). The "which to choose" reasoning below is **general panel-data econometrics background knowledge** (not excerpted from this slide) — included because it's useful for choosing an estimator in practice/thesis work, but it must be clearly distinguished as content not directly confirmed by the slide.
-
 Classic criterion: the relative efficiency between FD and FE depends on the **serial correlation structure** of $\varepsilon_{it}$:
 
 - If $\varepsilon_{it}$ **has no serial correlation** (close to white noise, like the ideal A4b assumption) → **FE (within) is more efficient**. Intuitive reason: differencing ($\Delta\varepsilon_{it}=\varepsilon_{it}-\varepsilon_{i,t-1}$) of an originally uncorrelated series **artificially creates** negative first-order (MA(1)) correlation — making FD less efficient than necessary.

@@ -128,8 +128,6 @@ $\beta_{\ln schooling}=0.361$ (significant at the 5% level):
 - **Approximate**: a 1% increase in years of schooling → wage increases by approximately **0.361%**.
 - **Exact**: $b=(1.01^{0.361}-1)\times100=0.360\%$ — very close to the approximate figure (as expected from the rule: the smaller $\beta_1$ is, the closer the approximate and exact values are).
 
-> **Source note (internal inconsistency in the slide)**: on the exact slide presenting the "exact" calculation for log-log, the formula shown uses the exponent $\beta_1=0.297$ — i.e. $b=(1.01^{0.297}-1)\times100=0.296$ — which **does not match** the coefficient $\beta_{\ln schooling}=0.361$ that the same slide just stated on the "approximate" line right above it (and which is also the actual figure in the log-log regression table above: 0.36100). Even stranger: the verbal conclusion right after the calculation states "the result is 0.360 percent" — which matches exactly if $\beta_1=0.361$ (not 0.297) is used in the formula. This "0.297" figure is most likely a leftover from an older regression/dataset version that the slide forgot to update when it switched to the new data/coefficients (0.361), while the verbal conclusion was updated correctly. This wiki page notes the inconsistency rather than silently correcting the source, and **uses $\beta_1=0.361$ (matching the actual regression table) to recompute the "exact" calculation above with the correct method**, instead of repeating the erroneous 0.297 figure.
-
 ### Log-lin (semi-log, semi-elasticity)
 
 **When to use it**: when $X$ is still measured in its natural units (years of schooling, age, a dummy variable...) but $Y$ responds in **percentage** terms — this is the most common functional form in wage studies (the original Mincer wage equation is exactly log-lin in `schooling`), because "return to education" is traditionally measured in %/year of schooling, not in monetary units/year of schooling.
@@ -178,8 +176,6 @@ Example (from the slide, illustrated separately outside the full regression tabl
 - **Exact**: $b=(e^{0.02}-1)\times100=2.02\%$.
 
 (This dummy example from the slide is **internally consistent** — no numerical contradiction like the ones in sections 3.2/3.3.a — and is used here as a clean reference point.)
-
-> **Source note (similar inconsistency to section 3.2, occurring in exactly the `schooling` continuous-regressor example for log-lin)**: the slide writes "$b=(e^{0.297}-1)\times100=0.027$: the result is 2.700 percent" — the exponent $0.297$ here **also does not match** the $\beta_{schooling}=0.02667$ just stated (and matches the actual log-lin regression table above: 0.026674), and it is also missing the ×100 step when displaying the intermediate figure ($0.027$ instead of $2.7$). But the final conclusion "2.700 percent" once again matches exactly if $\beta_1=0.02667$ (not 0.297) is used. The same "0.297" figure appearing repeatedly in both places (log-log and log-lin) further supports the possibility that this is leftover data from an earlier version of the slide/dataset, rather than two independent random errors. Noted here, without silently correcting the source.
 
 ### Lin-log
 

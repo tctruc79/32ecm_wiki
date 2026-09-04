@@ -126,9 +126,6 @@ Confusing association with causation is not merely an academic error — it lead
 |Ice cream sales rise at the same time as drowning accidents rise |"Eating ice cream increases drowning risk" |Restrict/heavily tax ice cream sales to reduce drowning accidents |Both very likely rise because of the same third cause: hot weather leads people to both buy more ice cream and swim/go to the beach more (raising drowning risk) — ice cream does not cause drowning |
 |Bigger fires have more firefighters and more damage |"Dispatching more firefighters increases damage" |Cut the firefighting force to reduce fire damage |The size of the fire (the confounder) causes both; cutting firefighters would actually make damage **worse** |
 |High-crime areas have more police |"Police increase crime" |Withdraw police from the area to reduce crime |The direction of causality is reversed: police are dispatched *because* crime is high, they are not the cause of crime |
-
-> **Note on the source**: the original slide only lists the "ice cream sales – drowning accidents" pair as an example of statistical association (section 4), and **does not** explain the specific mechanism behind it.
-> The interpretation "hot weather is the confounder" in the first row of the table above is inferred by applying the exact same confounding logic this slide uses to explain the firefighter example (a third factor causing both observed variables) — it is not verbatim from the slide.
 > This is noted explicitly here so as not to conflate original slide content with an inference applying similar logic.
 
 ## 6. Ceteris paribus — "other factors held constant"

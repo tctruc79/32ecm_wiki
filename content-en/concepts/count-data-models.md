@@ -102,7 +102,7 @@ Exactly the same logic as Logit/Probit: the marginal effect **is not the constan
 | `male` |Gender, 1 = male, 0 = female |
 | `risk` (ordinal) |Perceived risk of COVID-19 infection: "Very unlikely", "Unlikely", "Neither", "Likely", "Very likely" — converted into 4 dummies (`unlikely`, `neither`, `likely`, `verylikely`), with base group "Very unlikely" |
 
-> **Source-linkage note**: according to the wiki's `log.md`, the Topic 10 example reuses **exactly** the Topic 7 vaccine survey — only swapping the dependent variable from `dself` (binary, individual decision to get vaccinated or not) to `dhh` (count, number of doses purchased for the whole household). This is a clear link to [[concepts/binary-response-models]] — the same survey, two different research questions requiring two different model families.
+The example here reuses **exactly** the same vaccine survey as [[concepts/binary-response-models]] — only swapping the dependent variable from `dself` (binary, individual decision to get vaccinated or not) to `dhh` (count, number of doses purchased for the whole household): the same survey, two different research questions requiring two different model families.
 
 ### Descriptive statistics — and an "early warning" signal
 
@@ -307,8 +307,6 @@ nbpred2 - nbpred1
 
 This figure $0.0001038968$ is **exactly equal to** $\hat\beta_{hhincomeUS}=0.0001039$ (rounded) — this is algebraically obvious: `type="link"` returns $X\beta$ (the log scale of $\lambda$), and because the model is linear in $X$ on the log scale, the difference in $X\beta$ when $X_j$ increases by exactly 1 unit is always **exactly equal to** $\hat\beta_j$ — there is no need to run `predict()` to know this number in advance. Similarly, the example of changing `risk` from "likely" to "very likely" gives a difference $\approx0.3374$, closely matching $\hat\beta_{verylikely}-\hat\beta_{likely}=0.4376-0.1003=0.3373$.
 
-> **Note on the source**: the slide labels the prediction chart under "Prediction after negative binomial" (y-axis: "Predicted number of vaccines purchased") but the code uses `predict(negbin, type="link", ...)` — this function returns **the log of the expected count** ($X\beta$), **not** the expected count itself $\lambda=e^{X\beta}$. To get a prediction in the correct "number of vaccines" unit, `type="response"` is needed. This is a potentially misleading point in the original slide — noted here per the wiki's principle of not silently correcting the axis label.
-
 ## Zero-Inflated Negative Binomial (ZINB) — the "excess zeros" problem
 
 ### Intuition: when are there "too many zeros"?
@@ -335,8 +333,6 @@ where:
 - $\pi_i$: the probability that $y_i$ is a "structural zero", modeled using **logit**: $\pi_i=\dfrac{1}{1+e^{-\gamma Z}}$.
 - $\lambda_i=e^{\beta X}$: the expectation coming from the **count process** (count process — the NB model).
 
-> **Note on the source**: the formula above is copied verbatim from the slide. The notation $\{y_i=0\}$ is most likely an indicator function (equal to 1 if $y_i=0$, 0 otherwise) per the standard ZINB convention in econometrics literature (Pr(y=0) = $\pi_i + (1-\pi_i)\times Pr_{NB}(y=0)$; $E(y_i)=(1-\pi_i)\lambda_i$) — but the slide does not explicitly define what $\{y_i=0\}$ is, so it is presented here verbatim rather than reinterpreted into a different form.
-
 **Key point**: in ZINB, the probability of observing $y=0$ comes from **two sources** added together:
 
 1. The "always zero" group — probability $\pi_i$.
@@ -355,8 +351,6 @@ library(pscl)
 zinb = zeroinfl(dhh ~ efficacy80+duration3+priceUS+pbenefit+hhincomeUS+hhsize+age+male
                  | hhsize+age+male, data=data, dist="negbin")
 ```
-
-> **Note on the source**: the count part of ZINB in the slide **drops the 4 `risk` dummies** — which are present in both Poisson and NB in sections 5 and 8 — and the zero-inflation part uses only 3 variables (`hhsize`, `age`, `male`). This appears to be a deliberate simplification by the instructor for illustrating `zeroinfl()` syntax, not an error, but note: because ZINB's independent variable set **differs** from NB's in section 8, the two models **cannot be compared directly "apples-to-apples"** on log-likelihood/AIC — a meaningful comparison between NB and ZINB requires keeping the same variable set in both parts.
 
 **Count model coefficients (NB with log link)**:
 

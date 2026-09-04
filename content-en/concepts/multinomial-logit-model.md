@@ -54,7 +54,7 @@ This is the dataset Prof. Thụy uses throughout the Topic 8 slides — understa
 
 Total $N = 3{,}475$ observations. **Public hospital dominates overwhelmingly** — 2,320/3,475 ≈ 66.8% of the sample — an important detail to remember since it explains several phenomena in the prediction and McFadden $R^2$ sections below.
 
-> **Note on the unit of analysis**: the data-preview table in the original slide has columns `id`, `case`, `choice`, `income`, `female`… The same `id` can appear across several different `case` rows with different `choice` values (e.g. `id=1` has `case=1` choosing Public hospital and `case=2` choosing Lang y) — showing that the unit of analysis is actually **each choice occasion** (each time healthcare is needed), not one fixed choice per individual. Some other rows (`id=3`, `case=1,2,3`) have a blank `choice` column in the original slide screenshot — it's unclear whether this is genuinely missing data or just a cropped preview image; noted here without further speculation.
+> **Unit of analysis**: the same `id` can appear across several different `case` rows with different `choice` values (e.g. `id=1` has `case=1` choosing Public hospital and `case=2` choosing Lang y) — showing that the unit of analysis is actually **each choice occasion** (each time healthcare is needed), not one fixed choice per individual.
 
 **Independent variables** (variable names kept as in the slide):
 

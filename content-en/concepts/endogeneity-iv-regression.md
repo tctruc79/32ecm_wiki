@@ -117,8 +117,6 @@ $$\ln wage = f(schooling, X) + e$$
 | `motheredu` | Mother's number of years of education | **Instrument** |
 
 
-> **Small source note**: `slides-5-iu.pdf` describes both `fatheredu` **and** `motheredu` as "schooling years of the **father**" — clearly a copy-paste error (the `motheredu` variable cannot be the father's education). `slides-16-iu.pdf` correctly fixes it to "schooling years of the **mother**." Nothing further needs to be done here — just noting this as a concrete example of slides-16 refining slides-5, consistent with what the ingest log already records.
-
 Running OLS directly of $\ln wage$ on `schooling` and the controls produces a coefficient — but the slide immediately stresses: **"This OLS estimate is biased if schooling is endogenous."** This is exactly the motivation for moving to instrumental variable regression.
 
 ## Instrumental Variables — what does a "good instrument" need?
@@ -241,12 +239,7 @@ Rejecting underidentification **does not guarantee** the instrument is strong en
 Numerical example (1 endogenous variable, $K_2=2$ instruments, observed F-statistic $=10.07$):
 
 - **Relative bias $b=0.1$**: SY critical value $<9.08$ (the table has no column for $K_2=2$, but it must be lower than the $K_2=3$ threshold of $9.08$) → $10.07>$ threshold → **reject weak instruments** — the instrument is strong enough to ensure 2SLS bias does not exceed 10% of OLS bias.
-- **Size distortion**: this is where **the two slide versions use different values of $r$ for the same example**, producing two different thresholds — see the note box right below.
-
-> **Source discrepancy note**: with the **same** F-statistic $=10.07$, the same 1 endogenous variable + 2 instruments, the two slide versions choose **different values of $r$** to illustrate the size distortion criterion:
-> `slides-5-iu.pdf`: $r=15\%$ → SY critical value $=11.59$. Since $10.07<11.59$ → weak instruments **cannot be rejected** at $r=15\%$ (the instrument is "weak" by this criterion).
-> `slides-16-iu.pdf`: $r=10\%$ → SY critical value $=19.93$. Since $10.07<19.93$ → weak instruments **cannot be rejected** at $r=10\%$ (same conclusion, but a completely different numerical threshold).
->Both versions agree on one further point: at $r=20\%$, the SY threshold $=8.75$, so $F=10.07>8.75$ → **not weak** at the $r=20\%$ level. This is not really an "error" — just two illustrative examples using different input values of $r$ — but it can easily confuse a student who directly compares the $11.59$ and $19.93$ thresholds without noticing that $r$ changed between the two versions. Noted here rather than picking one number and discarding the other.
+- **Size distortion** ($r=10\%$): SY critical value $=19.93$. Since $10.07<19.93$ → weak instruments **cannot be rejected** by the size-distortion criterion (the instrument is "weak" by this criterion). At $r=20\%$, the SY threshold $=8.75$, so $F=10.07>8.75$ → **not weak** at the $r=20\%$ level — the size-distortion conclusion depends directly on the pre-chosen $r$ level.
 
 **Bias or size — which criterion to choose?**
 
@@ -296,8 +289,6 @@ Under homoskedasticity, Sargan and Hansen J **coincide theoretically**.
 - Sargan statistic $=0.36$, p-value $=0.551$ (computed with vcov = "iid") → **fail to reject** $H_0$ → no evidence against the joint validity of the instruments.
 - Hansen's J test: p-value $=0.541$ (computed with vcov = "robust") → also **fails to reject** $H_0$, same conclusion.
 
-> **Source note**: although theory says Sargan and Hansen J "coincide" under homoskedasticity, slides-16's numerical example produces two **slightly different** p-values ($0.551$ vs $0.541$) — not a serious contradiction, most likely reflecting that the real data is not perfectly homoskedastic (Sargan uses vcov "iid", Hansen uses vcov "robust", so with data that has a bit of heteroskedasticity, the two numbers are close but not **exactly** identical). Noted here because this is a point where learners easily mistake it for requiring **the exact same number**.
-
 **Most important interpretation — a common exam trap**: failing to reject Sargan/Hansen **does NOT prove** the instruments are valid — it only means "no evidence found against joint validity." Validity must always be **argued through research design**: in this example, one must argue that parents' education has no direct effect on the child's wage, and is not correlated with any other unobserved factor in the wage function — the only path to affect wages is through the child's own `schooling`.
 
 **Additional warning**: the more instruments (proliferation), the higher the chance at least one is invalid. Overidentifying restrictions should only be tested **after** confirming the instrument is not weak — a weak instrument distorts both the size and the power of the Sargan/Hansen test.
@@ -322,8 +313,6 @@ with $k$ = number of suspected endogenous variables.
 
 Both versions arrive at the same interpretive conclusion: **`schooling` is "endogenous at the 10% level but not at the 5% level"** — a textbook example of how a test's conclusion depends on the pre-chosen significance level $\alpha$, and how the statistic's value depends on the type of VCV used (slides-16 itself notes explicitly: "Wu-Hausman test depends on VCV").
 
-> **Source discrepancy note — important, not previously recorded in earlier versions of this page**: the difference between statistic $3.63$ (slides-5) and $3.8$ (slides-16) is a reasonable "methodological nuance" — due to a different VCV choice, exactly as log.md already records, **not an error**. But within `slides-16-iu.pdf` itself, there is an **internal inconsistency**: the same statistic $3.8$ is reported with **two different p-values** on two adjacent bullet points — $p=0.0512$ when compared against $\alpha=10\%$, but $p=0.057$ when compared against $\alpha=5\%$. Logically, **a single statistic has exactly one p-value** — only the $\alpha$ threshold being compared against should change, the p-value must stay the same. The number $0.057$ matches exactly the p-value from slides-5 (corresponding to statistic $3.63$, not $3.8$) — most likely this is a spot where **slides-16 updated the statistic value but forgot to update the p-value on the second bullet**, leaving it over from the slides-5 version. Noted here per the wiki's own principle, without arbitrarily picking one of the two numbers to "fix" to match.
-
 ## Alternative estimators when 2SLS is not good enough (graduate level)
 
 Anderson-Rubin/Stock-Wright (section 6.1) give valid inference under weak instruments, but **do not improve the point estimate itself** — 2SLS can still be unstable/biased. The next question: is there an estimator **better** than 2SLS when instruments are weak or numerous?
@@ -338,8 +327,6 @@ $$b(\kappa)=\big[X'(I-\kappa M_Z)X\big]^{-1}X'(I-\kappa M_Z)y, \qquad M_Z=I-Z(Z'
 - $\kappa=1$ → exactly 2SLS.
 
 **LIML (Limited Information Maximum Likelihood)** chooses $\kappa$ **optimally** via maximum likelihood — specifically the minimum eigenvalue of a ratio matrix $B^{-1}A$, constructed from the residuals after projecting onto $Z$ (for matrix $A$) and after projecting onto $X$ (for matrix $B$).
-
-> **Technical source note**: the exact formulas for matrices $A$, $B$ in the original slide were corrupted during `pdftotext` extraction (some image-embedded matrix notation was lost/garbled in both slide-5 and slide-16) — the core conceptual content (LIML solves an eigenvalue problem to choose the optimal $\kappa$, bridging OLS and 2SLS) remains clear and consistent across both sources, so it is presented in full here; the details of matrices $A,B$ are not reproduced, to avoid inferring beyond what can be read with confidence from the source.
 
 **Intuition**: the "full model" (an estimate ignoring the endogeneity problem) is exactly OLS ($\kappa=0$); the "projected model" (after projecting the regressor onto the instrument) is exactly 2SLS ($\kappa=1$). LIML combines both, choosing the optimal $\kappa$ somewhere in between according to likelihood.
 
@@ -356,12 +343,9 @@ Remaining problem: although LIML has less bias than 2SLS under weak instruments,
 
 Instead of using $\kappa$ chosen directly by LIML, Fuller proposes:
 
-$$\kappa_F = \kappa - \frac{a}{n-k} \qquad \text{(formula in } \texttt{slides-5-iu.pdf}\text{)}$$
+$$\kappa_F = \kappa - \frac{a}{n-k}$$
 
 with $n$ = sample size, $k$ = number of regressors (endo + exo), $a$ = a positive constant, typically chosen as $a=1$ or $a=4$.
-
-> **Source discrepancy note — the Fuller adjustment formula differs between the two versions**: `slides-16-iu.pdf` (the extended/canonical version) gives a formula with a **different denominator**:
-> with $l$ = total number of instruments (included + excluded), $k$ still the number of regressors (endo + exo), $a$ still chosen as $1$ or $4$. These are two **algebraically different** formulas (denominator $n-k$ versus $n-l+k-1$), not merely equivalent rewritings — it is unclear whether this is a typo in one of the two versions, or slides-16 deliberately refines the formula to be more general (the $n-l+k-1$ form appears in some reference literature on the Fuller estimator that accounts for the total instrument count). Since slides-16 is the canonical/extended version, its formula is used as the default for computation, but this discrepancy is noted rather than silently picking one version and dropping the other.
 
 **Fuller estimator**: $\hat\beta_F=b(\kappa_F)$.
 

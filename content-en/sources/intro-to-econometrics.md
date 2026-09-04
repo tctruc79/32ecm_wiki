@@ -30,7 +30,3 @@ The first lecture deck (Topic 0 in the Course Outline) by **[[people/truong-dang
 13. **Common mistakes**: treating association as causation; assuming regression automatically produces a causal effect; focusing on estimation while forgetting the identification problem.
 14. **Course preview** — 3 main parts: (a) the Linear Regression Model and its problems (OLS, multicollinearity, heteroskedasticity, endogeneity); (b) Models for Limited Dependent Variables (logit/probit, multinomial logit, Poisson/NB, ordinal, censored/truncated); (c) Panel data models (FE/RE, panel IV: 2SLS/LIML/GMM, dynamic panel).
 15. **Course platform**: econometrics.site — practice, assignments, project submission.
-
-## Note
-
-All the conceptual content of this deck has been synthesized into `[[concepts/econometrics-overview]]` — that page holds the full synthesis (definitions, examples, comparison tables). This page only records provenance and the original slide's narrative flow.

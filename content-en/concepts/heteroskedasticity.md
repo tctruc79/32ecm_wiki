@@ -163,10 +163,6 @@ $$BP = 167.46, \quad df=5, \quad \text{p-value} < 2.2\text{e-}16$$
 
 An extremely small p-value → **strongly reject** $H_0$ (homoskedastic) → very clear evidence that the household expenditure model has heteroskedasticity — exactly as suggested by the "megaphone" plot in section 5.
 
-> **Source note — a point to watch when reading the original slide**: the slide presents the BP test in section 7.2 as "**an F-test**" (testing $H_0:\alpha_1=\cdots=\alpha_k=0$ on the auxiliary regression), but the R example instead uses `lmtest::bptest(model)`, and R's own output explicitly labels it the "**studentized Breusch-Pagan test**" with statistic $BP=167.46$ following a **Chi-square** distribution ($df=5$), **not** an F distribution.
-> The slide then has a separate code block, commented "`# F-test version of the BP test`" — manually regressing $e^2$ on the variables and then using `car::linearHypothesis()` to obtain the actual F version — but **no numerical result is shown** for this code block in the slide (only code, no output).
-> So two versions of the BP test coexist in the slide (a chi-square version via `bptest()`, and an F version via the manual auxiliary regression + `linearHypothesis()`), but only the chi-square version has an illustrative numerical result — this is noted here rather than inventing a number for the F version, in keeping with this wiki's principles.
-
 ## White's test
 
 ### Intuition and the difference from the BP test
@@ -183,9 +179,6 @@ But if the relationship between the error variance and $X$ is more complex (nonl
 3. Under $H_0$ (homoskedastic), the statistic $nR^2$ follows a Chi-square distribution with the corresponding $df$.
 
 **Reject $H_0$** → evidence of heteroskedasticity; **fail to reject** → no evidence.
-
-> **Source note**: the slide presents White's test only in theoretical/formula form (no numerical example using the household expenditure data as was done for the BP test) — no results table with `nR²`, `df`, or a specific p-value is given in this deck for White's test.
-> Therefore this section can only present the formula and intuition, with no accompanying numerical case study — no numbers are invented here.
 
 **Summary of the BP vs. White difference**:
 

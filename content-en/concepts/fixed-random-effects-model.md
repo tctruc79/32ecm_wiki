@@ -10,8 +10,6 @@ assignment: ["Assignment 5: Panel data models with variance structures"]
 updated: 2026-09-04
 ---
 
-> Revision history: this page merges Topic 6 (`slides-6-iu.pdf`, introductory version) and Topic 12 (`slides-13-iu.pdf`, extended version with fuller variance structures — same company data example but adding GLS/FGLS and the SE types). The structure below follows the extended version.
-
 > **How to read this page**: this is a direct extension of [[concepts/linear-regression-model]] to data with a **time dimension** — all the underlying concepts (PRE/SRE, OLS, assumptions A1–A5, t-test, F-test) still apply, just "detailed further" to fit the panel structure. This page is long because it merges 2 slide decks (basic Topic 6 + extended Topic 12) — so read it in order: (1) what panel data is and why it exists, (2) the expanded assumption set A3a/A3b, A4a/b/c, (3) four estimation methods (Pooled OLS, GLS/FGLS, FE, RE), (4) how to choose the correct SE, (5) the Hausman test for choosing between FE and RE.
 
 **Lecture 6** in the syllabus (CO Topic 6 & 12) — Assignment 5: Panel data models with variance structures.
@@ -42,8 +40,6 @@ The Topic 6 slide uses data from 58 Vietnamese provinces, 5 years (2007–2011) 
 
 This is exactly the $y_{it}$ structure: each row is a pair $(i,t)$ — "An Giang, 2007" is a different observation from "An Giang, 2008" (same $i$, different $t$) and from "Bac Can, 2007" (different $i$, same $t$). $N$ here is the number of provinces (58 provinces per the original description — but the actual `plm` regression tables in later sections show `n = 43, T = 5, N = 215`, meaning only 43 provinces are used in the final balanced panel; the original slide does not explain why 58 dropped to 43 — this could be due to dropping observations with missing data to balance the panel, but this is an inference, not something the slide states explicitly).
 
-> **Source-contradiction note**: the Topic 6 slide states the units of `rgdp` and `rinvest` **two different times** — the first time ("EXAMPLE DATA") as "bil. VND," the second time ("THE DATA") records the same two variables as "mil. VND." This is a genuine contradiction in the original slide, not an extraction error — it is recorded per the wiki's principle, without arbitrarily picking one. Judging by plausible magnitude (a province's GDP is on the order of a few tens of thousands of billion VND in the 2007–2011 period), reading it as "million VND" (mil. VND) gives a far more plausible figure than "billion VND" (bil. VND) — but this is only a reasonable inference, not something the slide confirms.
-
 ### Why panel data is useful for identification — connecting to the causal-identification problem
 
 This is the single most important philosophical question of this entire page, and it flows directly from the **identification problem** discussed in [[concepts/econometrics-overview]] (section 8 of that page): to correctly estimate the causal effect of $X$ on $y$, one needs to isolate the part of the variation in $X$ that is **not** driven by confounders. The classic problem: if there is an **unobserved** factor $\alpha_i$ — e.g. a province's institutional quality, a firm's management capability, an individual's "innate ability" — that both affects $y$ and is correlated with $X$, then OLS on ordinary cross-sectional data will be **biased** (violating A3/exogeneity), because $\alpha_i$ gets "mixed" into the error term $\varepsilon_{it}$ and is correlated with $X$.
@@ -71,7 +67,7 @@ Because geographic distance is **constant** over years (country $i$ is always a 
 
 ## The two illustrative datasets used throughout this page
 
-Because this page merges two slide decks, **two** different illustrative datasets appear interleaved in the sections below — **not the same dataset** (this note supplements the "Revision history" line at the top of the page, which might mistakenly suggest "the same company data example"):
+This page covers both Topic 6 and Topic 12, so **two** different illustrative datasets appear interleaved in the sections below — **not the same dataset**:
 
 | |Topic 6 data (`slides-6-iu.pdf`) |Topic 12 data (`slides-13-iu.pdf`) |
 |---|---|---|

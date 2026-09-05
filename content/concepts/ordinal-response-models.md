@@ -22,23 +22,23 @@ updated: 2026-09-04
 
 Rất nhiều biến kết quả trong khảo sát kinh tế/xã hội là **rời rạc** (discrete, chỉ nhận một số hữu hạn giá trị) **và có thứ tự tự nhiên** (ordered), nhưng **không có đơn vị đo** (no measurement unit) — nghĩa là khoảng cách giữa các mức không có ý nghĩa số học rõ ràng.
 <br><span class="en">Many outcome variables in economic/social surveys are **discrete** (taking only a finite number of values) **and naturally ordered**, but have **no measurement unit** — meaning the distance between levels has no clear numerical meaning.</span>
-Hai ví dụ slide dùng để mở đầu:
-<br><span class="en">Two examples the slides use to open with:</span>
+Hai ví dụ mở đầu:
+<br><span class="en">Two opening examples:</span>
 
 - **Self-reported health status** theo thang Likert: kém / trung bình / tốt / rất tốt.
   <br><span class="en">**Self-reported health status** on a Likert scale: poor / average / good / very good.</span>
 - **Mức độ đồng ý với một phát biểu**: hoàn toàn không đồng ý / không đồng ý / trung lập / đồng ý / hoàn toàn đồng ý.
   <br><span class="en">**Level of agreement with a statement**: strongly disagree / disagree / neutral / agree / strongly agree.</span>
 
-Ví dụ xuyên suốt của slide (dùng lại ở mọi phần sau của trang này): **tần suất ăn ngoài hàng tuần** (`eatout`), ban đầu slide minh họa với 3 mức đơn giản (0 = không lần nào; 1 = 1–2 lần/tuần; 2 = từ 3 lần trở lên), sau đó bộ dữ liệu thực hành mở rộng thành 5 mức chi tiết hơn (xem mục 7).
-<br><span class="en">The running example of the slides (reused throughout every later section of this page): **weekly eating-out frequency** (`eatout`), first illustrated by the slides with 3 simple levels (0 = no times; 1 = 1–2 times/week; 2 = 3 or more times), later expanded by the practice dataset into 5 more detailed levels (see section 7).</span>
+Ví dụ xuyên suốt của bài này (dùng lại ở mọi phần sau của trang này): **tần suất ăn ngoài hàng tuần** (`eatout`), ban đầu minh họa với 3 mức đơn giản (0 = không lần nào; 1 = 1–2 lần/tuần; 2 = từ 3 lần trở lên), sau đó bộ dữ liệu thực hành mở rộng thành 5 mức chi tiết hơn (xem mục 7).
+<br><span class="en">The running example of this lecture (reused throughout every later section of this page): **weekly eating-out frequency** (`eatout`), first illustrated with 3 simple levels (0 = no times; 1 = 1–2 times/week; 2 = 3 or more times), later expanded by the practice dataset into 5 more detailed levels (see section 7).</span>
 Điểm chung của mọi ví dụ này: ta biết "nhiều hơn" hay "ít hơn", nhưng **không biết khoảng cách giữa 'kém' và 'trung bình' có bằng khoảng cách giữa 'trung bình' và 'tốt' hay không** — đây chính là đặc điểm định nghĩa nên "ordinal".
 <br><span class="en">What all these examples share: we know "more" or "less," but **we don't know whether the distance between 'poor' and 'average' equals the distance between 'average' and 'good'** — this is precisely the defining feature of "ordinal."</span>
 
 ### 1.2 Vì sao không dùng OLS, và vì sao MNL "phí" thông tin - <span class="en">Why not OLS, and why MNL "wastes" information</span>
 
-Slide đặt câu hỏi trực tiếp: nếu biến này là biến phụ thuộc, ta ước lượng bằng gì?
-<br><span class="en">The slide asks directly: if this variable is the dependent variable, what do we estimate it with?</span>
+Câu hỏi đặt ra: nếu biến này là biến phụ thuộc, ta ước lượng bằng gì?
+<br><span class="en">The question this raises: if this variable is the dependent variable, what do we estimate it with?</span>
 
 | Cách tiếp cận - <span class="en">Approach</span> | Dùng được không? - <span class="en">Usable?</span> | Vì sao - <span class="en">Why</span> |
 |---|---|---|
@@ -87,8 +87,8 @@ Bất kỳ cá nhân nào có $y^*$ rơi vào đoạn giữa $u_2$ và $u_3$ s�
 
 ## 3. Cutpoints (threshold parameters) — điểm cắt - <span class="en">Cutpoints (threshold parameters)</span>
 
-Với $J$ phạm trù (VD $J=3$: $y\in\{0,1,2\}$ như slide minh họa ban đầu), cần $J-1$ **cutpoints** $u_1<u_2<\cdots<u_{J-1}$ để chia trục $y^*$ thành $J$ đoạn. Quy tắc liên hệ $y^*$ với $y$ quan sát được (minh họa 3 phạm trù):
-<br><span class="en">With $J$ categories (e.g. $J=3$: $y\in\{0,1,2\}$ as the slide first illustrates), $J-1$ **cutpoints** $u_1<u_2<\cdots<u_{J-1}$ are needed to divide the $y^*$ axis into $J$ segments. The rule linking $y^*$ to the observed $y$ (illustrated with 3 categories):</span>
+Với $J$ phạm trù (VD $J=3$: $y\in\{0,1,2\}$ như minh họa ban đầu ở trên), cần $J-1$ **cutpoints** $u_1<u_2<\cdots<u_{J-1}$ để chia trục $y^*$ thành $J$ đoạn. Quy tắc liên hệ $y^*$ với $y$ quan sát được (minh họa 3 phạm trù):
+<br><span class="en">With $J$ categories (e.g. $J=3$: $y\in\{0,1,2\}$ as first illustrated above), $J-1$ **cutpoints** $u_1<u_2<\cdots<u_{J-1}$ are needed to divide the $y^*$ axis into $J$ segments. The rule linking $y^*$ to the observed $y$ (illustrated with 3 categories):</span>
 
 $$y=0 \text{ nếu } y^*\le u_1, \qquad y=1 \text{ nếu } u_1<y^*\le u_2, \qquad y=2 \text{ nếu } y^*> u_2$$
 <br><span class="en">(read: $y=0$ if $y^*\le u_1$; $y=1$ if $u_1<y^*\le u_2$; $y=2$ if $y^*> u_2$)</span>
@@ -134,8 +134,8 @@ $$Pr(y=1)=Pr(u_1<y^*\le u_2)=Pr(y^*\le u_2)-Pr(y^*\le u_1)=\Phi(u_2-\beta X)-\Ph
 
 ### 4.2 Tổng quát hóa cho $J$ phạm trù - <span class="en">Generalizing to $J$ categories</span>
 
-Slide minh họa lý thuyết bằng 3 phạm trù, nhưng ví dụ thực hành ở mục 7 dùng **5 phạm trù** (`eatout` = No / 1–2 / 3–5 / 5–10 / 11+ lần/tháng) — nên cần nối hai phần này lại. Với $J$ phạm trù $y\in\{0,1,\dots,J-1\}$ và $J-1$ cutpoints $u_1<\cdots<u_{J-1}$, cùng logic ở mục 4.1 tổng quát hóa thành:
-<br><span class="en">The slide illustrates the theory with 3 categories, but the practical example in section 7 uses **5 categories** (`eatout` = No / 1–2 / 3–5 / 5–10 / 11+ times/month) — so the two need to be connected. With $J$ categories $y\in\{0,1,\dots,J-1\}$ and $J-1$ cutpoints $u_1<\cdots<u_{J-1}$, the same logic from section 4.1 generalizes to:</span>
+Lý thuyết ở trên minh họa bằng 3 phạm trù, nhưng ví dụ thực hành ở mục 7 dùng **5 phạm trù** (`eatout` = No / 1–2 / 3–5 / 5–10 / 11+ lần/tháng) — nên cần nối hai phần này lại. Với $J$ phạm trù $y\in\{0,1,\dots,J-1\}$ và $J-1$ cutpoints $u_1<\cdots<u_{J-1}$, cùng logic ở mục 4.1 tổng quát hóa thành:
+<br><span class="en">The theory above is illustrated with 3 categories, but the practical example in section 7 uses **5 categories** (`eatout` = No / 1–2 / 3–5 / 5–10 / 11+ times/month) — so the two need to be connected. With $J$ categories $y\in\{0,1,\dots,J-1\}$ and $J-1$ cutpoints $u_1<\cdots<u_{J-1}$, the same logic from section 4.1 generalizes to:</span>
 
 $$Pr(y=0)=\Phi(u_1-\beta X), \qquad Pr(y=J-1)=1-\Phi(u_{J-1}-\beta X)$$
 $$Pr(y=j)=\Phi(u_{j+1}-\beta X)-\Phi(u_j-\beta X) \quad \text{với } j=1,\dots,J-2 \text{ (các phạm trù ở giữa)}$$
@@ -167,8 +167,8 @@ Cùng logic phân biệt Logit/Probit nhị phân ([[concepts/binary-response-mo
 | **Ordered Probit** | Chuẩn (normal) - <span class="en">Normal</span> | $\Phi(\cdot)$ | $\Phi(u_1-\beta X)$ |
 | **Ordered Logit** | Logistic - <span class="en">Logistic</span> | $\Lambda(x)=\dfrac{1}{1+e^{-x}}$ | $\Lambda(u_1-\beta X)$ |
 
-**Khác biệt so với trường hợp binary**: ở mô hình nhị phân, **Logit** thường được ưu tiên hơn (marginal effect có dạng đóng, dễ tính hơn Probit). Ở mô hình **ordinal**, slide ghi rõ chiều ngược lại: **"Probit is more popular"** (Probit phổ biến hơn) trong thực hành. Slide không giải thích lý do cụ thể — ghi nhận đây là một phát biểu thực hành (convention), không phải một định lý.
-<br><span class="en">**Difference from the binary case**: in the binary model, **Logit** is usually preferred (the marginal effect has a closed form, easier to compute than Probit). In the **ordinal** model, the slide explicitly notes the opposite direction: **"Probit is more popular"** in practice. The slide does not explain the specific reason — note that this is a practical statement (convention), not a theorem.</span>
+**Khác biệt so với trường hợp binary**: ở mô hình nhị phân, **Logit** thường được ưu tiên hơn (marginal effect có dạng đóng, dễ tính hơn Probit). Ở mô hình **ordinal**, quy ước thực hành lại theo chiều ngược lại: **"Probit is more popular"** (Probit phổ biến hơn) trong thực hành. Không có lý do lý thuyết cụ thể cho việc này — ghi nhận đây là một phát biểu thực hành (convention), không phải một định lý.
+<br><span class="en">**Difference from the binary case**: in the binary model, **Logit** is usually preferred (the marginal effect has a closed form, easier to compute than Probit). In the **ordinal** model, the practical convention runs the opposite direction: **"Probit is more popular"** in practice. There is no specific theoretical reason for this — note that this is a practical statement (convention), not a theorem.</span>
 
 ## 7. Ví dụ đầy đủ: Tần suất ăn ngoài (`eatout`) - <span class="en">Full example: eating-out frequency (`eatout`)</span>
 
@@ -256,8 +256,8 @@ Với quan sát đầu tiên trong mẫu, mô hình cho ra 5 xác suất (cộng
 $Pr(No)\approx0.0000115$, $Pr(1\text{–}2)\approx0.0010$, $Pr(3\text{–}5)\approx0.0829$, $Pr(5\text{–}10)\approx0.8385$, $Pr(11+)\approx0.0776$ — cá nhân này gần như chắc chắn thuộc nhóm "5–10 lần/tháng" (xác suất 83.85%).
 <br><span class="en">$Pr(No)\approx0.0000115$, $Pr(1\text{–}2)\approx0.0010$, $Pr(3\text{–}5)\approx0.0829$, $Pr(5\text{–}10)\approx0.8385$, $Pr(11+)\approx0.0776$ — this individual almost certainly belongs to the "5–10 times/month" group (83.85% probability).</span>
 
-**Đồ thị $Pr(y=4)$ (ăn ngoài ≥11 lần/tháng) theo tuổi**: slide vẽ `Pr(11+)` dự đoán theo `age` và cho thấy quan hệ **giảm dần rõ rệt** — xác suất gần 1.0 ở tuổi ~18, giảm mạnh qua tuổi 20 (~0.85), tiếp tục giảm và gần như bằng 0 từ khoảng tuổi 30 trở đi. Đây là minh họa trực quan cho dấu **âm** của $\beta_{age}=-0.29$: tuổi càng cao, khuynh hướng ăn ngoài tần suất cao càng giảm.
-<br><span class="en">**Plot of $Pr(y=4)$ (eating out ≥11 times/month) against age**: the slide plots predicted `Pr(11+)` against `age` and shows a clearly **decreasing** relationship — probability near 1.0 at age ~18, dropping sharply past age 20 (~0.85), continuing to fall and reaching near 0 from around age 30 onward. This is a visual illustration of the **negative** sign of $\beta_{age}=-0.29$: the older a person is, the lower their propensity toward high-frequency eating out.</span>
+**Đồ thị $Pr(y=4)$ (ăn ngoài ≥11 lần/tháng) theo tuổi**: đồ thị `Pr(11+)` dự đoán theo `age` cho thấy quan hệ **giảm dần rõ rệt** — xác suất gần 1.0 ở tuổi ~18, giảm mạnh qua tuổi 20 (~0.85), tiếp tục giảm và gần như bằng 0 từ khoảng tuổi 30 trở đi. Đây là minh họa trực quan cho dấu **âm** của $\beta_{age}=-0.29$: tuổi càng cao, khuynh hướng ăn ngoài tần suất cao càng giảm.
+<br><span class="en">**Plot of $Pr(y=4)$ (eating out ≥11 times/month) against age**: the plot of predicted `Pr(11+)` against `age` shows a clearly **decreasing** relationship — probability near 1.0 at age ~18, dropping sharply past age 20 (~0.85), continuing to fall and reaching near 0 from around age 30 onward. This is a visual illustration of the **negative** sign of $\beta_{age}=-0.29$: the older a person is, the lower their propensity toward high-frequency eating out.</span>
 
 ### 7.6 Dự báo (prediction) và ma trận nhầm lẫn - <span class="en">Prediction and the confusion matrix</span>
 
@@ -277,8 +277,8 @@ Tỷ lệ dự đoán đúng tổng thể (`sum(diag(tab))/sum(tab)`): **0.6638*
 
 ### 7.7 Dự đoán cho một cá nhân cụ thể - <span class="en">Prediction for a specific individual</span>
 
-Slide minh họa dự đoán cho hai hồ sơ giả định, giống hệt nhau ngoại trừ tình trạng quan hệ:
-<br><span class="en">The slide illustrates prediction for two hypothetical profiles, identical except for relationship status:</span>
+Dự đoán được minh họa cho hai hồ sơ giả định, giống hệt nhau ngoại trừ tình trạng quan hệ:
+<br><span class="en">Prediction is illustrated for two hypothetical profiles, identical except for relationship status:</span>
 
 - `person1`: age=23, whours=60, income=30, homeown=0, gender=0, `inrelationship=0`, married=0 → dự đoán: **"5-10/month"**.
   <br><span class="en">`person1`: age=23, whours=60, income=30, homeown=0, gender=0, `inrelationship=0`, married=0 → predicted: **"5-10/month"**.</span>
@@ -290,8 +290,8 @@ Chỉ thay đổi **một** biến dummy (`inrelationship`: 0→1) đã đủ đ
 
 ### 7.8 Pseudo R² (hiếm khi dùng) - <span class="en">Pseudo R² (rarely used)</span>
 
-`PseudoR2(oprobit, which=c("CoxSnell","Nagelkerke","McFadden"))`: CoxSnell = 0.770, Nagelkerke = 0.811, McFadden = 0.490. Slide ghi chú rõ tiêu đề trang này: **"(RARELY USED)"** — các pseudo-R² này không có thang đo và cách diễn giải tương đương $R^2$ tuyến tính ở [[concepts/linear-regression-model]] mục 9, và không nên dùng làm tiêu chí chính để đánh giá độ phù hợp mô hình.
-<br><span class="en">`PseudoR2(oprobit, which=c("CoxSnell","Nagelkerke","McFadden"))`: CoxSnell = 0.770, Nagelkerke = 0.811, McFadden = 0.490. The slide explicitly notes this page's title: **"(RARELY USED)"** — these pseudo-R² measures do not have the same scale or interpretation as the linear $R^2$ in [[concepts/linear-regression-model]] section 9, and should not be used as the primary criterion for evaluating model fit.</span>
+`PseudoR2(oprobit, which=c("CoxSnell","Nagelkerke","McFadden"))`: CoxSnell = 0.770, Nagelkerke = 0.811, McFadden = 0.490. Tiêu đề cần nhớ: **"(RARELY USED)"** — các pseudo-R² này không có thang đo và cách diễn giải tương đương $R^2$ tuyến tính ở [[concepts/linear-regression-model]] mục 9, và không nên dùng làm tiêu chí chính để đánh giá độ phù hợp mô hình.
+<br><span class="en">`PseudoR2(oprobit, which=c("CoxSnell","Nagelkerke","McFadden"))`: CoxSnell = 0.770, Nagelkerke = 0.811, McFadden = 0.490. The title to remember: **"(RARELY USED)"** — these pseudo-R² measures do not have the same scale or interpretation as the linear $R^2$ in [[concepts/linear-regression-model]] section 9, and should not be used as the primary criterion for evaluating model fit.</span>
 
 ### 7.9 Kiểm định ý nghĩa đồng thời của một nhóm hệ số - <span class="en">Testing the joint significance of a group of coefficients</span>
 
@@ -370,8 +370,8 @@ Chạy lại đúng phương trình ở mục 7.3 với `method="logistic"` thay
 **Cutpoints (Logit)**: $0|1=-17.10$, $1|2=-15.04$, $2|3=-11.95$, $3|4=-6.88$ (tất cả tăng dần, có ý nghĩa thống kê mạnh).
 <br><span class="en">**Cutpoints (Logit)**: $0|1=-17.10$, $1|2=-15.04$, $2|3=-11.95$, $3|4=-6.88$ (all increasing, strongly statistically significant).</span>
 
-> **Quan sát thêm** (tính toán từ hai bảng hệ số trên, không phải một phát biểu trực tiếp của slide): tỷ lệ hệ số Logit/Probit dao động khá đều quanh **1.7–1.8** cho mọi biến. Đây khớp với một quy tắc kinh nghiệm quen thuộc trong kinh tế lượng — phân phối logistic có phương sai $\pi^2/3\approx3.29$ trong khi phân phối chuẩn hóa có phương sai 1, nên hệ số logit thường lớn hơn hệ số probit tương ứng khoảng $\sqrt{\pi^2/3}\approx1.81$ lần. Không nên dùng con số này để so sánh **độ lớn tác động** giữa hai mô hình một cách trực tiếp (như đã lưu ý ở [[concepts/binary-response-models]]) — chỉ hữu ích như một cách kiểm tra nhanh xem hai mô hình có cho ra kết quả "nhất quán" hay không (cùng dấu, tỷ lệ hệ số gần hằng số).
-> <br><span class="en">**Additional observation** (computed from the two coefficient tables above, not a direct statement from the slide): the Logit/Probit coefficient ratio hovers fairly evenly around **1.7–1.8** for every variable. This matches a familiar rule of thumb in econometrics — the logistic distribution has variance $\pi^2/3\approx3.29$ while the standard normal has variance 1, so logit coefficients are typically about $\sqrt{\pi^2/3}\approx1.81$ times larger than their probit counterparts. This number should not be used to directly compare the **magnitude of effects** between the two models (as already noted in [[concepts/binary-response-models]]) — it is only useful as a quick check of whether the two models give "consistent" results (same signs, roughly constant coefficient ratio).</span>
+> **Quan sát thêm** (tính toán từ hai bảng hệ số trên): tỷ lệ hệ số Logit/Probit dao động khá đều quanh **1.7–1.8** cho mọi biến. Đây khớp với một quy tắc kinh nghiệm quen thuộc trong kinh tế lượng — phân phối logistic có phương sai $\pi^2/3\approx3.29$ trong khi phân phối chuẩn hóa có phương sai 1, nên hệ số logit thường lớn hơn hệ số probit tương ứng khoảng $\sqrt{\pi^2/3}\approx1.81$ lần. Không nên dùng con số này để so sánh **độ lớn tác động** giữa hai mô hình một cách trực tiếp (như đã lưu ý ở [[concepts/binary-response-models]]) — chỉ hữu ích như một cách kiểm tra nhanh xem hai mô hình có cho ra kết quả "nhất quán" hay không (cùng dấu, tỷ lệ hệ số gần hằng số).
+> <br><span class="en">**Additional observation** (computed from the two coefficient tables above): the Logit/Probit coefficient ratio hovers fairly evenly around **1.7–1.8** for every variable. This matches a familiar rule of thumb in econometrics — the logistic distribution has variance $\pi^2/3\approx3.29$ while the standard normal has variance 1, so logit coefficients are typically about $\sqrt{\pi^2/3}\approx1.81$ times larger than their probit counterparts. This number should not be used to directly compare the **magnitude of effects** between the two models (as already noted in [[concepts/binary-response-models]]) — it is only useful as a quick check of whether the two models give "consistent" results (same signs, roughly constant coefficient ratio).</span>
 
 Dấu và mức ý nghĩa thống kê của mọi hệ số **giống hệt** giữa hai mô hình (cùng biến có ý nghĩa, cùng biến không có ý nghĩa) — một dấu hiệu tốt cho thấy kết luận không nhạy cảm với lựa chọn Logit hay Probit ở ví dụ này.
 <br><span class="en">The sign and statistical significance level of every coefficient are **identical** between the two models (the same variables significant, the same variables not) — a good sign that the conclusions are not sensitive to the choice of Logit or Probit in this example.</span>
@@ -390,8 +390,8 @@ Ordered Logit/Probit giả định **cùng một bộ hệ số $\beta$ cho mọ
 
 - $H_0$ (giả thuyết gốc) của Brant test: **parallel regression assumption được thỏa mãn** (tức $\beta$ thực sự giống nhau ở mọi ngưỡng).
   <br><span class="en">$H_0$ (null hypothesis) of the Brant test: **the parallel regression assumption holds** (i.e. $\beta$ is truly the same across every threshold).</span>
-- Nếu **bác bỏ** $H_0$ → giả định bị vi phạm → nên cân nhắc mô hình khác — slide gợi ý **MNL** (không ràng buộc hệ số giống nhau giữa các ngưỡng — đổi lại, mất thông tin thứ tự — xem [[concepts/multinomial-logit-model]]). *(Slide không đề cập generalized ordered logit hay các mô hình khác — chỉ nêu MNL là lựa chọn thay thế; không mở rộng thêm vì không có trong nguồn.)*
-  <br><span class="en">If $H_0$ is **rejected** → the assumption is violated → an alternative model should be considered — the slide suggests **MNL** (does not constrain the coefficients to be the same across thresholds — in exchange, it loses the ordering information — see [[concepts/multinomial-logit-model]]). *(The slide does not mention generalized ordered logit or other models — it only names MNL as the alternative; not expanded further since it's not in the source.)*</span>
+- Nếu **bác bỏ** $H_0$ → giả định bị vi phạm → nên cân nhắc mô hình khác — **MNL** là lựa chọn thay thế thường được dùng (không ràng buộc hệ số giống nhau giữa các ngưỡng — đổi lại, mất thông tin thứ tự — xem [[concepts/multinomial-logit-model]]). *(Generalized ordered logit và các mô hình khác nằm ngoài phạm vi trang này.)*
+  <br><span class="en">If $H_0$ is **rejected** → the assumption is violated → an alternative model should be considered — **MNL** is the commonly used alternative (does not constrain the coefficients to be the same across thresholds — in exchange, it loses the ordering information — see [[concepts/multinomial-logit-model]]). *(Generalized ordered logit and other models are outside the scope of this page.)*</span>
 
 **Ví dụ số** (`brant::brant(ologit)`, chạy trên mô hình Ordered Logit ở mục 9):
 <br><span class="en">**Numerical example** (`brant::brant(ologit)`, run on the Ordered Logit model from section 9):</span>
@@ -407,8 +407,8 @@ Ordered Logit/Probit giả định **cùng một bộ hệ số $\beta$ cho mọ
 | inrelationship | 0.52 | 3 | 0.9 |
 | married | 0.38 | 3 | 0.9 |
 
-Mọi p-value (kể cả Omnibus, kiểm định tổng quát cho toàn bộ hệ số cùng lúc) đều **lớn hơn 0.05** → **không bác bỏ** $H_0$ → kết luận của slide: **"parallel regression assumption holds for all coefficients"** (giả định song song được thỏa mãn cho mọi hệ số) — ước lượng Ordered Logit ở ví dụ `eatout` này đáng tin cậy, không cần chuyển sang MNL.
-<br><span class="en">Every p-value (including Omnibus, the overall test for all coefficients jointly) is **greater than 0.05** → **fail to reject** $H_0$ → the slide's conclusion: **"parallel regression assumption holds for all coefficients"** — the Ordered Logit estimates in this `eatout` example are reliable, no need to switch to MNL.</span>
+Mọi p-value (kể cả Omnibus, kiểm định tổng quát cho toàn bộ hệ số cùng lúc) đều **lớn hơn 0.05** → **không bác bỏ** $H_0$ → kết luận: **"parallel regression assumption holds for all coefficients"** (giả định song song được thỏa mãn cho mọi hệ số) — ước lượng Ordered Logit ở ví dụ `eatout` này đáng tin cậy, không cần chuyển sang MNL.
+<br><span class="en">Every p-value (including Omnibus, the overall test for all coefficients jointly) is **greater than 0.05** → **fail to reject** $H_0$ → the conclusion: **"parallel regression assumption holds for all coefficients"** — the Ordered Logit estimates in this `eatout` example are reliable, no need to switch to MNL.</span>
 
 ## 11. Bẫy thi tổng hợp - <span class="en">Exam traps</span>
 
@@ -426,8 +426,8 @@ Mọi p-value (kể cả Omnibus, kiểm định tổng quát cho toàn bộ h�
    <br><span class="en">Getting the direction of the Brant test's $H_0$ backwards: $H_0$ = **the assumption holds**, not "the assumption is violated". Rejecting $H_0$ is the sign of a **violation**; failing to reject means the assumption is fine (as in the numerical example in section 10.2, where every p>0.05 → the assumption holds).</span>
 7. Nhầm lẫn Ordinal response (có thứ tự, dùng Ordered Logit/Probit) với Multinomial response (không thứ tự, dùng MNL) — xem [[concepts/multinomial-logit-model]]; hoặc dùng OLS trực tiếp lên mã số của biến ordinal, ngầm giả định khoảng cách giữa các mức bằng nhau (mục 1.2).
    <br><span class="en">Confusing an Ordinal response (ordered, uses Ordered Logit/Probit) with a Multinomial response (unordered, uses MNL) — see [[concepts/multinomial-logit-model]]; or running OLS directly on the ordinal variable's numeric codes, implicitly assuming the distance between levels is equal (section 1.2).</span>
-8. Dùng Pseudo R² (McFadden/CoxSnell/Nagelkerke) như tiêu chí đánh giá độ phù hợp chính của mô hình — slide ghi rõ các chỉ số này **"rarely used"**, không có thang đo/diễn giải tương đương $R^2$ tuyến tính.
-   <br><span class="en">Using Pseudo R² (McFadden/CoxSnell/Nagelkerke) as the main fit criterion for the model — the slide explicitly notes these measures are **"rarely used"**, and have no scale/interpretation equivalent to linear $R^2$.</span>
+8. Dùng Pseudo R² (McFadden/CoxSnell/Nagelkerke) như tiêu chí đánh giá độ phù hợp chính của mô hình — các chỉ số này được ghi nhận là **"rarely used"**, không có thang đo/diễn giải tương đương $R^2$ tuyến tính.
+   <br><span class="en">Using Pseudo R² (McFadden/CoxSnell/Nagelkerke) as the main fit criterion for the model — these measures are noted as **"rarely used"**, and have no scale/interpretation equivalent to linear $R^2$.</span>
 9. Chỉ báo cáo tỷ lệ dự đoán đúng tổng thể (VD 66.4% ở mục 7.6) mà không kiểm tra ma trận nhầm lẫn đầy đủ theo từng phạm trù — một mô hình có thể "trông tốt" ở mức tổng thể nhưng dự đoán rất kém ở một phạm trù cụ thể (VD "1-2/month" chỉ đúng ~32.5% trong ví dụ này).
    <br><span class="en">Reporting only the overall correct-prediction rate (e.g. 66.4% in section 7.6) without checking the full confusion matrix broken down by category — a model can "look good" overall while predicting a specific category very poorly (e.g. "1-2/month" is only correct ~32.5% of the time in this example).</span>
 10. So sánh trực tiếp độ lớn hệ số Ordered Logit với Ordered Probit như thể chúng cùng thang đo — hai mô hình khác thang đo sai số (logistic vs. chuẩn); chỉ nên so sánh dấu, mức ý nghĩa, hoặc xác suất dự đoán, không so sánh độ lớn hệ số trực tiếp (dù tỷ lệ ~1.8 lần ở mục 9 là một quy tắc kinh nghiệm hữu ích để kiểm tra tính nhất quán).

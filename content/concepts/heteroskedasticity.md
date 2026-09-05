@@ -36,8 +36,8 @@ Nói cách khác: **độ lớn của sai số dự đoán (phần dư) không �
 Ngược lại, nếu độ lớn sai số dự đoán đồng đều bất kể quan sát nào — không hộ nào có xu hướng bị dự đoán "lệch xa" nhiều hơn hộ khác một cách hệ thống — đó là **homoskedasticity**, giả định A4 của OLS (xem [[concepts/linear-regression-model]] mục 4).
 <br><span class="en">Conversely, if the magnitude of the prediction error is uniform regardless of the observation — no household is systematically predicted "further off" than another — that is **homoskedasticity**, OLS's A4 assumption (see [[concepts/linear-regression-model]] section 4).</span>
 
-Ví dụ số cụ thể minh họa đúng hiện tượng này nằm ở mục 4–5 bên dưới — dùng chính bộ dữ liệu chi tiêu hộ gia đình mà slide gốc dùng xuyên suốt.
-<br><span class="en">A concrete numerical example illustrating exactly this phenomenon appears in sections 4–5 below — using the very same household expenditure dataset that the original slides use throughout.</span>
+Ví dụ số cụ thể minh họa đúng hiện tượng này nằm ở mục 4–5 bên dưới — dùng chính bộ dữ liệu chi tiêu hộ gia đình được dùng xuyên suốt bài này.
+<br><span class="en">A concrete numerical example illustrating exactly this phenomenon appears in sections 4–5 below — using the same household expenditure dataset used throughout this lecture.</span>
 
 ## 2. Định nghĩa hình thức - <span class="en">Formal definition</span>
 
@@ -59,8 +59,8 @@ VCV và SE "chuẩn" mà OLS báo cáo mặc định (kể cả trong `summary(l
 
 ## 3. Nguồn gốc của heteroskedasticity - <span class="en">Sources of heteroskedasticity</span>
 
-Slide liệt kê ba nguồn gốc phổ biến, không loại trừ lẫn nhau:
-<br><span class="en">The slides list three common sources, not mutually exclusive:</span>
+Có ba nguồn gốc phổ biến, không loại trừ lẫn nhau:
+<br><span class="en">There are three common sources, not mutually exclusive:</span>
 
 1. **Outlier trong dữ liệu**: một vài quan sát cực đoan có thể kéo phương sai sai số lên cao bất thường tại vùng dữ liệu chứa outlier đó.
 <br><span class="en">**Outliers in the data**: a few extreme observations can pull the error variance up abnormally high in the region of the data containing that outlier.</span>
@@ -71,8 +71,8 @@ Slide liệt kê ba nguồn gốc phổ biến, không loại trừ lẫn nhau:
 
 ## 4. Ví dụ xuyên suốt: khảo sát chi tiêu hộ gia đình TP.HCM 2020 - <span class="en">Running example: 2020 Ho Chi Minh City household expenditure survey</span>
 
-Slide dùng bộ dữ liệu khảo sát các cặp vợ chồng tại TP.HCM năm 2020 (`https://econometrics.site/public/mcl.csv`) — **cùng bộ dữ liệu** dùng ở [[concepts/multicollinearity]], nhưng phục vụ hai mục đích chẩn đoán khác nhau (xem mục "Kết nối" cuối trang).
-<br><span class="en">The slides use a dataset surveying married couples in Ho Chi Minh City in 2020 (`https://econometrics.site/public/mcl.csv`) — **the same dataset** used in [[concepts/multicollinearity]], but serving two different diagnostic purposes (see the "Connections" section at the end of the page).</span>
+Ví dụ minh họa dùng bộ dữ liệu khảo sát các cặp vợ chồng tại TP.HCM năm 2020 (`https://econometrics.site/public/mcl.csv`) — **cùng bộ dữ liệu** dùng ở [[concepts/multicollinearity]], nhưng phục vụ hai mục đích chẩn đoán khác nhau (xem mục "Kết nối" cuối trang).
+<br><span class="en">The illustrating example uses a dataset surveying married couples in Ho Chi Minh City in 2020 (`https://econometrics.site/public/mcl.csv`) — **the same dataset** used in [[concepts/multicollinearity]], but serving two different diagnostic purposes (see the "Connections" section at the end of the page).</span>
 
 | Biến<br><span class="en">Variable</span> | Ý nghĩa<br><span class="en">Meaning</span> | Đơn vị<br><span class="en">Unit</span> |
 |---|---|---|
@@ -125,8 +125,8 @@ Câu hỏi đặt ra: giả định A4 có thật sự đúng ở đây không?
 
 ## 5. Phát hiện bằng đồ thị (trực quan, trước khi kiểm định chính thức) - <span class="en">Graphical detection (visual, before formal testing)</span>
 
-Slide minh họa hai đồ thị phần dư (residual) từ chính mô hình trên:
-<br><span class="en">The slides illustrate two residual plots from the model above:</span>
+Hai đồ thị phần dư (residual) từ chính mô hình trên minh họa rõ hiện tượng này:
+<br><span class="en">Two residual plots from the model above illustrate this clearly:</span>
 
 - **Density plot của phần dư** (`plot(density(data$u))`): phân phối phần dư có đỉnh nhọn quanh 0 nhưng có **đuôi phải rất dài**, kéo dài tới hơn 100 (trong khi phần lớn khối lượng nằm trong khoảng [−20, 20]) — dấu hiệu phần dư không đối xứng, gợi ý cả vấn đề về normality (A5) lẫn khả năng có outlier/heteroskedasticity.
 <br><span class="en">**Density plot of the residuals** (`plot(density(data$u))`): the residual distribution has a sharp peak around 0 but a **very long right tail**, extending past 100 (while most of the mass sits within [−20, 20]) — a sign that the residuals are asymmetric, suggesting both a normality issue (A5) and the possibility of outliers/heteroskedasticity.</span>
@@ -172,10 +172,10 @@ Vi phạm A4 không đụng gì đến A1–A3, nên $b$ vẫn là ước lượ
    <br><span class="en">and SE is the square root of the diagonal elements of this VCV.</span>
    Công thức này **chỉ đúng khi $Var(\varepsilon)=\sigma^2$ là hằng số**.
    <br><span class="en">This formula **is only correct when $Var(\varepsilon)=\sigma^2$ is constant**.</span>
-   Khi A4 bị vi phạm, công thức trên không còn phản ánh đúng độ bất định thật sự của $b$ — nói theo cách slide gốc dùng: "VCV và SE bị chệch" (biased).
-   <br><span class="en">When A4 is violated, the formula above no longer correctly reflects the true uncertainty of $b$ — in the words the original slide uses: "VCV and SE are biased".</span>
-   *Ghi chú diễn giải*: cách dùng từ "biased" ở đây của slide mang tính mô tả trực quan hơn là một phát biểu kỹ thuật chặt chẽ về phân phối lấy mẫu của SE; điều chính xác cần hiểu là **công thức SE thường không còn là một ước lượng đúng (invalid/không phù hợp) của độ bất định thật của $b$** khi A4 sai — SE tính ra có thể quá nhỏ hoặc quá lớn so với thực tế, không theo hướng cố định.
-   <br><span class="en">*Interpretive note*: the slide's use of the word "biased" here is more of an intuitive description than a technically rigorous statement about the sampling distribution of SE; the precise thing to understand is that **the usual SE formula is no longer a valid (invalid/not appropriate) estimate of the true uncertainty of $b$** when A4 is wrong — the computed SE can be too small or too large relative to reality, with no fixed direction.</span>
+   Khi A4 bị vi phạm, công thức trên không còn phản ánh đúng độ bất định thật sự của $b$ — cách nói thông dụng là: "VCV và SE bị chệch" (biased).
+   <br><span class="en">When A4 is violated, the formula above no longer correctly reflects the true uncertainty of $b$ — the common shorthand is: "VCV and SE are biased".</span>
+   *Ghi chú diễn giải*: cách dùng từ "biased" ở đây mang tính mô tả trực quan hơn là một phát biểu kỹ thuật chặt chẽ về phân phối lấy mẫu của SE; điều chính xác cần hiểu là **công thức SE thường không còn là một ước lượng đúng (invalid/không phù hợp) của độ bất định thật của $b$** khi A4 sai — SE tính ra có thể quá nhỏ hoặc quá lớn so với thực tế, không theo hướng cố định.
+   <br><span class="en">*Interpretive note*: the word "biased" here is more of an intuitive description than a technically rigorous statement about the sampling distribution of SE; the precise thing to understand is that **the usual SE formula is no longer a valid (invalid/not appropriate) estimate of the true uncertainty of $b$** when A4 is wrong — the computed SE can be too small or too large relative to reality, with no fixed direction.</span>
 
 **Hệ quả dây chuyền**: vì t-statistic $=\dfrac{b_j-c}{SE(b_j)}$ và F-statistic (qua Wald test, xem mục 10) đều xây dựng trực tiếp trên SE/VCV, khi SE sai thì **t-statistic sai, p-value sai, confidence interval sai** — toàn bộ suy luận thống kê (inference) trở nên không đáng tin, **dù bản thân hệ số $b$ vẫn đúng**.
 <br><span class="en">**Chain-reaction consequence**: since the t-statistic $=\dfrac{b_j-c}{SE(b_j)}$ and the F-statistic (via the Wald test, see section 10) are both built directly on SE/VCV, when SE is wrong then **the t-statistic is wrong, the p-value is wrong, the confidence interval is wrong** — the entire chain of statistical inference becomes unreliable, **even though the coefficient $b$ itself is still correct**.</span>
@@ -403,8 +403,8 @@ Với `children` ở mục 9.3, ta đã thấy rõ ràng một trường hợp m
 <br><span class="en">A violation of **A4 (Homoskedasticity)** from [[concepts/linear-regression-model]] — see sections 4 and 6 of that page to understand where A4 sits within the full A1–A5 "rules of the game" for OLS.</span>
 - **Cùng bộ dữ liệu minh họa** (khảo sát chi tiêu hộ TP.HCM 2020) với [[concepts/multicollinearity]], nhưng **hai vấn đề hoàn toàn độc lập**: multicollinearity ảnh hưởng A2 (full rank)/efficiency thông qua tương quan giữa các biến giải thích; heteroskedasticity ảnh hưởng A4/độ tin cậy của SE — một mô hình có thể vướng cả hai, một trong hai, hoặc không vướng vấn đề nào, độc lập với nhau.
 <br><span class="en">**The same illustrative dataset** (2020 Ho Chi Minh City household expenditure survey) as [[concepts/multicollinearity]], but **two entirely independent issues**: multicollinearity affects A2 (full rank)/efficiency through correlation among the explanatory variables; heteroskedasticity affects A4/the reliability of SE — a model can suffer from both, either one, or neither, independently of each other.</span>
-- [[concepts/fixed-random-effects-model]] (Topic 12, panel data) mở rộng khái niệm heteroskedasticity sang bối cảnh dữ liệu bảng (heteroskedasticity **giữa các panel/nhóm**, thường ký hiệu A4a/A4b/A4c trong slide panel data) — cùng logic gốc rễ (phương sai sai số không đồng đều) nhưng áp dụng theo chiều "giữa các đơn vị chéo" thay vì "giữa các quan sát" như ở trang này.
-<br><span class="en">[[concepts/fixed-random-effects-model]] (Topic 12, panel data) extends the concept of heteroskedasticity to the panel data setting (heteroskedasticity **across panels/groups**, typically denoted A4a/A4b/A4c in the panel data slides) — the same root logic (non-uniform error variance) but applied along the "across cross-sectional units" dimension instead of "across observations" as on this page.</span>
+- [[concepts/fixed-random-effects-model]] (Topic 12, panel data) mở rộng khái niệm heteroskedasticity sang bối cảnh dữ liệu bảng (heteroskedasticity **giữa các panel/nhóm**, thường ký hiệu A4a/A4b/A4c) — cùng logic gốc rễ (phương sai sai số không đồng đều) nhưng áp dụng theo chiều "giữa các đơn vị chéo" thay vì "giữa các quan sát" như ở trang này.
+<br><span class="en">[[concepts/fixed-random-effects-model]] (Topic 12, panel data) extends the concept of heteroskedasticity to the panel data setting (heteroskedasticity **across panels/groups**, typically denoted A4a/A4b/A4c) — the same root logic (non-uniform error variance) but applied along the "across cross-sectional units" dimension instead of "across observations" as on this page.</span>
 - Kỹ thuật **robust standard errors** ở đây là nền tảng cho các kỹ thuật "cluster-robust SE" sẽ gặp lại ở panel data — cùng một triết lý: không cần biết đúng dạng của phương sai sai số, chỉ cần ước lượng trực tiếp nó từ dữ liệu.
 <br><span class="en">The **robust standard errors** technique here is the foundation for "cluster-robust SE" techniques that will reappear in panel data — the same philosophy: no need to know the exact form of the error variance, just estimate it directly from the data.</span>
 

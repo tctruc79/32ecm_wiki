@@ -21,8 +21,8 @@ Kinh tế học đưa ra rất nhiều lý thuyết về hành vi của cá nhâ
 <br><span class="en">Economics puts forward many theories about the behavior of individuals, firms, and markets.</span>
 Nhưng một lý thuyết, dù nghe hợp lý đến đâu, vẫn chỉ là một **giả thuyết** cho đến khi có bằng chứng từ dữ liệu thực.
 <br><span class="en">But a theory, however reasonable it sounds, remains only a **hypothesis** until there is evidence from real data.</span>
-Slide mở đầu khóa học bằng 4 câu hỏi thực nghiệm để minh họa việc này:
-<br><span class="en">The slide opens the course with 4 empirical questions to illustrate this:</span>
+Khóa học mở đầu bằng 4 câu hỏi thực nghiệm để minh họa việc này:
+<br><span class="en">The course opens with 4 empirical questions to illustrate this:</span>
 
 - Giáo dục có làm tăng lương không? (*Does education increase wages?*)
   <br><span class="en">Does education increase wages?</span>
@@ -35,8 +35,8 @@ Slide mở đầu khóa học bằng 4 câu hỏi thực nghiệm để minh h�
 
 Điểm chung của cả 4 câu hỏi: chúng đều là câu hỏi **nhân quả** (causal), không phải câu hỏi mô tả đơn thuần.
 <br><span class="en">What all 4 questions have in common: they are all **causal** questions, not merely descriptive ones.</span>
-**Econometrics** được định nghĩa (theo đúng slide) là:
-<br><span class="en">**Econometrics** is defined (per the slide) as:</span>
+**Econometrics** được định nghĩa là:
+<br><span class="en">**Econometrics** is defined as:</span>
 
 > *"Econometrics is the discipline that uses statistical methods and data to quantify economic relationships and evaluate economic theories."*
 > (Econometrics là ngành dùng phương pháp thống kê và dữ liệu để **định lượng** các quan hệ kinh tế và **kiểm định** các lý thuyết kinh tế.)
@@ -85,8 +85,8 @@ Khác biệt nằm ở **mục tiêu**, không phải ở công thức:
 | Mục tiêu<br><span class="en">Objective</span> | Prediction, statistical inference | Causal inference |
 | Phạm vi<br><span class="en">Scope</span> | Áp dụng rộng, nhiều ngành<br><span class="en">Broadly applicable, across many fields</span> | Đánh giá lý thuyết & chính sách kinh tế<br><span class="en">Evaluating economic theory & policy</span> |
 
-Slide minh họa khác biệt này bằng đúng một tình huống, đặt dưới hai góc nhìn câu hỏi khác nhau (tiêu thụ điện của hộ gia đình):
-<br><span class="en">The slide illustrates this difference using exactly one situation, framed under two different question angles (household electricity consumption):</span>
+Khác biệt này được minh họa bằng đúng một tình huống, đặt dưới hai góc nhìn câu hỏi khác nhau (tiêu thụ điện của hộ gia đình):
+<br><span class="en">This difference is illustrated using exactly one situation, framed under two different question angles (household electricity consumption):</span>
 
 - **Statistical question**: "Can we predict household electricity consumption from income and household size?" — chỉ quan tâm **dự báo được hay không**, không quan tâm cơ chế.
   <br><span class="en">**Statistical question**: "Can we predict household electricity consumption from income and household size?" — concerned only with **whether it can be predicted**, not with the mechanism.</span>
@@ -107,8 +107,8 @@ Ngược lại, một câu hỏi econometric đòi hỏi khắt khe hơn nhiều
 Association được đo bằng các công cụ quen thuộc: **correlation** (hệ số tương quan), **regression coefficients** (hệ số hồi quy), **conditional averages** (trung bình có điều kiện).
 <br><span class="en">Association is measured using familiar tools: **correlation**, **regression coefficients**, **conditional averages**.</span>
 
-Slide đưa ba ví dụ thuần túy association (chưa nói gì đến nguyên nhân):
-<br><span class="en">The slide gives three purely-association examples (not yet saying anything about causation):</span>
+Ba ví dụ thuần túy association (chưa nói gì đến nguyên nhân):
+<br><span class="en">Three purely-association examples (not yet saying anything about causation):</span>
 
 - Hộ gia đình thu nhập cao hơn có xu hướng tiêu thụ điện nhiều hơn.
   <br><span class="en">Households with higher income tend to consume more electricity.</span>
@@ -117,19 +117,19 @@ Slide đưa ba ví dụ thuần túy association (chưa nói gì đến nguyên 
 - Doanh số bán kem tăng khi số vụ tai nạn đuối nước tăng.
   <br><span class="en">Ice cream sales rise when the number of drowning accidents rises.</span>
 
-Với mỗi ví dụ, câu hỏi slide đặt ra ngay sau đó là: **"Nếu hai biến có association, điều đó có nghĩa là biến này gây ra biến kia không?"** — và câu trả lời xuyên suốt khóa học là **không nhất thiết**.
-<br><span class="en">For each example, the question the slide immediately poses is: **"If two variables have an association, does that mean one causes the other?"** — and the answer running through the whole course is **not necessarily**.</span>
+Với mỗi ví dụ, câu hỏi đặt ra ngay sau đó là: **"Nếu hai biến có association, điều đó có nghĩa là biến này gây ra biến kia không?"** — và câu trả lời xuyên suốt khóa học là **không nhất thiết**.
+<br><span class="en">For each example, the question immediately posed is: **"If two variables have an association, does that mean one causes the other?"** — and the answer running through the whole course is **not necessarily**.</span>
 
-Một ví dụ khác slide dùng để làm rõ ranh giới giữa **association** và **causality** như hai khái niệm tách biệt:
-<br><span class="en">Another example the slide uses to clarify the boundary between **association** and **causality** as two separate concepts:</span>
+Một ví dụ khác làm rõ ranh giới giữa **association** và **causality** như hai khái niệm tách biệt:
+<br><span class="en">Another example that clarifies the boundary between **association** and **causality** as two separate concepts:</span>
 
 - **Association** (quan sát thuần túy): "Taller workers tend to earn higher wages" (người lao động cao hơn có xu hướng lương cao hơn) — chỉ là một pattern quan sát được, chưa nói gì về cơ chế.
   <br><span class="en">**Association** (pure observation): "Taller workers tend to earn higher wages" — just an observed pattern, saying nothing yet about the mechanism.</span>
 - **Causality** (quan hệ nhân quả thật): "An increase in electricity price causes households to reduce electricity consumption" (giá điện tăng **khiến** hộ gia đình giảm tiêu thụ) — đây là phát biểu về **cơ chế**, mạnh hơn hẳn một pattern quan sát.
   <br><span class="en">**Causality** (a true causal relationship): "An increase in electricity price causes households to reduce electricity consumption" — this is a statement about **mechanism**, far stronger than an observed pattern.</span>
 
-Câu hỏi trung tâm mà econometrics tồn tại để trả lời, đúng như slide đặt ra: ***"Does X merely move together with Y, or does X actually cause Y?"*** (X chỉ đi cùng Y, hay X thực sự gây ra Y?)
-<br><span class="en">The central question econometrics exists to answer, exactly as the slide poses it: ***"Does X merely move together with Y, or does X actually cause Y?"***</span>
+Câu hỏi trung tâm mà econometrics tồn tại để trả lời: ***"Does X merely move together with Y, or does X actually cause Y?"*** (X chỉ đi cùng Y, hay X thực sự gây ra Y?)
+<br><span class="en">The central question econometrics exists to answer: ***"Does X merely move together with Y, or does X actually cause Y?"***</span>
 
 ## 5. Association ≠ Causality: Ba nguyên nhân gây nhầm lẫn - <span class="en">5. Association ≠ Causality: Three sources of confusion</span>
 
@@ -183,7 +183,7 @@ Nhầm association với causation không chỉ là lỗi học thuật — nó 
 | Đám cháy lớn có nhiều lính cứu hỏa và nhiều thiệt hại<br><span class="en">Bigger fires have more firefighters and more damage</span> | "Điều thêm lính cứu hỏa làm tăng thiệt hại"<br><span class="en">"Dispatching more firefighters increases damage"</span> | Cắt giảm lực lượng cứu hỏa để giảm thiệt hại do cháy<br><span class="en">Cut the firefighting force to reduce fire damage</span> | Đám cháy lớn (confounder) gây ra cả hai; cắt lính cứu hỏa thực chất sẽ làm thiệt hại **tệ hơn**<br><span class="en">The size of the fire (the confounder) causes both; cutting firefighters would actually make damage **worse**</span> |
 | Khu vực tội phạm cao có nhiều cảnh sát<br><span class="en">High-crime areas have more police</span> | "Cảnh sát làm tăng tội phạm"<br><span class="en">"Police increase crime"</span> | Rút cảnh sát khỏi khu vực để giảm tội phạm<br><span class="en">Withdraw police from the area to reduce crime</span> | Chiều nhân quả ngược lại: cảnh sát được điều đến *vì* tội phạm cao, không phải nguyên nhân của tội phạm<br><span class="en">The direction of causality is reversed: police are dispatched *because* crime is high, they are not the cause of crime</span> |
 > Ghi chú rõ ở đây để không lẫn giữa nội dung gốc và suy luận áp dụng logic tương tự.
-> <br><span class="en">This is noted explicitly here so as not to conflate original slide content with an inference applying similar logic.</span>
+> <br><span class="en">This is noted explicitly here so as not to conflate the original content with an inference applying similar logic.</span>
 
 ## 6. Ceteris paribus — "các yếu tố khác giữ nguyên" - <span class="en">6. Ceteris paribus — "other factors held constant"</span>
 
@@ -192,8 +192,8 @@ Ngay cả khi tránh được ba bẫy ở mục 5, câu hỏi kinh tế thật 
 Đây gọi là hiệu ứng **ceteris paribus** ("mọi thứ khác không đổi" — tiếng Latin).
 <br><span class="en">This is called the **ceteris paribus** effect ("everything else held constant" — Latin).</span>
 
-*Ví dụ của slide*: Lương thay đổi thế nào khi giáo dục tăng, **giữ nguyên** ability (năng lực), gia đình, và các yếu tố khác?
-<br><span class="en">*The slide's example*: How does wage change when education increases, **holding fixed** ability, family, and other factors?</span>
+*Ví dụ minh họa*: Lương thay đổi thế nào khi giáo dục tăng, **giữ nguyên** ability (năng lực), gia đình, và các yếu tố khác?
+<br><span class="en">*Illustrative example*: How does wage change when education increases, **holding fixed** ability, family, and other factors?</span>
 Để kiểm soát các yếu tố này, ta đưa chúng vào cùng phương trình hồi quy:
 <br><span class="en">To control for these factors, we include them in the same regression equation:</span>
 
@@ -261,8 +261,8 @@ Nhưng trong dữ liệu quan sát được, biến ta quan tâm thường bị 
 
 ### 8.2 Ví dụ đầy đủ: giá điện và tiêu thụ điện - <span class="en">8.2 A full example: electricity price and electricity consumption</span>
 
-Slide dùng chính ví dụ "statistical vs. econometric question" ở mục 3 để minh họa cụ thể identification problem:
-<br><span class="en">The slide uses the same "statistical vs. econometric question" example from section 3 to concretely illustrate the identification problem:</span>
+Ví dụ "statistical vs. econometric question" ở mục 3 minh họa cụ thể identification problem:
+<br><span class="en">The "statistical vs. econometric question" example from section 3 concretely illustrates the identification problem:</span>
 
 - Ta muốn ước lượng hiệu ứng của giá điện lên tiêu thụ điện của hộ gia đình.
   <br><span class="en">We want to estimate the effect of electricity price on household electricity consumption.</span>
@@ -282,8 +282,8 @@ Slide dùng chính ví dụ "statistical vs. econometric question" ở mục 3 �
 Trong khoa học tự nhiên, quan hệ nhân quả thường được nghiên cứu bằng **controlled experiments** (thí nghiệm có kiểm soát): nhà nghiên cứu chủ động thay đổi một biến trong khi giữ các yếu tố khác không đổi.
 <br><span class="en">In natural sciences, causal relationships are usually studied using **controlled experiments**: the researcher actively changes one variable while holding other factors constant.</span>
 
-> *Ví dụ của slide*: để nghiên cứu hiệu ứng của một loại thuốc, nhà nghiên cứu **phân bổ ngẫu nhiên** (randomly assign) bệnh nhân vào nhóm điều trị (treatment group) và nhóm đối chứng (control group).
-> <br><span class="en">*The slide's example*: to study the effect of a drug, the researcher **randomly assigns** patients into a treatment group and a control group.</span>
+> *Ví dụ minh họa*: để nghiên cứu hiệu ứng của một loại thuốc, nhà nghiên cứu **phân bổ ngẫu nhiên** (randomly assign) bệnh nhân vào nhóm điều trị (treatment group) và nhóm đối chứng (control group).
+> <br><span class="en">*Illustrative example*: to study the effect of a drug, the researcher **randomly assigns** patients into a treatment group and a control group.</span>
 > Vì việc phân bổ là ngẫu nhiên, các yếu tố khác được cân bằng tự động giữa hai nhóm — nhờ đó cô lập được hiệu ứng nhân quả thật của thuốc.
 > <br><span class="en">Because the assignment is random, other factors are automatically balanced between the two groups — thereby isolating the true causal effect of the drug.</span>
 
@@ -324,8 +324,8 @@ Nghiên cứu kinh tế thực nghiệm thường đi theo một trình tự 6 b
 
 ### Ba câu hỏi nền tảng ở mỗi bước - <span class="en">Three foundational questions at every step</span>
 
-Slide nhấn mạnh: đằng sau 6 bước kỹ thuật trên, có **ba câu hỏi nền tảng** thực sự quyết định chất lượng của một nghiên cứu thực nghiệm — minh họa lại bằng đúng ví dụ giá điện:
-<br><span class="en">The slide emphasizes: behind the 6 technical steps above, there are **three foundational questions** that truly determine the quality of an empirical study — illustrated again using the same electricity-price example:</span>
+Đằng sau 6 bước kỹ thuật trên, có **ba câu hỏi nền tảng** thực sự quyết định chất lượng của một nghiên cứu thực nghiệm — minh họa lại bằng đúng ví dụ giá điện:
+<br><span class="en">Behind the 6 technical steps above, there are **three foundational questions** that truly determine the quality of an empirical study — illustrated again using the same electricity-price example:</span>
 
 1. **Câu hỏi kinh tế là gì?** (*What is the economic question?*) — cần định nghĩa rõ quan hệ đang quan tâm. *Ví dụ*: giá điện tăng có làm giảm tiêu thụ điện của hộ gia đình không? Bước này xác định: biến outcome, biến quan tâm chính, và câu hỏi hành vi/chính sách đang được đặt ra.
    <br><span class="en">**What is the economic question?** — the relationship of interest needs to be clearly defined. *Example*: does a higher electricity price reduce household electricity consumption? This step identifies: the outcome variable, the main variable of interest, and the behavioral/policy question being asked.</span>
@@ -333,11 +333,6 @@ Slide nhấn mạnh: đằng sau 6 bước kỹ thuật trên, có **ba câu h�
    <br><span class="en">**What is the economic mechanism?** — the economic theory explaining **why** this relationship might exist. *Example*: a higher price raises the cost of consumption, which may lead households to reduce electricity use. Theory helps identify: which variables matter, and how they relate to each other.</span>
 3. **Hiệu ứng nhân quả có identify được trong dữ liệu không?** (*Can the causal effect be identified in the data?*) — quan hệ quan sát được có thể bị confound bởi các yếu tố khác; thách thức cốt lõi là cô lập được phần biến thiên trong biến giải thích **không** bị chi phối bởi các ảnh hưởng gây nhiễu. Đây chính là **nhiệm vụ trung tâm của econometrics**, không phải câu hỏi (1) hay (2).
    <br><span class="en">**Can the causal effect be identified in the data?** — the observed relationship may be confounded by other factors; the core challenge is isolating the portion of variation in the explanatory variable that is **not** driven by confounding influences. This is precisely the **central task of econometrics**, not question (1) or (2).</span>
-
-> Ghi chú liên quan đến Course Outline: `VNP2026-CO.pdf` mô tả Topic 0 (Introduction) gồm đúng các mảng nội dung khớp với slide này — "the use of econometrics", "some alternative statistical techniques", "econometric analysis in the research process" — xác nhận trang này bao phủ đúng nội dung triết lý nền được dạy ở buổi học đầu tiên của khóa.
-> <br><span class="en">Note related to the Course Outline: `VNP2026-CO.pdf` describes Topic 0 (Introduction) as covering exactly the content areas matching this slide — "the use of econometrics", "some alternative statistical techniques", "econometric analysis in the research process" — confirming that this page correctly covers the foundational philosophy taught in the course's first session.</span>
-> Các chi tiết logistics khác của CO (thang điểm, 15/16 topics, phần mềm...) không liên quan trực tiếp đến causal inference nên không lặp lại ở đây — xem `sources/2026-course-outline.md`.
-> <br><span class="en">Other logistical details of the CO (grading scale, 15/16 topics, software...) are not directly relevant to causal inference, so they are not repeated here — see `sources/2026-course-outline.md`.</span>
 
 ## 10. Bẫy thi tổng hợp (exam traps) - <span class="en">10. Summary exam traps</span>
 
@@ -360,8 +355,8 @@ Slide nhấn mạnh: đằng sau 6 bước kỹ thuật trên, có **ba câu h�
 
 Trang này là điểm neo (anchor) cho toàn bộ wiki.
 <br><span class="en">This page is the anchor for the entire wiki.</span>
-Slide giới thiệu khóa học có 3 phần chính (**3 main parts**), mỗi phần là một tập hợp công cụ khác nhau để giải quyết identification problem trong các bối cảnh dữ liệu khác nhau:
-<br><span class="en">The course introduction slide describes **3 main parts**, each a different set of tools for solving the identification problem in different data contexts:</span>
+Khóa học có 3 phần chính (**3 main parts**), mỗi phần là một tập hợp công cụ khác nhau để giải quyết identification problem trong các bối cảnh dữ liệu khác nhau:
+<br><span class="en">The course has **3 main parts**, each a different set of tools for solving the identification problem in different data contexts:</span>
 
 - **Phần 1 — Linear Regression Model và các vấn đề của nó**: OLS, multicollinearity, heteroskedasticity, endogeneity. Xem [[concepts/linear-regression-model]] (OLS, 5 giả định), [[concepts/functional-forms]], [[concepts/multicollinearity]], [[concepts/heteroskedasticity]], [[concepts/endogeneity-iv-regression]].
   <br><span class="en">**Part 1 — The Linear Regression Model and its problems**: OLS, multicollinearity, heteroskedasticity, endogeneity. See [[concepts/linear-regression-model]] (OLS, 5 assumptions), [[concepts/functional-forms]], [[concepts/multicollinearity]], [[concepts/heteroskedasticity]], [[concepts/endogeneity-iv-regression]].</span>

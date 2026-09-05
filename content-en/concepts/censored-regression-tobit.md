@@ -16,7 +16,7 @@ updated: 2026-09-04
 
 ## Why a dedicated model is needed — when $y$ is "cut" at a threshold
 
-[[concepts/linear-regression-model|OLS]] assumes $y$ is a continuous variable, fluctuating freely without limit. But many economic variables have a **natural bound** — a threshold below (or above) which the true value is no longer recorded as it actually is, but instead "assigned" to a fixed constant. The original slide lists four classic examples:
+[[concepts/linear-regression-model|OLS]] assumes $y$ is a continuous variable, fluctuating freely without limit. But many economic variables have a **natural bound** — a threshold below (or above) which the true value is no longer recorded as it actually is, but instead "assigned" to a fixed constant. Four classic examples are:
 
 - **Dividend**: equal to 0 until the company's profit reaches a certain threshold — below that threshold, the company pays no dividend, even though the company's latent "dividend-paying capacity" could differ, positive or negative.
 - **Government-controlled price (price control)**: the "true" market price might want to rise above or fall below the ceiling/floor set by the government, but the observed price is held rigidly at that ceiling/floor.
@@ -25,7 +25,7 @@ updated: 2026-09-04
 
 The common thread: there is a latent "desire" or "capacity" variable (not directly observable) — but the data only records it once it crosses a threshold; below the threshold, everything is "labeled" the same way (usually 0), regardless of how different the underlying latent value actually is.
 
-**The slide's running case study** (reused from section 5 onward): **credit card balance**. Many customers pay off their balance every month or do not use the card to borrow → the observed balance is exactly 0, even though their latent "borrowing tendency" (depending on interest rate, age, gender, education) can be very different.
+**This lecture's running case study** (reused from section 5 onward): **credit card balance**. Many customers pay off their balance every month or do not use the card to borrow → the observed balance is exactly 0, even though their latent "borrowing tendency" (depending on interest rate, age, gender, education) can be very different.
 
 ## Censored vs. Truncated — distinguishing the two most commonly confused concepts
 
@@ -33,26 +33,26 @@ This is the most fundamental exam trap of the topic: the two concepts sound alik
 
 ### Censored data — the ENTIRE sample is observed, values are "cut"
 
-> The slide's definition: "$y$ is censored if: we can observe all values of $y$, but only in a certain interval, values beyond the interval are recorded as a constant (e.g.: 0)."
+> Definition: "$y$ is censored if: we can observe all values of $y$, but only in a certain interval, values beyond the interval are recorded as a constant (e.g.: 0)."
 
 Intuition: we **still have the full presence of every observation in the sample** — we still know $X_i$ (interest rate, age, gender, education...) for each person, including those who are "cut." Only the **value of $y$** for observations that fall outside a range is replaced by a fixed constant (usually 0), hiding the "true" latent value underneath.
 
 - $y \ge k$: **censored from below** — every value below $k$ is assigned to $k$.
 - $y \le k$: **censored from above** — every value above $k$ is assigned to $k$.
 
-**Concrete example** (the slide's case study — credit card balance, censored from below at 0): in the sample of 2895 customers, we fully know the interest rate, age, gender, education of **all** 2895 people — including the 1018 people with `balance = 0`. We don't know "the balance they would have had if it were allowed to be negative" (e.g., an extremely financially cautious customer could have a very negative latent "borrowing tendency"), but we know for certain that they *exist in the sample* and we know their characteristics.
+**Concrete example** (the credit card balance case study, censored from below at 0): in the sample of 2895 customers, we fully know the interest rate, age, gender, education of **all** 2895 people — including the 1018 people with `balance = 0`. We don't know "the balance they would have had if it were allowed to be negative" (e.g., an extremely financially cautious customer could have a very negative latent "borrowing tendency"), but we know for certain that they *exist in the sample* and we know their characteristics.
 
-**Additional illustrative example** (not from this slide, but same logic, familiar in econometrics — Tobin's 1958 original example on durable/luxury goods spending): a household's annual spending on luxury goods = 0 for households that buy nothing at all, but that household **is still in the survey sample**, we still know its income, household size, etc. — only its latent "willingness to spend" (which could be negative, e.g. an indebted household wanting to "spend negatively") is hidden by the 0 threshold.
+**Additional illustrative example** (a self-added example, same logic, familiar in econometrics — Tobin's 1958 original example on durable/luxury goods spending): a household's annual spending on luxury goods = 0 for households that buy nothing at all, but that household **is still in the survey sample**, we still know its income, household size, etc. — only its latent "willingness to spend" (which could be negative, e.g. an indebted household wanting to "spend negatively") is hidden by the 0 threshold.
 
 ### Truncated data — entire OBSERVATIONS outside the range vanish from the sample
 
-> The slide's definition: "$y$ is truncated if we can only observe it in the uncensored interval."
+> Definition: "$y$ is truncated if we can only observe it in the uncensored interval."
 
 Intuition: completely unlike censored — here **it is not just the value of $y$ that is hidden**, but the **entire observation** (both $y$ and $X$) of units outside the range of interest **does not appear in the data at all**. We don't even know they exist, have no way to count how many were excluded, and certainly don't know their $X$ characteristics.
 
-**Illustrative example** (not from this slide, but same logic, consistent with the review hint): a survey **that only interviews households with income above a certain threshold** (e.g. a survey dedicated to "well-off households") — households with income below the threshold are not present in the dataset at all, not because their income was recorded as a fixed number, but because they **were never included in the sample**.
+**Illustrative example** (a self-added example, same logic, consistent with the review hint): a survey **that only interviews households with income above a certain threshold** (e.g. a survey dedicated to "well-off households") — households with income below the threshold are not present in the dataset at all, not because their income was recorded as a fixed number, but because they **were never included in the sample**.
 
-The slide illustrates the difference with 4 consecutive scatter plots, on the same underlying set $(x,y)$ with $x \in \{1,...,5\}$, $y \in \{1,...,9\}$:
+The difference is illustrated with 4 consecutive scatter plots, on the same underlying set $(x,y)$ with $x \in \{1,...,5\}$, $y \in \{1,...,9\}$:
 
 1. **"No censoring or truncation"** — the full set of original data points, spread evenly from $y=1$ to $y=9$.
 2. **"Censored from above"** (at $y=6$) — every point with $y>6$ in the original data is "piled" down to sit exactly at $y=6$ (many points overlapping at level 6), but the number of points per $x$ value **is unchanged** compared to the original plot.
@@ -74,13 +74,13 @@ The most important visual takeaway from these 4 plots: with censored, **point de
 
 ### Why Tobit CANNOT be applied to truncated data
 
-> The slide's exact wording: **"Tobit can not be applied for truncated data."**
+> The precise statement to remember: **"Tobit can not be applied for truncated data."**
 
 The intuitive reason: Tobit's log-likelihood (section 6) is built by adding two parts — a continuous density part for uncensored observations, and a **probability** part $\Phi(-X\beta/\sigma)$ for censored observations. To compute that probability part, Tobit **needs to know $X$ for the very observations that are censored** — exactly what censored data provides. With truncated data, observations outside the range are not present in the dataset at all, so there is no $X$ to plug into that formula — Tobit's likelihood function simply does not apply. This case needs a different likelihood function, conditioned on exactly "$y$ is only observed within the uncensored interval" — that is the **truncated regression model**, and further still, when "making it into the sample" is itself systematically correlated with $y$ (not merely a hard cutoff threshold on $y$), the **Heckman selection model** is used to handle it (see the scope note in section 9).
 
 ## Why not use OLS directly on a censored variable?
 
-> The slide's exact wording: **"OLS with censored/truncated dependent variables is biased."**
+> The precise statement to remember: **"OLS with censored/truncated dependent variables is biased."**
 
 The intuition for the censored case (applies similarly to truncated): in the credit card balance example, 1018/2895 ≈ 35.2% of customers have `balance = 0` — a large mass of data points piled exactly at $y=0$. There are two common "wrong" ways of trying to handle this with ordinary OLS:
 
@@ -152,7 +152,7 @@ A few points worth noting when reading this table:
 - **1018/2895 ≈ 35.2%** of observations are censored (left-censored at 0) — this is exactly the "mass of points piled at 0" mentioned in section 3. The remaining 1877 observations (64.8%) have positive `balance`, observed exactly.
 - The package estimates **`logSigma`** instead of $\sigma$ directly (exactly as noted in section 6) — $\sigma = \exp(9.367847) \approx 11705.88$ (R recomputes this from `logSigma` when needed for the prediction/ME formulas in section 7).
 - Signs of the coefficients: `interest` and `age` are negative (higher interest rate, higher age → lower latent borrowing tendency), `male` is positive, `edu` is negative (more education → lower latent borrowing tendency). These are $\beta$ coefficients on the **latent variable** $y^*$ — section 7 will show that these numbers are **not** the effect on observed `balance`.
-- Since the slide does not discuss an identification strategy for this dataset (no discussion of the exogeneity of `interest`, `age`...), this page interprets the coefficients in **associational/descriptive language of the estimated model** ("the estimated model shows..."), without asserting strong causal language — following the same caution principle as in [[concepts/linear-regression-model]] section 5.
+- Since there is no clear identification strategy for this dataset (no discussion of the exogeneity of `interest`, `age`...), this page interprets the coefficients in **associational/descriptive language of the estimated model** ("the estimated model shows..."), without asserting strong causal language — following the same caution principle as in [[concepts/linear-regression-model]] section 5.
 
 ## Tobit's log-likelihood — the intuitive idea
 
@@ -187,7 +187,7 @@ $$E(y^*\mid X)=X\beta \qquad\Rightarrow\qquad \text{Marginal effect} = \beta \te
 
 $$E(y\mid X)=\Phi\left(\frac{X\beta}{\sigma}\right)\left(X\beta+\sigma\lambda\right), \qquad \lambda=\frac{\phi(X\beta/\sigma)}{\Phi(X\beta/\sigma)}$$
 
-$\lambda$ here is the **inverse Mills ratio** — although the slide does not name it directly, this is exactly the mathematical structure that will reappear in the Heckman selection model (section 9).
+$\lambda$ here is the **inverse Mills ratio** — although this name is not used directly, this is exactly the mathematical structure that will reappear in the Heckman selection model (section 9).
 
 The corresponding marginal effect:
 
@@ -217,7 +217,7 @@ This is not the effect on the *value* of $y$, but on the **probability** that $y
 
 ### Illustrative numerical example — four types of effects, same four variables, one table
 
-The slide precomputes these numbers (in R, at the sample mean $\bar X$) for the credit card balance case study — this is the clearest quantitative example to see just **how different the three types of prediction/marginal effect are for the same variable**:
+These numbers are precomputed (in R, at the sample mean $\bar X$) for the credit card balance case study — this is the clearest quantitative example to see just **how different the three types of prediction/marginal effect are for the same variable**:
 
 |Variable |"raw") | Unconditional ME — $\partial E(y\mid X)/\partial X$ | Conditional ME — $\partial E(y\mid y{>}0)/\partial X$ |on $Pr(y>0)$ |
 |---|---|---|---|---|
@@ -237,7 +237,7 @@ Reading this table along the `interest` row (all evaluated at $\bar X$, i.e. at 
 
 **A quick self-check** (in the same spirit as the "self-check" in [[concepts/linear-regression-model]] section 7.4): the ratio $\text{Unconditional ME}/\beta$ must be **the same for every variable**, since both share the common factor $\Phi(X\beta/\sigma)$, which depends only on the shared $\bar X$, not on any individual variable. Checking against the table above: $133.70/321.25\approx0.416$; $145.33/349.21\approx0.416$; $1053.51/2531.38\approx0.416$; $391.75/941.30\approx0.416$ — matches for all four variables. This tells us: at a customer with sample-average characteristics, the model-predicted probability of a positive balance is $\Phi(\bar X\beta/\sigma)\approx41.6\%$. Similarly, the ratio Conditional ME$/\beta\approx0.320$ for all four variables.
 
-**A subtle point worth noting**: $41.6\%$ (the predicted probability *at* the average customer $\bar X$) differs from $1877/2895\approx64.8\%$ (the *actual* proportion uncensored in the whole sample). This is not a contradiction — because $\Phi(\cdot)$ is a nonlinear function, "the probability evaluated at the mean of $X$" generally differs from "the mean of the probability evaluated for each individual" (a form of Jensen's inequality). This is also exactly why the slide computes **both versions** of each marginal effect:
+**A subtle point worth noting**: $41.6\%$ (the predicted probability *at* the average customer $\bar X$) differs from $1877/2895\approx64.8\%$ (the *actual* proportion uncensored in the whole sample). This is not a contradiction — because $\Phi(\cdot)$ is a nonlinear function, "the probability evaluated at the mean of $X$" generally differs from "the mean of the probability evaluated for each individual" (a form of Jensen's inequality). This is also exactly why **both versions** of each marginal effect are computed:
 
 - **"At mean"**: compute the ME formula a single time, plugging in $X=\bar X$ (sample-average characteristics).
 - **"Average" (average marginal effect — AME)**: compute the ME formula separately for **each observation** in the sample (using its own $X_i$), then take the average of the $N=2895$ resulting ME numbers.
@@ -246,7 +246,7 @@ For this case study, the two versions are close but not exactly identical — e.
 
 ### Technical note: p-value of the marginal effect
 
-There is no simple closed-form formula for the standard error/p-value of the ME's above (it requires the **delta method** — an advanced technique, outside the scope of by-hand computation in this course). The slide suggests an approximation: treat the ratio $ME/SE(ME)$ as standard-normally distributed,
+There is no simple closed-form formula for the standard error/p-value of the ME's above (it requires the **delta method** — an advanced technique, outside the scope of by-hand computation in this course). A common approximation: treat the ratio $ME/SE(ME)$ as standard-normally distributed,
 
 $$z=\frac{ME}{SE(ME)}, \qquad p=2\left(1-\Phi(|z|)\right)$$
 
@@ -254,7 +254,7 @@ $$z=\frac{ME}{SE(ME)}, \qquad p=2\left(1-\Phi(|z|)\right)$$
 
 Since Tobit is estimated by MLE (not OLS), testing **multiple coefficients jointly** does not use the F-test as in [[concepts/linear-regression-model]] section 8, but instead uses the **Likelihood Ratio (LR) test** — comparing the log-likelihood of the full (unrestricted) model against a model forced to exclude the variables being tested (restricted), in the same intuitive spirit as the F-test (if excluding variables causes "goodness of fit" to drop sharply, i.e. log-likelihood drops a lot, then those variables truly matter).
 
-**Example from the slide** (`lmtest::lrtest`, jointly testing `age`, `male`, `edu`):
+**Illustrative example** (`lmtest::lrtest`, jointly testing `age`, `male`, `edu`):
 
 ```
 Model 1: balance ~ interest + age + male + edu     (unrestricted, LogLik = -20733, Df = 6)
@@ -265,7 +265,7 @@ Chisq = 530.58, Df = 3, Pr(>Chisq) < 2.2e-16
 
 $H_0: \beta_{age}=\beta_{male}=\beta_{edu}=0$. With $\chi^2=530.58$, $p<2.2\times10^{-16}$ → **strongly reject** $H_0$ → there is evidence that at least one of the three variables (`age`, `male`, `edu`) genuinely contributes to explaining the balance, beyond `interest`.
 
-> Note from the slide: the LR test for overall significance (all slope coefficients at once) works the same way — simply put every variable of the model into `lmtest::lrtest`. The same interpretation caveat as the overall F-test in [[concepts/linear-regression-model]] section 8.5 applies: a statistically significant LR test **does not** prove the model is correctly specified, and does not test Tobit's assumptions (especially the normality assumption on $\varepsilon$, which matters far more than in OLS since the entire log-likelihood rests on this assumption).
+> Note: the LR test for overall significance (all slope coefficients at once) works the same way — simply put every variable of the model into `lmtest::lrtest`. The same interpretation caveat as the overall F-test in [[concepts/linear-regression-model]] section 8.5 applies: a statistically significant LR test **does not** prove the model is correctly specified, and does not test Tobit's assumptions (especially the normality assumption on $\varepsilon$, which matters far more than in OLS since the entire log-likelihood rests on this assumption).
 
 ## Consolidated exam traps — expanded
 
@@ -278,14 +278,14 @@ $H_0: \beta_{age}=\beta_{male}=\beta_{edu}=0$. With $\chi^2=530.58$, $p<2.2\time
    - Confusing **ME on the value of $y$** with **ME on the probability $Pr(y>0)$** — the two quantities have completely different units (USD per percentage point of interest, versus percentage points of probability per percentage point of interest).
 5. **Confusing "at mean" and "average" (AME)** when citing a marginal effect number — the two numbers can differ (section 7.5); always state clearly which method was used when reporting.
 6. **Treating a statistically significant LR test as "the model is correct/well-specified"** — the same interpretation error as the overall F-test in [[concepts/linear-regression-model]] section 8.5; the LR test does not test model specification or Tobit's normality assumption.
-7. **(Scope note)** The Course Outline mentions the Heckman selection model for cases with a truncation/selection element "if time allowed" — but it is **not taught** in the slide deck (`slides-11-iu.pdf`, 35 pages) used to write this page: there is no mention whatsoever of "Heckman" or "selection" anywhere in the slide content (verified via full-text search). This concept page therefore stops at Tobit; if supplementary material on Heckman appears later, it should be ingested separately and this page's section 2.4/9 expanded.
+7. **(Scope note)** The Course Outline mentions the Heckman selection model for cases with a truncation/selection element "if time allowed" — but this content is **outside the taught scope** of this course. This concept page therefore stops at Tobit; if supplementary material on Heckman appears later, section 2.4/9 of this page could be expanded.
 
 ## Connections to the rest of the course
 
 - The **latent variable** structure $y^*=X\beta+\varepsilon$ with a cut threshold is identical to [[concepts/ordinal-response-models]] — the difference is that Tobit has only one fixed threshold (at 0, or known $a,b$), while the ordinal model has multiple thresholds and those thresholds are usually estimated.
 - Clearly distinguishing the **raw coefficient $\beta$ from the true marginal effect** (which always requires multiplying by a density/CDF function, not a constant) is a theme running throughout all of Part 2 — it appears identically in [[concepts/binary-response-models]] (Probit/Logit) and reappears more complex here with THREE types of ME instead of one.
 - $\Phi(\cdot)$ and Tobit's "censoring probability" structure share the same mathematical tool (the normal CDF) with Probit in [[concepts/binary-response-models]] — fundamentally, "censored or not" is a hidden binary decision inside Tobit.
-- The quantity $\lambda$ (inverse Mills ratio) appearing in the Unconditional/Conditional expected value (sections 7.2–7.3) is the same mathematical structure that will reappear in the **Heckman selection model** — the standard model for handling sample selection/truncation with a systematic element, but **not taught in this slide deck** (see the scope note in section 9).
+- The quantity $\lambda$ (inverse Mills ratio) appearing in the Unconditional/Conditional expected value (sections 7.2–7.3) is the same mathematical structure that will reappear in the **Heckman selection model** — the standard model for handling sample selection/truncation with a systematic element, but **outside the taught scope of this course** (see the scope note in section 9).
 - This is the final lesson of **Part 2 (Models for Limited Dependent Variables)** — after this lesson, the course returns to **Panel Data** in Part 3, extending the OLS/panel framework learned in [[concepts/fixed-random-effects-model]] to more complex variance structures.
 
 ## Real-world application references

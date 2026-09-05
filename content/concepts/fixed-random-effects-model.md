@@ -10,8 +10,8 @@ assignment: ["Assignment 5: Panel data models with variance structures"]
 updated: 2026-09-04
 ---
 
-> **Cách đọc trang này**: đây là phần mở rộng trực tiếp của [[concepts/linear-regression-model]] sang dữ liệu có **chiều thời gian** — mọi khái niệm nền (PRE/SRE, OLS, giả định A1–A5, t-test, F-test) vẫn áp dụng, chỉ được "chi tiết hóa" thêm để phù hợp với cấu trúc panel. Trang này dài vì gộp 2 slide deck (Topic 6 cơ bản + Topic 12 mở rộng) — nên đọc tuần tự: (1) panel data là gì và tại sao nó tồn tại, (2) bộ giả định mở rộng A3a/A3b, A4a/b/c, (3) bốn cách ước lượng (Pooled OLS, GLS/FGLS, FE, RE), (4) cách chọn SE đúng, (5) Hausman test để chọn giữa FE và RE.
-> <br><span class="en">**How to read this page**: this is a direct extension of [[concepts/linear-regression-model]] to data with a **time dimension** — all the underlying concepts (PRE/SRE, OLS, assumptions A1–A5, t-test, F-test) still apply, just "detailed further" to fit the panel structure. This page is long because it merges 2 slide decks (basic Topic 6 + extended Topic 12) — so read it in order: (1) what panel data is and why it exists, (2) the expanded assumption set A3a/A3b, A4a/b/c, (3) four estimation methods (Pooled OLS, GLS/FGLS, FE, RE), (4) how to choose the correct SE, (5) the Hausman test for choosing between FE and RE.</span>
+> **Cách đọc trang này**: đây là phần mở rộng trực tiếp của [[concepts/linear-regression-model]] sang dữ liệu có **chiều thời gian** — mọi khái niệm nền (PRE/SRE, OLS, giả định A1–A5, t-test, F-test) vẫn áp dụng, chỉ được "chi tiết hóa" thêm để phù hợp với cấu trúc panel. Trang này dài vì bao phủ cả Topic 6 (cơ bản) và Topic 12 (mở rộng) — nên đọc tuần tự: (1) panel data là gì và tại sao nó tồn tại, (2) bộ giả định mở rộng A3a/A3b, A4a/b/c, (3) bốn cách ước lượng (Pooled OLS, GLS/FGLS, FE, RE), (4) cách chọn SE đúng, (5) Hausman test để chọn giữa FE và RE.
+> <br><span class="en">**How to read this page**: this is a direct extension of [[concepts/linear-regression-model]] to data with a **time dimension** — all the underlying concepts (PRE/SRE, OLS, assumptions A1–A5, t-test, F-test) still apply, just "detailed further" to fit the panel structure. This page is long because it covers both Topic 6 (basic) and Topic 12 (extended) — so read it in order: (1) what panel data is and why it exists, (2) the expanded assumption set A3a/A3b, A4a/b/c, (3) four estimation methods (Pooled OLS, GLS/FGLS, FE, RE), (4) how to choose the correct SE, (5) the Hausman test for choosing between FE and RE.</span>
 
 **Lecture 6** trong đề cương (CO Topic 6 & 12) — Assignment 5: Panel data models with variance structures.
 <br><span class="en">**Lecture 6** in the syllabus (CO Topic 6 & 12) — Assignment 5: Panel data models with variance structures.</span>
@@ -32,8 +32,8 @@ updated: 2026-09-04
 
 ### 1.2 Ví dụ minh họa: một mini-panel $N\times T$ - <span class="en">Illustrative example: an $N\times T$ mini-panel</span>
 
-Slide Topic 6 dùng dữ liệu 58 tỉnh thành Việt Nam, 5 năm (2007–2011) để minh họa cấu trúc panel — mỗi tỉnh là một đơn vị $i$, mỗi năm là một thời điểm $t$. Trích một phần bảng gốc (đơn vị đúng như slide ghi — xem ghi chú mâu thuẫn ngay dưới bảng):
-<br><span class="en">The Topic 6 slide uses data from 58 Vietnamese provinces, 5 years (2007–2011) to illustrate the panel structure — each province is a unit $i$, each year is a point in time $t$. An excerpt of the original table (units exactly as the slide records them — see the source-contradiction note right below the table):</span>
+Ví dụ minh họa dùng dữ liệu 58 tỉnh thành Việt Nam, 5 năm (2007–2011) để minh họa cấu trúc panel — mỗi tỉnh là một đơn vị $i$, mỗi năm là một thời điểm $t$. Trích một phần bảng dữ liệu:
+<br><span class="en">This illustrative example uses data from 58 Vietnamese provinces, 5 years (2007–2011) to illustrate the panel structure — each province is a unit $i$, each year is a point in time $t$. An excerpt of the data table:</span>
 
 | province (tỉnh)<br><span class="en">province</span> | year | rgdp (GDP tỉnh)<br><span class="en">rgdp (provincial GDP)</span> | labfo (lao động, nghìn người)<br><span class="en">labfo (labor force, thousand people)</span> | rinvest (đầu tư)<br><span class="en">rinvest (investment)</span> | pci (chỉ số năng lực cạnh tranh cấp tỉnh, 0–100)<br><span class="en">pci (provincial competitiveness index, 0–100)</span> |
 |---|---|---|---|---|---|
@@ -45,8 +45,8 @@ Slide Topic 6 dùng dữ liệu 58 tỉnh thành Việt Nam, 5 năm (2007–2011
 | Bac Can | 2009 | 2.400.000 | 189,8 | 1.100.000 | 75,96 |
 | … | … | … | … | … | … |
 
-Đây chính là cấu trúc $y_{it}$: mỗi hàng là một cặp $(i,t)$ — "An Giang, 2007" là một quan sát khác với "An Giang, 2008" (cùng $i$, khác $t$) và khác với "Bac Can, 2007" (khác $i$, cùng $t$). $N$ ở đây là số tỉnh (58 tỉnh theo mô tả gốc — nhưng bảng hồi quy `plm` thực tế ở các mục sau lại hiển thị `n = 43, T = 5, N = 215`, tức chỉ 43 tỉnh được dùng trong panel cân bằng cuối cùng; slide gốc không giải thích rõ vì sao 58 giảm còn 43 — có thể do loại bỏ quan sát thiếu dữ liệu để cân bằng panel, nhưng đây là suy luận, không phải điều slide nói rõ).
-<br><span class="en">This is exactly the $y_{it}$ structure: each row is a pair $(i,t)$ — "An Giang, 2007" is a different observation from "An Giang, 2008" (same $i$, different $t$) and from "Bac Can, 2007" (different $i$, same $t$). $N$ here is the number of provinces (58 provinces per the original description — but the actual `plm` regression tables in later sections show `n = 43, T = 5, N = 215`, meaning only 43 provinces are used in the final balanced panel; the original slide does not explain why 58 dropped to 43 — this could be due to dropping observations with missing data to balance the panel, but this is an inference, not something the slide states explicitly).</span>
+Đây chính là cấu trúc $y_{it}$: mỗi hàng là một cặp $(i,t)$ — "An Giang, 2007" là một quan sát khác với "An Giang, 2008" (cùng $i$, khác $t$) và khác với "Bac Can, 2007" (khác $i$, cùng $t$). Bảng minh họa trên có 58 tỉnh, nhưng bảng hồi quy `plm` thực tế ở các mục sau chỉ dùng $n=43, T=5, N=215$ — panel cân bằng cuối cùng chỉ giữ lại 43 tỉnh có đầy đủ dữ liệu qua cả 5 năm.
+<br><span class="en">This is exactly the $y_{it}$ structure: each row is a pair $(i,t)$ — "An Giang, 2007" is a different observation from "An Giang, 2008" (same $i$, different $t$) and from "Bac Can, 2007" (different $i$, same $t$). The illustrative table above has 58 provinces, but the actual `plm` regression tables in later sections use only $n=43, T=5, N=215$ — the final balanced panel keeps only the 43 provinces with complete data across all 5 years.</span>
 
 ### 1.3 Tại sao panel data hữu ích cho identification — kết nối với vấn đề nhận diện nhân quả - <span class="en">Why panel data is useful for identification — connecting to the causal-identification problem</span>
 
@@ -74,8 +74,8 @@ Slide Topic 6 dùng dữ liệu 58 tỉnh thành Việt Nam, 5 năm (2007–2011
 **Mô hình FE đòi hỏi biến thiên trong nhóm (within-group variation)** — nếu một biến độc lập không đổi theo thời gian cho từng đơn vị, nó sẽ bị "hấp thụ" hoàn toàn bởi fixed effect $\alpha_i$ và **không ước lượng được**.
 <br><span class="en">**The FE model requires within-group variation** — if an independent variable does not change over time for a given unit, it will be completely "absorbed" by the fixed effect $\alpha_i$ and **cannot be estimated**.</span>
 
-Ví dụ phản chứng của slide: hồi quy khối lượng xuất khẩu từ Việt Nam sang nước $i$ ở năm $t$ theo khoảng cách địa lý từ Việt Nam đến nước $i$:
-<br><span class="en">The slide's counterexample: regressing export volume from Vietnam to country $i$ in year $t$ on the geographic distance from Vietnam to country $i$:</span>
+Ví dụ phản chứng: hồi quy khối lượng xuất khẩu từ Việt Nam sang nước $i$ ở năm $t$ theo khoảng cách địa lý từ Việt Nam đến nước $i$:
+<br><span class="en">Counterexample: regressing export volume from Vietnam to country $i$ in year $t$ on the geographic distance from Vietnam to country $i$:</span>
 $$y_{it}=\alpha+\beta x_{it}+u_{it}$$
 Vì khoảng cách địa lý **không đổi** theo năm (nước $i$ luôn cách Việt Nam một khoảng cố định), biến này không có within-group variation → không thể đưa vào một mô hình fixed-effects. Đây chính là lý do FE **không cho phép** regressor bất biến thời gian, trong khi RE (mục 10) thì cho phép — một trong những khác biệt quan trọng nhất giữa hai mô hình.
 <br><span class="en">Because geographic distance is **constant** over years (country $i$ is always a fixed distance from Vietnam), this variable has no within-group variation → it cannot be included in a fixed-effects model. This is exactly why FE **does not allow** a time-invariant regressor, while RE (section 10) does — one of the most important differences between the two models.</span>
@@ -85,7 +85,7 @@ Vì khoảng cách địa lý **không đổi** theo năm (nước $i$ luôn cá
 Trang này gộp nội dung Topic 6 và Topic 12, nên có **hai** bộ dữ liệu minh họa khác nhau xuất hiện xen kẽ ở các mục dưới đây — **không phải cùng một bộ dữ liệu**:
 <br><span class="en">This page covers both Topic 6 and Topic 12, so **two** different illustrative datasets appear interleaved in the sections below — **not the same dataset**:</span>
 
-| | Dữ liệu Topic 6 (`slides-6-iu.pdf`)<br><span class="en">Topic 6 data (`slides-6-iu.pdf`)</span> | Dữ liệu Topic 12 (`slides-13-iu.pdf`)<br><span class="en">Topic 12 data (`slides-13-iu.pdf`)</span> |
+| | Dữ liệu Topic 6<br><span class="en">Topic 6 data</span> | Dữ liệu Topic 12<br><span class="en">Topic 12 data</span> |
 |---|---|---|
 | Đơn vị quan sát<br><span class="en">Observation unit</span> | 58 tỉnh thành Việt Nam (panel cân bằng cuối cùng dùng $n=43$)<br><span class="en">58 Vietnamese provinces (final balanced panel uses $n=43$)</span> | 300 công ty<br><span class="en">300 firms</span> |
 | Số kỳ<br><span class="en">Number of periods</span> | 5 năm (2007–2011)<br><span class="en">5 years (2007–2011)</span> | 5 năm<br><span class="en">5 years</span> |
@@ -405,8 +405,8 @@ Khi chạy `phtest()` (hoặc lệnh tương đương) trong R, đôi khi gặp 
 <br><span class="en">When running `phtest()` (or an equivalent command) in R, one sometimes encounters the warning:</span>
 > **"Vb-VB is not positive definite"**
 
-Cảnh báo này nghĩa là hiệu ma trận hiệp phương sai $V(\hat\beta_{FE})-V(\hat\beta_{RE})$ **không khả nghịch** đúng nghĩa toán học — do đó thống kê kiểm định $H$ **không tính đúng được** (công thức đòi hỏi nghịch đảo ma trận này). Cách khắc phục theo slide gốc:
-<br><span class="en">This warning means the covariance-matrix difference $V(\hat\beta_{FE})-V(\hat\beta_{RE})$ is **not truly invertible** in the mathematical sense — so the test statistic $H$ **cannot be computed correctly** (the formula requires inverting this matrix). Fixes according to the original slide:</span>
+Cảnh báo này nghĩa là hiệu ma trận hiệp phương sai $V(\hat\beta_{FE})-V(\hat\beta_{RE})$ **không khả nghịch** đúng nghĩa toán học — do đó thống kê kiểm định $H$ **không tính đúng được** (công thức đòi hỏi nghịch đảo ma trận này). Cách khắc phục:
+<br><span class="en">This warning means the covariance-matrix difference $V(\hat\beta_{FE})-V(\hat\beta_{RE})$ is **not truly invertible** in the mathematical sense — so the test statistic $H$ **cannot be computed correctly** (the formula requires inverting this matrix). Fixes:</span>
 - Kiểm tra **outlier** trong dữ liệu.
 <br><span class="en">Check for **outliers** in the data.</span>
 - Kiểm tra **multicollinearity** (xem [[concepts/multicollinearity]]).

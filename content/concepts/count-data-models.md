@@ -31,8 +31,8 @@ updated: 2026-09-04
 
 $$y = 0, 1, 2, \dots, K$$
 
-Slide gốc liệt kê các ví dụ kinh điển trong kinh tế lượng ứng dụng:
-<br><span class="en">The original slide lists the classic examples in applied econometrics:</span>
+Các ví dụ kinh điển trong kinh tế lượng ứng dụng gồm:
+<br><span class="en">The classic examples in applied econometrics include:</span>
 
 - Số lời chào mua lại (takeover bids) mà một doanh nghiệp mục tiêu nhận được.
 <br><span class="en">The number of takeover bids a target firm receives.</span>
@@ -145,8 +145,8 @@ Ví dụ ở đây dùng lại **chính xác** bộ khảo sát vaccine của [[
 | `pbenefit`, `efficacy80`, `duration3` | ≈0.49–0.50 | ≈0.50 | 0 | 1 |
 | `male` | 0.32 | 0.47 | 0 | 1 |
 
-Phân phối chi tiết của `dhh` (n=377): 0→73, 1→1, 2→15, 3→35, 4→74, 5→82, 6→47, 7→16, 8→14, 9→10, 10→4, 11→4, 12→1, 24→1 (một quan sát ngoại lai rõ rệt ở 24). Histogram trong slide cho thấy hình dạng **lệch phải điển hình của count data**: khối lượng quan sát tập trung ở 0–9, đuôi phải dài và mỏng.
-<br><span class="en">Detailed distribution of `dhh` (n=377): 0→73, 1→1, 2→15, 3→35, 4→74, 5→82, 6→47, 7→16, 8→14, 9→10, 10→4, 11→4, 12→1, 24→1 (one clear outlier at 24). The histogram in the slide shows the shape **typical right-skew of count data**: the bulk of observations concentrate at 0–9, with a long, thin right tail.</span>
+Phân phối chi tiết của `dhh` (n=377): 0→73, 1→1, 2→15, 3→35, 4→74, 5→82, 6→47, 7→16, 8→14, 9→10, 10→4, 11→4, 12→1, 24→1 (một quan sát ngoại lai rõ rệt ở 24). Histogram của phân phối này cho thấy hình dạng **lệch phải điển hình của count data**: khối lượng quan sát tập trung ở 0–9, đuôi phải dài và mỏng.
+<br><span class="en">Detailed distribution of `dhh` (n=377): 0→73, 1→1, 2→15, 3→35, 4→74, 5→82, 6→47, 7→16, 8→14, 9→10, 10→4, 11→4, 12→1, 24→1 (one clear outlier at 24). The histogram of this distribution shows the shape **typical right-skew of count data**: the bulk of observations concentrate at 0–9, with a long, thin right tail.</span>
 
 Phân bố `risk` (n=377): Very unlikely 87, Unlikely 109, Neither 129, Likely 42, Very likely 10.
 <br><span class="en">Distribution of `risk` (n=377): Very unlikely 87, Unlikely 109, Neither 129, Likely 42, Very likely 10.</span>
@@ -156,8 +156,8 @@ Phân bố `risk` (n=377): Very unlikely 87, Unlikely 109, Neither 129, Likely 4
 
 $$\frac{Var(dhh)}{Mean(dhh)}=\frac{7.84}{4.13}\approx1.90$$
 
-Nếu Poisson đúng (equidispersion), tỷ lệ này phải xấp xỉ 1. Con số ≈1.90 — phương sai thô gần **gấp đôi** trung bình thô — là dấu hiệu định tính sớm cho thấy khả năng cao dữ liệu này bị **overdispersion**, trước khi cần đến kiểm định chính thức (mục 6.2). Đây là một phép tính minh họa tự suy ra từ thống kê mô tả của slide, không phải một con số slide tính sẵn — nhưng là bước kiểm tra trực giác nên làm theo thói quen trước khi ước lượng Poisson.
-<br><span class="en">If Poisson holds (equidispersion), this ratio should be approximately 1. The figure ≈1.90 — raw variance nearly **double** the raw mean — is an early qualitative sign that this data is likely subject to **overdispersion**, before any formal test is needed (section 6.2). This is an illustrative calculation derived from the slide's descriptive statistics, not a figure the slide computes directly — but it is a sanity check worth doing as a habit before estimating a Poisson model.</span>
+Nếu Poisson đúng (equidispersion), tỷ lệ này phải xấp xỉ 1. Con số ≈1.90 — phương sai thô gần **gấp đôi** trung bình thô — là dấu hiệu định tính sớm cho thấy khả năng cao dữ liệu này bị **overdispersion**, trước khi cần đến kiểm định chính thức (mục 6.2). Đây là một phép tính minh họa tự suy ra từ thống kê mô tả ở trên — một bước kiểm tra trực giác nên làm theo thói quen trước khi ước lượng Poisson.
+<br><span class="en">If Poisson holds (equidispersion), this ratio should be approximately 1. The figure ≈1.90 — raw variance nearly **double** the raw mean — is an early qualitative sign that this data is likely subject to **overdispersion**, before any formal test is needed (section 6.2). This is an illustrative calculation derived from the descriptive statistics above — a sanity check worth doing as a habit before estimating a Poisson model.</span>
 
 ## 5. Ước lượng Poisson model trên dữ liệu vaccine - <span class="en">Estimating the Poisson model on the vaccine data</span>
 
@@ -337,8 +337,8 @@ $$IRR_j = e^{\hat\beta_j}$$
 | `age` | −0.009695 | 0.9904 | Tuổi tăng 1 năm → số vaccine kỳ vọng mua **giảm 0.96%**<br><span class="en">Age increases by 1 year → expected number of vaccines purchased **falls by 0.96%**</span> |
 | `verylikely` (so với base "very unlikely")<br><span class="en">`verylikely` (relative to base "very unlikely")</span> | 0.4376 | 1.5490 | Người cho rằng rủi ro nhiễm là "rất có khả năng" mua vaccine kỳ vọng **cao hơn 54.9%** so với người cho rằng "rất không có khả năng" (base), giữ các biến khác không đổi<br><span class="en">A person who perceives the risk of infection as "very likely" has an expected vaccine purchase **54.9% higher** than someone who perceives it as "very unlikely" (base), holding other variables fixed</span> |
 
-Vì `risk` không được slide gán nhãn causal/non-causal một cách tường minh như bộ dữ liệu Forest/Storm ở [[concepts/linear-regression-model]], nên diễn giải trên chỉ dùng ngôn ngữ liên kết ("có liên quan đến", "cao hơn") — **không khẳng định nhân quả** khi nguồn không xác nhận rõ cơ chế nhân quả.
-<br><span class="en">Because `risk` is not explicitly labeled causal/non-causal by the slide the way the Forest/Storm dataset is in [[concepts/linear-regression-model]], the interpretation above uses only associational language ("associated with", "higher than") — **no causal claim is made** when the source does not clearly confirm a causal mechanism.</span>
+Vì `risk` không được gán nhãn causal/non-causal một cách tường minh như bộ dữ liệu Forest/Storm ở [[concepts/linear-regression-model]], nên diễn giải trên chỉ dùng ngôn ngữ liên kết ("có liên quan đến", "cao hơn") — **không khẳng định nhân quả** khi nguồn không xác nhận rõ cơ chế nhân quả.
+<br><span class="en">Because `risk` is not explicitly labeled causal/non-causal the way the Forest/Storm dataset is in [[concepts/linear-regression-model]], the interpretation above uses only associational language ("associated with", "higher than") — **no causal claim is made** when the source does not clearly confirm a causal mechanism.</span>
 
 ### 9.3 Marginal effects trên thang số đếm (bổ sung IRR, không thay thế) - <span class="en">Marginal effects on the count scale (supplementing IRR, not replacing it)</span>
 
@@ -358,8 +358,8 @@ IRR cho biết **thay đổi tương đối (%)**; muốn biết thay đổi **t
 
 ### 9.4 Một điểm dễ nhầm: `predict(..., type="link")` không phải là số đếm kỳ vọng - <span class="en">An easy point of confusion: `predict(..., type="link")` is not the expected count</span>
 
-Slide minh họa tính "partial effect tại một điểm dữ liệu cụ thể" bằng cách tăng `hhincomeUS` từ 700 lên 701 (giữ các biến khác cố định) và lấy hiệu của hai dự đoán:
-<br><span class="en">The slide illustrates computing a "partial effect at a specific data point" by increasing `hhincomeUS` from 700 to 701 (holding other variables fixed) and taking the difference between the two predictions:</span>
+Partial effect "tại một điểm dữ liệu cụ thể" được tính bằng cách tăng `hhincomeUS` từ 700 lên 701 (giữ các biến khác cố định) và lấy hiệu của hai dự đoán:
+<br><span class="en">A partial effect "at a specific data point" is computed by increasing `hhincomeUS` from 700 to 701 (holding other variables fixed) and taking the difference between the two predictions:</span>
 
 ```r
 nbpred1 = predict(negbin, newdata=point1, type="link")
@@ -380,8 +380,8 @@ Ngay từ thống kê mô tả (mục 4.1): 73/377 ≈ **19.4%** hộ gia đình
 
 $$Pr(y=0)=\frac{e^{-4.13}(4.13)^0}{0!}=e^{-4.13}\approx0.0161 \;(\approx1.6\%)$$
 
-Tỷ lệ số 0 **thực tế quan sát được (≈19.4%) lớn hơn rất nhiều** so với tỷ lệ Poisson dự đoán (≈1.6%) tại cùng mức trung bình — đây là một minh họa trực quan cho bài toán **excess zeros** (quá nhiều quan sát bằng 0 so với những gì phân phối đếm chuẩn dự đoán). *(Đây là phép tính minh họa tự suy ra từ số liệu mô tả trong slide — bản thân slide không trình bày trực tiếp phép so sánh này, nhưng dùng đúng công thức Poisson mà slide đã cho ở mục 2 và trung bình mẫu ở mục 4.1.)*
-<br><span class="en">The **actually observed** zero rate (≈19.4%) is **far larger** than the Poisson-predicted rate (≈1.6%) at the same mean — this is a direct illustration of the **excess zeros** problem (far more zero observations than a standard count distribution predicts). *(This is an illustrative calculation derived from the slide's descriptive data — the slide itself does not present this comparison directly, but it uses exactly the Poisson formula given by the slide in section 2 and the sample mean from section 4.1.)*</span>
+Tỷ lệ số 0 **thực tế quan sát được (≈19.4%) lớn hơn rất nhiều** so với tỷ lệ Poisson dự đoán (≈1.6%) tại cùng mức trung bình — đây là một minh họa trực quan cho bài toán **excess zeros** (quá nhiều quan sát bằng 0 so với những gì phân phối đếm chuẩn dự đoán). *(Đây là phép tính minh họa tự suy ra từ số liệu mô tả ở trên, dùng đúng công thức Poisson ở mục 2 và trung bình mẫu ở mục 4.1.)*
+<br><span class="en">The **actually observed** zero rate (≈19.4%) is **far larger** than the Poisson-predicted rate (≈1.6%) at the same mean — this is a direct illustration of the **excess zeros** problem (far more zero observations than a standard count distribution predicts). *(This is an illustrative calculation derived from the descriptive data above, using exactly the Poisson formula from section 2 and the sample mean from section 4.1.)*</span>
 
 **Diễn giải kinh tế học của excess zeros**: có thể tồn tại **hai nhóm tiềm ẩn (latent groups)** trong dân số, mà biến $X$ quan sát được không phân biệt được hoàn toàn:
 <br><span class="en">**Economic interpretation of excess zeros**: there may exist **two latent groups** in the population that the observed $X$ variables cannot fully distinguish:</span>
@@ -391,8 +391,8 @@ Tỷ lệ số 0 **thực tế quan sát được (≈19.4%) lớn hơn rất nh
 2. **Nhóm "có khả năng mua" (count process / at-risk group)**: những hộ *có thể* mua vaccine (số lượng tuân theo một quá trình đếm, VD NB), nhưng vẫn có thể tình cờ mua đúng 0 liều trong lần khảo sát này (VD do giá cao, thu nhập thấp thời điểm đó…) mà không phải vì họ "không bao giờ mua".
 <br><span class="en">The "potential buyer" group (count process / at-risk group): households that *could* purchase vaccine (the quantity follows a count process, e.g. NB), but may happen to purchase exactly 0 doses at this particular survey moment (e.g. because of a high price, low income at that time…) without it meaning they "never buy".</span>
 
-Slide gốc gọi đây là trường hợp có **"too many zeros, or two separate processes"**.
-<br><span class="en">The original slide calls this a case of **"too many zeros, or two separate processes"**.</span>
+Đây là trường hợp được gọi là **"too many zeros, or two separate processes"**.
+<br><span class="en">This is a case of what's called **"too many zeros, or two separate processes"**.</span>
 
 ### 10.2 Cấu trúc hai phần (two-part structure) - <span class="en">Two-part structure</span>
 
@@ -476,11 +476,11 @@ So sánh hai giá trị $\theta$ (và $\alpha=1/\theta$) giữa NB thường (m�
 | NB (mục 8, không tách zero-inflation)<br><span class="en">NB (section 8, without separating zero-inflation)</span> | 6.6807 | 0.1497 |
 | ZINB — phần đếm<br><span class="en">ZINB — count part</span> | 8,841,154.89 | ≈0.0000001 (≈0) |
 
-$\alpha\approx0$ trong ZINB tương đương gần như **Poisson thuần túy** ở phần đếm (nhắc lại mục 7.3: $\alpha=0\Leftrightarrow$ NB thu gọn về Poisson). Diễn giải trực quan: khi mô hình NB thường (mục 8) phải "gánh" toàn bộ overdispersion — bao gồm cả phần overdispersion sinh ra bởi excess zeros — vào một tham số $\alpha$ duy nhất, $\alpha$ ước lượng được khá lớn (0.1497). Nhưng khi tách riêng phần "luôn luôn 0" ra thành một phương trình logit độc lập (ZINB), phần overdispersion còn lại trong quá trình đếm gần như biến mất ($\alpha\to0$). Điều này gợi ý: phần lớn overdispersion phát hiện được ở mục 6–8 trong ví dụ này **có thể chủ yếu đến từ excess zeros**, chứ không phải từ dị biệt cá nhân lan tỏa đều trên mọi mức đếm. Đây là một quan sát tự suy ra từ hai bảng số của slide (không phải kết luận slide tự phát biểu trực tiếp), nên trình bày như một cách đọc số liệu, không phải một khẳng định của giảng viên.
-<br><span class="en">$\alpha\approx0$ in ZINB is nearly equivalent to **pure Poisson** in the count part (recall section 7.3: $\alpha=0\Leftrightarrow$ NB collapses to Poisson). Intuitive interpretation: when the plain NB model (section 8) has to "carry" all the overdispersion — including the portion generated by excess zeros — into a single parameter $\alpha$, the estimated $\alpha$ turns out fairly large (0.1497). But once the "always zero" part is separated out into its own logit equation (ZINB), the remaining overdispersion in the count process nearly vanishes ($\alpha\to0$). This suggests that most of the overdispersion detected in sections 6–8 in this example **may come mainly from excess zeros**, rather than from individual heterogeneity spread evenly across all count levels. This is an observation derived from the slide's two numerical tables (not a conclusion the slide states directly), so it is presented as one way of reading the data, not a claim made by the instructor.</span>
+$\alpha\approx0$ trong ZINB tương đương gần như **Poisson thuần túy** ở phần đếm (nhắc lại mục 7.3: $\alpha=0\Leftrightarrow$ NB thu gọn về Poisson). Diễn giải trực quan: khi mô hình NB thường (mục 8) phải "gánh" toàn bộ overdispersion — bao gồm cả phần overdispersion sinh ra bởi excess zeros — vào một tham số $\alpha$ duy nhất, $\alpha$ ước lượng được khá lớn (0.1497). Nhưng khi tách riêng phần "luôn luôn 0" ra thành một phương trình logit độc lập (ZINB), phần overdispersion còn lại trong quá trình đếm gần như biến mất ($\alpha\to0$). Điều này gợi ý: phần lớn overdispersion phát hiện được ở mục 6–8 trong ví dụ này **có thể chủ yếu đến từ excess zeros**, chứ không phải từ dị biệt cá nhân lan tỏa đều trên mọi mức đếm. Đây là một quan sát tự suy ra từ hai bảng số ở trên, nên trình bày như một cách đọc số liệu, không phải một kết luận chắc chắn.
+<br><span class="en">$\alpha\approx0$ in ZINB is nearly equivalent to **pure Poisson** in the count part (recall section 7.3: $\alpha=0\Leftrightarrow$ NB collapses to Poisson). Intuitive interpretation: when the plain NB model (section 8) has to "carry" all the overdispersion — including the portion generated by excess zeros — into a single parameter $\alpha$, the estimated $\alpha$ turns out fairly large (0.1497). But once the "always zero" part is separated out into its own logit equation (ZINB), the remaining overdispersion in the count process nearly vanishes ($\alpha\to0$). This suggests that most of the overdispersion detected in sections 6–8 in this example **may come mainly from excess zeros**, rather than from individual heterogeneity spread evenly across all count levels. This is an observation derived from the two numerical tables above, so it is presented as one way of reading the data, not a firm conclusion.</span>
 
-> Lưu ý: slide không trình bày kiểm định hình thức nào (VD Vuong test) để so sánh trực tiếp NB và ZINB có thực sự khác biệt có ý nghĩa thống kê hay không — quan sát ở mục 11.2 chỉ mang tính minh họa định tính, không thay thế cho một kiểm định chính thức.
-> <br><span class="en">Note: the slide does not present any formal test (e.g. a Vuong test) to directly compare whether NB and ZINB actually differ with statistical significance — the observation in section 11.2 is only a qualitative illustration, not a substitute for a formal test.</span>
+> Lưu ý: không có kiểm định hình thức nào (VD Vuong test) được trình bày ở đây để so sánh trực tiếp NB và ZINB có thực sự khác biệt có ý nghĩa thống kê hay không — quan sát ở mục 11.2 chỉ mang tính minh họa định tính, không thay thế cho một kiểm định chính thức.
+> <br><span class="en">Note: no formal test (e.g. a Vuong test) is presented here to directly compare whether NB and ZINB actually differ with statistical significance — the observation in section 11.2 is only a qualitative illustration, not a substitute for a formal test.</span>
 
 ## 12. Bẫy thi tổng hợp (exam traps) - <span class="en">Comprehensive exam traps</span>
 
@@ -496,8 +496,8 @@ $\alpha\approx0$ trong ZINB tương đương gần như **Poisson thuần túy**
 <br><span class="en">**Confusing `predict(..., type="link")` with `predict(..., type="response")`.** `type="link"` returns $X\beta$ (the log of the expected count); the difference between two predictions on this scale is simply the coefficient difference × the $X$ difference — **not** the actual impact on the expected count $\lambda$ (section 9.4).</span>
 6. **Diễn giải hệ số $\hat\gamma$ ở phần zero-inflation (logit) giống hệ số $\hat\beta$ ở phần đếm (log-count).** Hai phần có ý nghĩa hoàn toàn khác nhau: $\hat\gamma$ nói về log-odds của việc thuộc nhóm "luôn luôn 0"; $\hat\beta$ nói về log của số đếm kỳ vọng trong nhóm "có khả năng đếm được". Không được gộp chung diễn giải (mục 11.1).
 <br><span class="en">**Interpreting the coefficient $\hat\gamma$ in the zero-inflation part (logit) the same way as the coefficient $\hat\beta$ in the count part (log-count).** The two parts have entirely different meanings: $\hat\gamma$ speaks to the log-odds of belonging to the "always zero" group; $\hat\beta$ speaks to the log of the expected count within the "at-risk" group. They must not be interpreted interchangeably (section 11.1).</span>
-7. **So sánh trực tiếp log-likelihood/AIC giữa hai mô hình dùng tập biến độc lập khác nhau** — như trong ví dụ slide, ZINB bỏ biến `risk` khỏi phần đếm so với NB thường (mục 11) — so sánh như vậy không "apples-to-apples", vì chênh lệch fit có thể đến từ khác biệt tập biến, không hẳn từ cấu trúc mô hình.
-<br><span class="en">**Directly comparing log-likelihood/AIC between two models that use different sets of independent variables** — as in the slide's example, ZINB drops the `risk` variable from the count part relative to the plain NB (section 11) — such a comparison is not "apples-to-apples", because the fit difference could come from the different variable sets, not necessarily from the model structure.</span>
+7. **So sánh trực tiếp log-likelihood/AIC giữa hai mô hình dùng tập biến độc lập khác nhau** — như trong ví dụ ở mục 11, ZINB bỏ biến `risk` khỏi phần đếm so với NB thường — so sánh như vậy không "apples-to-apples", vì chênh lệch fit có thể đến từ khác biệt tập biến, không hẳn từ cấu trúc mô hình.
+<br><span class="en">**Directly comparing log-likelihood/AIC between two models that use different sets of independent variables** — as in the section 11 example, ZINB drops the `risk` variable from the count part relative to the plain NB — such a comparison is not "apples-to-apples", because the fit difference could come from the different variable sets, not necessarily from the model structure.</span>
 8. **Coi "NB fit tốt hơn Poisson có ý nghĩa thống kê" (mục 8.3) là bằng chứng dứt khoát cho một cơ chế kinh tế cụ thể** (VD "chắc chắn do dị biệt cá nhân") — kiểm định $H_0:\alpha=0$ chỉ nói overdispersion tồn tại về mặt thống kê, không tự động xác định **nguyên nhân** overdispersion (dị biệt cá nhân thuần túy hay excess zeros hay cả hai) — muốn phân biệt, cần thử thêm ZINB như ở mục 10–11.
 <br><span class="en">**Treating "NB fits significantly better than Poisson" (section 8.3) as conclusive evidence for a specific economic mechanism** (e.g. "definitely due to individual heterogeneity") — the test $H_0:\alpha=0$ only tells us overdispersion exists statistically, it does not automatically identify the **cause** of the overdispersion (pure individual heterogeneity, excess zeros, or both) — distinguishing between them requires trying ZINB as in sections 10–11.</span>
 

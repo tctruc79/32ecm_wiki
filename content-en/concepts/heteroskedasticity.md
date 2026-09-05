@@ -26,7 +26,7 @@ In other words: **the magnitude of the prediction error (residual) is not unifor
 This is exactly **heteroskedasticity** ("hetero" = different, "skedasticity" = dispersion).
 Conversely, if the magnitude of the prediction error is uniform regardless of the observation — no household is systematically predicted "further off" than another — that is **homoskedasticity**, OLS's A4 assumption (see [[concepts/linear-regression-model]] section 4).
 
-A concrete numerical example illustrating exactly this phenomenon appears in sections 4–5 below — using the very same household expenditure dataset that the original slides use throughout.
+A concrete numerical example illustrating exactly this phenomenon appears in sections 4–5 below — using the same household expenditure dataset used throughout this lecture.
 
 ## Formal definition
 
@@ -44,7 +44,7 @@ The "standard" VCV and SE that OLS reports by default (including in R's `summary
 
 ## Sources of heteroskedasticity
 
-The slides list three common sources, not mutually exclusive:
+There are three common sources, not mutually exclusive:
 
 1. **Outliers in the data**: a few extreme observations can pull the error variance up abnormally high in the region of the data containing that outlier.
 2. **Wrong functional form**: for example the true model is nonlinear (log, quadratic…) but is estimated as linear — this "omitted nonlinearity" can manifest as non-uniform error variance. (See also [[concepts/functional-forms]].)
@@ -52,7 +52,7 @@ The slides list three common sources, not mutually exclusive:
 
 ## Running example: 2020 Ho Chi Minh City household expenditure survey
 
-The slides use a dataset surveying married couples in Ho Chi Minh City in 2020 (`https://econometrics.site/public/mcl.csv`) — **the same dataset** used in [[concepts/multicollinearity]], but serving two different diagnostic purposes (see the "Connections" section at the end of the page).
+The illustrating example uses a dataset surveying married couples in Ho Chi Minh City in 2020 (`https://econometrics.site/public/mcl.csv`) — **the same dataset** used in [[concepts/multicollinearity]], but serving two different diagnostic purposes (see the "Connections" section at the end of the page).
 
 |Variable |Meaning |Unit |
 |---|---|---|
@@ -97,7 +97,7 @@ The question that arises: does the A4 assumption actually hold here?
 
 ## Graphical detection (visual, before formal testing)
 
-The slides illustrate two residual plots from the model above:
+Two residual plots from the model above illustrate this clearly:
 
 - **Density plot of the residuals** (`plot(density(data$u))`): the residual distribution has a sharp peak around 0 but a **very long right tail**, extending past 100 (while most of the mass sits within [−20, 20]) — a sign that the residuals are asymmetric, suggesting both a normality issue (A5) and the possibility of outliers/heteroskedasticity.
 - **Residuals vs. Predicted values** (`plot(data$yh, data$u)`, x-axis = "Predicted monthly expense", y-axis = "Residuals"): this is the classic heteroskedasticity diagnostic plot.
@@ -124,8 +124,8 @@ Violating A4 does not touch A1–A3 at all, so $b$ remains a correct estimator, 
 2. **The standard VCV/SE formula becomes wrong**: the standard VCV is computed under the A4 assumption:
    and SE is the square root of the diagonal elements of this VCV.
    This formula **is only correct when $Var(\varepsilon)=\sigma^2$ is constant**.
-   When A4 is violated, the formula above no longer correctly reflects the true uncertainty of $b$ — in the words the original slide uses: "VCV and SE are biased".
-   *Interpretive note*: the slide's use of the word "biased" here is more of an intuitive description than a technically rigorous statement about the sampling distribution of SE; the precise thing to understand is that **the usual SE formula is no longer a valid (invalid/not appropriate) estimate of the true uncertainty of $b$** when A4 is wrong — the computed SE can be too small or too large relative to reality, with no fixed direction.
+   When A4 is violated, the formula above no longer correctly reflects the true uncertainty of $b$ — the common shorthand is: "VCV and SE are biased".
+   *Interpretive note*: the word "biased" here is more of an intuitive description than a technically rigorous statement about the sampling distribution of SE; the precise thing to understand is that **the usual SE formula is no longer a valid (invalid/not appropriate) estimate of the true uncertainty of $b$** when A4 is wrong — the computed SE can be too small or too large relative to reality, with no fixed direction.
 
 **Chain-reaction consequence**: since the t-statistic $=\dfrac{b_j-c}{SE(b_j)}$ and the F-statistic (via the Wald test, see section 10) are both built directly on SE/VCV, when SE is wrong then **the t-statistic is wrong, the p-value is wrong, the confidence interval is wrong** — the entire chain of statistical inference becomes unreliable, **even though the coefficient $b$ itself is still correct**.
 
@@ -290,7 +290,7 @@ With `children` in section 9.3, we already saw a clear case where switching the 
 
 - A violation of **A4 (Homoskedasticity)** from [[concepts/linear-regression-model]] — see sections 4 and 6 of that page to understand where A4 sits within the full A1–A5 "rules of the game" for OLS.
 - **The same illustrative dataset** (2020 Ho Chi Minh City household expenditure survey) as [[concepts/multicollinearity]], but **two entirely independent issues**: multicollinearity affects A2 (full rank)/efficiency through correlation among the explanatory variables; heteroskedasticity affects A4/the reliability of SE — a model can suffer from both, either one, or neither, independently of each other.
-- [[concepts/fixed-random-effects-model]] (Topic 12, panel data) extends the concept of heteroskedasticity to the panel data setting (heteroskedasticity **across panels/groups**, typically denoted A4a/A4b/A4c in the panel data slides) — the same root logic (non-uniform error variance) but applied along the "across cross-sectional units" dimension instead of "across observations" as on this page.
+- [[concepts/fixed-random-effects-model]] (Topic 12, panel data) extends the concept of heteroskedasticity to the panel data setting (heteroskedasticity **across panels/groups**, typically denoted A4a/A4b/A4c) — the same root logic (non-uniform error variance) but applied along the "across cross-sectional units" dimension instead of "across observations" as on this page.
 - The **robust standard errors** technique here is the foundation for "cluster-robust SE" techniques that will reappear in panel data — the same philosophy: no need to know the exact form of the error variance, just estimate it directly from the data.
 
 ## Real-world application references

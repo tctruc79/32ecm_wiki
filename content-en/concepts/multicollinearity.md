@@ -24,7 +24,7 @@ A concrete example — taken directly from the case study running through this p
 
 ## Perfect collinearity vs. Imperfect collinearity (multicollinearity)
 
-The Classical Linear Regression Model (CLRM) assumes **A2 — Full rank**: no perfect linear relationship among the regressors. The slide clearly distinguishes two types of collinearity, and this is a point that's often conflated during exam review:
+The Classical Linear Regression Model (CLRM) assumes **A2 — Full rank**: no perfect linear relationship among the regressors. There are two types of collinearity that must be clearly distinguished, and this is a point that's often conflated during exam review:
 
 - **Perfect collinearity**: a **perfect** linear relationship between 2+ variables (e.g., $X_2=2X_1$ holding for *every* observation). This is a **complete** violation of A2 — not "an issue to weigh" but a **technical error that stops the model from running at all**.
 - **Imperfect collinearity (multicollinearity)**: the regressors are highly correlated but **not perfectly** — the model still estimates normally, just less reliably (larger SE). This is a "near-violation" of A2, not a full violation.
@@ -35,7 +35,7 @@ With $y=\beta_0+\beta_1X_1+\beta_2X_2$ and $X_2=2X_1$ (a perfect linear relation
 
 $$y=\beta_0+\beta_1X_1+\beta_2(2X_1)=\beta_0+(\beta_1+2\beta_2)X_1=\beta_0+\gamma X_1, \qquad \gamma=\beta_1+2\beta_2$$
 
-The original model "collapses" into a model with only one variable $X_1$ and coefficient $\gamma$. The problem: for **one** estimated value of $\gamma$, there are **infinitely many** pairs $(\beta_1,\beta_2)$ satisfying the equation $\gamma=\beta_1+2\beta_2$. The slide illustrates this with $\gamma=1$:
+The original model "collapses" into a model with only one variable $X_1$ and coefficient $\gamma$. The problem: for **one** estimated value of $\gamma$, there are **infinitely many** pairs $(\beta_1,\beta_2)$ satisfying the equation $\gamma=\beta_1+2\beta_2$. Illustrated with $\gamma=1$:
 
 - if $\beta_1=2$ then $\beta_2=-0.5$;
 - if $\beta_1=3$ then $\beta_2=-1$;
@@ -47,7 +47,7 @@ Quite unlike perfect collinearity, **imperfect collinearity (multicollinearity)*
 
 ## Sources of multicollinearity
 
-The slide lists four mechanisms that make regressors highly correlated in practice:
+There are four mechanisms that make regressors highly correlated in practice:
 
 1. **Inherent relationships**: some variables are naturally correlated with each other — e.g., education and income; the labor and capital inputs in a production function.
 2. **Repeated measures**: using multiple variables to measure the same concept, or closely related concepts — e.g., assets and income.
@@ -69,7 +69,7 @@ This is the dataset Professor Thụy uses to illustrate the entire process of de
 | `hhsize` |Household size |number of members |
 | `children` |% of children in the household |percent |
 
-> Note from the slide: observations with NA values and households with `income = 0` were removed, leaving $n=470$ observations.
+> Note: observations with NA values and households with `income = 0` were removed, leaving $n=470$ observations.
 
 **Descriptive statistics** (after cleaning, $n=470$ for every variable):
 
@@ -128,11 +128,11 @@ Look at the denominator $(1-r_{12}^2)$: as $r_{12}\to1$ (the two variables move 
 
 ### Commonly used thresholds
 
-Rule of thumb per the slide: **$VIF>5$** is treated as serious in one place in the slide ("Signs of Multicollinearity"), while the slide states "$VIF>5$ (or 10)" elsewhere — i.e., it acknowledges that both the 5 and 10 thresholds are commonly used in practice, without committing to a single number. See more on this inconsistency in exam trap #7 (section 10).
+Rule of thumb: in practice, both **$VIF>5$** (the stricter threshold, "Signs of Multicollinearity") and **$VIF>5$ (or 10)** (the looser threshold) are commonly used — applied econometrics literature has not settled on a single agreed number. See more on this inconsistency in exam trap #7 (section 10).
 
 ## Detection
 
-The slide lists three groups of detection tools, with an important distinction: only VIF is considered a **confirmation**, while the other two tools are merely a **sign** — suggestive but not certain.
+There are three groups of detection tools, with an important distinction: only VIF is considered a **confirmation**, while the other two tools are merely a **sign** — suggestive but not certain.
 
 |Sign |Interpretation |Level of certainty |
 |---|---|---|
@@ -140,7 +140,7 @@ The slide lists three groups of detection tools, with an important distinction: 
 |High $R^2$ but few significant t-ratios |Suggests multicollinearity |Sign |
 |High pairwise correlation matrix values (commonly used threshold $\pm0.8$) |Suggests multicollinearity |**Only a sign, not a confirmation** — low correlation also does not guarantee the absence of multicollinearity (it could be multivariate multicollinearity, which doesn't show up in any single pairwise correlation) |
 |Auxiliary regression: regressing each regressor on all other regressors |High $R^2$ of the auxiliary regression (>0.8) or a significant F-test |Sign — same logic: high suggests it, low does not guarantee it's ruled out |
-|VIF > 5 (or 10) |Treated by the slide as **confirming** serious multicollinearity |Confirmation |
+|VIF > 5 (or 10) |Treated as **confirming** serious multicollinearity |Confirmation |
 
 Applying all three tools to the case study in sections 4–5:
 
@@ -156,7 +156,7 @@ Correlation matrix among $\log(\text{income})$, `age_wife`, `age_husband`, `hhsi
 | **hhsize** | −0.019 | −0.039 | −0.058 | 1.000 | 0.156 |
 | **children** | −0.018 | −0.220 | −0.236 | 0.156 | 1.000 |
 
-The correlation between `age_wife` and `age_husband` is $r=0.921$ — far exceeding the $\pm0.8$ threshold mentioned by the slide — this is the clearest **sign** of multicollinearity in the table. All other pairs have $|r|<0.4$, which is not a concern.
+The correlation between `age_wife` and `age_husband` is $r=0.921$ — far exceeding the $\pm0.8$ threshold — this is the clearest **sign** of multicollinearity in the table. All other pairs have $|r|<0.4$, which is not a concern.
 
 ### Auxiliary regression
 
@@ -172,11 +172,11 @@ Regressing `age_wife` on all other regressors: $\text{age\_wife} = \beta_0+\beta
 
 Residual SE $=4.158$ on 465 df; $R^2=0.8548$; $R^2_{adj}=0.8536$; $F=684.4$ on $(4,465)$ df, $p<2.2\times10^{-16}$.
 
-$R^2=0.8548$ (>0.8, the threshold stated by the slide) and an extremely significant F-test — both confirm multicollinearity by the slide's criteria. Notably: `age_husband` alone has $t=46.2$ in this auxiliary regression — `age_husband` on its own explains most of the variation in `age_wife`, exactly matching the intuition in section 1.
+$R^2=0.8548$ (>0.8, the commonly used threshold) and an extremely significant F-test — both confirm serious multicollinearity. Notably: `age_husband` alone has $t=46.2$ in this auxiliary regression — `age_husband` on its own explains most of the variation in `age_wife`, exactly matching the intuition in section 1.
 
 ### VIF
 
-The slide only gives the VIF formula for the 2-regressor case ($VIF=1/(1-r_{12}^2)$), but the `car::vif()` results table in section 9.2 (5 regressors) shows the slide applies the more general formula: $VIF_j=1/(1-R_j^2)$, where $R_j^2$ is precisely the $R^2$ of the auxiliary regression for variable $X_j$ — this is how the `car::vif()` function in R actually computes it, and matches the "auxiliary regression" logic the slide presented in section 8.2.
+The 2-regressor VIF formula ($VIF=1/(1-r_{12}^2)$) is a special case of the more general $k$-regressor formula: $VIF_j=1/(1-R_j^2)$, where $R_j^2$ is precisely the $R^2$ of the auxiliary regression for variable $X_j$ — this is how the `car::vif()` function in R actually computes it, matching the "auxiliary regression" logic from section 8.2, and confirmed by the `car::vif()` results table in section 9.2 (5 regressors).
 
 $$VIF_{\text{age\_wife}}=\frac{1}{1-0.8548}=\frac{1}{0.1452}\approx 6.89$$
 
@@ -186,26 +186,26 @@ With the $VIF>5$ threshold, the figure $\approx6.89$ confirms serious multicolli
 
 ### General rule: it doesn't always need to be fixed
 
-The slide clearly states **"General Rules of Thumb: DO NOT WORRY IF"**:
+General rule of thumb — **"DO NOT WORRY IF"** — there is no need to worry about multicollinearity when:
 
 - the coefficients are still statistically significant, **and**
 - the coefficients still have the correct expected signs.
 
 Reason: multicollinearity is only a **practical** problem when it actually undermines the ability to answer the research question (coefficients become insignificant or have the wrong sign). If the coefficients remain significant and correctly signed despite a high VIF, that means there is still *enough* independent variation for a reliable estimate — "fixing" a problem that isn't actually causing harm (e.g., just to make the VIF look nicer) can create a new problem (omitted variable bias, see below) without any real benefit.
 
-**If a fix is needed**, the slide offers two directions, each with its own trade-off:
+**If a fix is needed**, there are two directions, each with its own trade-off:
 
 ### Solution 1 — Restructure the model (transform regressors)
 
 **Idea**: find an alternative specification or functional form such that the new regressors are less correlated while still preserving the economic content of the original model.
 
-**Example 1 (slide, production function)**: with $y=F(\text{labor},\text{land},\text{capital})$, if `labor` and `capital` are highly correlated across observations (e.g., larger farms have both more labor and more capital), both sides can be divided by `land`:
+**Example 1 (production function)**: with $y=F(\text{labor},\text{land},\text{capital})$, if `labor` and `capital` are highly correlated across observations (e.g., larger farms have both more labor and more capital), both sides can be divided by `land`:
 
 $$\frac{y}{\text{land}}=F\left(\frac{\text{labor}}{\text{land}},\ \text{land},\ \frac{\text{capital}}{\text{land}}\right)$$
 
 Normalizing by land area reduces the correlation between the inputs, because the variables now measure *input intensity per unit of land*, no longer jointly driven by "farm size" as before.
 
-**Example 2 (case study, actually applied)**: instead of using both `age_wife` and `age_husband` (correlation $r=0.921$), the slide creates a new variable `age_diff = age_wife − age_husband` and replaces `age_husband` with `age_diff` in the model: $\log(\text{expense})=\beta_0+\beta_1\log(\text{income})+\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_diff}+\beta_4\,\text{hhsize}+\beta_5\,\text{children}+\varepsilon$
+**Example 2 (case study, actually applied)**: instead of using both `age_wife` and `age_husband` (correlation $r=0.921$), a new variable `age_diff = age_wife − age_husband` is created to replace `age_husband` in the model: $\log(\text{expense})=\beta_0+\beta_1\log(\text{income})+\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_diff}+\beta_4\,\text{hhsize}+\beta_5\,\text{children}+\varepsilon$
 
 |Variable | $b$ | SE | $t$ | $p$-value |
 |---|---|---|---|---|
@@ -226,7 +226,7 @@ And `car::vif(model2)` gives the result:
 
 All VIF values are now below 1.3 — multicollinearity has almost disappeared.
 
-**Further analysis (derived algebraically from the slide's own coefficients, not verbatim from the slide)**: since $\text{age\_husband}=\text{age\_wife}-\text{age\_diff}$, substituting into the original model $\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_husband}=\beta_2\,\text{age\_wife}+\beta_3(\text{age\_wife}-\text{age\_diff})=(\beta_2+\beta_3)\text{age\_wife}-\beta_3\,\text{age\_diff}$. Checking against the actual numbers: the original `age_wife` coefficient $(0.0066)$ plus the original `age_husband` coefficient $(-0.0053)$ equals $0.0013\approx0.0014$ (the new `age_wife` coefficient, rounding error); and $-(-0.0053)=0.0053$ equals exactly the new `age_diff` coefficient. Economic meaning: the **new** `age_wife` coefficient is no longer "the effect of the wife's age, holding the husband's age fixed" (something almost impossible to estimate precisely in this data, since the two ages rarely vary independently), but rather **the effect of both spouses aging by 1 year together** (holding the age gap fixed); while the `age_diff` coefficient is **the effect of widening the age gap**, holding the wife's age fixed. This is a reinterpretation that fits the actual variation present in the data — rather than trying to estimate an effect the data has almost no information to answer.
+**Further analysis (derived algebraically from the coefficients estimated above)**: since $\text{age\_husband}=\text{age\_wife}-\text{age\_diff}$, substituting into the original model $\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_husband}=\beta_2\,\text{age\_wife}+\beta_3(\text{age\_wife}-\text{age\_diff})=(\beta_2+\beta_3)\text{age\_wife}-\beta_3\,\text{age\_diff}$. Checking against the actual numbers: the original `age_wife` coefficient $(0.0066)$ plus the original `age_husband` coefficient $(-0.0053)$ equals $0.0013\approx0.0014$ (the new `age_wife` coefficient, rounding error); and $-(-0.0053)=0.0053$ equals exactly the new `age_diff` coefficient. Economic meaning: the **new** `age_wife` coefficient is no longer "the effect of the wife's age, holding the husband's age fixed" (something almost impossible to estimate precisely in this data, since the two ages rarely vary independently), but rather **the effect of both spouses aging by 1 year together** (holding the age gap fixed); while the `age_diff` coefficient is **the effect of widening the age gap**, holding the wife's age fixed. This is a reinterpretation that fits the actual variation present in the data — rather than trying to estimate an effect the data has almost no information to answer.
 
 **Trade-off of the restructure solution**: all of the original information is retained (no variable is lost), but (a) it isn't always possible to find a transformation that both reduces correlation and has a clear economic meaning for interpretation (dividing by `land` makes sense in a production function; taking the age difference makes sense since both are in the same "years" unit — but not every pair of collinear variables has a similarly natural transformation); (b) the transformed coefficients must be reinterpreted carefully, since they no longer carry the same "holding the other variable fixed" meaning as the original coefficients (see exam trap #8).
 
@@ -241,10 +241,10 @@ Remove the highly correlated regressor(s) from the model.
 1. **Confusing perfect and imperfect (multicollinearity)**: saying "multicollinearity makes $X'X$ non-invertible" is **wrong** — that is a consequence of **perfect** collinearity. Multicollinearity (imperfect) does not make $X'X$ non-invertible; the model still estimates normally, only the SE is inflated.
 2. **Confusing what's correlated with what**: multicollinearity is correlation **among the independent variables themselves**, not between an independent variable and the dependent variable.
 3. Thinking multicollinearity makes the OLS coefficients biased or inconsistent — wrong. OLS remains unbiased/consistent under multicollinearity (as long as A1–A3 still hold); multicollinearity only causes a loss of **efficiency** (larger SE). Easily confused with omitted variable bias or endogeneity — those are the problems that actually cause bias.
-4. Treating a high/low pairwise correlation as **conclusive evidence** of the presence/absence of multicollinearity — the slide only treats this as a "sign," not a "confirmation." A low pairwise correlation **does not guarantee** the absence of multicollinearity (it could be multivariate multicollinearity — 3+ variables jointly dependent on each other without any single pair individually showing a high correlation).
-5. "Fixing" multicollinearity even when the coefficients are still significant and correctly signed — unnecessary, and goes against the slide's "General Rule of Thumb" (section 9.1).
+4. Treating a high/low pairwise correlation as **conclusive evidence** of the presence/absence of multicollinearity — this is only a "sign," not a "confirmation." A low pairwise correlation **does not guarantee** the absence of multicollinearity (it could be multivariate multicollinearity — 3+ variables jointly dependent on each other without any single pair individually showing a high correlation).
+5. "Fixing" multicollinearity even when the coefficients are still significant and correctly signed — unnecessary, and goes against the "General Rule of Thumb" (section 9.1).
 6. Dropping a variable to reduce multicollinearity **without weighing omitted variable bias** — this is not a "free fix" but a genuine bias-variance trade-off.
-7. Confusing the VIF threshold: the slide uses both "$VIF>5$" and "$VIF>5$ (or 10)" in two different places, without settling on a single threshold — when answering exam questions, always state clearly which threshold is being used, since the same VIF (e.g., $\approx6.89$ in the case study) can be "serious" under the threshold of 5 but "not yet serious" under the threshold of 10.
+7. Confusing the VIF threshold: both "$VIF>5$" and "$VIF>5$ (or 10)" are commonly used, with no single threshold universally settled on — when answering exam questions, always state clearly which threshold is being used, since the same VIF (e.g., $\approx6.89$ in the case study) can be "serious" under the threshold of 5 but "not yet serious" under the threshold of 10.
 8. After restructuring the model (e.g., replacing `age_husband` → `age_diff`), forgetting to reinterpret the coefficients: the **new** `age_wife` coefficient no longer means "the effect of the wife's age, holding the husband's age fixed" — since the data has almost no independent variation to answer that question — but rather "the effect of both spouses aging together".
 9. Confusing the $R^2$ of the **main model** (measuring fit to $y$) with the $R^2$ of the **auxiliary regression** (measuring how much one $X_j$ is explained by the remaining $X$'s). In the case study, the main model's $R^2$ is only 0.38 (not high), but the auxiliary regression's $R^2$ for `age_wife` reaches 0.85 — only the second number is directly relevant to confirming multicollinearity.
 10. Using the language of "proving" when talking about VIF/correlation matrix/auxiliary regression — these tools should properly only be said to "confirm" or "suggest" multicollinearity, consistent with the statistical-inference language convention stated in [[concepts/linear-regression-model]] section 7.1.

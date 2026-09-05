@@ -26,11 +26,11 @@ Before diving into the formulas, we need to answer: how many "kinds" of discrete
 | Multi-category, ordered (ordinal) | $J>2$ (e.g., low/medium/high satisfaction, credit rating) | **Yes** — categories have a natural order | Ordered Logit/Probit | [[concepts/ordinal-response-models]] |
 
 
-Illustrative examples from the original slide clearly show MNL's "unordered" property:
+The illustrative examples below clearly show MNL's "unordered" property:
 
 - Long-term effects of radiation exposure: 1 = death by cancer, 2 = death by other cause, 3 = still alive — these three categories **cannot** be arranged along a meaningful "increasing/decreasing" axis.
 - Choice of healthcare provider: public hospital, private hospital/clinic, traditional healer, self-treatment — no category is "better" than another on a common scale, they are simply different choices.
-- Other examples given in the slide: choice of car brand (Toyota, Honda, Suzuki, Mazda, KIA…), choice of field of study, choice of occupation.
+- Other examples: choice of car brand (Toyota, Honda, Suzuki, Mazda, KIA…), choice of field of study, choice of occupation.
 
 **Why not use OLS?** For OLS to be valid, $Y$ must be a quantity with arithmetic meaning — the distance between two values must carry information (e.g., the gap between 3 and 1 years of schooling must equal the gap between 6 and 4 years of schooling). If we code "chose public hospital = 1, chose private hospital = 2, chose traditional healer = 3" and run OLS, the model implicitly assumes "traditional healer" is exactly as far from "private hospital" as "private hospital" is from "public hospital" — a meaningless assumption, since the numbers 1/2/3 are merely **labels**, not a scale.
 
@@ -38,7 +38,7 @@ Illustrative examples from the original slide clearly show MNL's "unordered" pro
 
 ## Running case study: choice of healthcare provider (VHLSS 2012)
 
-This is the dataset Prof. Thụy uses throughout the Topic 8 slides — understanding it is necessary for following every numeric example in the sections below. Source: **Vietnam Household Living Standards Survey (VHLSS) 2012**, file `mnl.xlsx`.
+This is the dataset used throughout Lecture 10 — understanding it is necessary for following every numeric example in the sections below. Source: **Vietnam Household Living Standards Survey (VHLSS) 2012**, file `mnl.xlsx`.
 
 **Dependent variable** `choice` — healthcare provider, 5 unordered categories:
 
@@ -56,7 +56,7 @@ Total $N = 3{,}475$ observations. **Public hospital dominates overwhelmingly** �
 
 > **Unit of analysis**: the same `id` can appear across several different `case` rows with different `choice` values (e.g. `id=1` has `case=1` choosing Public hospital and `case=2` choosing Lang y) — showing that the unit of analysis is actually **each choice occasion** (each time healthcare is needed), not one fixed choice per individual.
 
-**Independent variables** (variable names kept as in the slide):
+**Independent variables** (variable names kept as in the original dataset):
 
 
 | Variable | Meaning | Unit/coding |
@@ -81,7 +81,7 @@ This is exactly the **"base category" logic** already seen for categorical varia
 
 ### Case study: choosing Public hospital as the base
 
-The original slide uses the following R command to make `Public hospital` (original code = 2) the base group:
+The following R command is used to make `Public hospital` (original code = 2) the base group:
 
 ```r
 Z$choice = relevel(as.factor(Z$choice), ref = 2)
@@ -154,7 +154,7 @@ This optimization is carried out via numerical iterative optimization (R uses a 
 | Ind. health care | −2.643377 | 0.08057 |
 
 
-Residual Deviance = 6979.762, and since $LL=-\text{Deviance}/2$ (as noted in the original slide itself), $LL_{null} = -3489.881$.
+Residual Deviance = 6979.762, and since $LL=-\text{Deviance}/2$, $LL_{null} = -3489.881$.
 
 > **An insight you can verify by hand**: with an intercept-only model, the estimated coefficient is exactly the **raw log-odds computed directly from the frequency table** — $\hat\beta_{0j} = \ln(n_j/n_{base})$. Check: $\ln(434/2320) = -1.676$, $\ln(522/2320)=-1.492$, $\ln(34/2320)=-4.223$, $\ln(165/2320)=-2.643$ — matches the table above exactly. This is the most intuitive way to understand what "log-odds" means: it is simply the logarithm of the frequency ratio between two groups.
 
@@ -168,7 +168,7 @@ The coefficient $\beta_j$ measures the **change in the log-odds of choosing $j$ 
 
 **Interpreting via the relative risk ratio (RRR)**: taking $e^{\beta_j}$ gives an easier-to-read number — by what multiple the odds of choosing $j$ (relative to the base) change when $X$ increases by 1 unit.
 
-### Case study coefficient tables (two equations presented separately in the slide)
+### Case study coefficient tables (two equations presented separately)
 
 **Equation for Commune health center (relative to Public hospital):**
 
@@ -299,7 +299,7 @@ $$R^2_{McFadden} = 1-\frac{LL_{full}}{LL_{null}} = \frac{LL_{null}-LL_{full}}{LL
 
 $$R^2_{McFadden} = \frac{-3489.881-(-3210.319)}{-3489.881} = \frac{-279.562}{-3489.881} \approx 0.0801$$
 
-(Matches exactly the result computed directly in R in the original slide: `0.08010663`.)
+(Matches exactly the result computed directly in R: `0.08010663`.)
 
 ### How it differs from OLS $R^2$
 
@@ -309,7 +309,7 @@ An important consequence: **the McFadden $R^2$ value cannot be directly compared
 
 ### Commonly used evaluation thresholds
 
-According to McFadden's classic guideline (widely cited in discrete-choice textbooks, not directly from this slide), $R^2_{McFadden}$ in the range **0.2–0.4** is already considered a **very good** fit — much lower than the familiar "good" threshold for OLS $R^2$.
+According to McFadden's classic guideline (widely cited in discrete-choice textbooks), $R^2_{McFadden}$ in the range **0.2–0.4** is already considered a **very good** fit — much lower than the familiar "good" threshold for OLS $R^2$.
 
 **The most important point from the case study**: the MNL model here has $R^2_{McFadden}\approx 0.08$ — below even the 0.2 threshold — while the overall LR test (section 8.2) rejects $H_0$ extremely strongly ($p\approx 0$). This is a vivid illustration of the lesson already stated in [[concepts/linear-regression-model]] section 9: **"statistical significance" and "fit magnitude" are two completely different things** — a set of explanatory variables can have a genuine effect (LR test highly significant) yet still explain only a small fraction of the total log-likelihood that could be improved (because the behavior of choosing a healthcare provider also depends on many unobserved factors — the specific illness, actual geographic distance, perceived service quality…).
 

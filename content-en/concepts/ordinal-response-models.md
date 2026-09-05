@@ -19,17 +19,17 @@ updated: 2026-09-04
 ### What an "ordered" dependent variable means
 
 Many outcome variables in economic/social surveys are **discrete** (taking only a finite number of values) **and naturally ordered**, but have **no measurement unit** — meaning the distance between levels has no clear numerical meaning.
-Two examples the slides use to open with:
+Two opening examples:
 
 - **Self-reported health status** on a Likert scale: poor / average / good / very good.
 - **Level of agreement with a statement**: strongly disagree / disagree / neutral / agree / strongly agree.
 
-The running example of the slides (reused throughout every later section of this page): **weekly eating-out frequency** (`eatout`), first illustrated by the slides with 3 simple levels (0 = no times; 1 = 1–2 times/week; 2 = 3 or more times), later expanded by the practice dataset into 5 more detailed levels (see section 7).
+The running example of this lecture (reused throughout every later section of this page): **weekly eating-out frequency** (`eatout`), first illustrated with 3 simple levels (0 = no times; 1 = 1–2 times/week; 2 = 3 or more times), later expanded by the practice dataset into 5 more detailed levels (see section 7).
 What all these examples share: we know "more" or "less," but **we don't know whether the distance between 'poor' and 'average' equals the distance between 'average' and 'good'** — this is precisely the defining feature of "ordinal."
 
 ### Why not OLS, and why MNL "wastes" information
 
-The slide asks directly: if this variable is the dependent variable, what do we estimate it with?
+The question this raises: if this variable is the dependent variable, what do we estimate it with?
 
 |Approach |Usable? |Why |
 |---|---|---|
@@ -68,7 +68,7 @@ Any individual whose $y^*$ falls between $u_2$ and $u_3$ will be observed as $y=
 
 ## Cutpoints (threshold parameters)
 
-With $J$ categories (e.g. $J=3$: $y\in\{0,1,2\}$ as the slide first illustrates), $J-1$ **cutpoints** $u_1<u_2<\cdots<u_{J-1}$ are needed to divide the $y^*$ axis into $J$ segments. The rule linking $y^*$ to the observed $y$ (illustrated with 3 categories):
+With $J$ categories (e.g. $J=3$: $y\in\{0,1,2\}$ as first illustrated above), $J-1$ **cutpoints** $u_1<u_2<\cdots<u_{J-1}$ are needed to divide the $y^*$ axis into $J$ segments. The rule linking $y^*$ to the observed $y$ (illustrated with 3 categories):
 
 (read: $y=0$ if $y^*\le u_1$; $y=1$ if $u_1<y^*\le u_2$; $y=2$ if $y^*> u_2$)
 
@@ -103,7 +103,7 @@ $$Pr(y=1)=Pr(u_1<y^*\le u_2)=Pr(y^*\le u_2)-Pr(y^*\le u_1)=\Phi(u_2-\beta X)-\Ph
 
 ### Generalizing to $J$ categories
 
-The slide illustrates the theory with 3 categories, but the practical example in section 7 uses **5 categories** (`eatout` = No / 1–2 / 3–5 / 5–10 / 11+ times/month) — so the two need to be connected. With $J$ categories $y\in\{0,1,\dots,J-1\}$ and $J-1$ cutpoints $u_1<\cdots<u_{J-1}$, the same logic from section 4.1 generalizes to:
+The theory above is illustrated with 3 categories, but the practical example in section 7 uses **5 categories** (`eatout` = No / 1–2 / 3–5 / 5–10 / 11+ times/month) — so the two need to be connected. With $J$ categories $y\in\{0,1,\dots,J-1\}$ and $J-1$ cutpoints $u_1<\cdots<u_{J-1}$, the same logic from section 4.1 generalizes to:
 
 (the second line: $Pr(y=j)=\Phi(u_{j+1}-\beta X)-\Phi(u_j-\beta X)$ for $j=1,\dots,J-2$, i.e. the categories in between)
 
@@ -128,7 +128,7 @@ The same logic that distinguishes binary Logit/Probit ([[concepts/binary-respons
 | **Ordered Probit** |Normal | $\Phi(\cdot)$ | $\Phi(u_1-\beta X)$ |
 | **Ordered Logit** |Logistic | $\Lambda(x)=\dfrac{1}{1+e^{-x}}$ | $\Lambda(u_1-\beta X)$ |
 
-**Difference from the binary case**: in the binary model, **Logit** is usually preferred (the marginal effect has a closed form, easier to compute than Probit). In the **ordinal** model, the slide explicitly notes the opposite direction: **"Probit is more popular"** in practice. The slide does not explain the specific reason — note that this is a practical statement (convention), not a theorem.
+**Difference from the binary case**: in the binary model, **Logit** is usually preferred (the marginal effect has a closed form, easier to compute than Probit). In the **ordinal** model, the practical convention runs the opposite direction: **"Probit is more popular"** in practice. There is no specific theoretical reason for this — note that this is a practical statement (convention), not a theorem.
 
 ## Full example: eating-out frequency (`eatout`)
 
@@ -205,7 +205,7 @@ For the first observation in the sample, the model produces 5 probabilities (sum
 
 $Pr(No)\approx0.0000115$, $Pr(1\text{–}2)\approx0.0010$, $Pr(3\text{–}5)\approx0.0829$, $Pr(5\text{–}10)\approx0.8385$, $Pr(11+)\approx0.0776$ — this individual almost certainly belongs to the "5–10 times/month" group (83.85% probability).
 
-**Plot of $Pr(y=4)$ (eating out ≥11 times/month) against age**: the slide plots predicted `Pr(11+)` against `age` and shows a clearly **decreasing** relationship — probability near 1.0 at age ~18, dropping sharply past age 20 (~0.85), continuing to fall and reaching near 0 from around age 30 onward. This is a visual illustration of the **negative** sign of $\beta_{age}=-0.29$: the older a person is, the lower their propensity toward high-frequency eating out.
+**Plot of $Pr(y=4)$ (eating out ≥11 times/month) against age**: the plot of predicted `Pr(11+)` against `age` shows a clearly **decreasing** relationship — probability near 1.0 at age ~18, dropping sharply past age 20 (~0.85), continuing to fall and reaching near 0 from around age 30 onward. This is a visual illustration of the **negative** sign of $\beta_{age}=-0.29$: the older a person is, the lower their propensity toward high-frequency eating out.
 
 ### Prediction and the confusion matrix
 
@@ -223,7 +223,7 @@ Overall correct-prediction rate (`sum(diag(tab))/sum(tab)`): **0.6638** (66.4%).
 
 ### Prediction for a specific individual
 
-The slide illustrates prediction for two hypothetical profiles, identical except for relationship status:
+Prediction is illustrated for two hypothetical profiles, identical except for relationship status:
 
 - `person1`: age=23, whours=60, income=30, homeown=0, gender=0, `inrelationship=0`, married=0 → predicted: **"5-10/month"**.
 - `person2`: identical to person1 but `inrelationship=1` → predicted: **"11 or more"**.
@@ -232,7 +232,7 @@ Changing just **one** dummy variable (`inrelationship`: 0→1) is enough to push
 
 ### Pseudo R² (rarely used)
 
-`PseudoR2(oprobit, which=c("CoxSnell","Nagelkerke","McFadden"))`: CoxSnell = 0.770, Nagelkerke = 0.811, McFadden = 0.490. The slide explicitly notes this page's title: **"(RARELY USED)"** — these pseudo-R² measures do not have the same scale or interpretation as the linear $R^2$ in [[concepts/linear-regression-model]] section 9, and should not be used as the primary criterion for evaluating model fit.
+`PseudoR2(oprobit, which=c("CoxSnell","Nagelkerke","McFadden"))`: CoxSnell = 0.770, Nagelkerke = 0.811, McFadden = 0.490. The title to remember: **"(RARELY USED)"** — these pseudo-R² measures do not have the same scale or interpretation as the linear $R^2$ in [[concepts/linear-regression-model]] section 9, and should not be used as the primary criterion for evaluating model fit.
 
 ### Testing the joint significance of a group of coefficients
 
@@ -299,7 +299,7 @@ Re-running the exact same equation from section 7.3 with `method="logistic"` ins
 
 **Cutpoints (Logit)**: $0|1=-17.10$, $1|2=-15.04$, $2|3=-11.95$, $3|4=-6.88$ (all increasing, strongly statistically significant).
 
-> **Additional observation** (computed from the two coefficient tables above, not a direct statement from the slide): the Logit/Probit coefficient ratio hovers fairly evenly around **1.7–1.8** for every variable. This matches a familiar rule of thumb in econometrics — the logistic distribution has variance $\pi^2/3\approx3.29$ while the standard normal has variance 1, so logit coefficients are typically about $\sqrt{\pi^2/3}\approx1.81$ times larger than their probit counterparts. This number should not be used to directly compare the **magnitude of effects** between the two models (as already noted in [[concepts/binary-response-models]]) — it is only useful as a quick check of whether the two models give "consistent" results (same signs, roughly constant coefficient ratio).
+> **Additional observation** (computed from the two coefficient tables above): the Logit/Probit coefficient ratio hovers fairly evenly around **1.7–1.8** for every variable. This matches a familiar rule of thumb in econometrics — the logistic distribution has variance $\pi^2/3\approx3.29$ while the standard normal has variance 1, so logit coefficients are typically about $\sqrt{\pi^2/3}\approx1.81$ times larger than their probit counterparts. This number should not be used to directly compare the **magnitude of effects** between the two models (as already noted in [[concepts/binary-response-models]]) — it is only useful as a quick check of whether the two models give "consistent" results (same signs, roughly constant coefficient ratio).
 
 The sign and statistical significance level of every coefficient are **identical** between the two models (the same variables significant, the same variables not) — a good sign that the conclusions are not sensitive to the choice of Logit or Probit in this example.
 
@@ -314,7 +314,7 @@ Ordered Logit/Probit assumes **the same coefficient set $\beta$ for every catego
 ### Brant test
 
 - $H_0$ (null hypothesis) of the Brant test: **the parallel regression assumption holds** (i.e. $\beta$ is truly the same across every threshold).
-- If $H_0$ is **rejected** → the assumption is violated → an alternative model should be considered — the slide suggests **MNL** (does not constrain the coefficients to be the same across thresholds — in exchange, it loses the ordering information — see [[concepts/multinomial-logit-model]]). *(The slide does not mention generalized ordered logit or other models — it only names MNL as the alternative; not expanded further since it's not in the source.)*
+- If $H_0$ is **rejected** → the assumption is violated → an alternative model should be considered — **MNL** is the commonly used alternative (does not constrain the coefficients to be the same across thresholds — in exchange, it loses the ordering information — see [[concepts/multinomial-logit-model]]). *(Generalized ordered logit and other models are outside the scope of this page.)*
 
 **Numerical example** (`brant::brant(ologit)`, run on the Ordered Logit model from section 9):
 
@@ -329,7 +329,7 @@ Ordered Logit/Probit assumes **the same coefficient set $\beta$ for every catego
 | inrelationship | 0.52 | 3 | 0.9 |
 | married | 0.38 | 3 | 0.9 |
 
-Every p-value (including Omnibus, the overall test for all coefficients jointly) is **greater than 0.05** → **fail to reject** $H_0$ → the slide's conclusion: **"parallel regression assumption holds for all coefficients"** — the Ordered Logit estimates in this `eatout` example are reliable, no need to switch to MNL.
+Every p-value (including Omnibus, the overall test for all coefficients jointly) is **greater than 0.05** → **fail to reject** $H_0$ → the conclusion: **"parallel regression assumption holds for all coefficients"** — the Ordered Logit estimates in this `eatout` example are reliable, no need to switch to MNL.
 
 ## Exam traps
 
@@ -340,7 +340,7 @@ Every p-value (including Omnibus, the overall test for all coefficients jointly)
 5. Skipping the Brant test when reporting Ordered Logit/Probit — without testing it, there's no way to know whether the parallel regression assumption holds; if it's violated and an ordered model is still used, the estimated coefficients are biased.
 6. Getting the direction of the Brant test's $H_0$ backwards: $H_0$ = **the assumption holds**, not "the assumption is violated". Rejecting $H_0$ is the sign of a **violation**; failing to reject means the assumption is fine (as in the numerical example in section 10.2, where every p>0.05 → the assumption holds).
 7. Confusing an Ordinal response (ordered, uses Ordered Logit/Probit) with a Multinomial response (unordered, uses MNL) — see [[concepts/multinomial-logit-model]]; or running OLS directly on the ordinal variable's numeric codes, implicitly assuming the distance between levels is equal (section 1.2).
-8. Using Pseudo R² (McFadden/CoxSnell/Nagelkerke) as the main fit criterion for the model — the slide explicitly notes these measures are **"rarely used"**, and have no scale/interpretation equivalent to linear $R^2$.
+8. Using Pseudo R² (McFadden/CoxSnell/Nagelkerke) as the main fit criterion for the model — these measures are noted as **"rarely used"**, and have no scale/interpretation equivalent to linear $R^2$.
 9. Reporting only the overall correct-prediction rate (e.g. 66.4% in section 7.6) without checking the full confusion matrix broken down by category — a model can "look good" overall while predicting a specific category very poorly (e.g. "1-2/month" is only correct ~32.5% of the time in this example).
 10. Directly comparing Ordered Logit and Ordered Probit coefficient magnitudes as if they shared the same scale — the two models have different error-term scales (logistic vs. normal); only compare sign, significance level, or predicted probabilities, not raw coefficient magnitude directly (though the ~1.8× ratio in section 9 is a useful rule of thumb for checking consistency).
 

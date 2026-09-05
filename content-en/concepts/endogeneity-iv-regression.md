@@ -10,7 +10,7 @@ assignment: ["Assignment 4: Endogeneity and Instrumental Variable Regression"]
 updated: 2026-09-04
 ---
 
-> **How to read this page**: this page resolves the violation of assumption **A3 (exogeneity)** of [[concepts/linear-regression-model]] — arguably the single most important topic in the course, because it goes straight at the question "when does a regression coefficient actually measure a causal relationship?" The page merges `slides-5-iu.pdf` (original version, 63 slides) and `slides-16-iu.pdf` (extended version, 70 slides, used as the canonical structure). Main difference between the two versions: slides-16 corrects the terminology "biased" → "inconsistent" for greater precision, and adds an entirely new section — **robust inference under weak instruments** (Anderson-Rubin, Stock-Wright) — absent from slides-5. Specific numerical discrepancies between the two versions are noted exactly where they occur in the text, never silently reconciled.
+> **How to read this page**: this page resolves the violation of assumption **A3 (exogeneity)** of [[concepts/linear-regression-model]] — arguably the single most important topic in the course, because it goes straight at the question "when does a regression coefficient actually measure a causal relationship?" This page uses the precise term "inconsistent" rather than "biased" for the consequence of endogeneity on OLS, and includes a section — **robust inference under weak instruments** (Anderson-Rubin, Stock-Wright) — covering the course's advanced material. In a few places, two ways of computing the same test give slightly different numbers (e.g. due to the choice of VCV type) — both are noted exactly where they occur, never silently reconciled.
 
 **Lecture 5** in the syllabus (CO Topic 5) — Assignment 4: Endogeneity and Instrumental Variable Regression.
 
@@ -43,7 +43,7 @@ $$\textbf{Endogeneity occurs when } X'e\neq0$$
 - If $X'e=0$ → $\hat\beta_{OLS}=\beta$.
 - If $X'e\neq0$ → $\hat\beta_{OLS}\neq\beta$.
 
-**Precise terminology — the point slides-16 corrects from slides-5**: when $X'e\neq0$, the precise way to describe it is that $\hat\beta_{OLS}$ becomes an **inconsistent** estimator — i.e. no matter how much more data you have, the estimate still does *not* converge to the true value $\beta$. Slides-5 in places calls this "biased"; slides-16 consistently corrects it to "inconsistent." The two concepts differ in nature: bias is a finite-sample discrepancy (which can vanish as $N\to\infty$ under some other violations); under endogeneity, the problem **does not vanish** no matter how large the sample grows — which is why "inconsistent" is the term that correctly describes the nature of the problem.
+**Precise terminology**: when $X'e\neq0$, the precise way to describe it is that $\hat\beta_{OLS}$ becomes an **inconsistent** estimator — i.e. no matter how much more data you have, the estimate still does *not* converge to the true value $\beta$. The term "biased" is sometimes used for this phenomenon, but "inconsistent" is the precise description: the two concepts differ in nature — bias is a finite-sample discrepancy (which can vanish as $N\to\infty$ under some other violations); under endogeneity, the problem **does not vanish** no matter how large the sample grows — which is why "inconsistent" is the term that correctly describes the nature of the problem.
 
 ### Consequences for causal interpretation
 
@@ -64,7 +64,7 @@ $$y=\beta_0+\beta_1x_1+\mu, \qquad \mu=\beta_2x_2+e$$
 
 Then $E(\mu x_1)\neq0$ **if** $Cov(x_1,x_2)\neq0$ — the new error $\mu$ "contains" the omitted $x_2$, and if $x_2$ is correlated with $x_1$ which remains in the model, then $\mu$ is also correlated with $x_1$ → endogeneity.
 
-**Slide example**: ice cream sales and drowning accidents are strongly positively correlated in seasonal data — but ice cream does not "cause" drowning. The omitted variable is **summer temperature**: hot weather both makes people buy more ice cream and makes people swim more (and hence increases drowning risk). Omitting temperature from the model causes the ice-cream variable to "absorb" part of temperature's influence.
+**Illustrative example**: ice cream sales and drowning accidents are strongly positively correlated in seasonal data — but ice cream does not "cause" drowning. The omitted variable is **summer temperature**: hot weather both makes people buy more ice cream and makes people swim more (and hence increases drowning risk). Omitting temperature from the model causes the ice-cream variable to "absorb" part of temperature's influence.
 
 **This is exactly the education–wage case from section 1.1**: the true DGP includes `ability`, we omit it, `ability` is correlated with `schooling` → `schooling` becomes an endogenous variable.
 
@@ -80,7 +80,7 @@ $$X=\gamma(\beta X+e)+v \;\;\Rightarrow\;\; X=\frac{\gamma e}{1-\gamma\beta}+\fr
 
 $X$ is now a function of $e$ itself → $X$ is correlated with $e$ → endogeneity.
 
-**Slide example**: police and crime. More police officers can reduce crime (the "forward" causal direction we want to measure) — but at the same time, areas with high crime are also typically assigned more police (the "reverse" direction — authorities respond to crime conditions). A simple regression of `crime` on `number of police` mixes both directions of effect, so the estimated coefficient no longer measures the true "net effect of police on crime."
+**Illustrative example**: police and crime. More police officers can reduce crime (the "forward" causal direction we want to measure) — but at the same time, areas with high crime are also typically assigned more police (the "reverse" direction — authorities respond to crime conditions). A simple regression of `crime` on `number of police` mixes both directions of effect, so the estimated coefficient no longer measures the true "net effect of police on crime."
 
 ### Measurement error
 
@@ -117,7 +117,7 @@ $$\ln wage = f(schooling, X) + e$$
 | `motheredu` | Mother's number of years of education | **Instrument** |
 
 
-Running OLS directly of $\ln wage$ on `schooling` and the controls produces a coefficient — but the slide immediately stresses: **"This OLS estimate is biased if schooling is endogenous."** This is exactly the motivation for moving to instrumental variable regression.
+Running OLS directly of $\ln wage$ on `schooling` and the controls produces a coefficient — but it must be stressed immediately: **"This OLS estimate is biased if schooling is endogenous."** This is exactly the motivation for moving to instrumental variable regression.
 
 ## Instrumental Variables — what does a "good instrument" need?
 
@@ -127,14 +127,14 @@ Consider the model:
 
 $$y=\alpha+\beta_1X_1+\beta_2X_2+e$$
 
-with $X_2$ the suspected endogenous variable ($E(X_2'e)\neq0$). The idea of IV is to find an "auxiliary" variable $Z$ (called $IV$/$W$ in the slide's notation) that acts as a "clean source of variation" for $X_2$ — whatever variation in $X_2$ comes from $Z$ is kept for estimation, whatever comes from the "dirty" part (correlated with $e$) is discarded.
+with $X_2$ the suspected endogenous variable ($E(X_2'e)\neq0$). The idea of IV is to find an "auxiliary" variable $Z$ (called $IV$/$W$ in standard notation) that acts as a "clean source of variation" for $X_2$ — whatever variation in $X_2$ comes from $Z$ is kept for estimation, whatever comes from the "dirty" part (correlated with $e$) is discarded.
 
 To do this, $Z$ must satisfy **both** conditions simultaneously — missing either one makes the instrument "broken":
 
 1. **Relevance**: $Z$ must actually be correlated with $X_2$. Intuition: if $Z$ is nearly unrelated to $X_2$, using it to "substitute" for $X_2$'s variation is no different from using random noise — it doesn't help (see section 6.1 for the consequences of weak instruments).
 2. **Exogeneity / Exclusion**: $Z$ must not be correlated with $e$, and more importantly — intuitively — $Z$ is only allowed to affect $y$ **through** $X_2$, with no other direct path onto $y$.
 
-The slide further clarifies the relationship between "exogeneity" and "exclusion": mathematically, exogeneity ($Z$ uncorrelated with $e$) already implies exclusion. The slide separates out "exclusion" for emphasis because, in research practice, the easiest thing to violate is an unanticipated **direct path** from the instrument to $y$ — separating it out prompts the reader to ask specifically: "does $Z$ have any other channel onto $y$, besides the one through $X_2$?"
+The relationship between "exogeneity" and "exclusion" is worth clarifying further: mathematically, exogeneity ($Z$ uncorrelated with $e$) already implies exclusion. "Exclusion" is still worth separating out for emphasis because, in research practice, the easiest thing to violate is an unanticipated **direct path** from the instrument to $y$ — separating it out prompts the reader to ask specifically: "does $Z$ have any other channel onto $y$, besides the one through $X_2$?"
 
 **Applied to the wage example**: `fatheredu` and `motheredu` are proposed as instruments for `schooling`.
 
@@ -182,7 +182,7 @@ This shows 2SLS is not a tool "entirely different" from OLS — it is OLS genera
 
 ### Projection interpretation — why 2SLS is exactly "OLS with $X_2$ cleaned up"
 
-Slides-16 presents an additional equivalent formulation that bridges the intuition of the 2-step procedure (section 5.1) with the closed-form formula (section 5.2). Let $\hat X = Z(Z'Z)^{-1}Z'X = P_Z X$ (the projection of $X$ onto the space spanned by $Z$):
+There is an additional equivalent formulation that bridges the intuition of the 2-step procedure (section 5.1) with the closed-form formula (section 5.2). Let $\hat X = Z(Z'Z)^{-1}Z'X = P_Z X$ (the projection of $X$ onto the space spanned by $Z$):
 
 $$b_{2SLS}=(\hat X'X)^{-1}\hat X'y$$
 
@@ -207,9 +207,9 @@ After running 2SLS, there are three diagnostic questions to answer, in strict lo
 
 ### Testing for weak instruments
 
-**Why are weak instruments a problem — intuition before formulas**: recall section 5.3 — 2SLS replaces $X_2$ with $\hat X_2$, the predicted value from stage 1. If the instrument is nearly uncorrelated with $X_2$ (weak), then $\hat X_2$ carries **almost no real information** about $X_2$ — it behaves more like a random noise variable than a "clean" version of $X_2$. In that case, at stage 2, we are regressing $y$ on a nearly-noise variable → the estimate becomes **extremely sensitive to random sampling variation** (very large variance), and worse, this "projection noise" can push the 2SLS estimate systematically away from the true value — to the point that **2SLS bias under weak instruments can be even worse than the OLS bias from the endogeneity we were trying to fix** ("the cure can be worse than the disease" — the slide's own phrasing). This is why the slide stresses: weak instruments are **not merely an efficiency problem** — they can completely defeat the original purpose of using IV.
+**Why are weak instruments a problem — intuition before formulas**: recall section 5.3 — 2SLS replaces $X_2$ with $\hat X_2$, the predicted value from stage 1. If the instrument is nearly uncorrelated with $X_2$ (weak), then $\hat X_2$ carries **almost no real information** about $X_2$ — it behaves more like a random noise variable than a "clean" version of $X_2$. In that case, at stage 2, we are regressing $y$ on a nearly-noise variable → the estimate becomes **extremely sensitive to random sampling variation** (very large variance), and worse, this "projection noise" can push the 2SLS estimate systematically away from the true value — to the point that **2SLS bias under weak instruments can be even worse than the OLS bias from the endogeneity we were trying to fix** ("the cure can be worse than the disease"). This is why it must be stressed: weak instruments are **not merely an efficiency problem** — they can completely defeat the original purpose of using IV.
 
-Slides-16 organizes the testing of instrument "strength" into three tiers of questions, from weakest to strongest:
+Testing instrument "strength" is organized into three tiers of questions, from weakest to strongest:
 
 1. **Is there any relevance at all?** (Kleibergen-Paap rk LM test — test for underidentification)
 2. **Is the relevance strong enough?** (F-statistic / Cragg-Donald F / Kleibergen-Paap rk F, compared against Stock-Yogo critical values)
@@ -222,7 +222,7 @@ $H_0$: the instrument is not relevant — more precisely, $E(Z'X_2)=0$ (single e
 - Rejecting $H_0$ → initial evidence the instrument **is relevant** (but **says nothing yet about whether it is strong enough**).
 - Failing to reject $H_0$ → the model is **unidentified**, a different instrument is needed — every subsequent diagnostic test is **untrustworthy** in this case.
 
-Numerical example (a simple example used in slides-5, a joint F-test on the instrument coefficients at stage 1): F-statistic (excluded instruments) $=10.07$, very small p-value → reject $H_0$ → evidence the instruments are jointly relevant. Slides-16 replaces this with a more general/standard tool — the **Kleibergen-Paap (KP) rk LM test**, which has the advantage of being **robust to heteroskedasticity** (whereas Cragg-Donald LM is not).
+Numerical example (a joint F-test on the instrument coefficients at stage 1): F-statistic (excluded instruments) $=10.07$, very small p-value → reject $H_0$ → evidence the instruments are jointly relevant. A more general/standard tool commonly used instead is the **Kleibergen-Paap (KP) rk LM test**, which has the advantage of being **robust to heteroskedasticity** (whereas Cragg-Donald LM is not).
 
 **Tier 2 — Test for weak instruments (strength test, graduate level)**:
 
@@ -250,9 +250,9 @@ Numerical example (1 endogenous variable, $K_2=2$ instruments, observed F-statis
 | Size distortion $r$ | Hypothesis testing (whether the t-test/p-value can be trusted) | Directly protects hypothesis testing, higher (more conservative) threshold | When prioritizing reliable **statistical inference** (hypothesis testing) |
 
 
-An important point slides-16 adds: "**a good estimate does not guarantee a good test, and a good test does not guarantee a good estimate**" — meeting the relative bias criterion only controls the deviation of the estimated number, it does not guarantee the t-test/p-value is trustworthy; meeting the size distortion criterion is the reverse. In practice, instruments often fall into a **borderline** zone — not weak enough to discard entirely, not strong enough to fully trust standard inference (the ordinary t-test) — which is exactly the motivation for the next section.
+An important point worth adding: "**a good estimate does not guarantee a good test, and a good test does not guarantee a good estimate**" — meeting the relative bias criterion only controls the deviation of the estimated number, it does not guarantee the t-test/p-value is trustworthy; meeting the size distortion criterion is the reverse. In practice, instruments often fall into a **borderline** zone — not weak enough to discard entirely, not strong enough to fully trust standard inference (the ordinary t-test) — which is exactly the motivation for the next section.
 
-**Tier 3 — Robust inference under weak instruments (only in the extended slides-16 version)**:
+**Tier 3 — Robust inference under weak instruments (advanced material)**:
 
 When the instrument is in the borderline zone, instead of continuing to trust the standard t-test (which fails when the instrument is weak), use tests that **remain valid even when the instrument is weak** (as long as it is not underidentified and the instrument is truly exogenous):
 
@@ -308,10 +308,10 @@ with $k$ = number of suspected endogenous variables.
 
 **Numerical example — and two source points to note**:
 
-- `slides-5-iu.pdf`: Wu-Hausman statistic $=3.63$. At $\alpha=10\%$: p-value $=0.057<0.1$ → reject $H_0$ → evidence `schooling` is endogenous. At $\alpha=5\%$: the same p-value $=0.057>0.05$ → fail to reject $H_0$ → no evidence of endogeneity.
-- `slides-16-iu.pdf`: Wu-Hausman statistic recomputed $=3.8$ (using `ivreg2r::ivreg2()` with robust VCV). At $\alpha=10\%$: p-value $=0.0512<0.1$ → reject $H_0$. At $\alpha=5\%$: p-value $=0.057>0.05$ → fail to reject $H_0$.
+- With the standard (non-robust) VCV: Wu-Hausman statistic $=3.63$. At $\alpha=10\%$: p-value $=0.057<0.1$ → reject $H_0$ → evidence `schooling` is endogenous. At $\alpha=5\%$: the same p-value $=0.057>0.05$ → fail to reject $H_0$ → no evidence of endogeneity.
+- With a robust VCV (using `ivreg2r::ivreg2()`): Wu-Hausman statistic recomputed $=3.8$. At $\alpha=10\%$: p-value $=0.0512<0.1$ → reject $H_0$. At $\alpha=5\%$: p-value $=0.057>0.05$ → fail to reject $H_0$.
 
-Both versions arrive at the same interpretive conclusion: **`schooling` is "endogenous at the 10% level but not at the 5% level"** — a textbook example of how a test's conclusion depends on the pre-chosen significance level $\alpha$, and how the statistic's value depends on the type of VCV used (slides-16 itself notes explicitly: "Wu-Hausman test depends on VCV").
+Both versions arrive at the same interpretive conclusion: **`schooling` is "endogenous at the 10% level but not at the 5% level"** — a textbook example of how a test's conclusion depends on the pre-chosen significance level $\alpha$, and how the statistic's value depends on the type of VCV used — the key point: "Wu-Hausman test depends on VCV".
 
 ## Alternative estimators when 2SLS is not good enough (graduate level)
 
@@ -349,7 +349,7 @@ with $n$ = sample size, $k$ = number of regressors (endo + exo), $a$ = a positiv
 
 **Fuller estimator**: $\hat\beta_F=b(\kappa_F)$.
 
-**Properties** (per the slide, applying to both formulas):
+**Properties** (applying to both formulas):
 
 
 | Property | Remark |
@@ -399,7 +399,7 @@ $W$ is the weighting matrix: $W=I$ → simple GMM; $W=S^{-1}$ (with $S=E[m(\thet
 
 ## Exam traps — extended
 
-1. Calling the consequence of endogeneity on OLS "biased" in a generic way — the precise term is **inconsistent** (the terminology slides-16 corrects from slides-5); bias is a finite-sample problem, inconsistency is a problem that does not vanish no matter $N\to\infty$.
+1. Calling the consequence of endogeneity on OLS "biased" in a generic way — the precise term is **inconsistent**; bias is a finite-sample problem, inconsistency is a problem that does not vanish no matter $N\to\infty$.
 2. Rejecting the underidentification (relevance) test and then concluding right away "the instrument is strong enough" — these are **two different tests**: relevance (tier 1) and the strength/weak-instrument test (tier 2).
 3. Rejecting underidentification/weak-instrument and then treating 2SLS as "certainly giving correct inference" — Anderson-Rubin/Stock-Wright are only strictly necessary in the borderline zone, but the general principle is: the closer the instrument is to the weak boundary, the more the standard t-test should be doubted.
 4. Confusing the 2 criteria for choosing a Stock-Yogo threshold (**relative bias** vs **size distortion**) — an instrument can meet one criterion but not the other; "a good estimate does not guarantee a good test, and vice versa."

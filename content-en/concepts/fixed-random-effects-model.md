@@ -10,7 +10,7 @@ assignment: ["Assignment 5: Panel data models with variance structures"]
 updated: 2026-09-04
 ---
 
-> **How to read this page**: this is a direct extension of [[concepts/linear-regression-model]] to data with a **time dimension** — all the underlying concepts (PRE/SRE, OLS, assumptions A1–A5, t-test, F-test) still apply, just "detailed further" to fit the panel structure. This page is long because it merges 2 slide decks (basic Topic 6 + extended Topic 12) — so read it in order: (1) what panel data is and why it exists, (2) the expanded assumption set A3a/A3b, A4a/b/c, (3) four estimation methods (Pooled OLS, GLS/FGLS, FE, RE), (4) how to choose the correct SE, (5) the Hausman test for choosing between FE and RE.
+> **How to read this page**: this is a direct extension of [[concepts/linear-regression-model]] to data with a **time dimension** — all the underlying concepts (PRE/SRE, OLS, assumptions A1–A5, t-test, F-test) still apply, just "detailed further" to fit the panel structure. This page is long because it covers both Topic 6 (basic) and Topic 12 (extended) — so read it in order: (1) what panel data is and why it exists, (2) the expanded assumption set A3a/A3b, A4a/b/c, (3) four estimation methods (Pooled OLS, GLS/FGLS, FE, RE), (4) how to choose the correct SE, (5) the Hausman test for choosing between FE and RE.
 
 **Lecture 6** in the syllabus (CO Topic 6 & 12) — Assignment 5: Panel data models with variance structures.
 
@@ -26,7 +26,7 @@ updated: 2026-09-04
 
 ### Illustrative example: an $N\times T$ mini-panel
 
-The Topic 6 slide uses data from 58 Vietnamese provinces, 5 years (2007–2011) to illustrate the panel structure — each province is a unit $i$, each year is a point in time $t$. An excerpt of the original table (units exactly as the slide records them — see the source-contradiction note right below the table):
+This illustrative example uses data from 58 Vietnamese provinces, 5 years (2007–2011) to illustrate the panel structure — each province is a unit $i$, each year is a point in time $t$. An excerpt of the data table:
 
 |province | year |rgdp (provincial GDP) |labfo (labor force, thousand people) |rinvest (investment) |pci (provincial competitiveness index, 0–100) |
 |---|---|---|---|---|---|
@@ -38,7 +38,7 @@ The Topic 6 slide uses data from 58 Vietnamese provinces, 5 years (2007–2011) 
 | Bac Can | 2009 | 2.400.000 | 189,8 | 1.100.000 | 75,96 |
 | … | … | … | … | … | … |
 
-This is exactly the $y_{it}$ structure: each row is a pair $(i,t)$ — "An Giang, 2007" is a different observation from "An Giang, 2008" (same $i$, different $t$) and from "Bac Can, 2007" (different $i$, same $t$). $N$ here is the number of provinces (58 provinces per the original description — but the actual `plm` regression tables in later sections show `n = 43, T = 5, N = 215`, meaning only 43 provinces are used in the final balanced panel; the original slide does not explain why 58 dropped to 43 — this could be due to dropping observations with missing data to balance the panel, but this is an inference, not something the slide states explicitly).
+This is exactly the $y_{it}$ structure: each row is a pair $(i,t)$ — "An Giang, 2007" is a different observation from "An Giang, 2008" (same $i$, different $t$) and from "Bac Can, 2007" (different $i$, same $t$). The illustrative table above has 58 provinces, but the actual `plm` regression tables in later sections use only $n=43, T=5, N=215$ — the final balanced panel keeps only the 43 provinces with complete data across all 5 years.
 
 ### Why panel data is useful for identification — connecting to the causal-identification problem
 
@@ -62,14 +62,14 @@ This is the single most important philosophical question of this entire page, an
 
 **The FE model requires within-group variation** — if an independent variable does not change over time for a given unit, it will be completely "absorbed" by the fixed effect $\alpha_i$ and **cannot be estimated**.
 
-The slide's counterexample: regressing export volume from Vietnam to country $i$ in year $t$ on the geographic distance from Vietnam to country $i$:
+Counterexample: regressing export volume from Vietnam to country $i$ in year $t$ on the geographic distance from Vietnam to country $i$:
 Because geographic distance is **constant** over years (country $i$ is always a fixed distance from Vietnam), this variable has no within-group variation → it cannot be included in a fixed-effects model. This is exactly why FE **does not allow** a time-invariant regressor, while RE (section 10) does — one of the most important differences between the two models.
 
 ## The two illustrative datasets used throughout this page
 
 This page covers both Topic 6 and Topic 12, so **two** different illustrative datasets appear interleaved in the sections below — **not the same dataset**:
 
-| |Topic 6 data (`slides-6-iu.pdf`) |Topic 12 data (`slides-13-iu.pdf`) |
+| |Topic 6 data |Topic 12 data |
 |---|---|---|
 |Observation unit |58 Vietnamese provinces (final balanced panel uses $n=43$) |300 firms |
 |Number of periods |5 years (2007–2011) |5 years |
@@ -313,7 +313,7 @@ $p=0.0005 \ll 0.05$ → **strongly reject** $H_0$ → use FE for this data. This
 When running `phtest()` (or an equivalent command) in R, one sometimes encounters the warning:
 > **"Vb-VB is not positive definite"**
 
-This warning means the covariance-matrix difference $V(\hat\beta_{FE})-V(\hat\beta_{RE})$ is **not truly invertible** in the mathematical sense — so the test statistic $H$ **cannot be computed correctly** (the formula requires inverting this matrix). Fixes according to the original slide:
+This warning means the covariance-matrix difference $V(\hat\beta_{FE})-V(\hat\beta_{RE})$ is **not truly invertible** in the mathematical sense — so the test statistic $H$ **cannot be computed correctly** (the formula requires inverting this matrix). Fixes:
 - Check for **outliers** in the data.
 - Check for **multicollinearity** (see [[concepts/multicollinearity]]).
 - **Rescale** the variables.

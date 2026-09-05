@@ -16,7 +16,7 @@ updated: 2026-08-29
 
 Economics puts forward many theories about the behavior of individuals, firms, and markets.
 But a theory, however reasonable it sounds, remains only a **hypothesis** until there is evidence from real data.
-The slide opens the course with 4 empirical questions to illustrate this:
+The course opens with 4 empirical questions to illustrate this:
 
 - Does education increase wages?
 - Does foreign direct investment (FDI) reduce inequality?
@@ -24,7 +24,7 @@ The slide opens the course with 4 empirical questions to illustrate this:
 - What is the impact of carbon taxes on emissions?
 
 What all 4 questions have in common: they are all **causal** questions, not merely descriptive ones.
-**Econometrics** is defined (per the slide) as:
+**Econometrics** is defined as:
 
 > Econometrics is the discipline that uses statistical methods and data to quantify economic relationships and evaluate economic theories.
 
@@ -60,7 +60,7 @@ The difference lies in the **objective**, not in the formulas:
 |Objective | Prediction, statistical inference | Causal inference |
 |Scope |Broadly applicable, across many fields |Evaluating economic theory & policy |
 
-The slide illustrates this difference using exactly one situation, framed under two different question angles (household electricity consumption):
+This difference is illustrated using exactly one situation, framed under two different question angles (household electricity consumption):
 
 - **Statistical question**: "Can we predict household electricity consumption from income and household size?" — concerned only with **whether it can be predicted**, not with the mechanism.
 - **Econometric question**: "Does a higher electricity price cause households to reduce electricity consumption?" — requires a **causal** answer, meaning "the price increase" must actually be the *cause*, not merely a good predictor.
@@ -74,20 +74,20 @@ This is the most important reason: **many statistical methods are borrowed by ec
 **Association** (statistical linkage) means that when one variable changes, the other also changes in a systematic way — the two variables "move together" in the data.
 Association is measured using familiar tools: **correlation**, **regression coefficients**, **conditional averages**.
 
-The slide gives three purely-association examples (not yet saying anything about causation):
+Three purely-association examples (not yet saying anything about causation):
 
 - Households with higher income tend to consume more electricity.
 - Cities with more cars tend to have higher air pollution.
 - Ice cream sales rise when the number of drowning accidents rises.
 
-For each example, the question the slide immediately poses is: **"If two variables have an association, does that mean one causes the other?"** — and the answer running through the whole course is **not necessarily**.
+For each example, the question immediately posed is: **"If two variables have an association, does that mean one causes the other?"** — and the answer running through the whole course is **not necessarily**.
 
-Another example the slide uses to clarify the boundary between **association** and **causality** as two separate concepts:
+Another example that clarifies the boundary between **association** and **causality** as two separate concepts:
 
 - **Association** (pure observation): "Taller workers tend to earn higher wages" — just an observed pattern, saying nothing yet about the mechanism.
 - **Causality** (a true causal relationship): "An increase in electricity price causes households to reduce electricity consumption" — this is a statement about **mechanism**, far stronger than an observed pattern.
 
-The central question econometrics exists to answer, exactly as the slide poses it: ***"Does X merely move together with Y, or does X actually cause Y?"***
+The central question econometrics exists to answer: ***"Does X merely move together with Y, or does X actually cause Y?"***
 
 ## 5. Association ≠ Causality: Three sources of confusion
 
@@ -126,14 +126,14 @@ Confusing association with causation is not merely an academic error — it lead
 |Ice cream sales rise at the same time as drowning accidents rise |"Eating ice cream increases drowning risk" |Restrict/heavily tax ice cream sales to reduce drowning accidents |Both very likely rise because of the same third cause: hot weather leads people to both buy more ice cream and swim/go to the beach more (raising drowning risk) — ice cream does not cause drowning |
 |Bigger fires have more firefighters and more damage |"Dispatching more firefighters increases damage" |Cut the firefighting force to reduce fire damage |The size of the fire (the confounder) causes both; cutting firefighters would actually make damage **worse** |
 |High-crime areas have more police |"Police increase crime" |Withdraw police from the area to reduce crime |The direction of causality is reversed: police are dispatched *because* crime is high, they are not the cause of crime |
-> This is noted explicitly here so as not to conflate original slide content with an inference applying similar logic.
+> This is noted explicitly here so as not to conflate the original content with an inference applying similar logic.
 
 ## 6. Ceteris paribus — "other factors held constant"
 
 Even after avoiding the three traps in section 5, the real economic question a researcher cares about is usually not "do X and Y move together" but rather: **holding all other relevant factors constant, how much does Y change when X changes by 1 unit?**
 This is called the **ceteris paribus** effect ("everything else held constant" — Latin).
 
-*The slide's example*: How does wage change when education increases, **holding fixed** ability, family, and other factors?
+*Illustrative example*: How does wage change when education increases, **holding fixed** ability, family, and other factors?
 To control for these factors, we include them in the same regression equation:
 
 $$wage = \beta_0 + \beta_1 \cdot education + \beta_2 \cdot ability + \cdots + u$$
@@ -179,7 +179,7 @@ But in observational data, the variable we care about is usually affected by **m
 
 ### 8.2 A full example: electricity price and electricity consumption
 
-The slide uses the same "statistical vs. econometric question" example from section 3 to concretely illustrate the identification problem:
+The "statistical vs. econometric question" example from section 3 concretely illustrates the identification problem:
 
 - We want to estimate the effect of electricity price on household electricity consumption.
 - Observed: areas with higher electricity prices tend to have lower electricity consumption.
@@ -192,7 +192,7 @@ The slide uses the same "statistical vs. econometric question" example from sect
 
 In natural sciences, causal relationships are usually studied using **controlled experiments**: the researcher actively changes one variable while holding other factors constant.
 
-> *The slide's example*: to study the effect of a drug, the researcher **randomly assigns** patients into a treatment group and a control group.
+> *Illustrative example*: to study the effect of a drug, the researcher **randomly assigns** patients into a treatment group and a control group.
 > Because the assignment is random, other factors are automatically balanced between the two groups — thereby isolating the true causal effect of the drug.
 
 In economics and other social sciences, **controlled experiments are often difficult or impossible to carry out**.
@@ -218,14 +218,11 @@ Empirical economic research usually follows a 6-step sequence:
 
 ### Three foundational questions at every step
 
-The slide emphasizes: behind the 6 technical steps above, there are **three foundational questions** that truly determine the quality of an empirical study — illustrated again using the same electricity-price example:
+Behind the 6 technical steps above, there are **three foundational questions** that truly determine the quality of an empirical study — illustrated again using the same electricity-price example:
 
 1. **What is the economic question?** — the relationship of interest needs to be clearly defined. *Example*: does a higher electricity price reduce household electricity consumption? This step identifies: the outcome variable, the main variable of interest, and the behavioral/policy question being asked.
 2. **What is the economic mechanism?** — the economic theory explaining **why** this relationship might exist. *Example*: a higher price raises the cost of consumption, which may lead households to reduce electricity use. Theory helps identify: which variables matter, and how they relate to each other.
 3. **Can the causal effect be identified in the data?** — the observed relationship may be confounded by other factors; the core challenge is isolating the portion of variation in the explanatory variable that is **not** driven by confounding influences. This is precisely the **central task of econometrics**, not question (1) or (2).
-
-> Note related to the Course Outline: `VNP2026-CO.pdf` describes Topic 0 (Introduction) as covering exactly the content areas matching this slide — "the use of econometrics", "some alternative statistical techniques", "econometric analysis in the research process" — confirming that this page correctly covers the foundational philosophy taught in the course's first session.
-> Other logistical details of the CO (grading scale, 15/16 topics, software...) are not directly relevant to causal inference, so they are not repeated here — see `sources/2026-course-outline.md`.
 
 ## 10. Summary exam traps
 
@@ -240,7 +237,7 @@ The slide emphasizes: behind the 6 technical steps above, there are **three foun
 ## 11. Connection to the rest of the course
 
 This page is the anchor for the entire wiki.
-The course introduction slide describes **3 main parts**, each a different set of tools for solving the identification problem in different data contexts:
+The course has **3 main parts**, each a different set of tools for solving the identification problem in different data contexts:
 
 - **Part 1 — The Linear Regression Model and its problems**: OLS, multicollinearity, heteroskedasticity, endogeneity. See [[concepts/linear-regression-model]] (OLS, 5 assumptions), [[concepts/functional-forms]], [[concepts/multicollinearity]], [[concepts/heteroskedasticity]], [[concepts/endogeneity-iv-regression]].
 - **Part 2 — Models for Limited Dependent Variables**: logit/probit, multinomial logit, Poisson/negative binomial regression, ordinal response model, censored/truncated regressions. See [[concepts/binary-response-models]] (LPM/Logit/Probit), [[concepts/multinomial-logit-model]], [[concepts/ordinal-response-models]], [[concepts/count-data-models]], [[concepts/censored-regression-tobit]].

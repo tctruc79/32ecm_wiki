@@ -25,7 +25,7 @@ updated: 2026-09-04
 
 $$y = 0, 1, 2, \dots, K$$
 
-The original slide lists the classic examples in applied econometrics:
+The classic examples in applied econometrics include:
 
 - The number of takeover bids a target firm receives.
 - The number of unpaid credit installments.
@@ -116,7 +116,7 @@ The example here reuses **exactly** the same vaccine survey as [[concepts/binary
 | `pbenefit`, `efficacy80`, `duration3` | ≈0.49–0.50 | ≈0.50 | 0 | 1 |
 | `male` | 0.32 | 0.47 | 0 | 1 |
 
-Detailed distribution of `dhh` (n=377): 0→73, 1→1, 2→15, 3→35, 4→74, 5→82, 6→47, 7→16, 8→14, 9→10, 10→4, 11→4, 12→1, 24→1 (one clear outlier at 24). The histogram in the slide shows the shape **typical right-skew of count data**: the bulk of observations concentrate at 0–9, with a long, thin right tail.
+Detailed distribution of `dhh` (n=377): 0→73, 1→1, 2→15, 3→35, 4→74, 5→82, 6→47, 7→16, 8→14, 9→10, 10→4, 11→4, 12→1, 24→1 (one clear outlier at 24). The histogram of this distribution shows the shape **typical right-skew of count data**: the bulk of observations concentrate at 0–9, with a long, thin right tail.
 
 Distribution of `risk` (n=377): Very unlikely 87, Unlikely 109, Neither 129, Likely 42, Very likely 10.
 
@@ -124,7 +124,7 @@ Distribution of `risk` (n=377): Very unlikely 87, Unlikely 109, Neither 129, Lik
 
 $$\frac{Var(dhh)}{Mean(dhh)}=\frac{7.84}{4.13}\approx1.90$$
 
-If Poisson holds (equidispersion), this ratio should be approximately 1. The figure ≈1.90 — raw variance nearly **double** the raw mean — is an early qualitative sign that this data is likely subject to **overdispersion**, before any formal test is needed (section 6.2). This is an illustrative calculation derived from the slide's descriptive statistics, not a figure the slide computes directly — but it is a sanity check worth doing as a habit before estimating a Poisson model.
+If Poisson holds (equidispersion), this ratio should be approximately 1. The figure ≈1.90 — raw variance nearly **double** the raw mean — is an early qualitative sign that this data is likely subject to **overdispersion**, before any formal test is needed (section 6.2). This is an illustrative calculation derived from the descriptive statistics above — a sanity check worth doing as a habit before estimating a Poisson model.
 
 ## Estimating the Poisson model on the vaccine data
 
@@ -278,7 +278,7 @@ $$IRR_j = e^{\hat\beta_j}$$
 | `age` | −0.009695 | 0.9904 |Age increases by 1 year → expected number of vaccines purchased **falls by 0.96%** |
 |`verylikely` (relative to base "very unlikely") | 0.4376 | 1.5490 |A person who perceives the risk of infection as "very likely" has an expected vaccine purchase **54.9% higher** than someone who perceives it as "very unlikely" (base), holding other variables fixed |
 
-Because `risk` is not explicitly labeled causal/non-causal by the slide the way the Forest/Storm dataset is in [[concepts/linear-regression-model]], the interpretation above uses only associational language ("associated with", "higher than") — **no causal claim is made** when the source does not clearly confirm a causal mechanism.
+Because `risk` is not explicitly labeled causal/non-causal the way the Forest/Storm dataset is in [[concepts/linear-regression-model]], the interpretation above uses only associational language ("associated with", "higher than") — **no causal claim is made** when the source does not clearly confirm a causal mechanism.
 
 ### Marginal effects on the count scale (supplementing IRR, not replacing it)
 
@@ -296,7 +296,7 @@ Reading the `hhsize` example: at the average observation (MEM), adding 1 househo
 
 ### An easy point of confusion: `predict(..., type="link")` is not the expected count
 
-The slide illustrates computing a "partial effect at a specific data point" by increasing `hhincomeUS` from 700 to 701 (holding other variables fixed) and taking the difference between the two predictions:
+A partial effect "at a specific data point" is computed by increasing `hhincomeUS` from 700 to 701 (holding other variables fixed) and taking the difference between the two predictions:
 
 ```r
 nbpred1 = predict(negbin, newdata=point1, type="link")
@@ -315,14 +315,14 @@ Right from the descriptive statistics (section 4.1): 73/377 ≈ **19.4%** of hou
 
 $$Pr(y=0)=\frac{e^{-4.13}(4.13)^0}{0!}=e^{-4.13}\approx0.0161 \;(\approx1.6\%)$$
 
-The **actually observed** zero rate (≈19.4%) is **far larger** than the Poisson-predicted rate (≈1.6%) at the same mean — this is a direct illustration of the **excess zeros** problem (far more zero observations than a standard count distribution predicts). *(This is an illustrative calculation derived from the slide's descriptive data — the slide itself does not present this comparison directly, but it uses exactly the Poisson formula given by the slide in section 2 and the sample mean from section 4.1.)*
+The **actually observed** zero rate (≈19.4%) is **far larger** than the Poisson-predicted rate (≈1.6%) at the same mean — this is a direct illustration of the **excess zeros** problem (far more zero observations than a standard count distribution predicts). *(This is an illustrative calculation derived from the descriptive data above, using exactly the Poisson formula from section 2 and the sample mean from section 4.1.)*
 
 **Economic interpretation of excess zeros**: there may exist **two latent groups** in the population that the observed $X$ variables cannot fully distinguish:
 
 1. The "never" group (always-zero / structural zero): households that will *always* purchase 0 vaccines by nature — e.g. they completely distrust vaccines, or already have enough vaccine from another source. For this group, $y=0$ is not because they "happened not to need to buy" but because they **are never in this market** at all.
 2. The "potential buyer" group (count process / at-risk group): households that *could* purchase vaccine (the quantity follows a count process, e.g. NB), but may happen to purchase exactly 0 doses at this particular survey moment (e.g. because of a high price, low income at that time…) without it meaning they "never buy".
 
-The original slide calls this a case of **"too many zeros, or two separate processes"**.
+This is a case of what's called **"too many zeros, or two separate processes"**.
 
 ### Two-part structure
 
@@ -392,9 +392,9 @@ Comparing the two $\theta$ values (and $\alpha=1/\theta$) between the plain NB (
 |NB (section 8, without separating zero-inflation) | 6.6807 | 0.1497 |
 |ZINB — count part | 8,841,154.89 | ≈0.0000001 (≈0) |
 
-$\alpha\approx0$ in ZINB is nearly equivalent to **pure Poisson** in the count part (recall section 7.3: $\alpha=0\Leftrightarrow$ NB collapses to Poisson). Intuitive interpretation: when the plain NB model (section 8) has to "carry" all the overdispersion — including the portion generated by excess zeros — into a single parameter $\alpha$, the estimated $\alpha$ turns out fairly large (0.1497). But once the "always zero" part is separated out into its own logit equation (ZINB), the remaining overdispersion in the count process nearly vanishes ($\alpha\to0$). This suggests that most of the overdispersion detected in sections 6–8 in this example **may come mainly from excess zeros**, rather than from individual heterogeneity spread evenly across all count levels. This is an observation derived from the slide's two numerical tables (not a conclusion the slide states directly), so it is presented as one way of reading the data, not a claim made by the instructor.
+$\alpha\approx0$ in ZINB is nearly equivalent to **pure Poisson** in the count part (recall section 7.3: $\alpha=0\Leftrightarrow$ NB collapses to Poisson). Intuitive interpretation: when the plain NB model (section 8) has to "carry" all the overdispersion — including the portion generated by excess zeros — into a single parameter $\alpha$, the estimated $\alpha$ turns out fairly large (0.1497). But once the "always zero" part is separated out into its own logit equation (ZINB), the remaining overdispersion in the count process nearly vanishes ($\alpha\to0$). This suggests that most of the overdispersion detected in sections 6–8 in this example **may come mainly from excess zeros**, rather than from individual heterogeneity spread evenly across all count levels. This is an observation derived from the two numerical tables above, so it is presented as one way of reading the data, not a firm conclusion.
 
-> Note: the slide does not present any formal test (e.g. a Vuong test) to directly compare whether NB and ZINB actually differ with statistical significance — the observation in section 11.2 is only a qualitative illustration, not a substitute for a formal test.
+> Note: no formal test (e.g. a Vuong test) is presented here to directly compare whether NB and ZINB actually differ with statistical significance — the observation in section 11.2 is only a qualitative illustration, not a substitute for a formal test.
 
 ## Comprehensive exam traps
 
@@ -404,7 +404,7 @@ $\alpha\approx0$ in ZINB is nearly equivalent to **pure Poisson** in the count p
 4. **Forgetting that the marginal effect of count models (like Logit/Probit) is not constant** — it always depends on the $X$ value being considered (because it is proportional to $\lambda$) — one must state clearly whether MEM or AME is being reported.
 5. **Confusing `predict(..., type="link")` with `predict(..., type="response")`.** `type="link"` returns $X\beta$ (the log of the expected count); the difference between two predictions on this scale is simply the coefficient difference × the $X$ difference — **not** the actual impact on the expected count $\lambda$ (section 9.4).
 6. **Interpreting the coefficient $\hat\gamma$ in the zero-inflation part (logit) the same way as the coefficient $\hat\beta$ in the count part (log-count).** The two parts have entirely different meanings: $\hat\gamma$ speaks to the log-odds of belonging to the "always zero" group; $\hat\beta$ speaks to the log of the expected count within the "at-risk" group. They must not be interpreted interchangeably (section 11.1).
-7. **Directly comparing log-likelihood/AIC between two models that use different sets of independent variables** — as in the slide's example, ZINB drops the `risk` variable from the count part relative to the plain NB (section 11) — such a comparison is not "apples-to-apples", because the fit difference could come from the different variable sets, not necessarily from the model structure.
+7. **Directly comparing log-likelihood/AIC between two models that use different sets of independent variables** — as in the section 11 example, ZINB drops the `risk` variable from the count part relative to the plain NB — such a comparison is not "apples-to-apples", because the fit difference could come from the different variable sets, not necessarily from the model structure.
 8. **Treating "NB fits significantly better than Poisson" (section 8.3) as conclusive evidence for a specific economic mechanism** (e.g. "definitely due to individual heterogeneity") — the test $H_0:\alpha=0$ only tells us overdispersion exists statistically, it does not automatically identify the **cause** of the overdispersion (pure individual heterogeneity, excess zeros, or both) — distinguishing between them requires trying ZINB as in sections 10–11.
 
 ## Connections with the rest of the course

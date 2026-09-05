@@ -37,15 +37,15 @@ Trước khi đi vào công thức, cần trả lời câu hỏi: biến phụ t
 
 </span>
 
-Ví dụ minh họa từ slide gốc cho thấy rõ tính chất "không thứ tự" của MNL:
-<br><span class="en">Illustrative examples from the original slide clearly show MNL's "unordered" property:</span>
+Các ví dụ minh họa dưới đây cho thấy rõ tính chất "không thứ tự" của MNL:
+<br><span class="en">The illustrative examples below clearly show MNL's "unordered" property:</span>
 
 - Hiệu ứng dài hạn của phơi nhiễm phóng xạ: 1 = chết vì ung thư, 2 = chết vì nguyên nhân khác, 3 = còn sống — ba phạm trù này **không** xếp được theo một trục "tăng dần/giảm dần" có ý nghĩa.
 <br><span class="en">Long-term effects of radiation exposure: 1 = death by cancer, 2 = death by other cause, 3 = still alive — these three categories **cannot** be arranged along a meaningful "increasing/decreasing" axis.</span>
 - Chọn nơi khám chữa bệnh: bệnh viện công, bệnh viện/phòng khám tư, thầy lang truyền thống, tự điều trị — không có phạm trù nào "hơn" phạm trù kia theo một thang đo chung, chỉ đơn thuần là các lựa chọn khác nhau.
 <br><span class="en">Choice of healthcare provider: public hospital, private hospital/clinic, traditional healer, self-treatment — no category is "better" than another on a common scale, they are simply different choices.</span>
-- Các ví dụ khác nêu trong slide: chọn hãng xe (Toyota, Honda, Suzuki, Mazda, KIA…), chọn ngành học, chọn nghề nghiệp.
-<br><span class="en">Other examples given in the slide: choice of car brand (Toyota, Honda, Suzuki, Mazda, KIA…), choice of field of study, choice of occupation.</span>
+- Các ví dụ khác: chọn hãng xe (Toyota, Honda, Suzuki, Mazda, KIA…), chọn ngành học, chọn nghề nghiệp.
+<br><span class="en">Other examples: choice of car brand (Toyota, Honda, Suzuki, Mazda, KIA…), choice of field of study, choice of occupation.</span>
 
 **Vì sao không dùng OLS?** Muốn dùng OLS, $Y$ phải là một đại lượng có ý nghĩa số học — khoảng cách giữa hai giá trị phải mang thông tin (VD: chênh lệch giữa 3 và 1 năm học đúng bằng chênh lệch giữa 6 và 4 năm học). Nếu mã hóa "chọn bệnh viện công = 1, chọn bệnh viện tư = 2, chọn thầy lang = 3" rồi chạy OLS, mô hình sẽ ngầm giả định "thầy lang" cách "bệnh viện tư" đúng bằng khoảng cách "bệnh viện tư" cách "bệnh viện công" — một giả định vô nghĩa vì con số 1/2/3 chỉ là **nhãn** (label), không phải thang đo.
 <br><span class="en">**Why not use OLS?** For OLS to be valid, $Y$ must be a quantity with arithmetic meaning — the distance between two values must carry information (e.g., the gap between 3 and 1 years of schooling must equal the gap between 6 and 4 years of schooling). If we code "chose public hospital = 1, chose private hospital = 2, chose traditional healer = 3" and run OLS, the model implicitly assumes "traditional healer" is exactly as far from "private hospital" as "private hospital" is from "public hospital" — a meaningless assumption, since the numbers 1/2/3 are merely **labels**, not a scale.</span>
@@ -55,8 +55,8 @@ Ví dụ minh họa từ slide gốc cho thấy rõ tính chất "không thứ t
 
 ## 2. Case study xuyên suốt: chọn nơi khám chữa bệnh (VHLSS 2012) - <span class="en">Running case study: choice of healthcare provider (VHLSS 2012)</span>
 
-Đây là bộ dữ liệu thầy Thụy dùng cho toàn bộ slide Topic 8 — cần nắm để hiểu mọi ví dụ số ở các mục sau. Nguồn: **Vietnam Household Living Standards Survey (VHLSS) 2012**, file `mnl.xlsx`.
-<br><span class="en">This is the dataset Prof. Thụy uses throughout the Topic 8 slides — understanding it is necessary for following every numeric example in the sections below. Source: **Vietnam Household Living Standards Survey (VHLSS) 2012**, file `mnl.xlsx`.</span>
+Đây là bộ dữ liệu dùng xuyên suốt Lecture 10 — cần nắm để hiểu mọi ví dụ số ở các mục sau. Nguồn: **Vietnam Household Living Standards Survey (VHLSS) 2012**, file `mnl.xlsx`.
+<br><span class="en">This is the dataset used throughout Lecture 10 — understanding it is necessary for following every numeric example in the sections below. Source: **Vietnam Household Living Standards Survey (VHLSS) 2012**, file `mnl.xlsx`.</span>
 
 **Biến phụ thuộc** `choice` — nơi khám chữa bệnh, 5 phạm trù không thứ tự:
 <br><span class="en">**Dependent variable** `choice` — healthcare provider, 5 unordered categories:</span>
@@ -87,8 +87,8 @@ Tổng $N = 3{,}475$ quan sát. **Public hospital chiếm ưu thế áp đảo**
 > **Đơn vị phân tích**: cùng một `id` có thể xuất hiện ở nhiều dòng `case` khác nhau với `choice` khác nhau (VD `id=1` có `case=1` chọn Public hospital và `case=2` chọn Lang y) — cho thấy đơn vị phân tích thực chất là **mỗi lượt lựa chọn** (mỗi lần cần khám chữa bệnh), không phải cố định một lựa chọn duy nhất mỗi cá nhân.
 > <br><span class="en">**Unit of analysis**: the same `id` can appear across several different `case` rows with different `choice` values (e.g. `id=1` has `case=1` choosing Public hospital and `case=2` choosing Lang y) — showing that the unit of analysis is actually **each choice occasion** (each time healthcare is needed), not one fixed choice per individual.</span>
 
-**Biến độc lập** (giữ nguyên tên biến từ slide):
-<br><span class="en">**Independent variables** (variable names kept as in the slide):</span>
+**Biến độc lập** (giữ nguyên tên biến gốc):
+<br><span class="en">**Independent variables** (variable names kept as in the original dataset):</span>
 
 | Biến | Ý nghĩa | Đơn vị/mã hóa |
 |---|---|---|
@@ -127,8 +127,8 @@ Với $J$ phạm trù, ta có $J$ xác suất $p_{i1},\dots,p_{iJ}$, nhưng chú
 
 ### 3.2 Case study: chọn Public hospital làm base - <span class="en">Case study: choosing Public hospital as the base</span>
 
-Slide gốc dùng lệnh R sau để đưa `Public hospital` (mã gốc = 2) lên làm nhóm nền:
-<br><span class="en">The original slide uses the following R command to make `Public hospital` (original code = 2) the base group:</span>
+Lệnh R sau được dùng để đưa `Public hospital` (mã gốc = 2) lên làm nhóm nền:
+<br><span class="en">The following R command is used to make `Public hospital` (original code = 2) the base group:</span>
 
 ```r
 Z$choice = relevel(as.factor(Z$choice), ref = 2)
@@ -227,8 +227,8 @@ Việc tối ưu hóa này thực hiện bằng thuật toán số lặp (numeri
 
 </span>
 
-Residual Deviance = 6979.762, và vì $LL=-\text{Deviance}/2$ (ghi chú của chính slide gốc), $LL_{null} = -3489.881$.
-<br><span class="en">Residual Deviance = 6979.762, and since $LL=-\text{Deviance}/2$ (as noted in the original slide itself), $LL_{null} = -3489.881$.</span>
+Residual Deviance = 6979.762, và vì $LL=-\text{Deviance}/2$, $LL_{null} = -3489.881$.
+<br><span class="en">Residual Deviance = 6979.762, and since $LL=-\text{Deviance}/2$, $LL_{null} = -3489.881$.</span>
 
 > **Insight kiểm chứng được bằng tay**: với mô hình chỉ có intercept, hệ số ước lượng chính là **log-odds thô tính trực tiếp từ bảng tần suất** — $\hat\beta_{0j} = \ln(n_j/n_{base})$. Kiểm tra: $\ln(434/2320) = -1.676$, $\ln(522/2320)=-1.492$, $\ln(34/2320)=-4.223$, $\ln(165/2320)=-2.643$ — khớp chính xác với bảng trên. Đây là cách trực quan nhất để hiểu "log-odds" nghĩa là gì: nó chỉ là logarit của tỷ lệ tần suất giữa hai nhóm.
 > <br><span class="en">**An insight you can verify by hand**: with an intercept-only model, the estimated coefficient is exactly the **raw log-odds computed directly from the frequency table** — $\hat\beta_{0j} = \ln(n_j/n_{base})$. Check: $\ln(434/2320) = -1.676$, $\ln(522/2320)=-1.492$, $\ln(34/2320)=-4.223$, $\ln(165/2320)=-2.643$ — matches the table above exactly. This is the most intuitive way to understand what "log-odds" means: it is simply the logarithm of the frequency ratio between two groups.</span>
@@ -246,7 +246,7 @@ Hệ số $\beta_j$ đo **thay đổi trong log-odds của việc chọn $j$ so 
 **Diễn giải bằng relative risk ratio (RRR)**: lấy $e^{\beta_j}$ cho một con số dễ đọc hơn — tỷ lệ odds chọn $j$ (so với base) thay đổi bao nhiêu lần khi $X$ tăng 1 đơn vị.
 <br><span class="en">**Interpreting via the relative risk ratio (RRR)**: taking $e^{\beta_j}$ gives an easier-to-read number — by what multiple the odds of choosing $j$ (relative to the base) change when $X$ increases by 1 unit.</span>
 
-### 7.2 Bảng hệ số case study (hai phương trình được slide trình bày riêng) - <span class="en">Case study coefficient tables (two equations presented separately in the slide)</span>
+### 7.2 Bảng hệ số case study (hai phương trình trình bày riêng) - <span class="en">Case study coefficient tables (two equations presented separately)</span>
 
 **Phương trình cho Commune health center (so với Public hospital):**
 <br><span class="en">**Equation for Commune health center (relative to Public hospital):**</span>
@@ -452,8 +452,8 @@ $$R^2_{McFadden} = 1-\frac{LL_{full}}{LL_{null}} = \frac{LL_{null}-LL_{full}}{LL
 
 $$R^2_{McFadden} = \frac{-3489.881-(-3210.319)}{-3489.881} = \frac{-279.562}{-3489.881} \approx 0.0801$$
 
-(Khớp chính xác với kết quả tính trực tiếp trong R từ slide gốc: `0.08010663`.)
-<br><span class="en">(Matches exactly the result computed directly in R in the original slide: `0.08010663`.)</span>
+(Khớp chính xác với kết quả tính trực tiếp trong R: `0.08010663`.)
+<br><span class="en">(Matches exactly the result computed directly in R: `0.08010663`.)</span>
 
 ### 10.2 Khác gì với $R^2$ của OLS - <span class="en">How it differs from OLS $R^2$</span>
 
@@ -465,8 +465,8 @@ Hệ quả quan trọng: **giá trị McFadden $R^2$ không thể so sánh trự
 
 ### 10.3 Ngưỡng đánh giá thường dùng - <span class="en">Commonly used evaluation thresholds</span>
 
-Theo hướng dẫn kinh điển của McFadden (được trích dẫn rộng rãi trong các giáo trình discrete choice, không phải trực tiếp từ slide này), $R^2_{McFadden}$ trong khoảng **0.2–0.4** đã được coi là mức khớp **rất tốt** — thấp hơn nhiều so với ngưỡng "tốt" quen thuộc của $R^2$ OLS.
-<br><span class="en">According to McFadden's classic guideline (widely cited in discrete-choice textbooks, not directly from this slide), $R^2_{McFadden}$ in the range **0.2–0.4** is already considered a **very good** fit — much lower than the familiar "good" threshold for OLS $R^2$.</span>
+Theo hướng dẫn kinh điển của McFadden (được trích dẫn rộng rãi trong các giáo trình discrete choice), $R^2_{McFadden}$ trong khoảng **0.2–0.4** đã được coi là mức khớp **rất tốt** — thấp hơn nhiều so với ngưỡng "tốt" quen thuộc của $R^2$ OLS.
+<br><span class="en">According to McFadden's classic guideline (widely cited in discrete-choice textbooks), $R^2_{McFadden}$ in the range **0.2–0.4** is already considered a **very good** fit — much lower than the familiar "good" threshold for OLS $R^2$.</span>
 
 **Điểm quan trọng nhất từ case study**: mô hình MNL ở đây có $R^2_{McFadden}\approx 0.08$ — thấp hơn cả ngưỡng 0.2 — trong khi LR test tổng thể (mục 8.2) bác bỏ $H_0$ cực mạnh ($p\approx 0$). Đây là minh chứng sống động cho bài học đã nêu ở [[concepts/linear-regression-model]] mục 9: **"có ý nghĩa thống kê" (statistical significance) và "độ khớp tốt về mặt độ lớn" (fit magnitude) là hai chuyện hoàn toàn khác nhau** — một tập biến giải thích có thể ảnh hưởng thật (LR test rất có ý nghĩa) nhưng vẫn chỉ giải thích được một phần nhỏ trong toàn bộ log-likelihood cần cải thiện (vì hành vi lựa chọn nơi khám chữa bệnh còn phụ thuộc nhiều yếu tố không quan sát được — bệnh cụ thể, khoảng cách địa lý thực tế, chất lượng dịch vụ cảm nhận…).
 <br><span class="en">**The most important point from the case study**: the MNL model here has $R^2_{McFadden}\approx 0.08$ — below even the 0.2 threshold — while the overall LR test (section 8.2) rejects $H_0$ extremely strongly ($p\approx 0$). This is a vivid illustration of the lesson already stated in [[concepts/linear-regression-model]] section 9: **"statistical significance" and "fit magnitude" are two completely different things** — a set of explanatory variables can have a genuine effect (LR test highly significant) yet still explain only a small fraction of the total log-likelihood that could be improved (because the behavior of choosing a healthcare provider also depends on many unobserved factors — the specific illness, actual geographic distance, perceived service quality…).</span>

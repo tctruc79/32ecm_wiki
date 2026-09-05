@@ -29,8 +29,8 @@ Ví dụ cụ thể — lấy ngay từ case study xuyên suốt trang này (m�
 
 ## 2. Perfect collinearity vs. Imperfect collinearity (multicollinearity) - <span class="en">Perfect collinearity vs. Imperfect collinearity (multicollinearity)</span>
 
-Mô hình hồi quy tuyến tính cổ điển (CLRM) giả định **A2 — Full rank**: không có quan hệ tuyến tính hoàn hảo giữa các regressor. Slide phân biệt rõ hai loại collinearity, và đây là điểm hay bị gộp lẫn khi ôn thi:
-<br><span class="en">The Classical Linear Regression Model (CLRM) assumes **A2 — Full rank**: no perfect linear relationship among the regressors. The slide clearly distinguishes two types of collinearity, and this is a point that's often conflated during exam review:</span>
+Mô hình hồi quy tuyến tính cổ điển (CLRM) giả định **A2 — Full rank**: không có quan hệ tuyến tính hoàn hảo giữa các regressor. Có hai loại collinearity cần phân biệt rõ, đây là điểm hay bị gộp lẫn khi ôn thi:
+<br><span class="en">The Classical Linear Regression Model (CLRM) assumes **A2 — Full rank**: no perfect linear relationship among the regressors. There are two types of collinearity that must be clearly distinguished, and this is a point that's often conflated during exam review:</span>
 
 - **Perfect collinearity**: quan hệ tuyến tính **hoàn hảo** giữa 2+ biến (VD $X_2=2X_1$ đúng cho *mọi* quan sát). Đây là vi phạm A2 **hoàn toàn** — không phải "vấn đề cần cân nhắc" mà là **lỗi kỹ thuật khiến mô hình không chạy được**.
   <br><span class="en">**Perfect collinearity**: a **perfect** linear relationship between 2+ variables (e.g., $X_2=2X_1$ holding for *every* observation). This is a **complete** violation of A2 — not "an issue to weigh" but a **technical error that stops the model from running at all**.</span>
@@ -44,8 +44,8 @@ Với $y=\beta_0+\beta_1X_1+\beta_2X_2$ và $X_2=2X_1$ (quan hệ tuyến tính 
 
 $$y=\beta_0+\beta_1X_1+\beta_2(2X_1)=\beta_0+(\beta_1+2\beta_2)X_1=\beta_0+\gamma X_1, \qquad \gamma=\beta_1+2\beta_2$$
 
-Mô hình gốc "thu gọn" thành một mô hình chỉ còn một biến $X_1$ với hệ số $\gamma$. Vấn đề: với **một** giá trị $\gamma$ ước lượng được, có **vô số** cặp $(\beta_1,\beta_2)$ thỏa mãn phương trình $\gamma=\beta_1+2\beta_2$. Slide minh họa bằng $\gamma=1$:
-<br><span class="en">The original model "collapses" into a model with only one variable $X_1$ and coefficient $\gamma$. The problem: for **one** estimated value of $\gamma$, there are **infinitely many** pairs $(\beta_1,\beta_2)$ satisfying the equation $\gamma=\beta_1+2\beta_2$. The slide illustrates this with $\gamma=1$:</span>
+Mô hình gốc "thu gọn" thành một mô hình chỉ còn một biến $X_1$ với hệ số $\gamma$. Vấn đề: với **một** giá trị $\gamma$ ước lượng được, có **vô số** cặp $(\beta_1,\beta_2)$ thỏa mãn phương trình $\gamma=\beta_1+2\beta_2$. Minh họa bằng $\gamma=1$:
+<br><span class="en">The original model "collapses" into a model with only one variable $X_1$ and coefficient $\gamma$. The problem: for **one** estimated value of $\gamma$, there are **infinitely many** pairs $(\beta_1,\beta_2)$ satisfying the equation $\gamma=\beta_1+2\beta_2$. Illustrated with $\gamma=1$:</span>
 
 - nếu $\beta_1=2$ thì $\beta_2=-0.5$;
   <br><span class="en">if $\beta_1=2$ then $\beta_2=-0.5$;</span>
@@ -62,8 +62,8 @@ Khác hẳn với perfect collinearity, **imperfect collinearity (multicollinear
 
 ## 3. Nguồn gốc của multicollinearity - <span class="en">Sources of multicollinearity</span>
 
-Slide liệt kê bốn cơ chế khiến các regressor trở nên tương quan cao trong thực tế:
-<br><span class="en">The slide lists four mechanisms that make regressors highly correlated in practice:</span>
+Có bốn cơ chế khiến các regressor trở nên tương quan cao trong thực tế:
+<br><span class="en">There are four mechanisms that make regressors highly correlated in practice:</span>
 
 1. **Inherent relationships** (quan hệ nội tại): một số biến tự nhiên tương quan với nhau — VD giáo dục và thu nhập; các input lao động (labor) và vốn (capital) trong hàm sản xuất.
    <br><span class="en">**Inherent relationships**: some variables are naturally correlated with each other — e.g., education and income; the labor and capital inputs in a production function.</span>
@@ -91,8 +91,8 @@ Slide liệt kê bốn cơ chế khiến các regressor trở nên tương quan 
 | `hhsize` | Quy mô hộ gia đình<br><span class="en">Household size</span> | số thành viên<br><span class="en">number of members</span> |
 | `children` | % trẻ em trong hộ gia đình<br><span class="en">% of children in the household</span> | phần trăm<br><span class="en">percent</span> |
 
-> Lưu ý của slide: dữ liệu đã loại bỏ các quan sát có giá trị NA và các hộ có `income = 0`, còn lại $n=470$ quan sát.
-> <br><span class="en">Note from the slide: observations with NA values and households with `income = 0` were removed, leaving $n=470$ observations.</span>
+> Lưu ý: dữ liệu đã loại bỏ các quan sát có giá trị NA và các hộ có `income = 0`, còn lại $n=470$ quan sát.
+> <br><span class="en">Note: observations with NA values and households with `income = 0` were removed, leaving $n=470$ observations.</span>
 
 **Thống kê mô tả** (sau khi làm sạch, $n=470$ cho mọi biến):
 <br><span class="en">**Descriptive statistics** (after cleaning, $n=470$ for every variable):</span>
@@ -164,13 +164,13 @@ Nhìn vào mẫu số $(1-r_{12}^2)$: khi $r_{12}\to1$ (hai biến gần như đ
 
 ### 7.3 Ngưỡng thường dùng - <span class="en">Commonly used thresholds</span>
 
-Quy tắc kinh nghiệm (rule of thumb) theo slide: **$VIF>5$** được coi là nghiêm trọng ở một chỗ trong slide ("Signs of Multicollinearity"), trong khi slide ghi "$VIF>5$ (hoặc 10)" ở chỗ khác — tức thừa nhận cả hai ngưỡng 5 và 10 đều được dùng phổ biến trong thực hành, không chốt một con số duy nhất. Xem thêm lưu ý về sự không nhất quán này ở bẫy thi #7 (mục 10).
-<br><span class="en">Rule of thumb per the slide: **$VIF>5$** is treated as serious in one place in the slide ("Signs of Multicollinearity"), while the slide states "$VIF>5$ (or 10)" elsewhere — i.e., it acknowledges that both the 5 and 10 thresholds are commonly used in practice, without committing to a single number. See more on this inconsistency in exam trap #7 (section 10).</span>
+Quy tắc kinh nghiệm (rule of thumb): trong thực hành, cả **$VIF>5$** (ngưỡng chặt, "Signs of Multicollinearity") lẫn **$VIF>5$ (hoặc 10)** (ngưỡng nới hơn) đều được dùng phổ biến — không có một con số chốt duy nhất được thống nhất trong tài liệu econometrics ứng dụng. Xem thêm lưu ý về sự không nhất quán này ở bẫy thi #7 (mục 10).
+<br><span class="en">Rule of thumb: in practice, both **$VIF>5$** (the stricter threshold, "Signs of Multicollinearity") and **$VIF>5$ (or 10)** (the looser threshold) are commonly used — applied econometrics literature has not settled on a single agreed number. See more on this inconsistency in exam trap #7 (section 10).</span>
 
 ## 8. Phát hiện (detection) - <span class="en">Detection</span>
 
-Slide liệt kê ba nhóm công cụ phát hiện, với phân biệt quan trọng: chỉ VIF được coi là **xác nhận** (confirmation), hai công cụ còn lại chỉ là **dấu hiệu** (sign) — gợi ý nhưng không chắc chắn.
-<br><span class="en">The slide lists three groups of detection tools, with an important distinction: only VIF is considered a **confirmation**, while the other two tools are merely a **sign** — suggestive but not certain.</span>
+Có ba nhóm công cụ phát hiện, với phân biệt quan trọng: chỉ VIF được coi là **xác nhận** (confirmation), hai công cụ còn lại chỉ là **dấu hiệu** (sign) — gợi ý nhưng không chắc chắn.
+<br><span class="en">There are three groups of detection tools, with an important distinction: only VIF is considered a **confirmation**, while the other two tools are merely a **sign** — suggestive but not certain.</span>
 
 | Dấu hiệu<br><span class="en">Sign</span> | Diễn giải<br><span class="en">Interpretation</span> | Mức độ chắc chắn<br><span class="en">Level of certainty</span> |
 |---|---|---|
@@ -178,7 +178,7 @@ Slide liệt kê ba nhóm công cụ phát hiện, với phân biệt quan trọ
 | $R^2$ cao nhưng ít t-ratio có ý nghĩa<br><span class="en">High $R^2$ but few significant t-ratios</span> | Gợi ý multicollinearity<br><span class="en">Suggests multicollinearity</span> | Dấu hiệu<br><span class="en">Sign</span> |
 | Ma trận tương quan cặp cao (ngưỡng thường dùng $\pm0.8$)<br><span class="en">High pairwise correlation matrix values (commonly used threshold $\pm0.8$)</span> | Gợi ý multicollinearity<br><span class="en">Suggests multicollinearity</span> | **Chỉ là dấu hiệu, không phải xác nhận** — tương quan thấp cũng không đảm bảo không có multicollinearity (có thể multicollinear đa biến, không lộ ra ở tương quan cặp đơn lẻ)<br><span class="en">**Only a sign, not a confirmation** — low correlation also does not guarantee the absence of multicollinearity (it could be multivariate multicollinearity, which doesn't show up in any single pairwise correlation)</span> |
 | Auxiliary regression: hồi quy mỗi regressor lên toàn bộ regressor còn lại<br><span class="en">Auxiliary regression: regressing each regressor on all other regressors</span> | $R^2$ của auxiliary regression cao (>0.8) hoặc F-test có ý nghĩa<br><span class="en">High $R^2$ of the auxiliary regression (>0.8) or a significant F-test</span> | Dấu hiệu — cùng logic: cao thì gợi ý, thấp không đảm bảo loại trừ<br><span class="en">Sign — same logic: high suggests it, low does not guarantee it's ruled out</span> |
-| VIF > 5 (hoặc 10)<br><span class="en">VIF > 5 (or 10)</span> | Được slide coi là **xác nhận** (confirm) multicollinearity nghiêm trọng<br><span class="en">Treated by the slide as **confirming** serious multicollinearity</span> | Xác nhận<br><span class="en">Confirmation</span> |
+| VIF > 5 (hoặc 10)<br><span class="en">VIF > 5 (or 10)</span> | Được coi là **xác nhận** (confirm) multicollinearity nghiêm trọng<br><span class="en">Treated as **confirming** serious multicollinearity</span> | Xác nhận<br><span class="en">Confirmation</span> |
 
 Áp dụng cả ba công cụ vào case study ở mục 4–5:
 <br><span class="en">Applying all three tools to the case study in sections 4–5:</span>
@@ -196,8 +196,8 @@ Ma trận tương quan giữa $\log(\text{income})$, `age_wife`, `age_husband`, 
 | **hhsize** | −0.019 | −0.039 | −0.058 | 1.000 | 0.156 |
 | **children** | −0.018 | −0.220 | −0.236 | 0.156 | 1.000 |
 
-Tương quan giữa `age_wife` và `age_husband` là $r=0.921$ — vượt xa ngưỡng $\pm0.8$ mà slide đề cập — đây là **dấu hiệu** multicollinearity rõ ràng nhất trong bảng. Các cặp còn lại đều có $|r|<0.4$, không đáng lo ngại.
-<br><span class="en">The correlation between `age_wife` and `age_husband` is $r=0.921$ — far exceeding the $\pm0.8$ threshold mentioned by the slide — this is the clearest **sign** of multicollinearity in the table. All other pairs have $|r|<0.4$, which is not a concern.</span>
+Tương quan giữa `age_wife` và `age_husband` là $r=0.921$ — vượt xa ngưỡng $\pm0.8$ — đây là **dấu hiệu** multicollinearity rõ ràng nhất trong bảng. Các cặp còn lại đều có $|r|<0.4$, không đáng lo ngại.
+<br><span class="en">The correlation between `age_wife` and `age_husband` is $r=0.921$ — far exceeding the $\pm0.8$ threshold — this is the clearest **sign** of multicollinearity in the table. All other pairs have $|r|<0.4$, which is not a concern.</span>
 
 ### 8.2 Auxiliary regression - <span class="en">Auxiliary regression</span>
 
@@ -215,13 +215,13 @@ Hồi quy `age_wife` lên toàn bộ regressor còn lại: $\text{age\_wife} = \
 Residual SE $=4.158$ trên 465 df; $R^2=0.8548$; $R^2_{adj}=0.8536$; $F=684.4$ trên $(4,465)$ df, $p<2.2\times10^{-16}$.
 <br><span class="en">Residual SE $=4.158$ on 465 df; $R^2=0.8548$; $R^2_{adj}=0.8536$; $F=684.4$ on $(4,465)$ df, $p<2.2\times10^{-16}$.</span>
 
-$R^2=0.8548$ (>0.8, ngưỡng slide nêu) và F-test cực kỳ có ý nghĩa — cả hai đều xác nhận multicollinearity theo tiêu chí của slide. Đáng chú ý: riêng `age_husband` đã có $t=46.2$ trong auxiliary regression này — gần như một mình `age_husband` giải thích được phần lớn biến thiên của `age_wife`, đúng như trực giác ở mục 1.
-<br><span class="en">$R^2=0.8548$ (>0.8, the threshold stated by the slide) and an extremely significant F-test — both confirm multicollinearity by the slide's criteria. Notably: `age_husband` alone has $t=46.2$ in this auxiliary regression — `age_husband` on its own explains most of the variation in `age_wife`, exactly matching the intuition in section 1.</span>
+$R^2=0.8548$ (>0.8, ngưỡng thường dùng) và F-test cực kỳ có ý nghĩa — cả hai đều xác nhận multicollinearity nghiêm trọng. Đáng chú ý: riêng `age_husband` đã có $t=46.2$ trong auxiliary regression này — gần như một mình `age_husband` giải thích được phần lớn biến thiên của `age_wife`, đúng như trực giác ở mục 1.
+<br><span class="en">$R^2=0.8548$ (>0.8, the commonly used threshold) and an extremely significant F-test — both confirm serious multicollinearity. Notably: `age_husband` alone has $t=46.2$ in this auxiliary regression — `age_husband` on its own explains most of the variation in `age_wife`, exactly matching the intuition in section 1.</span>
 
 ### 8.3 VIF - <span class="en">VIF</span>
 
-Slide chỉ đưa ra công thức VIF cho trường hợp 2 regressor ($VIF=1/(1-r_{12}^2)$), nhưng bảng kết quả `car::vif()` ở mục 9.2 (5 regressor) cho thấy slide áp dụng công thức tổng quát hơn: $VIF_j=1/(1-R_j^2)$, với $R_j^2$ chính là $R^2$ của auxiliary regression cho biến $X_j$ — đây là cách hàm `car::vif()` trong R thực sự tính toán, và khớp với logic "auxiliary regression" mà slide đã trình bày ở mục 8.2.
-<br><span class="en">The slide only gives the VIF formula for the 2-regressor case ($VIF=1/(1-r_{12}^2)$), but the `car::vif()` results table in section 9.2 (5 regressors) shows the slide applies the more general formula: $VIF_j=1/(1-R_j^2)$, where $R_j^2$ is precisely the $R^2$ of the auxiliary regression for variable $X_j$ — this is how the `car::vif()` function in R actually computes it, and matches the "auxiliary regression" logic the slide presented in section 8.2.</span>
+Công thức VIF cho trường hợp 2 regressor ($VIF=1/(1-r_{12}^2)$) là trường hợp riêng của công thức tổng quát cho $k$ regressor: $VIF_j=1/(1-R_j^2)$, với $R_j^2$ chính là $R^2$ của auxiliary regression cho biến $X_j$ — đây là cách hàm `car::vif()` trong R thực sự tính toán, khớp với logic "auxiliary regression" ở mục 8.2, và được xác nhận bằng bảng kết quả `car::vif()` ở mục 9.2 (5 regressor).
+<br><span class="en">The 2-regressor VIF formula ($VIF=1/(1-r_{12}^2)$) is a special case of the more general $k$-regressor formula: $VIF_j=1/(1-R_j^2)$, where $R_j^2$ is precisely the $R^2$ of the auxiliary regression for variable $X_j$ — this is how the `car::vif()` function in R actually computes it, matching the "auxiliary regression" logic from section 8.2, and confirmed by the `car::vif()` results table in section 9.2 (5 regressors).</span>
 
 $$VIF_{\text{age\_wife}}=\frac{1}{1-0.8548}=\frac{1}{0.1452}\approx 6.89$$
 
@@ -232,8 +232,8 @@ Với ngưỡng $VIF>5$, con số $\approx6.89$ xác nhận multicollinearity ng
 
 ### 9.1 Quy tắc chung: không phải lúc nào cũng cần xử lý - <span class="en">General rule: it doesn't always need to be fixed</span>
 
-Slide nêu rõ **"General Rules of Thumb: DO NOT WORRY IF"**:
-<br><span class="en">The slide clearly states **"General Rules of Thumb: DO NOT WORRY IF"**:</span>
+Nguyên tắc chung — **"DO NOT WORRY IF"** — không cần lo ngại multicollinearity khi:
+<br><span class="en">General rule of thumb — **"DO NOT WORRY IF"** — there is no need to worry about multicollinearity when:</span>
 
 - các hệ số vẫn có ý nghĩa thống kê (statistically significant), **và**
   <br><span class="en">the coefficients are still statistically significant, **and**</span>
@@ -243,24 +243,24 @@ Slide nêu rõ **"General Rules of Thumb: DO NOT WORRY IF"**:
 Lý do: multicollinearity chỉ là vấn đề **thực tế** khi nó thực sự làm hỏng khả năng trả lời câu hỏi nghiên cứu (hệ số mất ý nghĩa hoặc sai dấu). Nếu hệ số vẫn có ý nghĩa và đúng dấu dù VIF cao, nghĩa là vẫn còn *đủ* biến thiên độc lập để ước lượng đáng tin cậy — "sửa" một vấn đề không thực sự gây hại (VD chỉ để hạ VIF cho đẹp) có thể tạo ra vấn đề mới (omitted variable bias, xem dưới) mà không mang lại lợi ích gì.
 <br><span class="en">Reason: multicollinearity is only a **practical** problem when it actually undermines the ability to answer the research question (coefficients become insignificant or have the wrong sign). If the coefficients remain significant and correctly signed despite a high VIF, that means there is still *enough* independent variation for a reliable estimate — "fixing" a problem that isn't actually causing harm (e.g., just to make the VIF look nicer) can create a new problem (omitted variable bias, see below) without any real benefit.</span>
 
-**Nếu cần xử lý**, slide đưa ra hai hướng, mỗi hướng kèm đánh đổi (trade-off) riêng:
-<br><span class="en">**If a fix is needed**, the slide offers two directions, each with its own trade-off:</span>
+**Nếu cần xử lý**, có hai hướng, mỗi hướng kèm đánh đổi (trade-off) riêng:
+<br><span class="en">**If a fix is needed**, there are two directions, each with its own trade-off:</span>
 
 ### 9.2 Giải pháp 1 — Restructure mô hình (transform regressors) - <span class="en">Solution 1 — Restructure the model (transform regressors)</span>
 
 **Ý tưởng**: tìm một cách đặc tả (specification) hoặc functional form thay thế, sao cho các regressor mới ít tương quan hơn nhưng vẫn giữ được nội dung kinh tế của mô hình gốc.
 <br><span class="en">**Idea**: find an alternative specification or functional form such that the new regressors are less correlated while still preserving the economic content of the original model.</span>
 
-**Ví dụ 1 (slide, hàm sản xuất)**: với $y=F(\text{labor},\text{land},\text{capital})$, nếu `labor` và `capital` tương quan cao qua các quan sát (VD trang trại lớn thì cả lao động lẫn vốn đều lớn), có thể chia cả hai vế cho `land`:
-<br><span class="en">**Example 1 (slide, production function)**: with $y=F(\text{labor},\text{land},\text{capital})$, if `labor` and `capital` are highly correlated across observations (e.g., larger farms have both more labor and more capital), both sides can be divided by `land`:</span>
+**Ví dụ 1 (hàm sản xuất)**: với $y=F(\text{labor},\text{land},\text{capital})$, nếu `labor` và `capital` tương quan cao qua các quan sát (VD trang trại lớn thì cả lao động lẫn vốn đều lớn), có thể chia cả hai vế cho `land`:
+<br><span class="en">**Example 1 (production function)**: with $y=F(\text{labor},\text{land},\text{capital})$, if `labor` and `capital` are highly correlated across observations (e.g., larger farms have both more labor and more capital), both sides can be divided by `land`:</span>
 
 $$\frac{y}{\text{land}}=F\left(\frac{\text{labor}}{\text{land}},\ \text{land},\ \frac{\text{capital}}{\text{land}}\right)$$
 
 Chuẩn hóa theo diện tích đất giúp giảm tương quan giữa các input, vì giờ đây các biến đo *cường độ sử dụng đầu vào trên một đơn vị đất*, không còn cùng bị chi phối bởi "quy mô trang trại" như trước.
 <br><span class="en">Normalizing by land area reduces the correlation between the inputs, because the variables now measure *input intensity per unit of land*, no longer jointly driven by "farm size" as before.</span>
 
-**Ví dụ 2 (case study, đã áp dụng thực tế)**: thay vì dùng cả `age_wife` và `age_husband` (tương quan $r=0.921$), slide tạo biến mới `age_diff = age_wife − age_husband` và thay `age_husband` bằng `age_diff` trong mô hình: $\log(\text{expense})=\beta_0+\beta_1\log(\text{income})+\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_diff}+\beta_4\,\text{hhsize}+\beta_5\,\text{children}+\varepsilon$
-<br><span class="en">**Example 2 (case study, actually applied)**: instead of using both `age_wife` and `age_husband` (correlation $r=0.921$), the slide creates a new variable `age_diff = age_wife − age_husband` and replaces `age_husband` with `age_diff` in the model: $\log(\text{expense})=\beta_0+\beta_1\log(\text{income})+\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_diff}+\beta_4\,\text{hhsize}+\beta_5\,\text{children}+\varepsilon$</span>
+**Ví dụ 2 (case study, đã áp dụng thực tế)**: thay vì dùng cả `age_wife` và `age_husband` (tương quan $r=0.921$), một biến mới `age_diff = age_wife − age_husband` được tạo ra để thay `age_husband` trong mô hình: $\log(\text{expense})=\beta_0+\beta_1\log(\text{income})+\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_diff}+\beta_4\,\text{hhsize}+\beta_5\,\text{children}+\varepsilon$
+<br><span class="en">**Example 2 (case study, actually applied)**: instead of using both `age_wife` and `age_husband` (correlation $r=0.921$), a new variable `age_diff = age_wife − age_husband` is created to replace `age_husband` in the model: $\log(\text{expense})=\beta_0+\beta_1\log(\text{income})+\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_diff}+\beta_4\,\text{hhsize}+\beta_5\,\text{children}+\varepsilon$</span>
 
 | Biến<br><span class="en">Variable</span> | $b$ | SE | $t$ | $p$-value |
 |---|---|---|---|---|
@@ -284,8 +284,8 @@ Và `car::vif(model2)` cho kết quả:
 Toàn bộ VIF giờ đều dưới 1.3 — multicollinearity gần như biến mất.
 <br><span class="en">All VIF values are now below 1.3 — multicollinearity has almost disappeared.</span>
 
-**Phân tích thêm (suy ra bằng đại số từ chính các hệ số slide đưa ra, không phải nguyên văn slide)**: vì $\text{age\_husband}=\text{age\_wife}-\text{age\_diff}$, thay vào mô hình gốc $\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_husband}=\beta_2\,\text{age\_wife}+\beta_3(\text{age\_wife}-\text{age\_diff})=(\beta_2+\beta_3)\text{age\_wife}-\beta_3\,\text{age\_diff}$. Kiểm tra với số liệu thật: hệ số `age_wife` gốc $(0.0066)$ cộng hệ số `age_husband` gốc $(-0.0053)$ đúng bằng $0.0013\approx0.0014$ (hệ số `age_wife` mới, sai số làm tròn); và $-(-0.0053)=0.0053$ đúng bằng hệ số `age_diff` mới. Ý nghĩa kinh tế: hệ số `age_wife` **mới** không còn là "hiệu ứng của tuổi vợ, giữ tuổi chồng cố định" (điều gần như không thể ước lượng chính xác trong dữ liệu này, vì hai tuổi hiếm khi biến động độc lập) mà là **hiệu ứng khi cả hai vợ chồng cùng già đi 1 năm** (giữ khoảng cách tuổi cố định); còn hệ số `age_diff` là **hiệu ứng của việc nới rộng khoảng cách tuổi**, giữ tuổi vợ cố định. Đây là cách diễn giải lại phù hợp với chính biến thiên thực sự có trong dữ liệu — thay vì cố ước lượng một hiệu ứng mà dữ liệu gần như không có thông tin để trả lời.
-<br><span class="en">**Further analysis (derived algebraically from the slide's own coefficients, not verbatim from the slide)**: since $\text{age\_husband}=\text{age\_wife}-\text{age\_diff}$, substituting into the original model $\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_husband}=\beta_2\,\text{age\_wife}+\beta_3(\text{age\_wife}-\text{age\_diff})=(\beta_2+\beta_3)\text{age\_wife}-\beta_3\,\text{age\_diff}$. Checking against the actual numbers: the original `age_wife` coefficient $(0.0066)$ plus the original `age_husband` coefficient $(-0.0053)$ equals $0.0013\approx0.0014$ (the new `age_wife` coefficient, rounding error); and $-(-0.0053)=0.0053$ equals exactly the new `age_diff` coefficient. Economic meaning: the **new** `age_wife` coefficient is no longer "the effect of the wife's age, holding the husband's age fixed" (something almost impossible to estimate precisely in this data, since the two ages rarely vary independently), but rather **the effect of both spouses aging by 1 year together** (holding the age gap fixed); while the `age_diff` coefficient is **the effect of widening the age gap**, holding the wife's age fixed. This is a reinterpretation that fits the actual variation present in the data — rather than trying to estimate an effect the data has almost no information to answer.</span>
+**Phân tích thêm (suy ra bằng đại số từ các hệ số ước lượng ở trên)**: vì $\text{age\_husband}=\text{age\_wife}-\text{age\_diff}$, thay vào mô hình gốc $\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_husband}=\beta_2\,\text{age\_wife}+\beta_3(\text{age\_wife}-\text{age\_diff})=(\beta_2+\beta_3)\text{age\_wife}-\beta_3\,\text{age\_diff}$. Kiểm tra với số liệu thật: hệ số `age_wife` gốc $(0.0066)$ cộng hệ số `age_husband` gốc $(-0.0053)$ đúng bằng $0.0013\approx0.0014$ (hệ số `age_wife` mới, sai số làm tròn); và $-(-0.0053)=0.0053$ đúng bằng hệ số `age_diff` mới. Ý nghĩa kinh tế: hệ số `age_wife` **mới** không còn là "hiệu ứng của tuổi vợ, giữ tuổi chồng cố định" (điều gần như không thể ước lượng chính xác trong dữ liệu này, vì hai tuổi hiếm khi biến động độc lập) mà là **hiệu ứng khi cả hai vợ chồng cùng già đi 1 năm** (giữ khoảng cách tuổi cố định); còn hệ số `age_diff` là **hiệu ứng của việc nới rộng khoảng cách tuổi**, giữ tuổi vợ cố định. Đây là cách diễn giải lại phù hợp với chính biến thiên thực sự có trong dữ liệu — thay vì cố ước lượng một hiệu ứng mà dữ liệu gần như không có thông tin để trả lời.
+<br><span class="en">**Further analysis (derived algebraically from the coefficients estimated above)**: since $\text{age\_husband}=\text{age\_wife}-\text{age\_diff}$, substituting into the original model $\beta_2\,\text{age\_wife}+\beta_3\,\text{age\_husband}=\beta_2\,\text{age\_wife}+\beta_3(\text{age\_wife}-\text{age\_diff})=(\beta_2+\beta_3)\text{age\_wife}-\beta_3\,\text{age\_diff}$. Checking against the actual numbers: the original `age_wife` coefficient $(0.0066)$ plus the original `age_husband` coefficient $(-0.0053)$ equals $0.0013\approx0.0014$ (the new `age_wife` coefficient, rounding error); and $-(-0.0053)=0.0053$ equals exactly the new `age_diff` coefficient. Economic meaning: the **new** `age_wife` coefficient is no longer "the effect of the wife's age, holding the husband's age fixed" (something almost impossible to estimate precisely in this data, since the two ages rarely vary independently), but rather **the effect of both spouses aging by 1 year together** (holding the age gap fixed); while the `age_diff` coefficient is **the effect of widening the age gap**, holding the wife's age fixed. This is a reinterpretation that fits the actual variation present in the data — rather than trying to estimate an effect the data has almost no information to answer.</span>
 
 **Trade-off của giải pháp restructure**: giữ được toàn bộ thông tin gốc (không mất biến), nhưng (a) không phải lúc nào cũng tìm được một phép biến đổi vừa giảm tương quan vừa có ý nghĩa kinh tế rõ ràng để diễn giải (chia cho `land` hợp lý trong hàm sản xuất; lấy hiệu số tuổi hợp lý vì cùng đơn vị "năm" — nhưng không phải cặp biến collinear nào cũng có phép biến đổi tự nhiên tương tự); (b) hệ số sau khi biến đổi phải được diễn giải lại cẩn thận, không còn mang đúng nghĩa "giữ biến kia cố định" như hệ số gốc (xem bẫy thi #8).
 <br><span class="en">**Trade-off of the restructure solution**: all of the original information is retained (no variable is lost), but (a) it isn't always possible to find a transformation that both reduces correlation and has a clear economic meaning for interpretation (dividing by `land` makes sense in a production function; taking the age difference makes sense since both are in the same "years" unit — but not every pair of collinear variables has a similarly natural transformation); (b) the transformed coefficients must be reinterpreted carefully, since they no longer carry the same "holding the other variable fixed" meaning as the original coefficients (see exam trap #8).</span>
@@ -306,14 +306,14 @@ Bỏ bớt (các) regressor tương quan cao khỏi mô hình.
    <br><span class="en">**Confusing what's correlated with what**: multicollinearity is correlation **among the independent variables themselves**, not between an independent variable and the dependent variable.</span>
 3. Nghĩ multicollinearity làm hệ số OLS bị chệch (biased)/mất consistency — sai. OLS vẫn unbiased/consistent dưới multicollinearity (miễn A1–A3 vẫn giữ); multicollinearity chỉ làm mất **efficiency** (SE lớn hơn). Dễ nhầm với omitted variable bias hoặc endogeneity — những vấn đề đó mới thực sự gây chệch.
    <br><span class="en">Thinking multicollinearity makes the OLS coefficients biased or inconsistent — wrong. OLS remains unbiased/consistent under multicollinearity (as long as A1–A3 still hold); multicollinearity only causes a loss of **efficiency** (larger SE). Easily confused with omitted variable bias or endogeneity — those are the problems that actually cause bias.</span>
-4. Coi tương quan cặp cao/thấp là **bằng chứng dứt khoát** có/không có multicollinearity — slide chỉ coi đây là "dấu hiệu" (sign), không phải "xác nhận" (confirmation). Tương quan cặp thấp **không đảm bảo** không có multicollinearity (có thể multicollinear đa biến — 3+ biến cùng phụ thuộc lẫn nhau mà không cặp nào riêng lẻ lộ ra tương quan cao).
-   <br><span class="en">Treating a high/low pairwise correlation as **conclusive evidence** of the presence/absence of multicollinearity — the slide only treats this as a "sign," not a "confirmation." A low pairwise correlation **does not guarantee** the absence of multicollinearity (it could be multivariate multicollinearity — 3+ variables jointly dependent on each other without any single pair individually showing a high correlation).</span>
-5. "Xử lý" multicollinearity ngay cả khi hệ số vẫn significant và đúng dấu kỳ vọng — không cần thiết, đi ngược lại "General Rule of Thumb" của slide (mục 9.1).
-   <br><span class="en">"Fixing" multicollinearity even when the coefficients are still significant and correctly signed — unnecessary, and goes against the slide's "General Rule of Thumb" (section 9.1).</span>
+4. Coi tương quan cặp cao/thấp là **bằng chứng dứt khoát** có/không có multicollinearity — đây chỉ là "dấu hiệu" (sign), không phải "xác nhận" (confirmation). Tương quan cặp thấp **không đảm bảo** không có multicollinearity (có thể multicollinear đa biến — 3+ biến cùng phụ thuộc lẫn nhau mà không cặp nào riêng lẻ lộ ra tương quan cao).
+   <br><span class="en">Treating a high/low pairwise correlation as **conclusive evidence** of the presence/absence of multicollinearity — this is only a "sign," not a "confirmation." A low pairwise correlation **does not guarantee** the absence of multicollinearity (it could be multivariate multicollinearity — 3+ variables jointly dependent on each other without any single pair individually showing a high correlation).</span>
+5. "Xử lý" multicollinearity ngay cả khi hệ số vẫn significant và đúng dấu kỳ vọng — không cần thiết, đi ngược lại nguyên tắc chung "General Rule of Thumb" (mục 9.1).
+   <br><span class="en">"Fixing" multicollinearity even when the coefficients are still significant and correctly signed — unnecessary, and goes against the "General Rule of Thumb" (section 9.1).</span>
 6. Bỏ biến để giảm multicollinearity mà **không cân nhắc omitted variable bias** — đây không phải một "sửa lỗi miễn phí" mà là một đánh đổi bias-variance thực sự.
    <br><span class="en">Dropping a variable to reduce multicollinearity **without weighing omitted variable bias** — this is not a "free fix" but a genuine bias-variance trade-off.</span>
-7. Nhầm lẫn ngưỡng VIF: slide dùng cả "$VIF>5$" và "$VIF>5$ (hoặc 10)" ở hai chỗ khác nhau, không chốt một ngưỡng duy nhất — khi làm bài luôn nêu rõ đang dùng ngưỡng nào, vì cùng một VIF (VD $\approx6.89$ trong case study) có thể "nghiêm trọng" theo ngưỡng 5 nhưng "chưa nghiêm trọng" theo ngưỡng 10.
-   <br><span class="en">Confusing the VIF threshold: the slide uses both "$VIF>5$" and "$VIF>5$ (or 10)" in two different places, without settling on a single threshold — when answering exam questions, always state clearly which threshold is being used, since the same VIF (e.g., $\approx6.89$ in the case study) can be "serious" under the threshold of 5 but "not yet serious" under the threshold of 10.</span>
+7. Nhầm lẫn ngưỡng VIF: cả "$VIF>5$" và "$VIF>5$ (hoặc 10)" đều được dùng phổ biến, không có một ngưỡng duy nhất được chốt — khi làm bài luôn nêu rõ đang dùng ngưỡng nào, vì cùng một VIF (VD $\approx6.89$ trong case study) có thể "nghiêm trọng" theo ngưỡng 5 nhưng "chưa nghiêm trọng" theo ngưỡng 10.
+   <br><span class="en">Confusing the VIF threshold: both "$VIF>5$" and "$VIF>5$ (or 10)" are commonly used, with no single threshold universally settled on — when answering exam questions, always state clearly which threshold is being used, since the same VIF (e.g., $\approx6.89$ in the case study) can be "serious" under the threshold of 5 but "not yet serious" under the threshold of 10.</span>
 8. Sau khi restructure mô hình (VD đổi `age_husband` → `age_diff`), quên diễn giải lại hệ số: hệ số `age_wife` **mới** không còn nghĩa là "hiệu ứng tuổi vợ, giữ tuổi chồng cố định" — vì dữ liệu gần như không có biến thiên độc lập để trả lời câu hỏi đó — mà là "hiệu ứng khi cả hai vợ chồng cùng già đi".
    <br><span class="en">After restructuring the model (e.g., replacing `age_husband` → `age_diff`), forgetting to reinterpret the coefficients: the **new** `age_wife` coefficient no longer means "the effect of the wife's age, holding the husband's age fixed" — since the data has almost no independent variation to answer that question — but rather "the effect of both spouses aging together".</span>
 9. Nhầm $R^2$ của **mô hình chính** (đo độ khớp với $y$) với $R^2$ của **auxiliary regression** (đo mức một $X_j$ bị các $X$ còn lại giải thích). Trong case study, $R^2$ mô hình chính chỉ 0.38 (không cao) nhưng $R^2$ của auxiliary regression cho `age_wife` lên tới 0.85 — chỉ con số thứ hai mới liên quan trực tiếp đến việc xác nhận multicollinearity.

@@ -95,14 +95,14 @@ Không cần nhớ cách chứng minh nếu không học sâu về ma trận —
 
 ## 3. Ví dụ xuyên suốt: Forest coverage & Storm damages - <span class="en">Running example: Forest coverage & Storm damages</span>
 
-Đây là bộ dữ liệu thầy Thụy dùng xuyên suốt slide Topic 1 để minh họa mọi khái niệm — cần nắm để hiểu các ví dụ số ở các phần sau.
-<br><span class="en">This is the dataset Professor Thụy uses throughout the Topic 1 slides to illustrate every concept — it's important to understand it in order to follow the numerical examples in later sections.</span>
+Đây là ví dụ xuyên suốt của Lecture 1, dùng để minh họa mọi khái niệm trong bài — cần nắm để hiểu các ví dụ số ở các phần sau.
+<br><span class="en">This is Lecture 1's running example, used to illustrate every concept in the lecture — it's important to understand it in order to follow the numerical examples in later sections.</span>
 
 **Bối cảnh nghiên cứu**: thiệt hại do bão gây tổn thất lớn cho cộng đồng. Có hai nhóm đòn bẩy chính sách: bảo vệ tự nhiên (rừng) và chuẩn bị con người (kế hoạch ứng phó). Rừng được kỳ vọng làm giảm thiệt hại vì có tác dụng chắn gió/lũ; kế hoạch ứng phó (cảnh báo sớm, kế hoạch sơ tán) cũng được kỳ vọng làm giảm thiệt hại.
 <br><span class="en">**Research context**: storm damage causes major losses for communities. There are two groups of policy levers: natural protection (forest) and human preparedness (response plans). Forests are expected to reduce damage because they block wind/flooding; response plans (early warning, evacuation plans) are also expected to reduce damage.</span>
 
-> Lưu ý của slide gốc: các biến trong bộ dữ liệu này được xây dựng dựa trên các nghiên cứu kinh tế học thảm họa (disaster economics) nhưng đã đơn giản hóa — dữ liệu chỉ phục vụ mục đích học tập, có thể bỏ sót các biến giải thích quan trọng trong thực tế. Tên biến cũng đặt theo quy ước kỹ thuật riêng của khóa học, không phải cách đặt tên khuyến nghị cho công việc thực tế của bạn.
-> <br><span class="en">Note from the original slide: the variables in this dataset were constructed based on disaster economics research but have been simplified — the data serves teaching purposes only and may omit explanatory variables that matter in practice. Variable names also follow the course's own technical convention, not a recommended naming scheme for your real-world work.</span>
+> Lưu ý: các biến trong bộ dữ liệu này được xây dựng dựa trên các nghiên cứu kinh tế học thảm họa (disaster economics) nhưng đã đơn giản hóa cho mục đích giảng dạy, nên có thể bỏ sót các biến giải thích quan trọng trong thực tế. Tên biến cũng đặt theo quy ước kỹ thuật riêng của khóa học, không phải cách đặt tên khuyến nghị cho công việc thực tế.
+> <br><span class="en">Note: the variables in this dataset are constructed from disaster-economics research but simplified for teaching purposes, so real-world explanatory variables that matter in practice may be omitted. Variable names also follow the course's own technical convention, not a naming scheme recommended for real-world work.</span>
 
 **Đơn vị phân tích**: các cộng đồng (communities) từng hứng chịu ít nhất 1 cơn bão trong năm vừa qua.
 <br><span class="en">**Unit of analysis**: communities that experienced at least 1 storm in the past year.</span>
@@ -117,8 +117,8 @@ Không cần nhớ cách chứng minh nếu không học sâu về ma trận —
 | `curban` | Cộng đồng đô thị hay không<br><span class="en">Whether the community is urban</span> | dummy (1/0) | Non-causal |
 | `cterrain` | Địa hình: lowland (nền/base), highland, coastal → sinh ra 2 dummy `chighland`, `ccoastal`<br><span class="en">Terrain: lowland (base), highland, coastal → generates 2 dummies `chighland`, `ccoastal`</span> | categorical | Non-causal |
 
-Phân biệt **causal vs. non-causal** ở đây không phải ngẫu nhiên — nó quyết định *ngôn ngữ* được phép dùng khi diễn giải hệ số (xem mục 5). `aforest` và `dplan` được coi là causal vì slide giả định có cơ chế nhân quả trực tiếp, hợp lý về mặt lý thuyết (rừng vật lý chắn gió/lũ; kế hoạch ứng phó vật lý làm giảm tổn thất); các biến còn lại chỉ là **kiểm soát** (controls) — đưa vào để "dọn nhiễu" chứ không phải đối tượng nghiên cứu.
-<br><span class="en">Distinguishing **causal vs. non-causal** here is not arbitrary — it determines the *language* allowed when interpreting coefficients (see section 5). `aforest` and `dplan` are treated as causal because the slide assumes a direct causal mechanism that is theoretically plausible (forest physically blocks wind/flooding; a response plan physically reduces losses); the remaining variables are merely **controls** — included to "clean up noise" rather than being the object of study.</span>
+Phân biệt **causal vs. non-causal** ở đây không phải ngẫu nhiên — nó quyết định *ngôn ngữ* được phép dùng khi diễn giải hệ số (xem mục 5). `aforest` và `dplan` được coi là causal vì có cơ chế nhân quả trực tiếp, hợp lý về mặt lý thuyết (rừng vật lý chắn gió/lũ; kế hoạch ứng phó vật lý làm giảm tổn thất); các biến còn lại chỉ là **kiểm soát** (controls) — đưa vào để "dọn nhiễu" chứ không phải đối tượng nghiên cứu.
+<br><span class="en">Distinguishing **causal vs. non-causal** here is not arbitrary — it determines the *language* allowed when interpreting coefficients (see section 5). `aforest` and `dplan` are treated as causal because there is a direct causal mechanism that is theoretically plausible (forest physically blocks wind/flooding; a response plan physically reduces losses); the remaining variables are merely **controls** — included to "clean up noise" rather than being the object of study.</span>
 
 **Thống kê mô tả đáng chú ý** (để cảm nhận thang đo trước khi đọc hệ số hồi quy):
 <br><span class="en">**Notable descriptive statistics** (to get a feel for the scale before reading the regression coefficients):</span>

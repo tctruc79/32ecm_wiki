@@ -28,9 +28,9 @@ Many economic relationships do not behave this way in reality:
 
 ## Running example dataset: wages of young, skilled workers in Vietnam
 
-The slide uses one real dataset throughout to illustrate every functional form — understanding it is necessary to follow the numerical examples in sections 3, 6, and 7 below.
+This lecture uses one real dataset throughout to illustrate every functional form — understanding it is necessary to follow the numerical examples in sections 3, 6, and 7 below.
 
-**Data source description (verbatim from the slide)**: data collected from roughly 900–1000 young, skilled workers, across provinces/cities in Vietnam.
+**Data source description**: data collected from roughly 900–1000 young, skilled workers, across provinces/cities in Vietnam.
 
 |Variable |Meaning |Unit/scale |
 |---|---|---|
@@ -59,7 +59,7 @@ The slide uses one real dataset throughout to illustrate every functional form �
 
 A quick read of this table before moving to the regression coefficients: mean wage is 75.02 thousand VND/hour but varies widely (10–302, range 292 — suggesting a right-skewed distribution, one empirical reason `ln(wage)` is often used as the dependent variable instead of raw `wage`); 61% of workers in the sample are male; 40% are migrants; 31% majored in natural science, 55% in social science (the remainder — the `technology` base group — accounts for about 14%).
 
-From this dataset, the slide runs six different regression models (the four basic functional forms in section 3, plus quadratic in section 6, plus interaction in section 7) on the same set of control variables — allowing a direct comparison of how differently each functional form "reads" the same data.
+On this dataset, six different regression models are estimated (the four basic functional forms in section 3, plus quadratic in section 6, plus interaction in section 7) on the same set of control variables — allowing a direct comparison of how differently each functional form "reads" the same data.
 
 ## Four basic functional forms
 
@@ -72,7 +72,7 @@ $$Y=\beta_0+\beta_1X+\varepsilon$$
 - **Continuous regressor**: $X$ increases by 1 unit → $Y$ changes by $\beta_1$ units (exact, there is no notion of "approximation" here since the relationship is already linear).
 - **Dummy regressor**: $\beta_1$ is the difference in mean $Y$ between the two groups defined by $X$ (identical to the dummy-variable interpretation already covered in [[concepts/linear-regression-model]]).
 
-**Numerical example (from the slide, regression on the wage dataset)**:
+**Numerical example (regression on the wage dataset)**:
 
 ```
 wage ~ age + schooling + tenure + gender + origin + science + social
@@ -104,7 +104,7 @@ With $X$ a continuous variable, $\beta_1$ is exactly the **instantaneous elastic
 - **Approximate interpretation**: $X$ increases by 1% → $Y$ changes by $\beta_1$ percent.
 - **Exact interpretation**: $X$ increases by 1% → $Y$ changes by $b=(1.01^{\beta_1}-1)\times100$ percent.
 
-**Numerical example (from the slide, regression on the wage dataset)**:
+**Numerical example (regression on the wage dataset)**:
 
 ```
 log(wage) ~ log(age) + log(schooling) + log(tenure) + gender + origin + science + social
@@ -141,7 +141,7 @@ The coefficient $\beta_1$ here is a **semi-elasticity** — a "half" elasticity:
 - **Approximate**: $X$ increases by 1 unit → $Y$ changes by $\beta_1\times100$ percent.
 - **Exact**: $X$ increases by 1 unit → $Y$ changes by $b=(e^{\beta_1}-1)\times100$ percent.
 
-**Numerical example (from the slide, regression on the wage dataset)**:
+**Numerical example (regression on the wage dataset)**:
 
 ```
 log(wage) ~ age + schooling + tenure + gender + origin + science + social
@@ -170,12 +170,12 @@ $\beta_{schooling}=0.02667$ (significant at the 1% level):
 - **Approximate**: the % difference between group $X=1$ and the base group $X=0$ is $\beta_1\times100$ percent.
 - **Exact**: the difference between the two groups is $b=(e^{\beta_1}-1)\times100$ percent.
 
-Example (from the slide, illustrated separately outside the full regression table above): $\beta_{gender}=0.02$ →
+Illustrative example (separate from the full regression table above): $\beta_{gender}=0.02$ →
 
 - **Approximate**: male wages are about **2.00%** higher than female wages.
 - **Exact**: $b=(e^{0.02}-1)\times100=2.02\%$.
 
-(This dummy example from the slide is **internally consistent** — no numerical contradiction like the ones in sections 3.2/3.3.a — and is used here as a clean reference point.)
+(This dummy example is **internally consistent** — no numerical contradiction like the ones in sections 3.2/3.3.a — and is used here as a clean reference point.)
 
 ### Lin-log
 
@@ -186,7 +186,7 @@ $$Y=\beta_0+\beta_1\ln X+\varepsilon$$
 - **Approximate**: $X$ increases by 1% → $Y$ changes by $\beta_1\div100$ units.
 - **Exact**: $X$ increases by 1% → $Y$ changes by $b=\beta_1\times\ln(1.01)$ units.
 
-**Numerical example (from the slide, regression on the wage dataset)**:
+**Numerical example (regression on the wage dataset)**:
 
 ```
 wage ~ log(age) + log(schooling) + log(tenure) + gender + origin + science + social
@@ -221,7 +221,7 @@ This is an **internally consistent** example (no numerical contradiction like se
 | **Log-lin** | $\ln Y=\beta_0+\beta_1X+\varepsilon$ |1 unit |$Y$ changes by $\beta_1\times100$ **percent** | $b=(e^{\beta_1}-1)\times100$ |
 | **Lin-log** | $Y=\beta_0+\beta_1\ln X+\varepsilon$ | 1% |$Y$ changes by $\beta_1\div100$ **units** | $b=\beta_1\times\ln(1.01)$ |
 
-**Quick mnemonic** (a memory aid, not quoted from the slide): look at **where "log" sits** in the name — whether "log" appears before $Y$ or $X$ (or both) determines the unit of measurement of the **change**, not of the **variable**:
+**Quick mnemonic** (a self-devised memory aid): look at **where "log" sits** in the name — whether "log" appears before $Y$ or $X$ (or both) determines the unit of measurement of the **change**, not of the **variable**:
 - - `log` present on $X$ (log-log, lin-log) → refers to $X$ **increasing by 1%**.
 - - No `log` on $X$ (linear, log-lin) → refers to $X$ **increasing by 1 unit**.
 - - `log` present on $Y$ (log-log, log-lin) → $Y$ **changes in percentage terms**.
@@ -229,9 +229,9 @@ This is an **internally consistent** example (no numerical contradiction like se
 
 > **General rule on approximate vs. exact**: the two calculation methods are **close when $\beta_1$ is small** (loosely: $|\beta_1|<0.1$ usually gives a negligible difference); when $\beta_1$ is large, the two methods can diverge substantially — this is a classic exam trap (using the approximate formula when the question asks for the "exact effect," or vice versa). The four numerical examples in section 3 above all have relatively small $\beta_1$, so the approximate and exact values are always close — **do not conclude from this that the two methods always give close results**; with a large $\beta_1$ (e.g. above 0.5), the discrepancy can become substantial.
 
-## Deriving the "exact" formula — step by step (self-study in the slide)
+## Deriving the "exact" formula — step by step (self-study)
 
-This part is marked by the slide as self-study — proving why the "exact" formula in sections 3 and 4 is correct, rather than just memorizing it mechanically.
+This part is self-study material — proving why the "exact" formula in sections 3 and 4 is correct, rather than just memorizing it mechanically.
 
 ### Log-log → the exact elasticity formula
 
@@ -275,7 +275,7 @@ Take the difference directly (no need to take logs again since $y$ is already li
 
 $$y_1-y_0=\beta_1\big[\ln(1.01X)-\ln X\big]=\beta_1\ln(1.01)$$
 
-This is exactly the "exact" formula in sections 3.4/4. Since $\ln(1.01)\approx0.01$, the approximate formula $\beta_1/100$ is simply a way of "rounding" $\ln(1.01)$ to $0.01$ — and the slide notes explicitly: **this approximation can deviate substantially from the exact figure if $\beta_1$ is large enough** (verbatim from the slide, section "EXACT EFFECTS FROM LIN-LOG").
+This is exactly the "exact" formula in sections 3.4/4. Since $\ln(1.01)\approx0.01$, the approximate formula $\beta_1/100$ is simply a way of "rounding" $\ln(1.01)$ to $0.01$ — and it's worth noting explicitly: **this approximation can deviate substantially from the exact figure if $\beta_1$ is large enough**.
 
 ## Quadratic functional form
 
@@ -289,7 +289,7 @@ $$\ln y = \beta_0 + \beta_1 \cdot age + \beta_2 \cdot age^2 + \cdots$$
 
 $$\frac{\partial \ln wage}{\partial age} = \beta_1 + 2\beta_2\cdot age = 0 \;\Rightarrow\; age^* = -\frac{\beta_1}{2\beta_2}$$
 
-**Numerical example (from the slide, regression on the wage dataset)**:
+**Numerical example (regression on the wage dataset)**:
 
 ```
 log(wage) ~ age + I(age^2) + schooling + tenure + gender + origin + science + social
@@ -321,10 +321,10 @@ Testing $\beta_2$ alone (the question "does the quadratic term contribute additi
 
 $$H_0: \beta_1=\beta_2=0$$
 
-**Actual F-test result from the slide** (`car::linearHypothesis`, comparing the model with and without `age`, `I(age^2)`):
+**Actual F-test result** (`car::linearHypothesis`, comparing the model with and without `age`, `I(age^2)`):
 
 ```
-Model 1: restricted model (không có / without age, age^2)
+Model 1: restricted model (without age, age^2)
 Model 2: log(wage) ~ age + I(age^2) + schooling + tenure + gender + origin + science + social
 
   Res.Df   RSS Df Sum of Sq      F Pr(>F)
@@ -338,7 +338,7 @@ F = 0.1723, p = 0.8418 → **fail to reject** $H_0$. In other words: in this exa
 
 ## Interaction terms
 
-**When to use it**: when the research question is "does the effect of variable A on $Y$ differ across groups/values of variable B?" — i.e. suspecting that the **slope** (not just the intercept) of the A→Y relationship depends on B. The slide's example: whether **return to education** differs between male and female workers.
+**When to use it**: when the research question is "does the effect of variable A on $Y$ differ across groups/values of variable B?" — i.e. suspecting that the **slope** (not just the intercept) of the A→Y relationship depends on B. Illustrative example: whether **return to education** differs between male and female workers.
 
 $$\ln wage = \beta_1\cdot schooling + \beta_2\cdot schooling\times gender$$
 
@@ -352,9 +352,9 @@ $$\frac{\partial \ln wage}{\partial schooling} = \beta_1+\beta_2\cdot gender$$
 
 **Interpreting the sign of $\beta_2$**: $\beta_2>0$ → men have a higher return to education than women; $\beta_2<0$ → men have a lower return to education than women; $\beta_2=0$ → no difference between the two genders.
 
-### Real numerical example (from the slide, regression on the wage dataset)
+### Real numerical example (regression on the wage dataset)
 
-The actual model the slide runs is more complete than the simplified formula above — it adds control variables, and the R syntax `schooling*gender` automatically adds both main effects (`schooling`, `gender`) as well as the interaction term `schooling:gender`:
+The actual estimated model is more complete than the simplified formula above — it adds control variables, and the R syntax `schooling*gender` automatically adds both main effects (`schooling`, `gender`) as well as the interaction term `schooling:gender`:
 
 ```
 log(wage) ~ age + schooling*gender + tenure + origin + science + social
@@ -380,11 +380,11 @@ Residual SE = 0.5044 (df = 989); $R^2$ = 0.07363; $R^2_{adj}$ = 0.06614; F = 9.8
 - - Return to education for **male** workers ($\beta_1+\beta_2$): $0.050169+(-0.037944)=0.012225$ → an extra year of schooling raises male wages by only approximately **1.22%**.
 - - **Male − female difference** ($\beta_2=-0.037944$): the return to education for men is **lower** than for women by about 3.79 percentage points in this sample. This coefficient has $p=0.069$ — **significant at the 10% level, but NOT significant at the 5% level** (the `.` symbol in the R table, not `*`). This is a point to be careful about when reporting: if the assignment/thesis specifies $\alpha=5\%$, the correct conclusion should be "**there is not enough evidence** at the 5% significance level that the return to education differs between men and women," even though the sign and magnitude of $\beta_2$ ("men lower than women by ~3.8 percentage points") is still worth reporting descriptively.
 
-> **Methodological note (not a slide error, but a point to keep in mind when running your own interaction models)**: the simplified formula at the start of section 7 ($\ln wage=\beta_1\cdot schooling+\beta_2\cdot schooling\times gender$) has only two terms, used to quickly illustrate how to take the partial derivative — but the actual R model that produced the table above **includes the full main effects** of both `schooling` and `gender` (because the R syntax `schooling*gender` automatically expands to `schooling + gender + schooling:gender`), plus the other control variables. This is an important general rule in econometrics (not specific to this slide): **when adding an interaction term to a model, both original variables (main effects) must always be kept in the model**, otherwise the interaction term's coefficient will be biased because it ends up absorbing the omitted main effect of the other variable.
+> **Methodological note (a point to keep in mind when running your own interaction models)**: the simplified formula at the start of section 7 ($\ln wage=\beta_1\cdot schooling+\beta_2\cdot schooling\times gender$) has only two terms, used to quickly illustrate how to take the partial derivative — but the actual R model that produced the table above **includes the full main effects** of both `schooling` and `gender` (because the R syntax `schooling*gender` automatically expands to `schooling + gender + schooling:gender`), plus the other control variables. This is an important general rule in econometrics: **when adding an interaction term to a model, both original variables (main effects) must always be kept in the model**, otherwise the interaction term's coefficient will be biased because it ends up absorbing the omitted main effect of the other variable.
 
 ## Comparing $R^2$ across functional forms — and why it should not be used to "pick the best form"
 
-Combining the fit of the six models run on the same dataset in sections 3, 6, and 7 (figures taken directly from the slide, not a new compilation):
+Combining the fit of the six models run on the same dataset in sections 3, 6, and 7:
 
 |Functional form | $Y$ | $R^2$ | $R^2_{adj}$ | F | df | p-value |
 |---|---|---|---|---|---|---|
@@ -395,7 +395,7 @@ Combining the fit of the six models run on the same dataset in sections 3, 6, an
 | Quadratic | `log(wage)` | 0.07069 | 0.06317 | 9.404 | (8, 989) | 1.406e-12 |
 | Interaction | `log(wage)` | 0.07363 | 0.06614 | 9.827 | (8, 989) | 3.298e-13 |
 
-> **Important note (general econometrics knowledge, not content this specific slide deck directly teaches)**: the slide does **not** present this comparison table as a procedure for "picking the best functional form using $R^2$" — the table above is simply this wiki page's compilation of figures already scattered throughout the slide, for ease of review. Technically, this table **should not** be used to conclude that "log-lin or interaction is the best form" by directly comparing $R^2$: the models with dependent variable `wage` (linear, lin-log) and the models with dependent variable `log(wage)` (log-log, log-lin, quadratic, interaction) compute $TSS$ (and hence $R^2=1-RSS/TSS$) on **two different scales** — $R^2$ across these two groups **cannot be compared directly**. Choosing a functional form must be based on **economic theory** (which relationship form is economically sensible) and **appropriate statistical tests** (t-test/F-test for each coefficient, specification tests where applicable), not simply looking at which one has a higher $R^2$.
+> **Important note**: the table above **should not** be used to conclude that "log-lin or interaction is the best form" by directly comparing $R^2$: the models with dependent variable `wage` (linear, lin-log) and the models with dependent variable `log(wage)` (log-log, log-lin, quadratic, interaction) compute $TSS$ (and hence $R^2=1-RSS/TSS$) on **two different scales** — $R^2$ across these two groups **cannot be compared directly**. Choosing a functional form must be based on **economic theory** (which relationship form is economically sensible) and **appropriate statistical tests** (t-test/F-test for each coefficient, specification tests where applicable), not simply looking at which one has a higher $R^2$.
 
 ## Comprehensive exam traps
 

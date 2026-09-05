@@ -14,20 +14,20 @@ updated: 2026-09-04
 > <br><span class="en">**How to read this page**: this is the opening page of **Part 2: Models for Limited Dependent Variables** — the rest of the course (Topic 8–11) are all variants of the ML/latent-variable framework built here.</span>
 > Nếu [[concepts/linear-regression-model]] là "luật chơi" khi $y$ liên tục, trang này là "luật chơi" khi $y$ chỉ có thể là 0 hoặc 1.
 > <br><span class="en">If [[concepts/linear-regression-model]] is the "rulebook" for continuous $y$, this page is the "rulebook" for when $y$ can only be 0 or 1.</span>
-> Hai bộ slide dạy cùng một lý thuyết bằng hai bộ dữ liệu khác nhau: `slides-7-iu.pdf` (48 trang, ví dụ quyết định tiêm vaccine COVID-19, có số liệu R thật ở trang 7–45) và `slides-310-iu.pdf` (39 trang, ví dụ dùng ví điện tử — e-wallet, chủ yếu văn bản/công thức, phần R-output là ảnh chưa trích xuất được số cụ thể).
-> <br><span class="en">Two slide decks teach the same theory with two different datasets: `slides-7-iu.pdf` (48 pages, COVID-19 vaccine decision example, with real R output on pages 7–45) and `slides-310-iu.pdf` (39 pages, e-wallet example, mostly text/formulas, with the R-output section as images from which concrete numbers could not be extracted).</span>
+> Lý thuyết trong bài được minh họa bằng hai bộ dữ liệu khác nhau: bộ quyết định tiêm vaccine COVID-19 (có số liệu R thật) và bộ ví điện tử — e-wallet (chủ yếu văn bản/công thức, không có số liệu R cụ thể).
+> <br><span class="en">The theory in this lecture is illustrated with two different datasets: a COVID-19 vaccine decision dataset (with real R output) and an e-wallet dataset (mostly text/formulas, with no concrete R output).</span>
 
 **Lecture 9** trong đề cương (CO Topic 7) — Assignment 10: Binary Response Model: Logit/Probit.
 <br><span class="en">**Lecture 9** in the syllabus (CO Topic 7) — Assignment 10: Binary Response Model: Logit/Probit.</span>
-> Toàn bộ ví dụ số trong trang này lấy từ bộ dữ liệu vaccine của `slides-7`; bộ e-wallet chỉ dùng để minh họa rằng lý thuyết áp dụng được cho bất kỳ outcome nhị phân nào.
-> <br><span class="en">Every numerical example on this page is drawn from the `slides-7` vaccine dataset; the e-wallet dataset is used only to illustrate that the theory applies to any binary outcome.</span>
+> Toàn bộ ví dụ số trong trang này lấy từ bộ dữ liệu vaccine; bộ e-wallet chỉ dùng để minh họa rằng lý thuyết áp dụng được cho bất kỳ outcome nhị phân nào.
+> <br><span class="en">Every numerical example on this page is drawn from the vaccine dataset; the e-wallet dataset is used only to illustrate that the theory applies to any binary outcome.</span>
 
 ## 1. Vấn đề gốc: khi biến phụ thuộc chỉ có thể là 0 hoặc 1 - <span class="en">The original problem: when the dependent variable can only be 0 or 1</span>
 
 Rất nhiều câu hỏi kinh tế không có outcome là một con số liên tục, mà là một **lựa chọn nhị phân** (binary choice) — có/không, xảy ra/không xảy ra.
 <br><span class="en">Many economic questions do not have a continuous number as the outcome, but rather a **binary choice** — yes/no, occurs/does not occur.</span>
-Slide liệt kê một loạt ví dụ:
-<br><span class="en">The slide lists a series of examples:</span>
+Một loạt ví dụ tiêu biểu:
+<br><span class="en">A series of representative examples:</span>
 
 - Đơn xin vay có được duyệt hay không.
   <br><span class="en">Whether a loan application is approved or not.</span>
@@ -37,8 +37,8 @@ Slide liệt kê một loạt ví dụ:
   <br><span class="en">Whether a person owns a credit card or not.</span>
 - (Ví dụ xuyên suốt trang này) Một người có quyết định tiêm vaccine COVID-19 hay không (`dself`).
   <br><span class="en">(The running example throughout this page) Whether a person decides to get a COVID-19 vaccine or not (`dself`).</span>
-- (Ví dụ của bộ slide song song) Một người có dùng ví điện tử hay không (`ewallet`).
-  <br><span class="en">(The example from the parallel slide deck) Whether a person uses an e-wallet or not (`ewallet`).</span>
+- (Ví dụ từ bộ dữ liệu song song) Một người có dùng ví điện tử hay không (`ewallet`).
+  <br><span class="en">(The example from the parallel dataset) Whether a person uses an e-wallet or not (`ewallet`).</span>
 
 Gọi biến này là $y_i \in \{0,1\}$. Câu hỏi tự nhiên: **tại sao không hồi quy OLS trực tiếp** $y = \beta X + u$ như [[concepts/linear-regression-model]] đã làm?
 <br><span class="en">Call this variable $y_i \in \{0,1\}$. The natural question: **why not just run OLS directly** on $y = \beta X + u$ the way [[concepts/linear-regression-model]] does?</span>
@@ -51,8 +51,8 @@ $$E(y_i|X_i) = 1\cdot Pr(y_i=1|X_i) + 0\cdot Pr(y_i=0|X_i) = Pr(y_i=1|X_i)$$
 Nói cách khác, hồi quy $y$ lên $X$ về bản chất là đang cố mô hình hóa $Pr(y=1|X)$ — và xác suất thì **luôn bị chặn trong khoảng [0,1]**. Nhưng vế phải của một phương trình hồi quy tuyến tính $X\beta$ thì **không bị chặn** — nó có thể chạy từ $-\infty$ đến $+\infty$ tùy giá trị $X$. Đây chính là mâu thuẫn nền tảng mà toàn bộ Part 2 của khóa học tồn tại để giải quyết: cần một hàm số biến đổi $X\beta$ (không giới hạn) thành một con số luôn nằm trong [0,1] (một xác suất hợp lệ).
 <br><span class="en">In other words, regressing $y$ on $X$ is essentially an attempt to model $Pr(y=1|X)$ — and a probability is **always bounded within [0,1]**. But the right-hand side of a linear regression equation $X\beta$ is **unbounded** — it can range from $-\infty$ to $+\infty$ depending on the value of $X$. This is precisely the foundational contradiction that all of Part 2 of the course exists to resolve: we need a function that transforms $X\beta$ (unbounded) into a number that always lies in [0,1] (a valid probability).</span>
 
-Slide hình thức hóa vấn đề bằng một hàm mật độ chung:
-<br><span class="en">The slide formalizes the problem with a general density function:</span>
+Vấn đề được hình thức hóa bằng một hàm mật độ chung:
+<br><span class="en">The problem is formalized with a general density function:</span>
 
 $$Pr(Y_i=1) = F(X_i\beta), \qquad Pr(Y_i=0) = 1-F(X_i\beta)$$
 
@@ -61,7 +61,7 @@ $F(\cdot)$ ở đây gọi là **hàm liên kết** (link function) — nhiệm 
 
 ## 2. Bộ dữ liệu minh họa - <span class="en">Illustrative datasets</span>
 
-### 2.1 COVID-19 vaccine (slides-7, dùng cho mọi ví dụ số trong trang này) - <span class="en">COVID-19 vaccine (slides-7, used for every numerical example on this page)</span>
+### 2.1 Bộ dữ liệu vaccine COVID-19 (dùng cho mọi ví dụ số trong trang này) - <span class="en">COVID-19 vaccine dataset (used for every numerical example on this page)</span>
 
 Khảo sát 377 người tại TP.HCM năm 2020 (dữ liệu công khai bởi EEPSEA), hỏi liệu họ có quyết định tiêm một loại vaccine COVID-19 giả định hay không.
 <br><span class="en">A survey of 377 people in Ho Chi Minh City in 2020 (data made public by EEPSEA), asking whether they would decide to get a hypothetical COVID-19 vaccine.</span>
@@ -80,7 +80,7 @@ Khảo sát 377 người tại TP.HCM năm 2020 (dữ liệu công khai bởi EE
 | `male` | 1 = nam / 1 = male |
 | `risk` (ordinal 1–5) | mức độ cảm nhận rủi ro nhiễm COVID-19: "Very unlikely" → "Very likely"<br><span class="en">perceived risk of COVID-19 infection: "Very unlikely" → "Very likely"</span> |
 
-### 2.2 E-wallet (slides-310, chỉ dùng minh họa khái niệm, không có số liệu R trích xuất được) - <span class="en">E-wallet (slides-310, used only to illustrate the concept, no extractable R output)</span>
+### 2.2 Bộ dữ liệu ví điện tử — E-wallet (chỉ dùng minh họa khái niệm, không có số liệu R trích xuất được) - <span class="en">E-wallet dataset (used only to illustrate the concept, no extractable R output)</span>
 
 | Biến<br><span class="en">Variable</span> | Ý nghĩa<br><span class="en">Meaning</span> |
 |---|---|
@@ -96,8 +96,8 @@ Hai bộ dữ liệu khác nhau hoàn toàn về bối cảnh, nhưng **cùng m�
 
 ## 3. Khung tổng quát: các lựa chọn cho $F(X\beta)$ - <span class="en">General framework: choices for $F(X\beta)$</span>
 
-Slide liệt kê 5 lựa chọn hàm liên kết (3 lựa chọn đầu là trọng tâm khóa học):
-<br><span class="en">The slide lists 5 choices of link function (the first 3 are the focus of the course):</span>
+Có 5 lựa chọn hàm liên kết phổ biến (3 lựa chọn đầu là trọng tâm khóa học):
+<br><span class="en">There are 5 common choices of link function (the first 3 are the focus of the course):</span>
 
 | Mô hình<br><span class="en">Model</span> | $F(X_i,\beta)$ |
 |---|---|
@@ -107,8 +107,8 @@ Slide liệt kê 5 lựa chọn hàm liên kết (3 lựa chọn đầu là tr�
 | Gumbel | $e^{-e^{-X_i\beta}}$ |
 | Complementary log-log | $1-e^{-e^{X_i\beta}}$ |
 
-"Và nhiều biến thể khác" — slide không đi sâu Gumbel/cloglog, chỉ liệt kê để cho thấy LPM/Logit/Probit là 3 trong nhiều lựa chọn khả dĩ, không phải toàn bộ vũ trụ các mô hình binary response.
-<br><span class="en">"And many other variants" — the slide does not go into depth on Gumbel/cloglog, only listing them to show that LPM/Logit/Probit are 3 out of many possible choices, not the entire universe of binary response models.</span>
+"Và nhiều biến thể khác" — Gumbel/cloglog nằm ngoài trọng tâm của khóa học này, chỉ được nêu tên để cho thấy LPM/Logit/Probit là 3 trong nhiều lựa chọn khả dĩ, không phải toàn bộ vũ trụ các mô hình binary response.
+<br><span class="en">"And many other variants" — Gumbel/cloglog are outside this course's focus and are named here only to show that LPM/Logit/Probit are 3 out of many possible choices, not the entire universe of binary response models.</span>
 
 ## 4. Linear Probability Model (LPM) - <span class="en">Linear Probability Model (LPM)</span>
 
@@ -138,8 +138,8 @@ Vì vế trái là $Pr(y=1)$, hệ số $\beta_j$ trong LPM được đọc gi�
 
 ### 4.4 Bốn nhược điểm của LPM — và tại sao mỗi nhược điểm là vấn đề thực tế - <span class="en">The four drawbacks of LPM — and why each one is a real problem</span>
 
-Slide liệt kê đúng 4 nhược điểm; dưới đây giải thích **tại sao** từng cái quan trọng, không chỉ liệt kê tên:
-<br><span class="en">The slide lists exactly 4 drawbacks; below explains **why** each one matters, not just names them:</span>
+Có đúng 4 nhược điểm chính; dưới đây giải thích **tại sao** từng cái quan trọng, không chỉ liệt kê tên:
+<br><span class="en">There are exactly 4 main drawbacks; below explains **why** each one matters, not just names them:</span>
 
 1. **Giá trị dự đoán $Pr(y=1)$ có thể nằm ngoài [0,1].** Đây không phải lỗi thẩm mỹ — nó phá vỡ chính định nghĩa của một xác suất. Một nhà hoạch định chính sách nhìn thấy "xác suất tiêm vaccine là −8%" hoặc "112%" sẽ không thể diễn giải được kết quả, và không thể dùng con số đó cho bất kỳ tính toán xác suất tiếp theo nào (kỳ vọng, mô phỏng…).
    <br><span class="en">**The predicted value $Pr(y=1)$ can fall outside [0,1].** This is not a cosmetic flaw — it breaks the very definition of a probability. A policymaker seeing "the probability of getting vaccinated is −8%" or "112%" cannot interpret the result, and cannot use that number for any subsequent probability calculation (expectation, simulation…).</span>
@@ -230,8 +230,8 @@ Nói cách khác: Logit giả định sai số $u$ tuân theo **phân phối log
 - Hệ quả: $P_i$ tiến về 0 và 1 **chậm hơn** trong Logit so với Probit — với cùng một mức thay đổi $X\beta$ ở vùng cực đoan (xa 0), Logit vẫn còn "để dành" một chút xác suất chưa hội tụ hẳn về biên, trong khi Probit hội tụ nhanh hơn.
   <br><span class="en">Consequence: $P_i$ converges to 0 and 1 **more slowly** in Logit than in Probit — for the same change in $X\beta$ in the extreme region (far from 0), Logit still "holds back" a bit of probability that has not fully converged to the boundary, while Probit converges faster.</span>
 
-**Khi nào chọn cái nào?** Theo đúng slide: "không có lý do rõ ràng để chọn hẳn một trong hai" (no obvious reason of choosing between the two models) — với cùng một bộ dữ liệu, hai mô hình cho kết luận thực chất tương đương (cùng dấu, cùng mức ý nghĩa thống kê ở hầu hết biến — xem số liệu thật mục 8). Lý do thực dụng khiến **Logit thường được ưu tiên hơn**: marginal effect của Logit có dạng đóng, tính trực tiếp được bằng công thức đại số; marginal effect của Probit đòi hỏi tính đạo hàm của hàm phân phối chuẩn (không có công thức đóng đơn giản, phải tính số). Ngoài ra, Logit còn có thêm cách diễn giải bằng **odds ratio** (mục 10) — công cụ quen thuộc trong y tế/dịch tễ học — mà Probit không có tương đương trực tiếp.
-<br><span class="en">**Which one to choose, and when?** Exactly as the slide states: "no obvious reason of choosing between the two models" — with the same dataset, the two models give substantively equivalent conclusions (same sign, same statistical significance level on most variables — see the real data in section 8). The practical reason **Logit is usually preferred**: Logit's marginal effect has a closed form, computable directly with an algebraic formula; Probit's marginal effect requires the derivative of the normal distribution function (no simple closed form, must be computed numerically). In addition, Logit also has the **odds ratio** interpretation (section 10) — a tool familiar in health/epidemiology — for which Probit has no direct equivalent.</span>
+**Khi nào chọn cái nào?** Về nguyên tắc, không có lý do lý thuyết rõ ràng để chọn hẳn một trong hai — với cùng một bộ dữ liệu, hai mô hình cho kết luận thực chất tương đương (cùng dấu, cùng mức ý nghĩa thống kê ở hầu hết biến — xem số liệu thật mục 8). Lý do thực dụng khiến **Logit thường được ưu tiên hơn**: marginal effect của Logit có dạng đóng, tính trực tiếp được bằng công thức đại số; marginal effect của Probit đòi hỏi tính đạo hàm của hàm phân phối chuẩn (không có công thức đóng đơn giản, phải tính số). Ngoài ra, Logit còn có thêm cách diễn giải bằng **odds ratio** (mục 10) — công cụ quen thuộc trong y tế/dịch tễ học — mà Probit không có tương đương trực tiếp.
+<br><span class="en">**Which one to choose, and when?** In principle, there is no clear theoretical reason to strictly prefer one over the other — with the same dataset, the two models give substantively equivalent conclusions (same sign, same statistical significance level on most variables — see the real data in section 8). The practical reason **Logit is usually preferred**: Logit's marginal effect has a closed form, computable directly with an algebraic formula; Probit's marginal effect requires the derivative of the normal distribution function (no simple closed form, must be computed numerically). In addition, Logit also has the **odds ratio** interpretation (section 10) — a tool familiar in health/epidemiology — for which Probit has no direct equivalent.</span>
 
 ## 7. Ước lượng thực tế trên dữ liệu vaccine — Logit và Probit song song - <span class="en">Real estimation on the vaccine data — Logit and Probit side by side</span>
 
@@ -285,8 +285,8 @@ Công thức LR test:
 
 $$LR = 2(LL_F - LL_R) \sim \chi^2_q$$
 
-với $q$ = số hệ số bị kiểm định. Slide còn ghi chú kỹ thuật hữu ích: $\log L = -\text{deviance}/2$ — tức deviance (thường xuất hiện trực tiếp trong output R của `glm()`) chỉ là log-likelihood nhân với $-2$, nên `anova(model, test="Chisq")` (so deviance) và `lrtest()` (so log-likelihood) về bản chất tính cùng một con số.
-<br><span class="en">where $q$ = the number of coefficients being tested. The slide also notes a useful technical point: $\log L = -\text{deviance}/2$ — i.e. deviance (which often appears directly in R's `glm()` output) is just the log-likelihood multiplied by $-2$, so `anova(model, test="Chisq")` (comparing deviance) and `lrtest()` (comparing log-likelihood) are essentially computing the same number.</span>
+với $q$ = số hệ số bị kiểm định. Một điểm kỹ thuật hữu ích cần nhớ: $\log L = -\text{deviance}/2$ — tức deviance (thường xuất hiện trực tiếp trong output R của `glm()`) chỉ là log-likelihood nhân với $-2$, nên `anova(model, test="Chisq")` (so deviance) và `lrtest()` (so log-likelihood) về bản chất tính cùng một con số.
+<br><span class="en">where $q$ = the number of coefficients being tested. A useful technical point to remember: $\log L = -\text{deviance}/2$ — i.e. deviance (which often appears directly in R's `glm()` output) is just the log-likelihood multiplied by $-2$, so `anova(model, test="Chisq")` (comparing deviance) and `lrtest()` (comparing log-likelihood) are essentially computing the same number.</span>
 
 ### 8.2 Số liệu thật — kiểm định overall significance (toàn bộ hệ số góc, trừ intercept) - <span class="en">Real data — testing overall significance (all slope coefficients, excluding the intercept)</span>
 
@@ -341,8 +341,8 @@ Số hạng $P_i(1-P_i)$ là một "trọng số" hình chuông (bell-shaped), �
 
 ### 9.2 Minh họa bằng số tự tính từ hệ số Logit (dữ liệu vaccine) - <span class="en">Illustration with numbers computed by hand from the Logit coefficients (vaccine data)</span>
 
-Dùng hệ số Logit ở mục 7 ($\beta_{priceUS}=-0.0318$; các biến khác cố định ở mức: `efficacy80=1, duration3=1, pbenefit=0, hhincomeUS=700, hhsize=4, age=30, male=1, risk="Very likely"` — đúng theo giá trị tham chiếu slide dùng để vẽ đồ thị dự đoán ở mục 10), tính tay bằng công thức trên để thấy rõ hình chữ S và marginal effect thay đổi ra sao theo giá vaccine:
-<br><span class="en">Using the Logit coefficient from section 7 ($\beta_{priceUS}=-0.0318$; other variables fixed at: `efficacy80=1, duration3=1, pbenefit=0, hhincomeUS=700, hhsize=4, age=30, male=1, risk="Very likely"` — exactly the reference values the slide uses to plot the predicted-probability graph in section 10), computing by hand with the formula above to clearly see the S shape and how the marginal effect changes with vaccine price:</span>
+Dùng hệ số Logit ở mục 7 ($\beta_{priceUS}=-0.0318$; các biến khác cố định ở mức: `efficacy80=1, duration3=1, pbenefit=0, hhincomeUS=700, hhsize=4, age=30, male=1, risk="Very likely"` — đúng theo giá trị tham chiếu dùng để vẽ đồ thị dự đoán ở mục 10), tính tay bằng công thức trên để thấy rõ hình chữ S và marginal effect thay đổi ra sao theo giá vaccine:
+<br><span class="en">Using the Logit coefficient from section 7 ($\beta_{priceUS}=-0.0318$; other variables fixed at: `efficacy80=1, duration3=1, pbenefit=0, hhincomeUS=700, hhsize=4, age=30, male=1, risk="Very likely"` — the same reference values used to plot the predicted-probability graph in section 10), computing by hand with the formula above to clearly see the S shape and how the marginal effect changes with vaccine price:</span>
 
 | `priceUS` (USD) | $P_i$ dự đoán<br><span class="en">predicted</span> | Marginal effect ($\partial P/\partial X$, %-điểm mỗi $1 tăng thêm)<br><span class="en">Marginal effect ($\partial P/\partial X$, pp per $1 increase)</span> |
 |---|---|---|
@@ -405,8 +405,8 @@ Các biến còn lại (`efficacy80`, `duration3`, `pbenefit`, `hhincomeUS`, `hh
 Ngoài đạo hàm giải tích, còn một cách tính marginal effect **thực dụng** hơn — đặc biệt hữu ích khi muốn biết hiệu ứng tại một điểm dữ liệu cụ thể, hoặc khi biến độc lập không liên tục (dummy, categorical) và đạo hàm giải tích không áp dụng trực tiếp: dự đoán xác suất ở **hai điểm** chỉ khác nhau đúng 1 đơn vị của biến quan tâm, rồi lấy hiệu số.
 <br><span class="en">Besides the analytical derivative, there is a more **practical** way of computing the marginal effect — especially useful when we want the effect at a specific data point, or when the independent variable is not continuous (dummy, categorical) and the analytical derivative does not apply directly: predict the probability at **two points** that differ by exactly 1 unit of the variable of interest, then take the difference.</span>
 
-Ví dụ slide dùng cho biến `hhincomeUS`: cố định mọi biến khác (`priceUS=50, efficacy80=1, duration3=1, pbenefit=0, hhsize=4, age=30, male=1, risk="Very likely"`), chỉ thay đổi thu nhập hộ gia đình từ 700 lên 701 USD/tháng:
-<br><span class="en">The example the slide uses for `hhincomeUS`: hold all other variables fixed (`priceUS=50, efficacy80=1, duration3=1, pbenefit=0, hhsize=4, age=30, male=1, risk="Very likely"`), and change only household income from 700 to 701 USD/month:</span>
+Ví dụ minh họa cho biến `hhincomeUS`: cố định mọi biến khác (`priceUS=50, efficacy80=1, duration3=1, pbenefit=0, hhsize=4, age=30, male=1, risk="Very likely"`), chỉ thay đổi thu nhập hộ gia đình từ 700 lên 701 USD/tháng:
+<br><span class="en">Illustrative example for `hhincomeUS`: hold all other variables fixed (`priceUS=50, efficacy80=1, duration3=1, pbenefit=0, hhsize=4, age=30, male=1, risk="Very likely"`), and change only household income from 700 to 701 USD/month:</span>
 
 - **Logit**: $Pr(dself=1\mid hhincomeUS=701) - Pr(dself=1\mid hhincomeUS=700) = 7.580978\times10^{-5}$
 - **Probit**: hiệu số tương ứng $=6.806759\times10^{-5}$
@@ -435,8 +435,8 @@ Dùng ngưỡng $\hat P_i>0.5$ để phân loại dự đoán "có tiêm"/"khôn
 Tỷ lệ dự đoán đúng tổng thể: $\dfrac{9+289}{377} = 0.7904509$ (≈79.05%).
 <br><span class="en">Overall correct prediction rate: $\dfrac{9+289}{377} = 0.7904509$ (≈79.05%).</span>
 
-**Điểm cần lưu ý khi diễn giải con số này** (tự tính thêm từ chính bảng trên, không phải số slide nêu sẵn — nhưng là hệ quả số học trực tiếp): trong mẫu, tổng số người thực sự chọn "có tiêm" là $7+289=296/377\approx78.5\%$. Nghĩa là một mô hình "ngây thơ" chỉ đơn giản luôn dự đoán "có tiêm" cho mọi người (không cần biết gì về $X$) đã đạt độ chính xác khoảng 78.5% — gần bằng con số 79.05% mà mô hình Probit đạt được. Mô hình chỉ nhận diện đúng 9/81 (≈11%) trường hợp thực sự "không tiêm" — cho thấy **tỷ lệ dự đoán đúng tổng thể có thể gây hiểu lầm khi outcome mất cân bằng** (imbalanced) — một điểm cần cẩn trọng khi đánh giá mô hình binary response trong thực hành, không chỉ dừng ở một con số "% đúng" duy nhất.
-<br><span class="en">**A point to note when interpreting this number** (computed additionally from the table above, not a number the slide states directly — but a direct arithmetic consequence): in the sample, the total number of people who actually chose "vaccinate" is $7+289=296/377\approx78.5\%$. This means a "naive" model that simply always predicts "vaccinate" for everyone (without knowing anything about $X$) would already achieve about 78.5% accuracy — close to the 79.05% the Probit model achieves. The model correctly identifies only 9/81 (≈11%) of the truly "not vaccinate" cases — showing that **the overall correct-prediction rate can be misleading when the outcome is imbalanced** — a point to be cautious about when evaluating binary response models in practice, rather than stopping at a single "% correct" number.</span>
+**Điểm cần lưu ý khi diễn giải con số này** (tính thêm từ chính bảng trên — một hệ quả số học trực tiếp): trong mẫu, tổng số người thực sự chọn "có tiêm" là $7+289=296/377\approx78.5\%$. Nghĩa là một mô hình "ngây thơ" chỉ đơn giản luôn dự đoán "có tiêm" cho mọi người (không cần biết gì về $X$) đã đạt độ chính xác khoảng 78.5% — gần bằng con số 79.05% mà mô hình Probit đạt được. Mô hình chỉ nhận diện đúng 9/81 (≈11%) trường hợp thực sự "không tiêm" — cho thấy **tỷ lệ dự đoán đúng tổng thể có thể gây hiểu lầm khi outcome mất cân bằng** (imbalanced) — một điểm cần cẩn trọng khi đánh giá mô hình binary response trong thực hành, không chỉ dừng ở một con số "% đúng" duy nhất.
+<br><span class="en">**A point to note when interpreting this number** (computed additionally from the table above — a direct arithmetic consequence): in the sample, the total number of people who actually chose "vaccinate" is $7+289=296/377\approx78.5\%$. This means a "naive" model that simply always predicts "vaccinate" for everyone (without knowing anything about $X$) would already achieve about 78.5% accuracy — close to the 79.05% the Probit model achieves. The model correctly identifies only 9/81 (≈11%) of the truly "not vaccinate" cases — showing that **the overall correct-prediction rate can be misleading when the outcome is imbalanced** — a point to be cautious about when evaluating binary response models in practice, rather than stopping at a single "% correct" number.</span>
 
 ## 11. Logit hay Probit? — so sánh trực tiếp bằng đồ thị dự đoán - <span class="en">Logit or Probit? — a direct comparison via the predicted-probability graph</span>
 
@@ -445,8 +445,8 @@ Vẽ chồng hai đường cong xác suất dự đoán (Logit và Probit) trên
 
 ## 12. Logistic regression với Odds Ratio - <span class="en">Logistic regression with Odds Ratio</span>
 
-Một cách trình bày kết quả Logit phổ biến khác — đặc biệt trong y tế/dịch tễ học — là báo cáo trực tiếp **odds ratio** thay vì hệ số thô. Vì đã có $\dfrac{P_i}{1-P_i}=e^{\beta X_i}$ (mục 5.2), odds ratio của từng biến chính là $e^{\hat\beta_j}$ — slide xác nhận bằng số liệu thật: `exp(coef(logit))` cho ra đúng cột "OddsRatio" trong bảng `logitor()`.
-<br><span class="en">Another common way of presenting Logit results — especially in health/epidemiology — is to report the **odds ratio** directly instead of the raw coefficient. Since $\dfrac{P_i}{1-P_i}=e^{\beta X_i}$ (section 5.2) already holds, the odds ratio of each variable is exactly $e^{\hat\beta_j}$ — the slide confirms this with real data: `exp(coef(logit))` produces exactly the "OddsRatio" column in the `logitor()` table.</span>
+Một cách trình bày kết quả Logit phổ biến khác — đặc biệt trong y tế/dịch tễ học — là báo cáo trực tiếp **odds ratio** thay vì hệ số thô. Vì đã có $\dfrac{P_i}{1-P_i}=e^{\beta X_i}$ (mục 5.2), odds ratio của từng biến chính là $e^{\hat\beta_j}$ — xác nhận được bằng số liệu thật: `exp(coef(logit))` cho ra đúng cột "OddsRatio" trong bảng `logitor()`.
+<br><span class="en">Another common way of presenting Logit results — especially in health/epidemiology — is to report the **odds ratio** directly instead of the raw coefficient. Since $\dfrac{P_i}{1-P_i}=e^{\beta X_i}$ (section 5.2) already holds, the odds ratio of each variable is exactly $e^{\hat\beta_j}$ — confirmed with real data: `exp(coef(logit))` produces exactly the "OddsRatio" column in the `logitor()` table.</span>
 
 | Biến<br><span class="en">Variable</span> | Odds Ratio | p-value | Diễn giải<br><span class="en">Interpretation</span> |
 |---|---|---|---|

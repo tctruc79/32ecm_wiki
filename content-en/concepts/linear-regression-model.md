@@ -75,11 +75,11 @@ There's no need to memorize the derivation if you haven't studied matrix algebra
 
 ## Running example: Forest coverage & Storm damages
 
-This is the dataset Professor Thụy uses throughout the Topic 1 slides to illustrate every concept — it's important to understand it in order to follow the numerical examples in later sections.
+This is Lecture 1's running example, used to illustrate every concept in the lecture — it's important to understand it in order to follow the numerical examples in later sections.
 
 **Research context**: storm damage causes major losses for communities. There are two groups of policy levers: natural protection (forest) and human preparedness (response plans). Forests are expected to reduce damage because they block wind/flooding; response plans (early warning, evacuation plans) are also expected to reduce damage.
 
-> Note from the original slide: the variables in this dataset were constructed based on disaster economics research but have been simplified — the data serves teaching purposes only and may omit explanatory variables that matter in practice. Variable names also follow the course's own technical convention, not a recommended naming scheme for your real-world work.
+> Note: the variables in this dataset are constructed from disaster-economics research but simplified for teaching purposes, so real-world explanatory variables that matter in practice may be omitted. Variable names also follow the course's own technical convention, not a naming scheme recommended for real-world work.
 
 **Unit of analysis**: communities that experienced at least 1 storm in the past year.
 
@@ -93,7 +93,7 @@ This is the dataset Professor Thụy uses throughout the Topic 1 slides to illus
 | `curban` |Whether the community is urban | dummy (1/0) | Non-causal |
 | `cterrain` |Terrain: lowland (base), highland, coastal → generates 2 dummies `chighland`, `ccoastal` | categorical | Non-causal |
 
-Distinguishing **causal vs. non-causal** here is not arbitrary — it determines the *language* allowed when interpreting coefficients (see section 5). `aforest` and `dplan` are treated as causal because the slide assumes a direct causal mechanism that is theoretically plausible (forest physically blocks wind/flooding; a response plan physically reduces losses); the remaining variables are merely **controls** — included to "clean up noise" rather than being the object of study.
+Distinguishing **causal vs. non-causal** here is not arbitrary — it determines the *language* allowed when interpreting coefficients (see section 5). `aforest` and `dplan` are treated as causal because there is a direct causal mechanism that is theoretically plausible (forest physically blocks wind/flooding; a response plan physically reduces losses); the remaining variables are merely **controls** — included to "clean up noise" rather than being the object of study.
 
 **Notable descriptive statistics** (to get a feel for the scale before reading the regression coefficients):
 

@@ -12,21 +12,21 @@ updated: 2026-09-04
 
 > **How to read this page**: this is the opening page of **Part 2: Models for Limited Dependent Variables** — the rest of the course (Topic 8–11) are all variants of the ML/latent-variable framework built here.
 > If [[concepts/linear-regression-model]] is the "rulebook" for continuous $y$, this page is the "rulebook" for when $y$ can only be 0 or 1.
-> Two slide decks teach the same theory with two different datasets: `slides-7-iu.pdf` (48 pages, COVID-19 vaccine decision example, with real R output on pages 7–45) and `slides-310-iu.pdf` (39 pages, e-wallet example, mostly text/formulas, with the R-output section as images from which concrete numbers could not be extracted).
+> The theory in this lecture is illustrated with two different datasets: a COVID-19 vaccine decision dataset (with real R output) and an e-wallet dataset (mostly text/formulas, with no concrete R output).
 
 **Lecture 9** in the syllabus (CO Topic 7) — Assignment 10: Binary Response Model: Logit/Probit.
-> Every numerical example on this page is drawn from the `slides-7` vaccine dataset; the e-wallet dataset is used only to illustrate that the theory applies to any binary outcome.
+> Every numerical example on this page is drawn from the vaccine dataset; the e-wallet dataset is used only to illustrate that the theory applies to any binary outcome.
 
 ## The original problem: when the dependent variable can only be 0 or 1
 
 Many economic questions do not have a continuous number as the outcome, but rather a **binary choice** — yes/no, occurs/does not occur.
-The slide lists a series of examples:
+A series of representative examples:
 
 - Whether a loan application is approved or not.
 - Whether a borrower can repay the debt or not.
 - Whether a person owns a credit card or not.
 - (The running example throughout this page) Whether a person decides to get a COVID-19 vaccine or not (`dself`).
-- (The example from the parallel slide deck) Whether a person uses an e-wallet or not (`ewallet`).
+- (The example from the parallel dataset) Whether a person uses an e-wallet or not (`ewallet`).
 
 Call this variable $y_i \in \{0,1\}$. The natural question: **why not just run OLS directly** on $y = \beta X + u$ the way [[concepts/linear-regression-model]] does?
 
@@ -36,7 +36,7 @@ $$E(y_i|X_i) = 1\cdot Pr(y_i=1|X_i) + 0\cdot Pr(y_i=0|X_i) = Pr(y_i=1|X_i)$$
 
 In other words, regressing $y$ on $X$ is essentially an attempt to model $Pr(y=1|X)$ — and a probability is **always bounded within [0,1]**. But the right-hand side of a linear regression equation $X\beta$ is **unbounded** — it can range from $-\infty$ to $+\infty$ depending on the value of $X$. This is precisely the foundational contradiction that all of Part 2 of the course exists to resolve: we need a function that transforms $X\beta$ (unbounded) into a number that always lies in [0,1] (a valid probability).
 
-The slide formalizes the problem with a general density function:
+The problem is formalized with a general density function:
 
 $$Pr(Y_i=1) = F(X_i\beta), \qquad Pr(Y_i=0) = 1-F(X_i\beta)$$
 
@@ -44,7 +44,7 @@ $F(\cdot)$ here is called the **link function** — its job is simply to "squeez
 
 ## Illustrative datasets
 
-### COVID-19 vaccine (slides-7, used for every numerical example on this page)
+### COVID-19 vaccine dataset (used for every numerical example on this page)
 
 A survey of 377 people in Ho Chi Minh City in 2020 (data made public by EEPSEA), asking whether they would decide to get a hypothetical COVID-19 vaccine.
 
@@ -62,7 +62,7 @@ A survey of 377 people in Ho Chi Minh City in 2020 (data made public by EEPSEA),
 | `male` | 1 = nam / 1 = male |
 | `risk` (ordinal 1–5) |perceived risk of COVID-19 infection: "Very unlikely" → "Very likely" |
 
-### E-wallet (slides-310, used only to illustrate the concept, no extractable R output)
+### E-wallet dataset (used only to illustrate the concept, no extractable R output)
 
 |Variable |Meaning |
 |---|---|
@@ -77,7 +77,7 @@ The two datasets differ completely in context, but share **the same problem stru
 
 ## General framework: choices for $F(X\beta)$
 
-The slide lists 5 choices of link function (the first 3 are the focus of the course):
+There are 5 common choices of link function (the first 3 are the focus of the course):
 
 |Model | $F(X_i,\beta)$ |
 |---|---|
@@ -87,7 +87,7 @@ The slide lists 5 choices of link function (the first 3 are the focus of the cou
 | Gumbel | $e^{-e^{-X_i\beta}}$ |
 | Complementary log-log | $1-e^{-e^{X_i\beta}}$ |
 
-"And many other variants" — the slide does not go into depth on Gumbel/cloglog, only listing them to show that LPM/Logit/Probit are 3 out of many possible choices, not the entire universe of binary response models.
+"And many other variants" — Gumbel/cloglog are outside this course's focus and are named here only to show that LPM/Logit/Probit are 3 out of many possible choices, not the entire universe of binary response models.
 
 ## Linear Probability Model (LPM)
 
@@ -111,7 +111,7 @@ Since the left-hand side is $Pr(y=1)$, the coefficient $\beta_j$ in LPM is read 
 
 ### The four drawbacks of LPM — and why each one is a real problem
 
-The slide lists exactly 4 drawbacks; below explains **why** each one matters, not just names them:
+There are exactly 4 main drawbacks; below explains **why** each one matters, not just names them:
 
 1. **The predicted value $Pr(y=1)$ can fall outside [0,1].** This is not a cosmetic flaw — it breaks the very definition of a probability. A policymaker seeing "the probability of getting vaccinated is −8%" or "112%" cannot interpret the result, and cannot use that number for any subsequent probability calculation (expectation, simulation…).
 
@@ -179,7 +179,7 @@ In other words: Logit assumes the error $u$ follows a **logistic distribution**;
 - The logistic distribution has slightly **fatter tails** than the normal distribution.
 - Consequence: $P_i$ converges to 0 and 1 **more slowly** in Logit than in Probit — for the same change in $X\beta$ in the extreme region (far from 0), Logit still "holds back" a bit of probability that has not fully converged to the boundary, while Probit converges faster.
 
-**Which one to choose, and when?** Exactly as the slide states: "no obvious reason of choosing between the two models" — with the same dataset, the two models give substantively equivalent conclusions (same sign, same statistical significance level on most variables — see the real data in section 8). The practical reason **Logit is usually preferred**: Logit's marginal effect has a closed form, computable directly with an algebraic formula; Probit's marginal effect requires the derivative of the normal distribution function (no simple closed form, must be computed numerically). In addition, Logit also has the **odds ratio** interpretation (section 10) — a tool familiar in health/epidemiology — for which Probit has no direct equivalent.
+**Which one to choose, and when?** In principle, there is no clear theoretical reason to strictly prefer one over the other — with the same dataset, the two models give substantively equivalent conclusions (same sign, same statistical significance level on most variables — see the real data in section 8). The practical reason **Logit is usually preferred**: Logit's marginal effect has a closed form, computable directly with an algebraic formula; Probit's marginal effect requires the derivative of the normal distribution function (no simple closed form, must be computed numerically). In addition, Logit also has the **odds ratio** interpretation (section 10) — a tool familiar in health/epidemiology — for which Probit has no direct equivalent.
 
 ## Real estimation on the vaccine data — Logit and Probit side by side
 
@@ -224,7 +224,7 @@ The LR test formula:
 
 $$LR = 2(LL_F - LL_R) \sim \chi^2_q$$
 
-where $q$ = the number of coefficients being tested. The slide also notes a useful technical point: $\log L = -\text{deviance}/2$ — i.e. deviance (which often appears directly in R's `glm()` output) is just the log-likelihood multiplied by $-2$, so `anova(model, test="Chisq")` (comparing deviance) and `lrtest()` (comparing log-likelihood) are essentially computing the same number.
+where $q$ = the number of coefficients being tested. A useful technical point to remember: $\log L = -\text{deviance}/2$ — i.e. deviance (which often appears directly in R's `glm()` output) is just the log-likelihood multiplied by $-2$, so `anova(model, test="Chisq")` (comparing deviance) and `lrtest()` (comparing log-likelihood) are essentially computing the same number.
 
 ### Real data — testing overall significance (all slope coefficients, excluding the intercept)
 
@@ -269,7 +269,7 @@ The term $P_i(1-P_i)$ is a bell-shaped "weight," reaching a maximum $=0.25$ at $
 
 ### Illustration with numbers computed by hand from the Logit coefficients (vaccine data)
 
-Using the Logit coefficient from section 7 ($\beta_{priceUS}=-0.0318$; other variables fixed at: `efficacy80=1, duration3=1, pbenefit=0, hhincomeUS=700, hhsize=4, age=30, male=1, risk="Very likely"` — exactly the reference values the slide uses to plot the predicted-probability graph in section 10), computing by hand with the formula above to clearly see the S shape and how the marginal effect changes with vaccine price:
+Using the Logit coefficient from section 7 ($\beta_{priceUS}=-0.0318$; other variables fixed at: `efficacy80=1, duration3=1, pbenefit=0, hhincomeUS=700, hhsize=4, age=30, male=1, risk="Very likely"` — the same reference values used to plot the predicted-probability graph in section 10), computing by hand with the formula above to clearly see the S shape and how the marginal effect changes with vaccine price:
 
 | `priceUS` (USD) |predicted |Marginal effect ($\partial P/\partial X$, pp per $1 increase) |
 |---|---|---|
@@ -321,7 +321,7 @@ The remaining variables (`efficacy80`, `duration3`, `pbenefit`, `hhincomeUS`, `h
 
 Besides the analytical derivative, there is a more **practical** way of computing the marginal effect — especially useful when we want the effect at a specific data point, or when the independent variable is not continuous (dummy, categorical) and the analytical derivative does not apply directly: predict the probability at **two points** that differ by exactly 1 unit of the variable of interest, then take the difference.
 
-The example the slide uses for `hhincomeUS`: hold all other variables fixed (`priceUS=50, efficacy80=1, duration3=1, pbenefit=0, hhsize=4, age=30, male=1, risk="Very likely"`), and change only household income from 700 to 701 USD/month:
+Illustrative example for `hhincomeUS`: hold all other variables fixed (`priceUS=50, efficacy80=1, duration3=1, pbenefit=0, hhsize=4, age=30, male=1, risk="Very likely"`), and change only household income from 700 to 701 USD/month:
 
 - **Probit**: the corresponding difference $=6.806759\times10^{-5}$
 
@@ -344,7 +344,7 @@ Using the threshold $\hat P_i>0.5$ to classify the prediction as "vaccinate"/"no
 
 Overall correct prediction rate: $\dfrac{9+289}{377} = 0.7904509$ (≈79.05%).
 
-**A point to note when interpreting this number** (computed additionally from the table above, not a number the slide states directly — but a direct arithmetic consequence): in the sample, the total number of people who actually chose "vaccinate" is $7+289=296/377\approx78.5\%$. This means a "naive" model that simply always predicts "vaccinate" for everyone (without knowing anything about $X$) would already achieve about 78.5% accuracy — close to the 79.05% the Probit model achieves. The model correctly identifies only 9/81 (≈11%) of the truly "not vaccinate" cases — showing that **the overall correct-prediction rate can be misleading when the outcome is imbalanced** — a point to be cautious about when evaluating binary response models in practice, rather than stopping at a single "% correct" number.
+**A point to note when interpreting this number** (computed additionally from the table above — a direct arithmetic consequence): in the sample, the total number of people who actually chose "vaccinate" is $7+289=296/377\approx78.5\%$. This means a "naive" model that simply always predicts "vaccinate" for everyone (without knowing anything about $X$) would already achieve about 78.5% accuracy — close to the 79.05% the Probit model achieves. The model correctly identifies only 9/81 (≈11%) of the truly "not vaccinate" cases — showing that **the overall correct-prediction rate can be misleading when the outcome is imbalanced** — a point to be cautious about when evaluating binary response models in practice, rather than stopping at a single "% correct" number.
 
 ## Logit or Probit? — a direct comparison via the predicted-probability graph
 
@@ -352,7 +352,7 @@ Overlaying the two predicted-probability curves (Logit and Probit) on the same `
 
 ## Logistic regression with Odds Ratio
 
-Another common way of presenting Logit results — especially in health/epidemiology — is to report the **odds ratio** directly instead of the raw coefficient. Since $\dfrac{P_i}{1-P_i}=e^{\beta X_i}$ (section 5.2) already holds, the odds ratio of each variable is exactly $e^{\hat\beta_j}$ — the slide confirms this with real data: `exp(coef(logit))` produces exactly the "OddsRatio" column in the `logitor()` table.
+Another common way of presenting Logit results — especially in health/epidemiology — is to report the **odds ratio** directly instead of the raw coefficient. Since $\dfrac{P_i}{1-P_i}=e^{\beta X_i}$ (section 5.2) already holds, the odds ratio of each variable is exactly $e^{\hat\beta_j}$ — confirmed with real data: `exp(coef(logit))` produces exactly the "OddsRatio" column in the `logitor()` table.
 
 |Variable | Odds Ratio | p-value |Interpretation |
 |---|---|---|---|

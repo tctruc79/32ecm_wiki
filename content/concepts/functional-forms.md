@@ -35,11 +35,11 @@ Nhiều quan hệ kinh tế không vận hành như vậy trong thực tế:
 
 ## 2. Bộ dữ liệu ví dụ xuyên suốt: lương của lao động trẻ có kỹ năng tại Việt Nam - <span class="en">Running example dataset: wages of young, skilled workers in Vietnam</span>
 
-Slide dùng một bộ dữ liệu thực tế xuyên suốt để minh họa mọi dạng hàm — cần nắm để hiểu các ví dụ số ở mục 3, 6, 7 bên dưới.
-<br><span class="en">The slide uses one real dataset throughout to illustrate every functional form — understanding it is necessary to follow the numerical examples in sections 3, 6, and 7 below.</span>
+Bài này dùng một bộ dữ liệu thực tế xuyên suốt để minh họa mọi dạng hàm — cần nắm để hiểu các ví dụ số ở mục 3, 6, 7 bên dưới.
+<br><span class="en">This lecture uses one real dataset throughout to illustrate every functional form — understanding it is necessary to follow the numerical examples in sections 3, 6, and 7 below.</span>
 
-**Mô tả nguồn dữ liệu (nguyên văn từ slide)**: dữ liệu thu thập từ khoảng 900–1000 lao động trẻ, có kỹ năng (young and skilled workers), tại các tỉnh thành Việt Nam.
-<br><span class="en">**Data source description (verbatim from the slide)**: data collected from roughly 900–1000 young, skilled workers, across provinces/cities in Vietnam.</span>
+**Mô tả nguồn dữ liệu**: dữ liệu thu thập từ khoảng 900–1000 lao động trẻ, có kỹ năng (young and skilled workers), tại các tỉnh thành Việt Nam.
+<br><span class="en">**Data source description**: data collected from roughly 900–1000 young, skilled workers, across provinces/cities in Vietnam.</span>
 
 | Biến<br><span class="en">Variable</span> | Ý nghĩa<br><span class="en">Meaning</span> | Đơn vị/thang đo<br><span class="en">Unit/scale</span> |
 |---|---|---|
@@ -70,8 +70,8 @@ Slide dùng một bộ dữ liệu thực tế xuyên suốt để minh họa m�
 Đọc nhanh bảng này trước khi đi vào hệ số hồi quy: lương trung bình 75.02 nghìn VND/giờ nhưng dao động rất mạnh (10–302, range 292 — gợi ý phân phối lệch phải, một lý do thực nghiệm khiến `ln(wage)` hay được dùng làm biến phụ thuộc thay vì `wage` thô); 61% người lao động trong mẫu là nam; 40% là dân nhập cư; 31% chuyên ngành khoa học tự nhiên, 55% khoa học xã hội (còn lại — nhóm nền `technology` — chiếm khoảng 14%).
 <br><span class="en">A quick read of this table before moving to the regression coefficients: mean wage is 75.02 thousand VND/hour but varies widely (10–302, range 292 — suggesting a right-skewed distribution, one empirical reason `ln(wage)` is often used as the dependent variable instead of raw `wage`); 61% of workers in the sample are male; 40% are migrants; 31% majored in natural science, 55% in social science (the remainder — the `technology` base group — accounts for about 14%).</span>
 
-Từ bộ dữ liệu này, slide chạy sáu mô hình hồi quy khác nhau (bốn dạng hàm cơ bản ở mục 3, cộng quadratic ở mục 6, cộng interaction ở mục 7) trên cùng một tập biến kiểm soát — cho phép so sánh trực tiếp cách các dạng hàm "đọc" cùng một dữ liệu khác nhau như thế nào.
-<br><span class="en">From this dataset, the slide runs six different regression models (the four basic functional forms in section 3, plus quadratic in section 6, plus interaction in section 7) on the same set of control variables — allowing a direct comparison of how differently each functional form "reads" the same data.</span>
+Trên bộ dữ liệu này, sáu mô hình hồi quy khác nhau được ước lượng (bốn dạng hàm cơ bản ở mục 3, cộng quadratic ở mục 6, cộng interaction ở mục 7) trên cùng một tập biến kiểm soát — cho phép so sánh trực tiếp cách các dạng hàm "đọc" cùng một dữ liệu khác nhau như thế nào.
+<br><span class="en">On this dataset, six different regression models are estimated (the four basic functional forms in section 3, plus quadratic in section 6, plus interaction in section 7) on the same set of control variables — allowing a direct comparison of how differently each functional form "reads" the same data.</span>
 
 ## 3. Bốn dạng hàm cơ bản - <span class="en">Four basic functional forms</span>
 
@@ -87,8 +87,8 @@ $$Y=\beta_0+\beta_1X+\varepsilon$$
 - **Biến dummy (dummy regressor)**: $\beta_1$ là chênh lệch $Y$ trung bình giữa hai nhóm của $X$ (giống hệt cách diễn giải dummy đã học ở [[concepts/linear-regression-model]]).
 <br><span class="en">**Dummy regressor**: $\beta_1$ is the difference in mean $Y$ between the two groups defined by $X$ (identical to the dummy-variable interpretation already covered in [[concepts/linear-regression-model]]).</span>
 
-**Ví dụ số (từ slide, hồi quy trên bộ dữ liệu lương)**:
-<br><span class="en">**Numerical example (from the slide, regression on the wage dataset)**:</span>
+**Ví dụ số (hồi quy trên bộ dữ liệu lương)**:
+<br><span class="en">**Numerical example (regression on the wage dataset)**:</span>
 
 ```
 wage ~ age + schooling + tenure + gender + origin + science + social
@@ -126,8 +126,8 @@ Với $X$ là biến liên tục, $\beta_1$ chính là **elasticity tức thời
 - **Diễn giải chính xác (exact)**: $X$ tăng 1% → $Y$ đổi $b=(1.01^{\beta_1}-1)\times100$ phần trăm.
 <br><span class="en">**Exact interpretation**: $X$ increases by 1% → $Y$ changes by $b=(1.01^{\beta_1}-1)\times100$ percent.</span>
 
-**Ví dụ số (từ slide, hồi quy trên bộ dữ liệu lương)**:
-<br><span class="en">**Numerical example (from the slide, regression on the wage dataset)**:</span>
+**Ví dụ số (hồi quy trên bộ dữ liệu lương)**:
+<br><span class="en">**Numerical example (regression on the wage dataset)**:</span>
 
 ```
 log(wage) ~ log(age) + log(schooling) + log(tenure) + gender + origin + science + social
@@ -173,8 +173,8 @@ Hệ số $\beta_1$ ở đây là **semi-elasticity** — co giãn "nửa vời"
 - **Chính xác**: $X$ tăng 1 đơn vị → $Y$ đổi $b=(e^{\beta_1}-1)\times100$ phần trăm.
 <br><span class="en">**Exact**: $X$ increases by 1 unit → $Y$ changes by $b=(e^{\beta_1}-1)\times100$ percent.</span>
 
-**Ví dụ số (từ slide, hồi quy trên bộ dữ liệu lương)**:
-<br><span class="en">**Numerical example (from the slide, regression on the wage dataset)**:</span>
+**Ví dụ số (hồi quy trên bộ dữ liệu lương)**:
+<br><span class="en">**Numerical example (regression on the wage dataset)**:</span>
 
 ```
 log(wage) ~ age + schooling + tenure + gender + origin + science + social
@@ -210,16 +210,16 @@ $\beta_{schooling}=0.02667$ (có ý nghĩa ở mức 1%):
 - **Chính xác**: chênh lệch giữa hai nhóm là $b=(e^{\beta_1}-1)\times100$ phần trăm.
 <br><span class="en">**Exact**: the difference between the two groups is $b=(e^{\beta_1}-1)\times100$ percent.</span>
 
-Ví dụ (từ slide, minh họa riêng ngoài bảng hồi quy đầy đủ ở trên): $\beta_{gender}=0.02$ →
-<br><span class="en">Example (from the slide, illustrated separately outside the full regression table above): $\beta_{gender}=0.02$ →</span>
+Ví dụ minh họa (riêng ngoài bảng hồi quy đầy đủ ở trên): $\beta_{gender}=0.02$ →
+<br><span class="en">Illustrative example (separate from the full regression table above): $\beta_{gender}=0.02$ →</span>
 
 - **Xấp xỉ**: lương nam cao hơn nữ khoảng **2.00%**.
 <br><span class="en">**Approximate**: male wages are about **2.00%** higher than female wages.</span>
 - **Chính xác**: $b=(e^{0.02}-1)\times100=2.02\%$.
 <br><span class="en">**Exact**: $b=(e^{0.02}-1)\times100=2.02\%$.</span>
 
-(Ví dụ dummy này của slide **nhất quán nội bộ** — không có mâu thuẫn số liệu như ở mục 3.2/3.3.a, dùng để đối chiếu.)
-<br><span class="en">(This dummy example from the slide is **internally consistent** — no numerical contradiction like the ones in sections 3.2/3.3.a — and is used here as a clean reference point.)</span>
+(Ví dụ dummy này **nhất quán nội bộ** — không có mâu thuẫn số liệu như ở mục 3.2/3.3.a, dùng để đối chiếu.)
+<br><span class="en">(This dummy example is **internally consistent** — no numerical contradiction like the ones in sections 3.2/3.3.a — and is used here as a clean reference point.)</span>
 
 ### 3.4 Lin-log - <span class="en">Lin-log</span>
 
@@ -233,8 +233,8 @@ $$Y=\beta_0+\beta_1\ln X+\varepsilon$$
 - **Chính xác**: $X$ tăng 1% → $Y$ đổi $b=\beta_1\times\ln(1.01)$ đơn vị.
 <br><span class="en">**Exact**: $X$ increases by 1% → $Y$ changes by $b=\beta_1\times\ln(1.01)$ units.</span>
 
-**Ví dụ số (từ slide, hồi quy trên bộ dữ liệu lương)**:
-<br><span class="en">**Numerical example (from the slide, regression on the wage dataset)**:</span>
+**Ví dụ số (hồi quy trên bộ dữ liệu lương)**:
+<br><span class="en">**Numerical example (regression on the wage dataset)**:</span>
 
 ```
 wage ~ log(age) + log(schooling) + log(tenure) + gender + origin + science + social
@@ -274,8 +274,8 @@ $\beta_{\ln schooling}=30.907$ (có ý nghĩa ở mức 1%):
 | **Log-lin** | $\ln Y=\beta_0+\beta_1X+\varepsilon$ | 1 đơn vị<br><span class="en">1 unit</span> | $Y$ đổi $\beta_1\times100$ **phần trăm**<br><span class="en">$Y$ changes by $\beta_1\times100$ **percent**</span> | $b=(e^{\beta_1}-1)\times100$ |
 | **Lin-log** | $Y=\beta_0+\beta_1\ln X+\varepsilon$ | 1% | $Y$ đổi $\beta_1\div100$ **đơn vị**<br><span class="en">$Y$ changes by $\beta_1\div100$ **units**</span> | $b=\beta_1\times\ln(1.01)$ |
 
-**Cách nhớ nhanh** (mẹo ghi nhớ, không phải trích slide): nhìn vào **vị trí của "log"** trong tên gọi — "log" đứng trước $Y$ hay $X$ (hay cả hai) quyết định đơn vị đo của **thay đổi**, không phải của **biến**:
-<br><span class="en">**Quick mnemonic** (a memory aid, not quoted from the slide): look at **where "log" sits** in the name — whether "log" appears before $Y$ or $X$ (or both) determines the unit of measurement of the **change**, not of the **variable**:</span>
+**Cách nhớ nhanh** (mẹo ghi nhớ tự đặt): nhìn vào **vị trí của "log"** trong tên gọi — "log" đứng trước $Y$ hay $X$ (hay cả hai) quyết định đơn vị đo của **thay đổi**, không phải của **biến**:
+<br><span class="en">**Quick mnemonic** (a self-devised memory aid): look at **where "log" sits** in the name — whether "log" appears before $Y$ or $X$ (or both) determines the unit of measurement of the **change**, not of the **variable**:</span>
 - Có `log` ở $X$ (log-log, lin-log) → nói về $X$ **tăng 1%**.
 <br><span class="en">- `log` present on $X$ (log-log, lin-log) → refers to $X$ **increasing by 1%**.</span>
 - Không có `log` ở $X$ (linear, log-lin) → nói về $X$ **tăng 1 đơn vị**.
@@ -288,10 +288,10 @@ $\beta_{\ln schooling}=30.907$ (có ý nghĩa ở mức 1%):
 > **Quy tắc chung về xấp xỉ vs. chính xác**: hai cách tính **gần nhau khi $\beta_1$ nhỏ** (nói lỏng: $|\beta_1|<0.1$ thường lệch không đáng kể); khi $\beta_1$ lớn, hai cách tính có thể lệch đáng kể — đây là bẫy thi kinh điển (dùng công thức xấp xỉ khi đề bài yêu cầu "exact effect", hoặc ngược lại). Bốn ví dụ số ở mục 3 phía trên đều có $\beta_1$ tương đối nhỏ nên xấp xỉ và chính xác luôn gần nhau — **không được suy ra từ đó rằng hai cách tính luôn cho kết quả gần nhau**; với $\beta_1$ lớn (VD trên 0.5), độ lệch có thể trở nên rõ rệt.
 > <br><span class="en">**General rule on approximate vs. exact**: the two calculation methods are **close when $\beta_1$ is small** (loosely: $|\beta_1|<0.1$ usually gives a negligible difference); when $\beta_1$ is large, the two methods can diverge substantially — this is a classic exam trap (using the approximate formula when the question asks for the "exact effect," or vice versa). The four numerical examples in section 3 above all have relatively small $\beta_1$, so the approximate and exact values are always close — **do not conclude from this that the two methods always give close results**; with a large $\beta_1$ (e.g. above 0.5), the discrepancy can become substantial.</span>
 
-## 5. Suy ra công thức "exact" — từng bước (self-study trong slide) - <span class="en">Deriving the "exact" formula — step by step (self-study in the slide)</span>
+## 5. Suy ra công thức "exact" — từng bước (tự học) - <span class="en">Deriving the "exact" formula — step by step (self-study)</span>
 
-Phần này slide đánh dấu là tự học (self-study) — chứng minh vì sao công thức "exact" ở mục 3, 4 lại đúng, thay vì chỉ ghi nhớ máy móc.
-<br><span class="en">This part is marked by the slide as self-study — proving why the "exact" formula in sections 3 and 4 is correct, rather than just memorizing it mechanically.</span>
+Phần này thuộc diện tự học (self-study) — chứng minh vì sao công thức "exact" ở mục 3, 4 lại đúng, thay vì chỉ ghi nhớ máy móc.
+<br><span class="en">This part is self-study material — proving why the "exact" formula in sections 3 and 4 is correct, rather than just memorizing it mechanically.</span>
 
 ### 5.1 Log-log → công thức exact elasticity - <span class="en">Log-log → the exact elasticity formula</span>
 
@@ -345,8 +345,8 @@ Lấy hiệu trực tiếp (không cần logarit hóa lần nữa vì $y$ đã �
 
 $$y_1-y_0=\beta_1\big[\ln(1.01X)-\ln X\big]=\beta_1\ln(1.01)$$
 
-Đây chính là công thức "exact" ở mục 3.4/4. Vì $\ln(1.01)\approx0.01$, công thức xấp xỉ $\beta_1/100$ chỉ là cách "làm tròn" $\ln(1.01)$ thành $0.01$ — và slide lưu ý rõ: **xấp xỉ này có thể lệch đáng kể so với con số chính xác nếu $\beta_1$ đủ lớn** (nguyên văn slide, mục "EXACT EFFECTS FROM LIN-LOG").
-<br><span class="en">This is exactly the "exact" formula in sections 3.4/4. Since $\ln(1.01)\approx0.01$, the approximate formula $\beta_1/100$ is simply a way of "rounding" $\ln(1.01)$ to $0.01$ — and the slide notes explicitly: **this approximation can deviate substantially from the exact figure if $\beta_1$ is large enough** (verbatim from the slide, section "EXACT EFFECTS FROM LIN-LOG").</span>
+Đây chính là công thức "exact" ở mục 3.4/4. Vì $\ln(1.01)\approx0.01$, công thức xấp xỉ $\beta_1/100$ chỉ là cách "làm tròn" $\ln(1.01)$ thành $0.01$ — và cần lưu ý rõ: **xấp xỉ này có thể lệch đáng kể so với con số chính xác nếu $\beta_1$ đủ lớn**.
+<br><span class="en">This is exactly the "exact" formula in sections 3.4/4. Since $\ln(1.01)\approx0.01$, the approximate formula $\beta_1/100$ is simply a way of "rounding" $\ln(1.01)$ to $0.01$ — and it's worth noting explicitly: **this approximation can deviate substantially from the exact figure if $\beta_1$ is large enough**.</span>
 
 ## 6. Quadratic functional form - <span class="en">Quadratic functional form</span>
 
@@ -363,8 +363,8 @@ $$\ln y = \beta_0 + \beta_1 \cdot age + \beta_2 \cdot age^2 + \cdots$$
 
 $$\frac{\partial \ln wage}{\partial age} = \beta_1 + 2\beta_2\cdot age = 0 \;\Rightarrow\; age^* = -\frac{\beta_1}{2\beta_2}$$
 
-**Ví dụ số (từ slide, hồi quy trên bộ dữ liệu lương)**:
-<br><span class="en">**Numerical example (from the slide, regression on the wage dataset)**:</span>
+**Ví dụ số (hồi quy trên bộ dữ liệu lương)**:
+<br><span class="en">**Numerical example (regression on the wage dataset)**:</span>
 
 ```
 log(wage) ~ age + I(age^2) + schooling + tenure + gender + origin + science + social
@@ -400,11 +400,11 @@ Kiểm định $\beta_2$ riêng lẻ (câu hỏi "số hạng bậc hai có đó
 
 $$H_0: \beta_1=\beta_2=0$$
 
-**Kết quả F-test thực tế từ slide** (`car::linearHypothesis`, so sánh mô hình có và không có `age`, `I(age^2)`):
-<br><span class="en">**Actual F-test result from the slide** (`car::linearHypothesis`, comparing the model with and without `age`, `I(age^2)`):</span>
+**Kết quả F-test thực tế** (`car::linearHypothesis`, so sánh mô hình có và không có `age`, `I(age^2)`):
+<br><span class="en">**Actual F-test result** (`car::linearHypothesis`, comparing the model with and without `age`, `I(age^2)`):</span>
 
 ```
-Model 1: restricted model (không có / without age, age^2)
+Model 1: restricted model (without age, age^2)
 Model 2: log(wage) ~ age + I(age^2) + schooling + tenure + gender + origin + science + social
 
   Res.Df   RSS Df Sum of Sq      F Pr(>F)
@@ -420,8 +420,8 @@ F = 0.1723, p = 0.8418 → **không bác bỏ** $H_0$. Nói cách khác: trong �
 
 ## 7. Interaction terms - <span class="en">Interaction terms</span>
 
-**Khi nào dùng**: khi câu hỏi nghiên cứu là "hiệu ứng của biến A lên $Y$ có khác nhau giữa các nhóm/giá trị của biến B hay không?" — tức nghi ngờ rằng **độ dốc** (không chỉ mức chặn) của quan hệ A→Y phụ thuộc vào B. Ví dụ slide dùng: liệu **lợi tức giáo dục (return to education)** có khác nhau giữa lao động nam và nữ hay không.
-<br><span class="en">**When to use it**: when the research question is "does the effect of variable A on $Y$ differ across groups/values of variable B?" — i.e. suspecting that the **slope** (not just the intercept) of the A→Y relationship depends on B. The slide's example: whether **return to education** differs between male and female workers.</span>
+**Khi nào dùng**: khi câu hỏi nghiên cứu là "hiệu ứng của biến A lên $Y$ có khác nhau giữa các nhóm/giá trị của biến B hay không?" — tức nghi ngờ rằng **độ dốc** (không chỉ mức chặn) của quan hệ A→Y phụ thuộc vào B. Ví dụ minh họa: liệu **lợi tức giáo dục (return to education)** có khác nhau giữa lao động nam và nữ hay không.
+<br><span class="en">**When to use it**: when the research question is "does the effect of variable A on $Y$ differ across groups/values of variable B?" — i.e. suspecting that the **slope** (not just the intercept) of the A→Y relationship depends on B. Illustrative example: whether **return to education** differs between male and female workers.</span>
 
 $$\ln wage = \beta_1\cdot schooling + \beta_2\cdot schooling\times gender$$
 
@@ -440,10 +440,10 @@ $$\frac{\partial \ln wage}{\partial schooling} = \beta_1+\beta_2\cdot gender$$
 **Diễn giải dấu của $\beta_2$**: $\beta_2>0$ → nam có lợi tức giáo dục cao hơn nữ; $\beta_2<0$ → nam có lợi tức giáo dục thấp hơn nữ; $\beta_2=0$ → không khác biệt giữa hai giới.
 <br><span class="en">**Interpreting the sign of $\beta_2$**: $\beta_2>0$ → men have a higher return to education than women; $\beta_2<0$ → men have a lower return to education than women; $\beta_2=0$ → no difference between the two genders.</span>
 
-### 7.1 Ví dụ số thực tế (từ slide, hồi quy trên bộ dữ liệu lương) - <span class="en">Real numerical example (from the slide, regression on the wage dataset)</span>
+### 7.1 Ví dụ số thực tế (hồi quy trên bộ dữ liệu lương) - <span class="en">Real numerical example (regression on the wage dataset)</span>
 
-Mô hình thực tế slide chạy đầy đủ hơn công thức rút gọn ở trên — có thêm các biến kiểm soát, và cú pháp R `schooling*gender` tự động thêm cả hai hệu ứng chính (`schooling`, `gender`) lẫn số hạng tương tác `schooling:gender`:
-<br><span class="en">The actual model the slide runs is more complete than the simplified formula above — it adds control variables, and the R syntax `schooling*gender` automatically adds both main effects (`schooling`, `gender`) as well as the interaction term `schooling:gender`:</span>
+Mô hình thực tế được ước lượng đầy đủ hơn công thức rút gọn ở trên — có thêm các biến kiểm soát, và cú pháp R `schooling*gender` tự động thêm cả hai hệu ứng chính (`schooling`, `gender`) lẫn số hạng tương tác `schooling:gender`:
+<br><span class="en">The actual estimated model is more complete than the simplified formula above — it adds control variables, and the R syntax `schooling*gender` automatically adds both main effects (`schooling`, `gender`) as well as the interaction term `schooling:gender`:</span>
 
 ```
 log(wage) ~ age + schooling*gender + tenure + origin + science + social
@@ -474,13 +474,13 @@ Residual SE = 0.5044 (df = 989); $R^2$ = 0.07363; $R^2_{adj}$ = 0.06614; F = 9.8
 - **Chênh lệch nam − nữ** ($\beta_2=-0.037944$): lợi tức giáo dục của nam **thấp hơn** nữ khoảng 3.79 điểm phần trăm trong mẫu này. Hệ số này có $p=0.069$ — **có ý nghĩa ở mức 10%, nhưng KHÔNG có ý nghĩa ở mức 5%** (dấu `.` trong bảng R, không phải `*`). Đây là điểm cần cẩn trọng khi báo cáo: nếu bài tập/luận văn quy định $\alpha=5\%$, kết luận đúng phải là "**chưa có đủ bằng chứng** ở mức ý nghĩa 5% cho thấy lợi tức giáo dục khác nhau giữa nam và nữ", dù dấu và độ lớn của $\beta_2$ ("nam thấp hơn nữ ~3.8 điểm phần trăm") vẫn đáng để báo cáo mô tả.
 <br><span class="en">- **Male − female difference** ($\beta_2=-0.037944$): the return to education for men is **lower** than for women by about 3.79 percentage points in this sample. This coefficient has $p=0.069$ — **significant at the 10% level, but NOT significant at the 5% level** (the `.` symbol in the R table, not `*`). This is a point to be careful about when reporting: if the assignment/thesis specifies $\alpha=5\%$, the correct conclusion should be "**there is not enough evidence** at the 5% significance level that the return to education differs between men and women," even though the sign and magnitude of $\beta_2$ ("men lower than women by ~3.8 percentage points") is still worth reporting descriptively.</span>
 
-> **Ghi chú phương pháp (không phải lỗi của slide, mà là một điểm cần lưu ý khi tự chạy mô hình interaction)**: công thức rút gọn ở đầu mục 7 ($\ln wage=\beta_1\cdot schooling+\beta_2\cdot schooling\times gender$) chỉ có hai số hạng, dùng để minh họa nhanh cách lấy đạo hàm riêng — nhưng mô hình R thực tế chạy ra bảng số ở trên **có đầy đủ hiệu ứng chính** của cả `schooling` lẫn `gender` (vì cú pháp `schooling*gender` trong R tự mở rộng thành `schooling + gender + schooling:gender`), cộng thêm các biến kiểm soát khác. Đây là một quy tắc chung quan trọng trong econometrics (không chỉ riêng slide này): **khi đưa một interaction term vào mô hình, luôn phải giữ lại cả hai biến gốc (main effects) trong mô hình**, nếu không hệ số của số hạng tương tác sẽ bị chệch (biased) vì gánh luôn cả phần hiệu ứng chính bị bỏ sót của biến kia.
-> <br><span class="en">**Methodological note (not a slide error, but a point to keep in mind when running your own interaction models)**: the simplified formula at the start of section 7 ($\ln wage=\beta_1\cdot schooling+\beta_2\cdot schooling\times gender$) has only two terms, used to quickly illustrate how to take the partial derivative — but the actual R model that produced the table above **includes the full main effects** of both `schooling` and `gender` (because the R syntax `schooling*gender` automatically expands to `schooling + gender + schooling:gender`), plus the other control variables. This is an important general rule in econometrics (not specific to this slide): **when adding an interaction term to a model, both original variables (main effects) must always be kept in the model**, otherwise the interaction term's coefficient will be biased because it ends up absorbing the omitted main effect of the other variable.</span>
+> **Ghi chú phương pháp (một điểm cần lưu ý khi tự chạy mô hình interaction)**: công thức rút gọn ở đầu mục 7 ($\ln wage=\beta_1\cdot schooling+\beta_2\cdot schooling\times gender$) chỉ có hai số hạng, dùng để minh họa nhanh cách lấy đạo hàm riêng — nhưng mô hình R thực tế chạy ra bảng số ở trên **có đầy đủ hiệu ứng chính** của cả `schooling` lẫn `gender` (vì cú pháp `schooling*gender` trong R tự mở rộng thành `schooling + gender + schooling:gender`), cộng thêm các biến kiểm soát khác. Đây là một quy tắc chung quan trọng trong econometrics: **khi đưa một interaction term vào mô hình, luôn phải giữ lại cả hai biến gốc (main effects) trong mô hình**, nếu không hệ số của số hạng tương tác sẽ bị chệch (biased) vì gánh luôn cả phần hiệu ứng chính bị bỏ sót của biến kia.
+> <br><span class="en">**Methodological note (a point to keep in mind when running your own interaction models)**: the simplified formula at the start of section 7 ($\ln wage=\beta_1\cdot schooling+\beta_2\cdot schooling\times gender$) has only two terms, used to quickly illustrate how to take the partial derivative — but the actual R model that produced the table above **includes the full main effects** of both `schooling` and `gender` (because the R syntax `schooling*gender` automatically expands to `schooling + gender + schooling:gender`), plus the other control variables. This is an important general rule in econometrics: **when adding an interaction term to a model, both original variables (main effects) must always be kept in the model**, otherwise the interaction term's coefficient will be biased because it ends up absorbing the omitted main effect of the other variable.</span>
 
 ## 8. So sánh $R^2$ giữa các dạng hàm — và vì sao không nên dùng để "chọn form tốt nhất" - <span class="en">Comparing $R^2$ across functional forms — and why it should not be used to "pick the best form"</span>
 
-Gộp lại độ khớp (fit) của sáu mô hình chạy trên cùng bộ dữ liệu ở các mục 3, 6, 7 (số liệu trích trực tiếp từ slide, không phải tổng hợp mới):
-<br><span class="en">Combining the fit of the six models run on the same dataset in sections 3, 6, and 7 (figures taken directly from the slide, not a new compilation):</span>
+Gộp lại độ khớp (fit) của sáu mô hình chạy trên cùng bộ dữ liệu ở các mục 3, 6, 7:
+<br><span class="en">Combining the fit of the six models run on the same dataset in sections 3, 6, and 7:</span>
 
 | Dạng hàm<br><span class="en">Functional form</span> | $Y$ | $R^2$ | $R^2_{adj}$ | F | df | p-value |
 |---|---|---|---|---|---|---|
@@ -491,8 +491,8 @@ Gộp lại độ khớp (fit) của sáu mô hình chạy trên cùng bộ dữ
 | Quadratic | `log(wage)` | 0.07069 | 0.06317 | 9.404 | (8, 989) | 1.406e-12 |
 | Interaction | `log(wage)` | 0.07363 | 0.06614 | 9.827 | (8, 989) | 3.298e-13 |
 
-> **Lưu ý quan trọng (kiến thức econometrics chung, không phải nội dung slide dạy trực tiếp trong deck này)**: slide **không** trình bày bảng so sánh này như một quy trình "chọn dạng hàm tốt nhất bằng $R^2$" — bảng trên chỉ do trang wiki này gộp lại các con số đã có sẵn rải rác trong slide để tiện ôn tập. Về mặt kỹ thuật, **không nên** dùng bảng này để kết luận "log-lin hay interaction là form tốt nhất" theo kiểu so $R^2$ trực tiếp: các mô hình có biến phụ thuộc `wage` (linear, lin-log) và các mô hình có biến phụ thuộc `log(wage)` (log-log, log-lin, quadratic, interaction) tính $TSS$ (và do đó $R^2=1-RSS/TSS$) trên **hai thang đo khác nhau** — $R^2$ giữa hai nhóm này **không so sánh trực tiếp được**. Việc chọn dạng hàm phải dựa trên **lý thuyết kinh tế** (dạng quan hệ nào hợp lý về mặt kinh tế) và **kiểm định thống kê phù hợp** (t-test/F-test cho từng hệ số, kiểm định đặc tả nếu có), không phải chỉ nhìn $R^2$ cao hơn.
-> <br><span class="en">**Important note (general econometrics knowledge, not content this specific slide deck directly teaches)**: the slide does **not** present this comparison table as a procedure for "picking the best functional form using $R^2$" — the table above is simply this wiki page's compilation of figures already scattered throughout the slide, for ease of review. Technically, this table **should not** be used to conclude that "log-lin or interaction is the best form" by directly comparing $R^2$: the models with dependent variable `wage` (linear, lin-log) and the models with dependent variable `log(wage)` (log-log, log-lin, quadratic, interaction) compute $TSS$ (and hence $R^2=1-RSS/TSS$) on **two different scales** — $R^2$ across these two groups **cannot be compared directly**. Choosing a functional form must be based on **economic theory** (which relationship form is economically sensible) and **appropriate statistical tests** (t-test/F-test for each coefficient, specification tests where applicable), not simply looking at which one has a higher $R^2$.</span>
+> **Lưu ý quan trọng**: bảng trên **không nên** được dùng để kết luận "log-lin hay interaction là form tốt nhất" theo kiểu so $R^2$ trực tiếp: các mô hình có biến phụ thuộc `wage` (linear, lin-log) và các mô hình có biến phụ thuộc `log(wage)` (log-log, log-lin, quadratic, interaction) tính $TSS$ (và do đó $R^2=1-RSS/TSS$) trên **hai thang đo khác nhau** — $R^2$ giữa hai nhóm này **không so sánh trực tiếp được**. Việc chọn dạng hàm phải dựa trên **lý thuyết kinh tế** (dạng quan hệ nào hợp lý về mặt kinh tế) và **kiểm định thống kê phù hợp** (t-test/F-test cho từng hệ số, kiểm định đặc tả nếu có), không phải chỉ nhìn $R^2$ cao hơn.
+> <br><span class="en">**Important note**: the table above **should not** be used to conclude that "log-lin or interaction is the best form" by directly comparing $R^2$: the models with dependent variable `wage` (linear, lin-log) and the models with dependent variable `log(wage)` (log-log, log-lin, quadratic, interaction) compute $TSS$ (and hence $R^2=1-RSS/TSS$) on **two different scales** — $R^2$ across these two groups **cannot be compared directly**. Choosing a functional form must be based on **economic theory** (which relationship form is economically sensible) and **appropriate statistical tests** (t-test/F-test for each coefficient, specification tests where applicable), not simply looking at which one has a higher $R^2$.</span>
 
 ## 9. Bẫy thi tổng hợp (exam traps) - <span class="en">Comprehensive exam traps</span>
 

@@ -28,7 +28,7 @@ Recall from [[concepts/fixed-random-effects-model]]: the original exogeneity ass
 
 **The FE model solves A3b but does not solve A3a.** Intuition: the within-transformation (or first-difference) only removes the **time-invariant** part of the error ($\alpha_i$) — because that part is identical across every $t$ for the same unit $i$, subtracting the mean (or subtracting the previous period) makes it vanish. But if $X_{it}$ is correlated with $\varepsilon_{it}$ — the error part that **changes at each specific point in time**, not a constant unique to each unit — then this transformation is **powerless**: $\varepsilon_{it}$ still remains fully in the equation after $\alpha_i$ has been removed.
 
-**Concrete example (used throughout this page, taken from the slide)**: firm $i$ decides to increase labor training hours (`training`) in year $t$ because management *anticipates* that production demand for that year will rise (reverse causality/simultaneity — see also the three sources of endogeneity in [[concepts/endogeneity-iv-regression]]). This decision changes from year to year for each specific firm, not a fixed characteristic of that firm — so it belongs in $\varepsilon_{it}$, not in $\alpha_i$. FE (even after removing every fixed difference across firms — industry scale, geographic location, baseline management capability…) **cannot remove** this type of correlation. This is exactly why IV is needed **even after FE has already been used**.
+**Concrete example (used throughout this page)**: firm $i$ decides to increase labor training hours (`training`) in year $t$ because management *anticipates* that production demand for that year will rise (reverse causality/simultaneity — see also the three sources of endogeneity in [[concepts/endogeneity-iv-regression]]). This decision changes from year to year for each specific firm, not a fixed characteristic of that firm — so it belongs in $\varepsilon_{it}$, not in $\alpha_i$. FE (even after removing every fixed difference across firms — industry scale, geographic location, baseline management capability…) **cannot remove** this type of correlation. This is exactly why IV is needed **even after FE has already been used**.
 
 ## Model setup
 
@@ -43,8 +43,8 @@ Compactly: $y_{it}=\delta W_{it}+\alpha_i+\varepsilon_{it}$. The instrument $IV_
 
 **Note on scope**: this is a **static model** — there is no lagged $y$ on the right-hand side. The case with a lagged term (dynamic panel, where $y_{i,t-1}$ itself becomes the endogenous variable) belongs to [[concepts/dynamic-panel-data-models]], which uses different logic (internal instruments).
 
-**Models/estimators available per the slide**:
-- **RE-IV** (Generalized 2SLS) — the slide states verbatim "**not covered**". This is a gap **explicitly confirmed** by the slide itself (unlike gaps that must be inferred from the absence of content) — the Course Outline lists "2SLS RE estimator"/"G2GLS estimator" for Topic 13, but the actual slide does not teach it. Recorded verbatim.
+**Models/estimators available**:
+- **RE-IV** (Generalized 2SLS) — this content is **outside the taught scope** of the course — the Course Outline lists "2SLS RE estimator"/"G2GLS estimator" for Topic 13, but it is not actually taught. This gap is noted explicitly.
 - **FD-IV** (First-Difference) — 2SLS, plus the LIML/Fuller/GMM variants.
 - **FE-IV** (Fixed Effects) — 2SLS, plus the LIML/Fuller/GMM variants.
 
@@ -149,14 +149,14 @@ $N=1500$, fixed-effects: `id` (300 groups).
 
 ### Extension: Two-way FE-IV
 
-The slide has a dedicated section "Two-way FE-IV Regression" — in substance, this is just adding **time fixed effects** $\gamma_t$ alongside $\alpha_i$ (like two-way FE in [[concepts/fixed-random-effects-model]]), declared in `fixest` with `| id + year |` instead of `| id |`:
+There is a dedicated approach called "Two-way FE-IV Regression" — in substance, this is just adding **time fixed effects** $\gamma_t$ alongside $\alpha_i$ (like two-way FE in [[concepts/fixed-random-effects-model]]), declared in `fixest` with `| id + year |` instead of `| id |`:
 
 ```r
 eqIVfixest2 = log(output) ~ log(capital) + log(labor) + export + credit + mediumtech + hightech
               | id + year | training ~ subeligible + localbudget
 ```
 
-The slide only presents the code for all 5 types of SE (homoskedastic, individual hetero, clustered by `id`, two-way clustered `id+year`, Driscoll-Kraay) — **without an accompanying numeric results table** for this part, unlike the one-way FD-IV/FE-IV above which have full numeric tables. Recorded exactly as presented in the slide, without inferring numbers.
+There is only code for all 5 types of SE (homoskedastic, individual hetero, clustered by `id`, two-way clustered `id+year`, Driscoll-Kraay) — **without an accompanying numeric results table** for this part, unlike the one-way FD-IV/FE-IV above which have full numeric tables.
 
 ## FD-IV vs. FE-IV comparison — which to choose when
 
@@ -180,13 +180,13 @@ $$\kappa_F=\kappa-\frac{a}{n-l+k-1}$$
 
 where $n$ = sample size, $k$ = number of regressors (endogenous + exogenous), $l$ = total number of instruments (included + excluded), $a$ = a positive constant usually chosen as 1 or 4. Result: $\hat\beta_F=b(\kappa_F)$.
 
-**Panel-specific practical note** (unlike cross-section, explicitly stated in the slide): two-way clustered SE is **not reliable** when $T$ is small; Driscoll-Kraay SE is **not available** for LIML/Fuller estimation in common R packages — this is a practical constraint to remember when choosing an SE type, not simply picking "the most robust type is always best."
+**Panel-specific practical note** (unlike cross-section): two-way clustered SE is **not reliable** when $T$ is small; Driscoll-Kraay SE is **not available** for LIML/Fuller estimation in common R packages — this is a practical constraint to remember when choosing an SE type, not simply picking "the most robust type is always best."
 
-**On GMM in the static model**: under a static specification (no lagged terms), IV-GMM **does not meaningfully expand** the instrument set relative to 2SLS — both rely on the same excluded instruments, differing only in the weighting matrix $W$ (2SLS uses $W=(Z'Z)^{-1}$; efficient GMM uses $W=S^{-1}$). Under homoskedasticity, efficient GMM **collapses exactly to 2SLS**; under heteroskedasticity, GMM assigns lower weight to observations with larger error variance and is therefore more efficient — but **the empirical benefit in the static model is fairly limited** per the slide's note. (Comparison: GMM proves far more useful in **dynamic panel** — see [[concepts/dynamic-panel-data-models]] — where the internal instrument set expands substantially with the number of available lags.)
+**On GMM in the static model**: under a static specification (no lagged terms), IV-GMM **does not meaningfully expand** the instrument set relative to 2SLS — both rely on the same excluded instruments, differing only in the weighting matrix $W$ (2SLS uses $W=(Z'Z)^{-1}$; efficient GMM uses $W=S^{-1}$). Under homoskedasticity, efficient GMM **collapses exactly to 2SLS**; under heteroskedasticity, GMM assigns lower weight to observations with larger error variance and is therefore more efficient — but **the empirical benefit in the static model is fairly limited**. (Comparison: GMM proves far more useful in **dynamic panel** — see [[concepts/dynamic-panel-data-models]] — where the internal instrument set expands substantially with the number of available lags.)
 
 ## Diagnostic tests for IV-panel
 
-Reuses exactly the four groups of tests from [[concepts/endogeneity-iv-regression]], adjusted for panel. The slide notes: "*In R, diagnostic tests for IV regression with panel data is limited*" — the tools available in R are more limited than for pure cross-section.
+Reuses exactly the four groups of tests from [[concepts/endogeneity-iv-regression]], adjusted for panel. Worth noting: "*In R, diagnostic tests for IV regression with panel data is limited*" — the tools available in R are more limited than for pure cross-section.
 
 ### Underidentification test
 
@@ -209,9 +209,9 @@ Intuition: exactly the same reason OLS needs both conventional SE and robust SE 
 
 **Decision rule**: compare CD-F against the **[[people/stock-yogo|Stock-Yogo]] (SY)** threshold or the rule-of-thumb value of 10 (details of the two SY criteria — relative bias vs. size distortion — see [[concepts/endogeneity-iv-regression]]).
 
-> **The most important note in this section — a common exam trap**: **KP-F cannot be directly compared against the Stock-Yogo threshold**, because SY was built under the homoskedastic assumption while KP-F is not — applying a criterion to a statistic it's incompatible with is a technical error. The slide states clearly: in practice, people still **compare KP-F informally** with SY or with the threshold of 10, despite knowing this is not a theoretically rigorous comparison — it's merely a common practical convention, not a formally valid test.
+> **The most important note in this section — a common exam trap**: **KP-F cannot be directly compared against the Stock-Yogo threshold**, because SY was built under the homoskedastic assumption while KP-F is not — applying a criterion to a statistic it's incompatible with is a technical error. In practice, people still **compare KP-F informally** with SY or with the threshold of 10, despite knowing this is not a theoretically rigorous comparison — it's merely a common practical convention, not a formally valid test.
 
-**Note on the numeric example**: the slide's illustrative example (table in section 7.1) presents only **one** F value (using two-way clustered SE) and confirms in words that with 1 endogenous variable, this F is exactly CD-F — the slide **does not provide a separate KP-F number** to compare within this exact numeric example. Recorded exactly as the slide has it, without inferring an unprovided KP-F value.
+**Note on the numeric example**: the illustrative example (table in section 7.1) presents only **one** F value (using two-way clustered SE), confirming that with 1 endogenous variable, this F is exactly CD-F — there is **no separate KP-F number** to compare within this exact numeric example.
 
 ### Overidentification test
 
@@ -223,7 +223,7 @@ $$\text{Sargan: stat} = 1.6171, \quad p = 0.2035, \quad df=1$$
 
 $p>0.05$ → **fail to reject** $H_0$ → no evidence against the joint validity of the two instruments.
 
-**The point the slide emphasizes most, worth recording in spirit verbatim**: even though the Sargan result "supports" validity, the slide itself warns of two layers of limitation:
+**The point worth emphasizing most**: even though the Sargan result "supports" validity, there are two layers of limitation worth noting:
 1. Sargan assumes homoskedastic — "*should be interpreted with caution given the presence of heteroskedasticity and serial correlation*" (in practice panel data almost always carries risk of both).
 2. **More important than the test itself**: "*the credibility of the instruments ultimately relies on economic reasoning and the plausibility of the exclusion restriction, not the formal tests*" — the ultimate credibility of an instrument **never** comes from the test statistic itself, but from **economic reasoning** that the instrument affects $y$ **only through** the endogenous-variable channel, with no other direct path. Failing to reject Sargan/Hansen only means "no evidence found against it," absolutely not "the instrument has been proven valid."
 
@@ -254,7 +254,7 @@ The "naïve" FE coefficient is **nearly double** the corrected FE-IV coefficient
 4. Treating rejection of the underidentification test as evidence the instrument is "strong" — these are two different tests (relevance vs. strength), exactly the same trap already noted in [[concepts/endogeneity-iv-regression]].
 5. Assuming FD-IV and FE-IV always give **the same number** — they only coincide when $T=2$; with $T>2$ (as in the $T=5$ example here), the two `training` coefficients (0.0168 vs. 0.0212) are genuinely different.
 6. Expecting GMM to always be substantially more efficient than 2SLS in a static model — the empirical benefit is fairly modest (unlike dynamic panel, where GMM proves much more useful).
-7. Failing to reject Sargan/Hansen J and then treating it as "proof the instrument is valid" — and **more importantly**: forgetting that an instrument's ultimate credibility always rests on **economic reasoning** (a plausible exclusion restriction), not the test statistic itself — a point the slide itself emphasizes twice, not an inference by the wiki author.
+7. Failing to reject Sargan/Hansen J and then treating it as "proof the instrument is valid" — and **more importantly**: forgetting that an instrument's ultimate credibility always rests on **economic reasoning** (a plausible exclusion restriction), not the test statistic itself — a point that deserves emphasis, not a minor detail.
 8. Using two-way clustered SE or Driscoll-Kraay when $T$ is small — both are only reliable with $T$ large enough (same note as in [[concepts/fixed-random-effects-model]]); LIML/Fuller in particular have no DK SE available in common R packages.
 
 ## Connections

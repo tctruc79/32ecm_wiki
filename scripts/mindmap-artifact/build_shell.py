@@ -138,17 +138,29 @@ html, body {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
-  overflow-x: hidden;
+  /* Deliberately NOT setting overflow-x (or any overflow) here: doing so
+     forces the UA to compute the other axis as "auto" too (CSS Overflow
+     spec), turning html/body into an extra scroll container. A `position:
+     sticky` descendant (the .tabbar below) then sticks relative to THAT
+     container instead of the true viewport, which -- especially inside the
+     Artifact iframe's own scroll handling -- makes it silently fail to
+     stay pinned while the page visibly scrolls. Wide content is instead
+     contained per-element (.table-wrap, pre.code-block have their own
+     overflow-x: auto) so nothing here needs to be a scroll container at
+     all, keeping the viewport the single, unambiguous sticky reference.
+     Long unbroken tokens are guarded against separately via
+     overflow-wrap below. */
 }
 body { min-height: 100vh; }
 a { color: var(--slate); }
 code, .math-inline, .math-display { font-family: var(--font-mono); }
+p, li, td, th, blockquote, dd, summary { overflow-wrap: break-word; }
 
 /* ============================= Shell layout ============================= */
 .shell {
-  max-width: 920px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 16px 64px;
+  padding: 0 clamp(16px, 3vw, 48px) 64px;
 }
 .masthead {
   padding: 28px 4px 14px;
@@ -179,8 +191,9 @@ code, .math-inline, .math-display { font-family: var(--font-mono); }
 /* ============================= Tab bar (CSS-radio, no JS) ============================= */
 .tabbar {
   position: sticky; top: 0; z-index: 50;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(6px);
+  /* Fully opaque (not a translucent/backdrop-blur treatment): this bar
+     must completely hide scrolled-under content, not just tint it. */
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: 8px 4px;
   display: flex; flex-wrap: wrap; gap: 6px;
